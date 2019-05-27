@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on /profile</title>
+    <link>https://dimidagd.github.io/tags/</link>
+    <description>Recent content in Tags on /profile</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://dimidagd.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>aerodynamics</title>
+      <link>https://dimidagd.github.io/tags/aerodynamics/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
+      
+      <guid>https://dimidagd.github.io/tags/aerodynamics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>control</title>
+      <link>https://dimidagd.github.io/tags/control/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
+      
+      <guid>https://dimidagd.github.io/tags/control/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
