@@ -1,17 +1,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>/profile on /profile</title>
+    <title>/usr on /usr</title>
     <link>https://dimidagd.github.io/</link>
-    <description>Recent content in /profile on /profile</description>
+    <description>Recent content in /usr on /usr</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Nov 2019 00:29:44 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 12 Nov 2019 01:08:41 +0100</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Projects</title>
       <link>https://dimidagd.github.io/project/</link>
-      <pubDate>Tue, 12 Nov 2019 00:29:44 +0100</pubDate>
+      <pubDate>Tue, 12 Nov 2019 01:08:41 +0100</pubDate>
       
       <guid>https://dimidagd.github.io/project/</guid>
       <description></description>
