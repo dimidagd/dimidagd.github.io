@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Semantic segmentation using Deep Fully Convolutional Network">
+  <meta name="description" content="Deep Fully Convolutional Networks for pixel-wise class prediction">
 
   
   <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/project/segmentation/">
@@ -92,6 +92,16 @@
 
   <link rel="stylesheet" href="/styles.css">
   
+    
+    
+    
+    
+      
+    
+    
+    
+    <link rel="stylesheet" href="/css/academic.a9d6948b3aee6a914873add49cdda744.css">
+  
 
   
   
@@ -132,8 +142,8 @@
   
   <meta property="og:site_name" content="/usr">
   <meta property="og:url" content="https://dimidagd.github.io/project/segmentation/">
-  <meta property="og:title" content="Segmentation | /usr">
-  <meta property="og:description" content="Semantic segmentation using Deep Fully Convolutional Network"><meta property="og:image" content="https://dimidagd.github.io/project/segmentation/featured.png">
+  <meta property="og:title" content="Semantic segmentation | /usr">
+  <meta property="og:description" content="Deep Fully Convolutional Networks for pixel-wise class prediction"><meta property="og:image" content="https://dimidagd.github.io/project/segmentation/featured.png">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2019-12-05T13:34:06&#43;01:00">
@@ -145,7 +155,7 @@
 
   
 
-  <title>Segmentation | /usr</title>
+  <title>Semantic segmentation | /usr</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -279,7 +289,7 @@
 
 
 <div class="article-header d-xl-none">
-  <div class="featured-image" style="background-image: url('/project/segmentation/featured_hu279709ea6679a1d871bdb1f30132f2a2_389476_800x0_resize_lanczos_2.png');"></div>
+  <div class="featured-image" style="background-image: url('/project/segmentation/featured_hubd23f88acd19b2d2fa62654ec95eb954_213240_800x0_resize_lanczos_2.png');"></div>
   
 </div>
 
@@ -288,7 +298,7 @@
   <div class="row">
     <div class="col-6">
       <div class="split-header-content">
-        <h1 itemprop="name">Segmentation</h1>
+        <h1 itemprop="name">Semantic segmentation</h1>
 
         
 
@@ -400,7 +410,7 @@
     </div>
     <div class="col-6">
       <div class="split-header-image">
-        <img src="/project/segmentation/featured_hu279709ea6679a1d871bdb1f30132f2a2_389476_680x500_fill_q90_lanczos_smart1_2.png" itemprop="image" alt="">
+        <img src="/project/segmentation/featured_hubd23f88acd19b2d2fa62654ec95eb954_213240_680x500_fill_q90_lanczos_smart1_2.png" itemprop="image" alt="">
         
       </div>
     </div>
@@ -408,7 +418,7 @@
 </div>
 
 <div class="article-container d-xl-none">
-  <h1 itemprop="name">Segmentation</h1>
+  <h1 itemprop="name">Semantic segmentation</h1>
 
   
 
@@ -530,32 +540,139 @@
 
 <p>Self-driving cars are one of the hottest areas of research and business for the tech giants. What seemed like a science-fiction, a few years ago, now seems more like something which is soon to become a part and parcel of life. “soon to be” is because of the fact that even though companies like Tesla, Nissan, Cadillac do have self-driving car assistance software. They still require a human to keep an eye on the road and take control when needed. However, it is fascinating to see how far we have come in terms of innovation and how fast technology is advancing.</p>
 
+<p>Other applications of semantic segmentation include and definetely not limited to:
+- Classification of terrain visible in satellite imagery
+- Medical imaging analysis
+- Industrial inspection</p>
+
 <h3 id="background">Background</h3>
 
-<p>Fully Convoluted Networks (FCN) for semantic segmentation <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> shows that convolutional networks can be used for semantic segmentation as well. In this project, we will investigate the method described in the paper to perform segmentation on the driving scene image.</p>
+<p>Fully Convoluted Networks (FCN) for semantic segmentation <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> can be used for semantic segmentation as well. In this project, we will investigate the method described in the paper to perform segmentation on the driving scene image. The framework used is Pytorch.</p>
 
-<p><em>FCN</em> extends the classic convolutional network pipeline such such that it can be used for full image predictions. FCN takes an image and outputs a classification map. The initial layers are similar to a standard CNN architecture where the image is transformed into  a latent represatation that includes contextual information but loses structural information. Having ground truth available, the network can be trained end to end. A pretrained image classifier was used as the backbone of the pipeline, the design aims to use learned parameters to upsample the low-dimensional output of the convolutional layers to class predictions for every pixel in the original image. The basic method resembles the encoder-decoder method, but we want to make use of the rich contextual information at the output of each subsequent convolutional layer, by creating additional skip connections to the upsampling layers. Both non-learned methods and learned upscaling methods are used to compute the final class predictions on the image pixels.</p>
+<p><center>
 
-<pre><code>![FCNs structural information](img/FCNs.png)*Objects and loss of structural information*
-</code></pre>
+
+<figure>
+
+<img src="/img/model.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>FCN8s proposed architecture</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p><em>FCN</em> extends the classic convolutional network pipeline such such that it can be used for full image predictions. FCN takes an image and outputs a classification map. The initial layers are similar to a standard CNN architecture where the image is transformed into  a latent represatation that includes contextual information but loses structural information.</p>
+
+<p>Having ground truth available, the network can be trained end to end. A pretrained image classifier was used as the backbone of the pipeline, the design aims to use learned parameters to upsample the low-dimensional output of the convolutional layers to class predictions for every pixel in the original image. The basic method resembles the encoder-decoder architecture, but while making use of the rich contextual information at the output of each subsequent convolutional layers, by creating additional skip connections to the upsampling layers. Both non-learned methods and learned upscaling methods are used to compute the final class predictions on the image pixels.</p>
 
 <h3 id="dataset">Dataset:</h3>
 
-<p>Camvid and Cityscape are free available labeled dataset.
-1. Cambridge-driving Labeled Video Database (CamVid) is a collection of video and images where each pixel is labelled with one of the 32 semantic labels. This dataset contains both fix-perspective videos (CCTV footage) and from a driving automobile. The footage from automobile makes this dataset a suitable choice for this project.</p>
+<p>Camvid and Cityscape are free available labeled dataset.</p>
 
-<p><img src="img/Camvid.jpg" alt="CamVid dataset example" /><em>CamVid dataset sample frame</em></p>
+<ol>
+<li>Cambridge-driving Labeled Video Database (CamVid) is a collection of video and images where each pixel is labelled with one of the 32 semantic labels. This dataset contains both fix-perspective videos (CCTV footage) and from a driving automobile. The footage from automobile makes this dataset a suitable choice for this project.</li>
+</ol>
+
+<p><center>
+
+
+<figure>
+
+<img src="/img/Camvid.jpg" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>CamVid sample image</h4>
+  
+</figcaption>
+
+</figure></center></p>
 
 <ol>
 <li>Cityscape dataset contains labelled video and images from fix-perspective videos in the streets of different cities. The images are labelled with one of the 32 semantic labels.
 For the project, we would focus on the CamVid dataset recorded from automobile. Fix-perspective videos will not be investigated.</li>
 </ol>
+
+<p><center>
+
+
+<figure>
+
+<img src="/img/Cityscape_zuric.png" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Cityscapes ground truth sample image (Zurich)</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<h3 id="training">Training:</h3>
+
+<p>Different submodels of the original architecture were tested depending on the resolution of the information extracted from the convolutional layers. Namely FCN32s, FCN16s, FCN8s.</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/img/FCNs.png" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>From left to right model performance for, FCN32, FCN16, FCN8, Ground truth</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/img/segmentation_IOU_best.png" width="50%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Best model (FCN8s) on average Intersection over Union(IoU) performance</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>The backbone of the network are the pretrained layers conv1,2,3, they are being initialized from the popular <strong>VGGnet</strong> . Given that <strong>VGG</strong> was trained on over 1million pictures, these layers are considered good feature extractors.</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/img/segmentation_pixel_accuracy.png" width="50%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Models pixel accuracy over epochs. (mean epoch time 90s on a single GPU setup)</h4>
+  
+</figcaption>
+
+</figure></center></p>
 <div class="footnotes">
 
 <hr />
 
 <ol>
-<li id="fn:1">arXiv:1411.4038v2 [cs.CV] 8 Mar 2015 <a href="https://arxiv.org/pdf/1411.4038.pdf" title="Fully Convolutional Networks for Semantic Segmentation" target="_blank">link</a>.
+<li id="fn:1">arXiv:1411.4038v2 [cs.CV] 8 Mar 2015 <a href="https://arxiv.org/pdf/1411.4038.pdf" title="Fully Convolutional Networks for Semantic Segmentation" target="_blank">Fully Convolutional Networks for Semantic Segmentation</a>.
  <a class="footnote-return" href="#fnref:1"><sup>^</sup></a></li>
 </ol>
 </div>

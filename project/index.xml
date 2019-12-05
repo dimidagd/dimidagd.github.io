@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Segmentation</title>
+      <title>Semantic segmentation</title>
       <link>https://dimidagd.github.io/project/segmentation/</link>
       <pubDate>Thu, 05 Dec 2019 13:34:06 +0100</pubDate>
       
       <guid>https://dimidagd.github.io/project/segmentation/</guid>
-      <description>Semantic segmentation using Deep Fully Convolutional Network</description>
+      <description>Deep Fully Convolutional Networks for pixel-wise class prediction</description>
     </item>
     
     <item>
