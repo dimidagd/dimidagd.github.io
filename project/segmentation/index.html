@@ -522,22 +522,23 @@
   <div class="article-container">
 
     <div class="article-style" itemprop="articleBody">
-      
-
-<h2 id="driving-scene-image-segmentation-using-fully-convolutional-networks">Driving scene image segmentation using Fully Convolutional Networks</h2>
+      <h2 id="driving-scene-image-segmentation-using-fully-convolutional-networks">Driving scene image segmentation using Fully Convolutional Networks</h2>
 
 <h3 id="motivation">Motivation</h3>
 
 <p>Self-driving cars are one of the hottest areas of research and business for the tech giants. What seemed like a science-fiction, a few years ago, now seems more like something which is soon to become a part and parcel of life. “soon to be” is because of the fact that even though companies like Tesla, Nissan, Cadillac do have self-driving car assistance software. They still require a human to keep an eye on the road and take control when needed. However, it is fascinating to see how far we have come in terms of innovation and how fast technology is advancing.</p>
 
-<p>Other applications of semantic segmentation include and definetely not limited to:
-- Classification of terrain visible in satellite imagery
-- Medical imaging analysis
-- Industrial inspection</p>
+<p>Other applications of semantic segmentation include and definetely not limited to:</p>
+
+<ul>
+<li>Classification of terrain visible in satellite imagery</li>
+<li>Medical imaging analysis</li>
+<li>Industrial inspection</li>
+</ul>
 
 <h3 id="background">Background</h3>
 
-<p>Fully Convoluted Networks (FCN) for semantic segmentation <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> can be used for semantic segmentation as well. In this project, we will investigate the method described in the paper to perform segmentation on the driving scene image. The framework used is Pytorch.</p>
+<p>Fully Convolutional Networks <sup class="footnote-ref" id="fnref:1"><a class="footnote" href="#fn:1">1</a></sup> provide a solution to the image segmentation task, which is trying to answer to the question of ’where’ is something instead of just ’what’. The FCN complements the CNN architecture by following up the ”downsampling path” with an ”upsampling path”. Upsampling methods can include both learnable and non-learnable parameters.</p>
 
 <p><center>
 
@@ -555,9 +556,28 @@
 
 </figure></center></p>
 
-<p><em>FCN</em> extends the classic convolutional network pipeline such such that it can be used for full image predictions. FCN takes an image and outputs a classification map. The initial layers are similar to a standard CNN architecture where the image is transformed into  a latent represatation that includes contextual information but loses structural information.</p>
+<p><em>FCN</em> extends the classic convolutional network pipeline such such that it can be used for full image predictions. The input to an FCN is an <em>RGB</em> image and  its output is a pixelwise classification prediction. The initial layers of the pipeline are similar to a standard CNN architecture where the image is transformed into  a latent representation that includes contextual information but most structural information is lost due to the nature of convolution.</p>
 
-<p>Having ground truth available, the network can be trained end to end. A pretrained image classifier was used as the backbone of the pipeline, the design aims to use learned parameters to upsample the low-dimensional output of the convolutional layers to class predictions for every pixel in the original image. The basic method resembles the encoder-decoder architecture, but while making use of the rich contextual information at the output of each subsequent convolutional layers, by creating additional skip connections to the upsampling layers. Both non-learned methods and learned upscaling methods are used to compute the final class predictions on the image pixels.</p>
+<ul>
+<li>The use of CNN layers in the vanilla FCN architecture is reducing the structural information in the image as data flows through the ”downsampling path”, hence upsampling the low-dimensional information in the ”upsampling path” creates coarse bounding areas around the objects.</li>
+<li>The proposed architecture is leveraging the available structural information of the convolutional feature maps by forward passing information from their max-pooling layers to the up-sampling layers. Merging feature maps from various resolution levels helps combining context information with spatial information.
+􏰀* The proposed architecture is leveraging transfer learning by initializing the convolutional layers from an accurate pre-trained classification architecture(VGGnet).</li>
+<li>The convolutional layers can be frozen or trainable. Performance of the architecture has been evaluated for both cases.</li>
+
+<li><p>The architecture enables end-to-end training of the network. We define different models by adding forward passing feature maps from various resolution levels.</p>
+
+<ul>
+<li><code>FCN32s</code> : The original FCN without max-pooling forward passes.</li>
+<li><code>FCN16s</code> : Forward passing max pooled information from conv4 to the output of upsample6.</li>
+<li><code>FCN8s</code> : Extends FCN16s by upsampling the FCN16s skip connection, then fusing it with the
+max-pooled output of conv3 and applying upsample8.</li>
+<li><code>FCNs</code> : Extends FCN8s by summing the pooled output of conv2 with the FCN8s skip
+connection(not illustrated in Figure 1).
+Figure 1 illustrates the FCN8s architecture, the FCN16s is derived by cutting the skip2, and FCN32s by cutting both skip1 and skip2.</li>
+</ul></li>
+</ul>
+
+<p>Structural information is being extracted from the pooling layers of the down- sampling path. Then this information is being fused with the up-sampled information by element-wise addition before moving upstream. Batch normalization and dropout layers are being applied to the outputs of every convolution and up-sampling layer. ReLu was used as the activation function.</p>
 
 <h3 id="dataset">Dataset:</h3>
 
@@ -583,7 +603,7 @@
 
 </figure></center></p>
 
-<ol>
+<ol start="2">
 <li>Cityscape dataset contains labelled video and images from fix-perspective videos in the streets of different cities. The images are labelled with one of the 32 semantic labels.
 For the project, we would focus on the CamVid dataset recorded from automobile. Fix-perspective videos will not be investigated.</li>
 </ol>
@@ -607,6 +627,16 @@ For the project, we would focus on the CamVid dataset recorded from automobile. 
 <h3 id="training">Training:</h3>
 
 <p>Different submodels of the original architecture were tested depending on the resolution of the information extracted from the convolutional layers. Namely FCN32s, FCN16s, FCN8s.</p>
+
+<h2 id="loss-and-performance-metrics">Loss and performance metrics</h2>
+
+<p>For the task of image segmentation pixel wise binary cross-entropy loss is used. It examines each pixels individually. Since the target vectors are one out of K encoded (total 32 class labels), the binary cross entropy is calculated using each encoded class and then averaged over all the 32 classes. This makes sure that each pixel is learning equally while training.</p>
+
+<p>To compare the performance of the FCN, we will consider two measures : pixel accuracy and IoU (Intersection over Union)</p>
+
+<p><span  class="math">\[\textrm{Pixel accuracy} = \frac{\textrm{No of pixels predicted accurately}}{\textrm{No of pixels}}\]</span></p>
+
+<p><span  class="math">\[\textrm{IoU} = \frac{\textrm{Area of Overlap}}{\textrm{Area of Union}}\]</span></p>
 
 <p><center>
 
@@ -640,8 +670,6 @@ For the project, we would focus on the CamVid dataset recorded from automobile. 
 
 </figure></center></p>
 
-<p>The backbone of the network are the pretrained layers conv1,2,3, they are being initialized from the popular <strong>VGGnet</strong> . Given that <strong>VGG</strong> was trained on over 1million pictures, these layers are considered good feature extractors.</p>
-
 <p><center>
 
 
@@ -657,12 +685,30 @@ For the project, we would focus on the CamVid dataset recorded from automobile. 
 </figcaption>
 
 </figure></center></p>
+
+<h2 id="model-predictions">Model predictions</h2>
+
+<p><center>
+
+
+<figure>
+
+<img src="/img/validation.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Different model predictions.</h4>
+  
+</figcaption>
+
+</figure></center></p>
 <div class="footnotes">
 
-<hr />
+<hr>
 
 <ol>
-<li id="fn:1">arXiv:1411.4038v2 [cs.CV] 8 Mar 2015 <a href="https://arxiv.org/pdf/1411.4038.pdf" title="Fully Convolutional Networks for Semantic Segmentation" target="_blank">Fully Convolutional Networks for Semantic Segmentation</a>.
+<li id="fn:1">arXiv:1411.4038v2 [cs.CV] 8 Mar 2015 <a href="https://arxiv.org/pdf/1411.4038.pdf" title="Fully Convolutional Networks for Semantic Segmentation">Fully Convolutional Networks for Semantic Segmentation</a>.
  <a class="footnote-return" href="#fnref:1"><sup>^</sup></a></li>
 </ol>
 </div>
@@ -838,6 +884,9 @@ For the project, we would focus on the CamVid dataset recorded from automobile. 
 
     
     
+    
+    <script src="/js/mathjax-config.js"></script>
+    
 
     
     
@@ -855,6 +904,8 @@ For the project, we would focus on the CamVid dataset recorded from automobile. 
       
 
       
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
       
     
 
