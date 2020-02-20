@@ -130,17 +130,16 @@
   
   
     
-    
   
-  <meta property="twitter:card" content="summary">
+  <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="/usr">
   <meta property="og:url" content="https://dimidagd.github.io/project/thesis/">
-  <meta property="og:title" content="Thesis Week3 | /usr">
+  <meta property="og:title" content="Thesis report Week#3 | /usr">
   <meta property="og:description" content="The essence of estimation The generation of information that has the following properties
  quality (accuracy/reliability) higher than the raw measurements contains information not directly available in the measurements  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
   Mathematical view of state estimation.  
- No access to variables inside the first two blocks The only accessible variable are the measurements which are affected by noise."><meta property="og:image" content="https://dimidagd.github.io/img/icon-192.png">
+ No access to variables inside the first two blocks The only accessible variable are the measurements which are affected by noise."><meta property="og:image" content="https://dimidagd.github.io/project/thesis/featured.jpg">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2020-02-19T16:16:09&#43;01:00">
@@ -152,7 +151,7 @@
 
   
 
-  <title>Thesis Week3 | /usr</title>
+  <title>Thesis report Week#3 | /usr</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -290,7 +289,7 @@
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">Thesis Week3</h1>
+  <h1 itemprop="name">Thesis report Week#3</h1>
 
   
 
@@ -469,14 +468,15 @@
   
 </figcaption>
 
-</figure></center>
-<span  class="math">\(
+</figure></center></p>
+
+<p><span  class="math">\[
 \begin{align*}
  X &=(N+h)cos\lambda cos\phi \\
 Y &= (N+h)cos\lambda sin\phi \\
 Z &= [N(1-e^2)+h] sin\lambda
 \end{align*}
-\)</span></p>
+\]</span></p>
 
 <h3 id="ecef-to-localtangential-plane-enu">ECEF to local-tangential plane (ENU)</h3>
 
@@ -779,6 +779,24 @@ Z
 
 </figure></center></p>
 
+<p>A top-view of the pinhole model seen in the figure below</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/camera_pinhole.png" width="50%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Pinhole model top-view</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
 <p>Then the measurement model for the predicted pixel location of a target obtained from a deep neural-network classifier and localiser along the y-axis is</p>
 
 <p><span  class="math">\[
@@ -867,8 +885,8 @@ f_{k-1} \approx F_{k-1} =
 <p>and for the CTRV model this leads to</p>
 
 <p><span  class="math">\[
-F_{{CTRV}_{k-1}} = \begin{bmatrix}
-1 &0 &\frac{sin(h+T\omega) - \sinh}{\omega} & \upsilon \frac{cos(h+T\omega)-cosh}{\omega} & \upsilon\frac{sinh -sin(h+T\omega) + T\omega cos(h+T\omega)}{\omega^{2}}\\
+F_{{CTRV}_{k-1}} =
+\begin{bmatrix}1 &0 &\frac{sin(h+T\omega) - \sinh}{\omega} & \upsilon \frac{cos(h+T\omega)-cosh}{\omega} & \upsilon\frac{sinh -sin(h+T\omega) + T\omega cos(h+T\omega)}{\omega^{2}}\\
 0 &1 &-\frac{cos(h+T\omega) - cos(\omega)}{\omega} &\upsilon \frac{sin(h+T\omega)-sinh}{\omega} & \upsilon\frac{cos(h + T\omega) -cosh + T\omega sin(h+T\omega)}{\omega^{2}}\\
 0 &0 &1 &0 &0 \\
 0 &0 &0 &0 &1\end{bmatrix}
@@ -898,7 +916,7 @@ H =
 
 <figure>
 
-<img src="/thesis/EKF_lineariation_error.png" width="100%" />
+<img src="/thesis/EKF_lineariation_error.png" width="70%" />
 
 
 
@@ -917,7 +935,7 @@ H =
 
 <p><a href="http://ais.informatik.uni-freiburg.de/teaching/ss17/robotics/slides/11-ekf.pdf">Figure src</a></p>
 
-<h1 id="first-simulation-results">First simulation results</h1>
+<h1 id="simulation-results">Simulation results</h1>
 
 <ul>
 <li>Motion model CTRV, sample time T = 100ms</li>
@@ -940,6 +958,87 @@ H =
 
 <figcaption data-pre="Figure " data-post=":" >
   <h4>Overall estimated trajectory of target using CTRV motion model for 8.3 minutes</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>Having a close look at a segment of the trajectory one can observe the effect of using a CTRV model.</p>
+
+<ul>
+<li>Clearly the estimator is able to adapt to the step change in the turn rate but it is rather slow, as the model is supposed to be a constant turn rate one.</li>
+<li>The red ellipses correspond to the state uncertainty as propagated through the motion model, without an available measurement update.</li>
+<li>The green ellipses correspond to the uncertainty after incorporating a measurement update.</li>
+</ul>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/propagation.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Close up on the previous trajectory</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<h1 id="filter-performance">Filter performance</h1>
+
+<h4 id="performance-graphs">Performance graphs</h4>
+
+<p>The performance of this tracker is outlined in the following figures
+<center>
+
+
+<figure>
+
+<img src="/thesis/EKF_performance.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Performance of the EKF on the previous simulation (right click image open in new tab for zoomable image)</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>From top to bottom:</p>
+
+<ul>
+<li>Predicted target position <span  class="math">\(x_p\)</span> and real target position <span  class="math">\(x\)</span> w.r.t Seakeeping self-vessel frame</li>
+<li>Predicted target position <span  class="math">\(y_p\)</span> and real target position <span  class="math">\(y\)</span> w.r.t Seakeeping self-vessel frame</li>
+<li>Predicted target heading velocity <span  class="math">\(\upsilon_p\)</span> and real target heading velocity <span  class="math">\(\upsilon \)</span> w.r.t Seakeeping self-vessel frame</li>
+<li>Predicted target heading velocity <span  class="math">\(h_p\)</span> and real target heading velocity <span  class="math">\(h\)</span> w.r.t Seakeeping self-vessel frame</li>
+<li>Predicted target turn rate <span  class="math">\(\omega_{p}\)</span> and real target turn rate <span  class="math">\(\omega \)</span></li>
+<li>Absolute distance prediction error norm <span  class="math">\(|e| = \sqrt{(x-x_p)^2+(y-y_p)^2} \)</span></li>
+<li>Innovation norm <span  class="math">\(|v|\)</span>, is a measure of how accurate the filter is tracking the real target, an unbound innovation norm implies that the observations do not match the predicted trajectory anymore i.e the tracker diverged.</li>
+<li>Innovation of the range measurements</li>
+<li>Innovation of the range rate Measurements</li>
+<li>Innovation of the bearing measurement</li>
+<li>Innovation of the camera localiser measurements</li>
+</ul>
+
+<h4 id="determinant-of-the-covariance-matrix-p">Determinant of the covariance matrix P</h4>
+
+<p>Calculating the determinant <span  class="math">\(||P||\)</span> of the predicted state covariance matrix provides an indication of the tracking uncertainty of the target or in other words a measure of the surface of the plotted uncertainty ellipses. As seen in the figure below, measurement updates from different sensors are able to keep the uncertainty low.</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/detP.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Predicted state covariance matrix determinant</h4>
   
 </figcaption>
 
