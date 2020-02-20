@@ -6,10 +6,19 @@
     <description>Recent content in Tags on /usr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Dec 2019 13:34:06 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 19 Feb 2020 16:16:09 +0100</lastBuildDate>
     
 	<atom:link href="https://dimidagd.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sensor-fusion</title>
+      <link>https://dimidagd.github.io/tags/sensor-fusion/</link>
+      <pubDate>Wed, 19 Feb 2020 16:16:09 +0100</pubDate>
+      
+      <guid>https://dimidagd.github.io/tags/sensor-fusion/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Mobile-robots</title>

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 4.1.0">
-  <meta name="generator" content="Hugo 0.59.1" />
+  <meta name="generator" content="Hugo 0.64.1" />
 
   
 
@@ -391,30 +391,16 @@
   <div class="article-container">
 
     <div class="article-style" itemprop="articleBody">
-      
-
-<h2 id="occupancy-grid-mapping-in-matlab2018a">Occupancy grid mapping in MATLAB2018a</h2>
-
+      <h2 id="occupancy-grid-mapping-in-matlab2018a">Occupancy grid mapping in MATLAB2018a</h2>
 <p>Test-case of occupancy grid mapping using real pose data, and laser measurements.</p>
-
-<p><img src="/img/OGM.gif" alt="drawing" title="A caption" style="width:70%;"/></p>
-
-<h3 id="getting-started">Getting Started</h3>
-
+<!-- raw HTML omitted -->
 <p>For a showcase you can copy the whole rep and run the script</p>
-
 <pre><code>occupancy_grid_mapping.m
-</code></pre>
-
-<p>The script will run by using the measurement file <code>laser_0.log</code> which includes laser sensor data as well as odometry data.</p>
-
+</code></pre><p>The script will run by using the measurement file <code>laser_0.log</code> which includes laser sensor data as well as odometry data.</p>
 <h2 id="description">Description</h2>
-
 <p>Odometry pose data is treated as the real pose of the robot, in that sense there is no variance/uncertainty in the pose data, hence the robot belief distribution at every step is  represented by a dirac centered at the robots pose. This assumption should make sense, since we are addressing exclusively a mapping problem which requires good knowledge or the robots position to create an accurate map. By relaxing this requirement, the problem gets transformed into a SLAM problem, which is beyond the scope of this example. Another assumption is that the environment is static, thus it can get only more certain(brighter), and not more uncertain(darker) that in the initialisation.</p>
-
 <h3 id="what-is-occupancy-grid-mapping">What is occupancy grid mapping</h3>
-
-<p>Occupancy grid mapping is a probabilistic representation of an environment. The environment is discretised into (here even) cells and the grid values represent obstacle uncertainty. In the example above, the darker the grid the more uncertain the representation. As the robot moves around getting laser range measurements, it &ldquo;sheds light&rdquo; into the map and brightens the free-space areas. This is done by ray-casting the measurements on the grid and decreasing the associated cell&rsquo;s probability. This is a rough explanation omitting mathematical details. For a  detailed and mathematically involved explanation please refer to <a href="http://www.probabilistic-robotics.org" target="_blank">a very nice book</a></p>
+<p>Occupancy grid mapping is a probabilistic representation of an environment. The environment is discretised into (here even) cells and the grid values represent obstacle uncertainty. In the example above, the darker the grid the more uncertain the representation. As the robot moves around getting laser range measurements, it &ldquo;sheds light&rdquo; into the map and brightens the free-space areas. This is done by ray-casting the measurements on the grid and decreasing the associated cell&rsquo;s probability. This is a rough explanation omitting mathematical details. For a  detailed and mathematically involved explanation please refer to <a href="http://www.probabilistic-robotics.org">a very nice book</a></p>
 
     </div>
 

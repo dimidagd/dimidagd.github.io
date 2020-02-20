@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.1.0">
+  <meta name="generator" content="Hugo 0.64.1" />
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Dimitrios Dagdilelis">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="The essence of estimation The generation of information that has the following properties
+ quality (accuracy/reliability) higher than the raw measurements contains information not directly available in the measurements  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
+  Mathematical view of state estimation.  
+ No access to variables inside the first two blocks The only accessible variable are the measurements which are affected by noise.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/project/thesis/">
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
+  
+
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-152056153-1', 'auto');
+      
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+  
+
+  
+  <link rel="alternate" href="https://dimidagd.github.io/index.xml" type="application/rss+xml" title="/usr">
+  <link rel="feed" href="https://dimidagd.github.io/index.xml" type="application/rss+xml" title="/usr">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="https://dimidagd.github.io/project/thesis/">
+
+  
+  
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="/usr">
+  <meta property="og:url" content="https://dimidagd.github.io/project/thesis/">
+  <meta property="og:title" content="Thesis Week3 | /usr">
+  <meta property="og:description" content="The essence of estimation The generation of information that has the following properties
+ quality (accuracy/reliability) higher than the raw measurements contains information not directly available in the measurements  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
+  Mathematical view of state estimation.  
+ No access to variables inside the first two blocks The only accessible variable are the measurements which are affected by noise."><meta property="og:image" content="https://dimidagd.github.io/img/icon-192.png">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-02-19T16:16:09&#43;01:00">
+  
+  <meta property="article:modified_time" content="2020-02-19T16:16:09&#43;01:00">
+  
+
+  
+
+  
+
+  <title>Thesis Week3 | /usr</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">/usr</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#projects">
+            
+            <span>/Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article article-project" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Thesis Week3</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2020-02-19 16:16:09 &#43;0100 CET" itemprop="datePublished">
+<meta content="2020-02-19 16:16:09 &#43;0100 CET" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Feb 19, 2020</time>
+  </span>
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+    
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      <h3 id="the-essence-of-estimation">The essence of estimation</h3>
+
+<p>The generation of information that has the following properties</p>
+
+<ul>
+<li>quality (accuracy/reliability) higher than the raw measurements</li>
+<li>contains information not directly available in the measurements</li>
+</ul>
+
+<p>[Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/SE.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Mathematical view of state estimation.</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<ul>
+<li>No access to variables inside the first two blocks</li>
+<li>The only accessible variable are the measurements which are affected by noise.</li>
+</ul>
+
+<h4 id="the-estimator">The estimator</h4>
+
+<p>Uses knowledge and processes the measurements to yield an estimate of a variable of interest(state or state uncertainty), while trying to make best use of the available data. In this process it is taking into account the:</p>
+
+<ul>
+<li>System dynamics</li>
+<li>Sensor Models</li>
+<li>Prior information &amp; probabilistic nature of the uncertainties</li>
+</ul>
+
+<h1 id="tracking">Tracking</h1>
+
+<p>Tracking is the <em>processing of measurements</em> or <em>observations</em> obtained from a <em>target</em> in order to maintain an <em>estimate of its current</em> <strong><em>state</em></strong></p>
+
+<p>The state of a target usually consists of:</p>
+
+<ul>
+<li>Kinematics - position, velocity, acceleration , turn rate, etc. expressed  w.r.t a coordinate frame</li>
+<li>Feature components - target classificiation, spectral characteristics, radar cross-section etc.</li>
+</ul>
+
+<p><strong><em>Measurements or observations</em></strong> are noise-corrupted quantities which are related to the state of a target, such as</p>
+
+<ul>
+<li>Direct estimate of position (GPS)</li>
+<li>Range and azimuth(bearing) from the sensor (radar, cameras)</li>
+<li>Range rate (radar)</li>
+</ul>
+
+<p>The observations are not raw data sequences but usually the output of a complex signal processing subsystem.</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/information.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Tracking system components.</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<h2 id="coordinate-systems">Coordinate systems</h2>
+
+<p>Four coordinate systems are usually involved in tracking algorithms.</p>
+
+<ul>
+<li>Geodetic</li>
+<li>Local-tangential</li>
+<li>Local spherical</li>
+<li>Earth centered Earth-fixed (ECEF) coordinates</li>
+</ul>
+
+<p>The transformations between the systems exist and are non-linear.</p>
+
+<h3 id="geodetic-to-ecef">Geodetic to ECEF</h3>
+
+<p>GPS measurements usually arrive in geodetic coordinates, where as tracking is usually performed in the local tangential plane. The transformation between these two requires an intermediate transformation from geodetic <span  class="math">\((\phi,\lambda,h)\)</span> to ECEF <span  class="math">\((X,Y,Z)\)</span> coordinates.</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/geodetic.png" width="50%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Geodetic coordinate system</h4>
+  
+</figcaption>
+
+</figure></center>
+<span  class="math">\(
+\begin{align*}
+ X &=(N+h)cos\lambda cos\phi \\
+Y &= (N+h)cos\lambda sin\phi \\
+Z &= [N(1-e^2)+h] sin\lambda
+\end{align*}
+\)</span></p>
+
+<h3 id="ecef-to-localtangential-plane-enu">ECEF to local-tangential plane (ENU)</h3>
+
+<p>The local-tangential plane is the east-north-up rectangular coordinate system and it is determined by fitting a tangential plane to the surface of the earth at some reference point. The reference point is the origin of the frame. Such a system is convenient in the context of tracking nearby ships because the motion and measurement models reduce to two-dimensional problems.</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/ECEF_ENU.png" width="50%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>ECEF and ENU systems</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>Given a reference point in Geodetic <span  class="math">\( [\phi_0,\lambda_0] \)</span> and the corresponding ECEF <span  class="math">\( [X_0,Y_0,Z_0] \)</span> coordinates, then any other point's ECEF coordinates <span  class="math">\( [X,Y,Z] \)</span> can be converted to local tangential plane coordinates <span  class="math">\( [x,y,z] \)</span> using the following transformation</p>
+
+<p><span  class="math">\[
+\begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}= \mathcal{L}\left(\begin{bmatrix}
+X\\
+Y\\
+Z
+\end{bmatrix} - \begin{bmatrix}
+X_0\\
+Y_0\\
+Z_0
+\end{bmatrix}\right)
+\]</span></p>
+
+<p>where <span  class="math">\( \mathcal{L} \)</span> is a function of the reference point <span  class="math">\( [\phi_0,\lambda_0,h_0] \)</span></p>
+
+<p><span  class="math">\[ \mathcal{L} = \begin{bmatrix}
+-sin\phi_0  & cos\phi_0 & 0 \\
+-sin\lambda_0cos\phi_0 & -sin\lambda_0sin\phi_0 & cos\lambda_0\\
+cos\lambda_0 cos\phi_0 & cos\lambda_0 sin\phi_0 & sin\lambda_0
+\end{bmatrix}\]</span></p>
+
+<h3 id="body-fixed-frame-or-local-tangential-selfvessel-frame">Body fixed frame (or local tangential self-vessel frame)</h3>
+
+<p>This frame is the local-tangential frame rotated around the z-axis so that the x-axis is aligned with the self-vessels heading direction from the true north <span  class="math">\(h_{self_{true}} \)</span>. This frame in case of a non rolling-pitching vessel coincides with the body-fixed frame. This is also called the sea-keeping frame because the vessel is assumed to move along the direction of its average velocity. Since this system is rotating along the vessel's heading direction and so do the local sensors, it is convenient to use for tracking purposes.</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/seakeeping_body.jpg" width="50%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Body fixed sea-keeping and NED systems</h4>
+  
+</figcaption>
+
+</figure></center>
+src: [<a href="https://www.researchgate.net/publication/41719906_Kinematic_Models_for_Manoeuvring_and_Seakeeping_of_Marine_Vessels">Kinematic Models for Manoeuvring and Seakeeping of Marine Vessels</a>]</p>
+
+<p>The transformation thus is:</p>
+
+<p><span  class="math">\[
+\begin{bmatrix}
+x \\
+y \\
+z
+\end{bmatrix}_{\text{w.r.t. self-vessel}} = R_{z}(\frac{\pi}{2}-h_{self_{true}} )
+\begin{bmatrix}
+x \\
+y \\
+z
+\end{bmatrix}_{\text{local tangential}}
+\]</span></p>
+
+<p>where</p>
+
+<p><span  class="math">\[
+R_{z}(\theta)=\begin{bmatrix}
+cos\theta &-sin\theta &0\\
+sin\theta &cos\theta &0 \\
+0 &0 &1
+\end{bmatrix}
+\]</span></p>
+
+<h4 id="purpose-of-using-different-coordinate-systems">Purpose of using different coordinate systems</h4>
+
+<p>Both the motion and the measurement model equations depend on the coordinate system of choice. Sensor measurements from a radar usually arrive in the local spherical system, where as the GPS measurements either for the self-vessel or for other vessels arrive in the geodetic system. It is convenient to express a target's motion model w.r.t the local tangential body fixed frame, since the local sensors like the radar and the cameras are rigidly attached to the body-frame. This simplifies the measurement models for local sensors, nevertheless it is creating the necessity to simplify the global measurement sensors like the AIS.</p>
+
+<h1 id="motion-model">Motion model</h1>
+
+<p>When choosing a coordinate system for the target motion model, it is very convenient to assume the target's motion on the local-tangential plane with the origin placed on the self-vessel(body fixed frame).</p>
+
+<p>The motion models proposed in literature are numerous. Trying to keep the complexity low, <em>linear motion</em> models assume a constant velocity(CV) or constant acceleration (CA). These models have the advantage that the state transition equation is linear. Unfortunately they assume straight motions and are thus unable to model rotational motion. When one introduces the angular speed of the target around the z-axis, the resulting models are referred to as <em>curvilinear</em> models.</p>
+
+<h2 id="use-of-the-local-tangential-selfvessel-coordinate-system">Use of the local tangential self-vessel coordinate system</h2>
+
+<p>Tracking objects using the body-fixed planar frame is a fair assumption at sea since a target in the vicinity of the self-vessel in this case can be projected on the self-body fixed frame, and is thus a fair approximation as long as the distance between the tracked target and the self-vessel is not large enough for the earth's curvature to induce approximation errors. The model's fidelity using the body-fixed frame is a topic of debate. In the context of sensor fusion and local situational awareness, the on-board sensors used on a ship operate within a range limit that should --- at least intuitively --- ratify the tangential plane approximation.</p>
+
+<p>When it comes to situational awareness in a more global context, i.e. tracking target vessels across the Atlantic, one could argue that there is no sense in applying sensor fusion since the targets are observable solely through GPS measurements.</p>
+
+<p>The above is just an assumption at this point.</p>
+
+<h2 id="state-vector">State vector</h2>
+
+<p>Assuming the target's motion on a plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:</p>
+
+<ul>
+<li><p>Cartesian velocity model
+<span  class="math">\(\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} \)</span></p></li>
+
+<li><p>Polar velocity model
+<span  class="math">\(\mathbf{x} = \left[x,y,\upsilon, h,\omega\right]^{T} \)</span></p></li>
+</ul>
+
+<p>where</p>
+
+<p><span  class="math">\[\begin{align*}
+\upsilon &= \sqrt{\dot{x}^2 + \dot{y}^2}  \\
+h &= arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\
+\omega &= \dot{h}
+\end{align*}\]</span></p>
+
+<p>Where:</p>
+
+<ul>
+<li><p><span  class="math">\((x,y)\)</span> is the displacement relative to the local self-body fixed coordinate system</p></li>
+
+<li><p><span  class="math">\(\upsilon \)</span> is the target's linear velocity</p></li>
+
+<li><p><span  class="math">\(h\)</span> is the heading angle</p></li>
+
+<li><p><span  class="math">\(\omega\)</span> is the turn-rate of the target</p></li>
+</ul>
+
+<p>all expressed w.r.t the self-vessel's body frame which has the x-axis aligned with the self-vessel heading direction.</p>
+
+<h3 id="continuous-constant-turn-rate-and-velocity-ctrv-model">Continuous constant turn rate and velocity (CTRV) model</h3>
+
+<p>Starting with a time continuous model</p>
+
+<p><span  class="math">\[ \dot{\mathbf{x}}(t) = f(\mathbf{x}(t)) + w(t) \]</span></p>
+
+<p>then assuming that the linear velocity <span  class="math">\(\upsilon\)</span> and the turn rate <span  class="math">\(\omega\)</span> remain constant  --- which is a fair assumption for a moving vessel --- the non-linear dynamics are</p>
+
+<p><span  class="math">\[f = \begin{bmatrix}\upsilon cos(h) \\ \upsilon sin(h) \\ 0 \\ \omega \\ 0  \end{bmatrix}^{T}\]</span></p>
+
+<p>which is describing  constant turn rate and velocity(CTRV)model.</p>
+
+<h3 id="discretisation-of-the-ctrv-motion-model">Discretisation of the CTRV motion model</h3>
+
+<p>Since the system is simulated in discrete time, one can integrate the motion model within a sample time <span  class="math">\(T\)</span> and obtain exactly</p>
+
+<p><span  class="math">\[
+\mathbf{x}(t+T) = \mathbf{x}(t) + \int_{t}^{t+T}(f(\mathbf{x}(\tau)+w(\tau) )d\tau
+\]</span></p>
+
+<p>and hence the discrete update model by ignoring the noise is</p>
+
+<p><span  class="math">\[
+ \mathbf{x}(t+T) = g\left(\mathbf{x}(t)\right)
+\]</span></p>
+
+<p>where</p>
+
+<p><span  class="math">\[
+g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
+\frac{2\upsilon}{\omega}sin(\omega T)cos(h + \frac{\omega T}{2})\\
+-\frac{2\upsilon}{\omega}sin(\omega T)cos(h + \frac{\omega T}{2})\\
+0 \\
+\omega T \\
+0
+\end{bmatrix} , \omega \neq 0
+\]</span></p>
+
+<p>or</p>
+
+<p><span  class="math">\[
+g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
+\upsilon T cos(h)\\
+\upsilon T sin(h)\\
+0 \\
+0 \\
+0
+\end{bmatrix} ,  \omega = 0
+\]</span></p>
+
+<h1 id="observation-models">Observation models</h1>
+
+<p>An observation model <span  class="math">\(z_k = h(\mathbf{x_k}) + w_k\)</span> expresses the observations <span  class="math">\(z_k\)</span> at time instances <span  class="math">\(t_k\)</span> given the state vector <span  class="math">\(\mathbf{x}\)</span> . <span  class="math">\(w_k\)</span> is assumed to be white gaussian noise with covariance matrix that depends on the specific sensor. The selection of the state vector <span  class="math">\(\mathbf{x}\)</span> can lead to linear or nonlinear observation models.</p>
+
+<h4 id="radar-observation-model">Radar observation model</h4>
+
+<p>The radar observation model includes calculating the distance and bearing from the self-vessel to the target in polar form <span  class="math">\(z_{radar} = \begin{bmatrix}
+\rho,
+\theta
+\end{bmatrix}^{T}\)</span> , given the target's position <span  class="math">\(\begin{bmatrix}x_t, y_t\end{bmatrix}^{T} \)</span> w.r.t the sensor's coordinate frame. If the radar's frame is aligned to the vessel's frame, then the radar measurement model can be expressed as:</p>
+
+<p><span  class="math">\[ z_{radar}(\mathbf{x}) = \begin{bmatrix}
+\rho \\
+\theta
+\end{bmatrix} = \begin{bmatrix}
+\sqrt{x^2 + y^2} \\
+arctan(\frac{x}{y})
+\end{bmatrix} + w_{radar}
+\]</span></p>
+
+<p>where the measurement noise <span  class="math">\(w\)</span> is assumed to be white, zero-mean Gaussian with covariance <span  class="math">\(R_{radar} = \text{diag}\left[\sigma^2_{\rho}, \sigma^2_{\theta}\right] \)</span></p>
+
+<p>A reasonable sizing of the noise variances can be</p>
+
+<ul>
+<li><span  class="math">\(\sigma^2_\rho = 10 \textit{m}\)</span></li>
+<li><span  class="math">\(\sigma^2_\theta = 3 \frac{\pi}{180} [rad] \)</span></li>
+</ul>
+
+<h4 id="gps-observation-model">GPS observation model</h4>
+
+<p>The GPS observation model calculates the target's relative position <span  class="math">\(\begin{bmatrix}x, y\end{bmatrix}^{T} \)</span> w.r.t the self-vessel tangential coordinate frame given</p>
+
+<ul>
+<li>The self-vessel's geodetic coordinates <span  class="math">\(\begin{bmatrix}\phi_{0}, \lambda_{0} \end{bmatrix}^{T}\)</span></li>
+<li>The self-vessels heading angle from true north <span  class="math">\(h_{0_{true}}\)</span></li>
+<li>The target's measured geodetic coordinates <span  class="math">\(\begin{bmatrix}\phi, \lambda\end{bmatrix}^{T} \)</span> which is usually available at sea through the Automatic Identification System.</li>
+</ul>
+
+<p><span  class="math">\[ z_{GPS}(\mathbf{x},\begin{bmatrix}\phi_{0}, \lambda_{0}, h_{0_{true}} \end{bmatrix}^{T}) = \begin{bmatrix}
+x \\
+y
+\end{bmatrix}_{GPS} = \begin{bmatrix}
+x \\
+y
+\end{bmatrix} + w_{GPS}
+\]</span></p>
+
+<p>The fact that the geodetic coordinates and the heading to true north of the self-vehicle is not included in the state-space representation leads to a linear measurement system, as the measurements are pre-transformed into the local-tangential plane w.r.t the self-vehicles heading direction and the noise is added on the the post-transformed measurements.</p>
+
+<p>The AIS measurements can be transformed into local-tangential vessel coordinates by using the aforementioned transformations.</p>
+
+<p><span  class="math">\[
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}_{\text{local tangential}} = R_z(\frac{\pi}{2}-h_{0_{true}}) \cdot F_1\left(F_2(\begin{bmatrix}
+\phi \\
+\lambda
+\end{bmatrix}),\begin{bmatrix}
+\phi_0 \\ \lambda_0
+\end{bmatrix}\right)
+\]</span></p>
+
+<p>Where</p>
+
+<ul>
+<li><p><span  class="math">\(F_1\left( \begin{bmatrix}
+X \\
+Y \\
+Z
+\end{bmatrix}_{ECEF},\begin{bmatrix}
+\phi_0 \\
+\lambda_0
+\end{bmatrix}\right)\)</span> is the transformation from ECEF to ENU, given the geodetic coordinates of the self-vessel <span  class="math">\(\begin{bmatrix}
+\phi_0,
+\lambda_0
+\end{bmatrix}^T\)</span> as a reference point.</p></li>
+
+<li><p><span  class="math">\(F_2\left(\begin{bmatrix}
+\phi \\
+\lambda
+\end{bmatrix}\right)\)</span> is the transformation from geodetic to ECEF coordinates</p></li>
+
+<li><p><span  class="math">\(R_z(\theta)\)</span> is the transformation from ENU to body fixed frame.</p></li>
+</ul>
+
+<h4 id="camera-localizer-model">Camera localizer model</h4>
+
+<p>Assuming a camera sensor and a pinhole model, with the camera z-axis aligned with the self-vessel body frame</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/camera.png" width="50%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Camera alignment with body frame</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>Then the measurement model for the predicted pixel location of a target obtained from a deep neural-network classifier and localiser along the y-axis is</p>
+
+<p><span  class="math">\[
+z_{cam_{px}} = \text{pixel_location} = f_x \cdot \frac{y}{\sqrt{x^2+y^2}} + w_{camera}
+\]</span></p>
+
+<p>Where</p>
+
+<ul>
+<li><p><span  class="math">\(f_x\)</span> is the intrinsic camera calibration parameter focal length along the camera x direction in pixels</p></li>
+
+<li><p><span  class="math">\(w_{camera}\)</span> is white gaussian zero mean noise with variance related to the classifier accuracy</p></li>
+</ul>
+
+<h1 id="kalman-filter">Kalman filter</h1>
+
+<h2 id="modeling-assumptions">Modeling Assumptions:</h2>
+
+<ul>
+<li>System's state evolution is linear and driven by
+
+<ul>
+<li>Known input</li>
+<li>Additive process noise which is assumed to be a zero-mean white, uncorrelated process with known covariance <span  class="math">\(Q(k)\)</span></li>
+</ul></li>
+<li>Measurements - linear sensor function of the state with
+
+<ul>
+<li>Addditive measurement zero-mean white noise with known covariance <span  class="math">\(R(k)\)</span></li>
+</ul></li>
+<li>Initial state , a random variable with known mean(initial estimate) and covariance (initial uncertainty)</li>
+</ul>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/KF2.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Block diagram of a discrete Kalman filtering algorithm</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p><a href="KF2.png">src</a></p>
+
+<p>Under the above assumptions the Kalman Filter is the <strong><em>MMSE state estimator</em></strong>. If the random variables are <em>not Gaussian</em>, but one can still obtain their first two moments, then the KF is still the <strong><em>best linear MMSE estimator</em></strong>.</p>
+
+<h2 id="kf-pitfalls-in-tracking">KF pitfalls in tracking</h2>
+
+<ul>
+<li>Usually the motion models are nonlinear</li>
+<li>The measurement models are usually nonlinear</li>
+<li>Unable to capture  mode changes(target maneuveres)</li>
+<li>Can't handle cross-correlated noise</li>
+<li>Single target &amp; unimodal</li>
+</ul>
+
+<h1 id="extended-kalman-filter">Extended Kalman Filter</h1>
+
+<p>The EKF is a suboptimal state estimation algorithm for nonlinear systems.</p>
+
+<h2 id="modeling-assumptions-1">Modeling Assumptions:</h2>
+
+<ul>
+<li>Same as the KF except that the motion model and/or the measurement models are nonlinear functions of the state, note that the noises are still assumed to enter additively into the models.</li>
+<li>First order Taylor expansion of the nonlinear functions are a reasonable approximation to the original functions</li>
+</ul>
+
+<h2 id="taylor-approximation-of-the-ctrv-motion-models">Taylor approximation of the CTRV motion models</h2>
+
+<p>A nonlinear motion model <span  class="math">\(x_{k} = f({x}_{k-1}) \)</span> can be linearised around a known state <span  class="math">\(x_{k-1} \)</span></p>
+
+<p><span  class="math">\[
+f_{k-1} \approx F_{k-1} =
+\begin{bmatrix}
+\nabla_{x_{k-1}} f_{k-1}^{T}(x_{k-1})
+\end{bmatrix}_{x_{k-1} \rightarrow\text{latest estimate}}^{T}
+\]</span></p>
+
+<p>and for the CTRV model this leads to</p>
+
+<p><span  class="math">\[
+F_{{CTRV}_{k-1}} = \begin{bmatrix}
+1 &0 &\frac{sin(h+T\omega) - \sinh}{\omega} & \upsilon \frac{cos(h+T\omega)-cosh}{\omega} & \upsilon\frac{sinh -sin(h+T\omega) + T\omega cos(h+T\omega)}{\omega^{2}}\\
+0 &1 &-\frac{cos(h+T\omega) - cos(\omega)}{\omega} &\upsilon \frac{sin(h+T\omega)-sinh}{\omega} & \upsilon\frac{cos(h + T\omega) -cosh + T\omega sin(h+T\omega)}{\omega^{2}}\\
+0 &0 &1 &0 &0 \\
+0 &0 &0 &0 &1\end{bmatrix}
+\]</span></p>
+
+<p>similarly, a measurement model <span  class="math">\(z_k=h(\mathbf{x_k})\)</span> can be linearised around the latest motion propagated estimate <span  class="math">\(x_{k}\)</span> as</p>
+
+<p><span  class="math">\[
+h_{k} \approx H_{k} =
+\begin{bmatrix}
+\nabla_{x_{k}} h_{k}^{T}(x_{k})
+\end{bmatrix}_{x_{k} \rightarrow\text{motion updated estimate}}^{T}
+\]</span></p>
+
+<p>Thus the radar model that measures distance and bearing is linearised as</p>
+
+<p><span  class="math">\[
+H =
+\begin{bmatrix}
+\frac{x}{\sqrt{x^2+y^2}} &\frac{y}{\sqrt{x^2+y^2}} &0 &0 \\
+-\frac{y}{x^2+y^2} &\frac{x}{x^2+y^2} &0 &0
+\end{bmatrix}
+\]</span></p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/EKF_lineariation_error.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Gaussian PDF propagation through a nonlinear model and taylor-approximation.</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<!---
+| ![space-1.jpg](/thesis/EKF_lineariation_error.png) |
+|:--:|
+| *Space*
+-->
+
+<p><a href="http://ais.informatik.uni-freiburg.de/teaching/ss17/robotics/slides/11-ekf.pdf">Figure src</a></p>
+
+<h1 id="first-simulation-results">First simulation results</h1>
+
+<ul>
+<li>Motion model CTRV, sample time T = 100ms</li>
+<li>Measurement models, asynchronous measurements from:
+
+<ul>
+<li>Noisy Radar measurements: bearing and distance, Ts=5 s</li>
+<li>Noisy Camera pixel measurements. Horizontal target pixel location on the image plane. Ts = 20s</li>
+</ul></li>
+</ul>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/fusionCTRV.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Overall estimated trajectory of target using CTRV motion model for 8.3 minutes</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/sensor-fusion/">Sensor-fusion</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  
+  <img class="portrait mr-3" src="/author/admin/avatar_hu9a5bbf0657111f252bed6cd0c360848b_15195_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+  
+
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Dimitrios Dagdilelis</a></h5>
+    <h6 class="card-subtitle">MSc student</h6>
+    <p class="card-text" itemprop="description">My research interests include sensor fusion, perception, mapping and estimation in the context of autonomous systems.</p>
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:dimidagd_at_gmail_dot_com" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://www.linkedin.com/in/dimidagd/" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="https://github.com/dimidagd" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+    
+    
+    
+
+  </div>
+</article>
+
+
+
+<div class="container">
+  <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+</div>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.59444117f1957a46872930c49af65e4d.js"></script>
+
+  </body>
+</html>
+

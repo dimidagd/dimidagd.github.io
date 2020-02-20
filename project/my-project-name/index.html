@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Source Themes Academic 4.1.0">
-  <meta name="generator" content="Hugo 0.59.1" />
+  <meta name="generator" content="Hugo 0.64.1" />
 
   
 
@@ -352,18 +352,11 @@
   <div class="article-container">
 
     <div class="article-style" itemprop="articleBody">
-      
-
-<h3 id="motivation">Motivation</h3>
-
+      <h3 id="motivation">Motivation</h3>
 <p>Mobile robots need to be aware of moving targets in their environment, let alone they have to do it fast and using the least resources possible. The case of particular interests is the one of mobile robots operating in a factory environment, in which they have to constantly avoid other dangerous moving targets such as forklifts. The motivation for this algorithm was a company that wanted to implement a computationaly light solution since their main processing unit was already busy with running other computationally expensive tasks.</p>
-
 <h3 id="constraints">Constraints</h3>
-
 <p>Low computational efforts exclude grid-based method, because they are having a difficulty scaling to larger areas while keeping computations low and therefore, a <span class="markup-quote">continuous method</span> had to be used. Inspired from the probabilistic estimation methods the algorithm can be summarized to the following steps.</p>
-
 <h3 id="algorithm-overview">Algorithm overview</h3>
-
 <ol>
 <li>Mark polygon area as free space from t-1 scan measurement.</li>
 <li>Shrink polygon area according to sensor noise model in order to avoid false positives on step#3.</li>
@@ -377,7 +370,6 @@
 <li>Propagate possible previous moving target objects based on confirmed violations field.</li>
 <li>Repeat #1 for new scan sample.</li>
 </ol>
-
 <h2 id="hahahugoshortcode-s1-hbhb">
 
 
@@ -395,17 +387,13 @@
 </figcaption>
 
 </figure></h2>
-
-<h2 id="img-src-img-no-mov-targs-gif-alt-drawing-title-a-caption-style-width-70"><img src="/img/no_mov_targs.gif" alt="drawing" title="A caption" style="width:70%;"/></h2>
-
+<!-- raw HTML omitted -->
 <h2 id="remarks">Remarks</h2>
-
 <ul>
 <li>The advantage of this method is that is effectively capitalizing the low dimensionality of the laser data, to create a fast and robust estimator, in constrast to using camera based methods which are prone to classification errors/illumination noise.</li>
 <li>It is worth noting that the &ldquo;free-space&rdquo; algorithm will not work for objects moving away from the laser frame, which is not necessarily a disadvantage, since generally objects moving away from the robot are not a safety concern.</li>
 <li>Although the method is robust, it is generally noisy, due to the nature of violating points. By including a dynamical model of the moving targets, one could include an optimal estimator in the pipeline that smooths out the estimated position of the targets.</li>
 </ul>
-
 <h2 id="next-steps">Next steps</h2>
 
     </div>
