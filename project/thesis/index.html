@@ -524,9 +524,9 @@ Z_0
 cos\lambda_0 cos\phi_0 & cos\lambda_0 sin\phi_0 & sin\lambda_0
 \end{bmatrix}\]</span></p>
 
-<h3 id="body-fixed-frame-or-local-tangential-selfvessel-frame">Body fixed frame (or local tangential self-vessel frame)</h3>
+<h3 id="body-fixed-frame-or-local-tangential-ownship-frame">Body fixed frame (or local tangential own-ship frame)</h3>
 
-<p>This frame is the local-tangential frame rotated around the z-axis so that the x-axis is aligned with the self-vessels heading direction from the true north <span  class="math">\(h_{self_{true}} \)</span>. This frame in case of a non rolling-pitching vessel coincides with the body-fixed frame. This is also called the sea-keeping frame because the vessel is assumed to move along the direction of its average velocity. Since this system is rotating along the vessel's heading direction and so do the local sensors, it is convenient to use for tracking purposes.</p>
+<p>This frame is the local-tangential frame rotated around the z-axis so that the x-axis is aligned with the own-ships heading direction from the true north <span  class="math">\(h_{self_{true}} \)</span>. This frame in case of a non rolling-pitching vessel coincides with the body-fixed frame. This is also called the sea-keeping frame because the vessel is assumed to move along the direction of its average velocity. Since this system is rotating along the vessel's heading direction and so do the local sensors, it is convenient to use for tracking purposes.</p>
 
 <p><center>
 
@@ -552,7 +552,7 @@ src: [<a href="https://www.researchgate.net/publication/41719906_Kinematic_Model
 x \\
 y \\
 z
-\end{bmatrix}_{\text{w.r.t. self-vessel}} = R_{z}(\frac{\pi}{2}-h_{self_{true}} )
+\end{bmatrix}_{\text{w.r.t. own-ship}} = R_{z}(\frac{\pi}{2}-h_{self_{true}} )
 \begin{bmatrix}
 x \\
 y \\
@@ -572,17 +572,17 @@ sin\theta &cos\theta &0 \\
 
 <h4 id="purpose-of-using-different-coordinate-systems">Purpose of using different coordinate systems</h4>
 
-<p>Both the motion and the measurement model equations depend on the coordinate system of choice. Sensor measurements from a radar usually arrive in the local spherical system, where as the GPS measurements either for the self-vessel or for other vessels arrive in the geodetic system. It is convenient to express a target's motion model w.r.t the local tangential body fixed frame, since the local sensors like the radar and the cameras are rigidly attached to the body-frame. This simplifies the measurement models for local sensors, nevertheless it is creating the necessity to simplify the global measurement sensors like the AIS.</p>
+<p>Both the motion and the measurement model equations depend on the coordinate system of choice. Sensor measurements from a radar usually arrive in the local spherical system, where as the GPS measurements either for the own-ship or for other vessels arrive in the geodetic system. It is convenient to express a target's motion model w.r.t the local tangential body fixed frame, since the local sensors like the radar and the cameras are rigidly attached to the body-frame. This simplifies the measurement models for local sensors, nevertheless it is creating the necessity to simplify the global measurement sensors like the AIS.</p>
 
 <h1 id="motion-model">Motion model</h1>
 
-<p>When choosing a coordinate system for the target motion model, it is very convenient to assume the target's motion on the local-tangential plane with the origin placed on the self-vessel(body fixed frame).</p>
+<p>When choosing a coordinate system for the target motion model, it is very convenient to assume the target's motion on the local-tangential plane with the origin placed on the own-ship(body fixed frame).</p>
 
 <p>The motion models proposed in literature are numerous. Trying to keep the complexity low, <em>linear motion</em> models assume a constant velocity(CV) or constant acceleration (CA). These models have the advantage that the state transition equation is linear. Unfortunately they assume straight motions and are thus unable to model rotational motion. When one introduces the angular speed of the target around the z-axis, the resulting models are referred to as <em>curvilinear</em> models.</p>
 
-<h2 id="use-of-the-local-tangential-selfvessel-coordinate-system">Use of the local tangential self-vessel coordinate system</h2>
+<h2 id="use-of-the-local-tangential-ownship-coordinate-system">Use of the local tangential own-ship coordinate system</h2>
 
-<p>Tracking objects using the body-fixed planar frame is a fair assumption at sea since a target in the vicinity of the self-vessel in this case can be projected on the self-body fixed frame, and is thus a fair approximation as long as the distance between the tracked target and the self-vessel is not large enough for the earth's curvature to induce approximation errors. The model's fidelity using the body-fixed frame is a topic of debate. In the context of sensor fusion and local situational awareness, the on-board sensors used on a ship operate within a range limit that should --- at least intuitively --- ratify the tangential plane approximation.</p>
+<p>Tracking objects using the body-fixed planar frame is a fair assumption at sea since a target in the vicinity of the own-ship in this case can be projected on the self-body fixed frame, and is thus a fair approximation as long as the distance between the tracked target and the own-ship is not large enough for the earth's curvature to induce approximation errors. The model's fidelity using the body-fixed frame is a topic of debate. In the context of sensor fusion and local situational awareness, the on-board sensors used on a ship operate within a range limit that should --- at least intuitively --- ratify the tangential plane approximation.</p>
 
 <p>When it comes to situational awareness in a more global context, i.e. tracking target vessels across the Atlantic, one could argue that there is no sense in applying sensor fusion since the targets are observable solely through GPS measurements.</p>
 
@@ -620,7 +620,7 @@ h &= arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\
 <li><p><span  class="math">\(\omega\)</span> is the turn-rate of the target</p></li>
 </ul>
 
-<p>all expressed w.r.t the self-vessel's body frame which has the x-axis aligned with the self-vessel heading direction.</p>
+<p>all expressed w.r.t the own-ship's body frame which has the x-axis aligned with the own-ship heading direction.</p>
 
 <h3 id="continuous-constant-turn-rate-and-velocity-ctrv-model">Continuous constant turn rate and velocity (CTRV) model</h3>
 
@@ -678,7 +678,7 @@ g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
 
 <h4 id="radar-observation-model">Radar observation model</h4>
 
-<p>The radar observation model includes calculating the distance and bearing from the self-vessel to the target in polar form <span  class="math">\(z_{radar} = \begin{bmatrix}
+<p>The radar observation model includes calculating the distance and bearing from the own-ship to the target in polar form <span  class="math">\(z_{radar} = \begin{bmatrix}
 \rho,
 \theta
 \end{bmatrix}^{T}\)</span> , given the target's position <span  class="math">\(\begin{bmatrix}x_t, y_t\end{bmatrix}^{T} \)</span> w.r.t the sensor's coordinate frame. If the radar's frame is aligned to the vessel's frame, then the radar measurement model can be expressed as:</p>
@@ -703,15 +703,15 @@ arctan(\frac{x}{y})
 
 <h4 id="gps-observation-model">GPS observation model</h4>
 
-<p>The GPS observation model calculates the target's relative position <span  class="math">\(\begin{bmatrix}x, y\end{bmatrix}^{T} \)</span> w.r.t the self-vessel tangential coordinate frame given</p>
+<p>The GPS observation model calculates the target's relative position <span  class="math">\(\begin{bmatrix}x, y\end{bmatrix}^{T} \)</span> w.r.t the own-ship tangential coordinate frame given</p>
 
 <ul>
-<li>The self-vessel's geodetic coordinates <span  class="math">\(\begin{bmatrix}\phi_{0}, \lambda_{0} \end{bmatrix}^{T}\)</span></li>
-<li>The self-vessels heading angle from true north <span  class="math">\(h_{0_{true}}\)</span></li>
+<li>The own-ship's geodetic coordinates <span  class="math">\(\begin{bmatrix}\phi_{0}, \lambda_{0} \end{bmatrix}^{T}\)</span></li>
+<li>The own-ships sea-keeping heading angle from true north <span  class="math">\(h_{0_{\textit{TN}}}\)</span></li>
 <li>The target's measured geodetic coordinates <span  class="math">\(\begin{bmatrix}\phi, \lambda\end{bmatrix}^{T} \)</span> which is usually available at sea through the Automatic Identification System.</li>
 </ul>
 
-<p><span  class="math">\[ z_{GPS}(\mathbf{x},\begin{bmatrix}\phi_{0}, \lambda_{0}, h_{0_{true}} \end{bmatrix}^{T}) = \begin{bmatrix}
+<p><span  class="math">\[ z_{GPS}(\mathbf{x},\begin{bmatrix}\phi_{0}, \lambda_{0}, h_{0_{\textit{TN}}} \end{bmatrix}^{T}) = \begin{bmatrix}
 x \\
 y
 \end{bmatrix}_{GPS} = \begin{bmatrix}
@@ -728,7 +728,7 @@ y
 \begin{bmatrix}
 x \\
 y
-\end{bmatrix}_{\text{local tangential}} = R_z(\frac{\pi}{2}-h_{0_{true}}) \cdot F_1\left(F_2(\begin{bmatrix}
+\end{bmatrix}_{\text{local tangential}} = R_z(\frac{\pi}{2}-h_{0_{\textit{TN}}}) \cdot F_1\left(F_2(\begin{bmatrix}
 \phi \\
 \lambda
 \end{bmatrix}),\begin{bmatrix}
@@ -746,7 +746,7 @@ Z
 \end{bmatrix}_{ECEF},\begin{bmatrix}
 \phi_0 \\
 \lambda_0
-\end{bmatrix}\right)\)</span> is the transformation from ECEF to ENU, given the geodetic coordinates of the self-vessel <span  class="math">\(\begin{bmatrix}
+\end{bmatrix}\right)\)</span> is the transformation from ECEF to ENU, given the geodetic coordinates of the own-ship <span  class="math">\(\begin{bmatrix}
 \phi_0,
 \lambda_0
 \end{bmatrix}^T\)</span> as a reference point.</p></li>
@@ -756,12 +756,124 @@ Z
 \lambda
 \end{bmatrix}\right)\)</span> is the transformation from geodetic to ECEF coordinates</p></li>
 
-<li><p><span  class="math">\(R_z(\theta)\)</span> is the transformation from ENU to body fixed frame.</p></li>
+<li><p><span  class="math">\(R_z(\theta)\)</span> is the transformation from ENU to sea-keeping frame.</p></li>
 </ul>
 
-<h4 id="camera-localizer-model">Camera localizer model</h4>
+<h4 id="ais-observation-model">AIS observation model</h4>
 
-<p>Assuming a camera sensor and a pinhole model, with the camera z-axis aligned with the self-vessel body frame</p>
+<p>An alternative method to using the aforementioned GPS model is to leverage the fact that the tracked targets are in the viscinity of the own-vehicle, and thus small differences in geodetical coordinates can be linearly mapped to ENU differences and the other way around.
+x
+[<a href="https://en.wikipedia.org/wiki/Geographic_coordinate_conversion">src:&quot;Wikipedia:Geographic coordinate conversion&quot;</a>]</p>
+
+<p>By differentiating the model mentioned in the Coordinate systems section, one can confirm that for given own-ship geodetic coordinates <span  class="math">\((\phi,\lambda)_{\textit{own-ship}}\)</span></p>
+
+<p><span  class="math">\[
+\begin{bmatrix}
+dE\\dN\\dU
+\end{bmatrix}=
+\begin{bmatrix}
+(N(\phi)+h)\cos\phi &0 &0\\
+0 &M(\phi) + h &0\\
+0 &0 &1
+\end{bmatrix}
+\begin{bmatrix}
+d\lambda\\d\phi\\dh
+\end{bmatrix}
+\]</span></p>
+
+<p>Which can be solved for</p>
+
+<p><span  class="math">\[
+\begin{bmatrix}
+d\lambda\\ d\phi
+\end{bmatrix}=
+\mathbf{T}(\phi)^{-1}
+\begin{bmatrix}
+dE\\ dN
+\end{bmatrix}
+\]</span></p>
+
+<p>Since the target's state is in the <em>sea-keeping</em> frame, one needs to transform it to ENU.</p>
+
+<p>If <span  class="math">\(\mathbf{R}_z(h)\)</span> is the Euler's angle transformation for a rotation <span  class="math">\(h\)</span> around the z-axis, then the transformation <em>from sea-keeping to ENU</em></p>
+
+<p><span  class="math">\[\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}} \]</span></p>
+
+<p>given the own-ship's <em>seakeeping heading from true-north</em> <span  class="math">\(h_{0_{\textit{TN}}}\)</span>
+is ,</p>
+
+<p><span  class="math">\[\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}} = \mathbf{R_{z}}(\frac{\pi}{2}-h_{0_{\textit{TN}}})\]</span></p>
+
+<p><span  class="math">\[
+\begin{bmatrix}
+dE\\ dN
+\end{bmatrix}=
+\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}}
+\begin{bmatrix}
+X\\ Y
+\end{bmatrix}_{\textit{target wrt}_{{\textit{sea-keeping}}}}
+\]</span></p>
+
+<p>and thus, by combining the above equations</p>
+
+<p><span  class="math">\[
+\begin{bmatrix}
+\phi\\ \lambda
+\end{bmatrix}_{\textit{target}}=
+\begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix}_{\textit{own-ship}} + \mathbf{T}(\phi_{0})^{-1}
+\begin{bmatrix}
+dE\\ dN
+\end{bmatrix} + w_{\textit{AIS}}=
+\begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix}_{\textit{own-ship}} + \mathbf{T}(\phi_{0})^{-1}
+\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}}(h_{0_{\textit{TN}}})
+\begin{bmatrix}
+X_{\textit{target}}\\ Y_{\textit{target}}
+\end{bmatrix}_{\textit{wrt}_{{\textit{sea-keeping}}}}+w_{\textit{AIS}}
+\]</span></p>
+
+<p>Where</p>
+
+<ul>
+<li><p><span  class="math">\(\mathbf{T}(\phi)=
+\begin{bmatrix}
+N(\phi)\cos\phi &0\\
+0 &M(\phi)
+\end{bmatrix}
+\)</span> is the transformation matrix from geodetic differences to ENU differences.</p></li>
+
+<li><p><span  class="math">\(N(\phi) = \frac{\alpha}{\sqrt{1-e^2\sin^2\phi}}\)</span> is the <em>prime vertical radius of curvature</em></p></li>
+
+<li><p><span  class="math">\(M(\phi) = \frac{\alpha(1-e^2)}{(1-e^2\sin^2\phi)^\frac{3}{2}}\)</span> is the <em>meridional radius of curvature</em></p></li>
+
+<li><p><span  class="math">\(\alpha,\beta \)</span> are the equitorial radius(6378.1370 km) and the Polar radius(6356.7523 km) respectively, as derived from the <strong><em>WGS-84</em></strong> ellipsoid model.</p></li>
+
+<li><p><span  class="math">\(e = \sqrt{1 -\frac{b^2}{a^2}}\)</span> is the ellipsoid's eccentricity.</p></li>
+
+<li><p><span  class="math">\(h = 0 \)</span> since the own-ship is always floating on the geoid.</p></li>
+
+<li><p><span  class="math">\(w_{\textit{AIS}}\)</span> is white gaussian zero-mean noise with covariance matrix <span  class="math">\(\mathbf{R}_{\textit{AIS}}\)</span> depending on the noise intensity of the AIS source.</p></li>
+</ul>
+
+<p>The above equation can be rewritten to the standard measurement model formulation</p>
+
+<p><span  class="math">\[ z_{AIS}(\mathbf{x},\begin{bmatrix}\phi_{0}, \lambda_{0}, h_{0_{\textit{TN}}} \end{bmatrix}^{T}) = \begin{bmatrix}
+\phi\\ \lambda
+\end{bmatrix}_{\textit{target}} = \begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix} + \mathbf{H}\mathbf{x} + w_{\textit{AIS}}
+\]</span></p>
+
+<p>, which is a linear measurement model that is approximating the geoid with a <strong><em>spherical-linearization</em></strong> about the own-ship's geodetic location.</p>
+
+<p><a href="#camera-model"></a></p>
+
+<h4 id="camera-model">Camera model</h4>
+
+<p>Assuming a camera sensor and a pinhole model, with the camera z-axis aligned with the own-ship body frame</p>
 
 <p><center>
 
@@ -797,19 +909,85 @@ Z
 
 </figure></center></p>
 
-<p>Then the measurement model for the predicted pixel location of a target obtained from a deep neural-network classifier and localiser along the y-axis is</p>
+<p>Then the measurement model for the predicted pixel location of a target obtained from a deep neural-network classifier and localiser along the y-axis is found by the projecting a point in homogeneous coordinates</p>
+
+<p><span  class="math">\[x_{\text{wrt}_{\text{sea keeping}}} =\begin{bmatrix}x, y, 0, 1\end{bmatrix}^T\]</span></p>
+
+<p>to the finite camera frame given measured information <span  class="math">\(z_{gyro}\)</span> about the rotational state of the <em>own-ship w.r.t the sea-keeping frame</em>:</p>
 
 <p><span  class="math">\[
-z_{cam_{px}} = \text{pixel_location} = f_x \cdot \frac{y}{\sqrt{x^2+y^2}} + w_{camera}
+z_{\textit{cam}_{\textit{px}}}(\mathbf{x},z_{\textit{gyro}}) = \frac{\begin{bmatrix}-P_1-\\-P_2-\end{bmatrix}\mathbf{x}}{
+\begin{bmatrix}
+-P_3-
+\end{bmatrix}
+\mathbf{x}}+ w_{\text{camera}}
 \]</span></p>
 
-<p>Where</p>
+<p>Where <span  class="math">\(\mathbf{P}\)</span> is the projection matrix and <span  class="math">\(P_{i}\)</span> it's rows</p>
+
+<p><span  class="math">\[ \mathbf{P} = \begin{bmatrix}-P_1- \\-P_2-\\-P_3- \end{bmatrix} = \mathbf{K}\mathbf{\mathbf{R}_{\textit{own-ship}}^{\textit{camera}}}[\mathbf{I} | \mathbf{-C}]
+\begin{bmatrix}
+\mathbf{\mathbf{R}_{\textit{sea-keeping}}^{\textit{own-ship}}} &\mathbf{0}\\
+\mathbf{0} &1
+\end{bmatrix}\]</span></p>
+
+<p>Because of the denumenator this is a non-linear model, and a description of the matrices that comprise the projection matrix <span  class="math">\(P\)</span> is given below:</p>
+
+<h3 id="mathbfk"><span  class="math">\(\mathbf{K}\)</span></h3>
+
+<p>is the <strong><em>intrinsic camera calibration</em></strong> matrix</p>
+
+<p><span  class="math">\[\mathbf{K} = \begin{bmatrix}f m_x &0 &p_x \\
+  0 &f m_y &p_y \\
+  0 &0 &1
+  \end{bmatrix} \]</span></p>
+
+<p>with</p>
 
 <ul>
-<li><p><span  class="math">\(f_x\)</span> is the intrinsic camera calibration parameter focal length along the camera x direction in pixels</p></li>
-
-<li><p><span  class="math">\(w_{camera}\)</span> is white gaussian zero mean noise with variance related to the classifier accuracy</p></li>
+<li><span  class="math">\(f\)</span> is the intrinsic camera calibration parameter, focal length in mm</li>
+<li><span  class="math">\(m_x, m_y\)</span> are the camera's sensor pixel density in <span  class="math">\(\frac{\text{number of pixels}}{mm}\)</span> across the two different directions of the image plane.</li>
+<li><span  class="math">\(p_x,p_y\)</span> correspond to the position of the principal point of the image in <em>pixel coordinates</em></li>
+<li><span  class="math">\(w_{\textit{camera}}\)</span> is white gaussian zero mean noise with variance related to the classifier accuracy, or any calibration errors in the extrinsic and intrinsic camera matrices.</li>
 </ul>
+
+<h3 id="mathbfrtextitownshiptextitcamera"><span  class="math">\(\mathbf{R}_{\textit{own-ship}}^{\textit{camera}}\)</span></h3>
+
+<p>is the <strong><em>extrinsic camera rotation</em></strong> matrix that describes the <em>orientation of the camera frame</em> w.r.t. the <em>own-ship</em>.</p>
+
+<h3 id="mathbfc"><span  class="math">\(\mathbf{C}\)</span></h3>
+
+<p>is the  <strong><em>extrinsic origin of the camera frame</em></strong> w.r.t. the <em>own-ship</em>.</p>
+
+<h3 id="mathbfrtextitseakeepingtextitownship"><span  class="math">\(\mathbf{R}_{\textit{sea-keeping}}^{\textit{own-ship}}\)</span></h3>
+
+<p>Is the transformation matrix that corresponds to the <strong><em>roll-pitch</em></strong> rotation of the <strong><em>own-ship</em></strong> w.r.t the <strong><em>sea-keeping</em></strong> frame. Please note that the order of the rotations matters.</p>
+
+<p><span  class="math">\[
+\mathbf{R}_{\textit{sea-keeping}}^{\textit{own-ship}}=\left( R_{\textit{pitch}} R_{\textit{roll}}\right)^T
+\]</span></p>
+
+<p>Where <span  class="math">\(R_{\textit{pitch}},R_{\textit{roll}}\)</span> are the standard rotation matrices for Euler's angles <span  class="math">\(z_{\textit{gyro}}=(\alpha,\beta)^T = (\textit{roll},\textit{pitch})^T\)</span>.</p>
+
+<p><span  class="math">\[
+  R_{\textit{roll}}= R_x(\alpha) =
+  \begin{bmatrix}
+  1 &0 &0\\
+  0 &\cos\alpha &-\sin \alpha\\
+  0 &\sin \alpha &\cos \alpha
+  \end{bmatrix}
+\]</span></p>
+
+<p><span  class="math">\[
+  R_{\textit{pitch}}= R_y(\beta) =
+  \begin{bmatrix}
+  \cos\beta &0 &\sin \beta\\
+  0 &1 &0\\
+  -\sin \beta &0 &\cos\beta
+  \end{bmatrix}
+\]</span></p>
+
+<p>A basic assumption at that point, is that the own-ship is able to measure the angles <span  class="math">\((\alpha,\beta)\)</span> of the <em>own-ship body frame</em> w.r.t the <em>sea-keeping frame</em>. These angles are usually available on a ship by using one or multiple <strong><em>gyroscope sensors</em></strong>.</p>
 
 <h1 id="kalman-filter">Kalman filter</h1>
 
@@ -901,13 +1079,13 @@ h_{k} \approx H_{k} =
 \end{bmatrix}_{x_{k} \rightarrow\text{motion updated estimate}}^{T}
 \]</span></p>
 
-<p>Thus the radar model that measures distance and bearing is linearised as</p>
+<p>Thus the radar model that measures distance and bearing(given a CTRV state-space) is linearised as</p>
 
 <p><span  class="math">\[
 H =
 \begin{bmatrix}
-\frac{x}{\sqrt{x^2+y^2}} &\frac{y}{\sqrt{x^2+y^2}} &0 &0 \\
--\frac{y}{x^2+y^2} &\frac{x}{x^2+y^2} &0 &0
+\frac{x}{\sqrt{x^2+y^2}} &\frac{y}{\sqrt{x^2+y^2}} &0 &0 &0 \\
+-\frac{y}{x^2+y^2} &\frac{x}{x^2+y^2} &0 &0 &0
 \end{bmatrix}
 \]</span></p>
 
@@ -933,7 +1111,7 @@ H =
 | *Space*
 -->
 
-<p><a href="http://ais.informatik.uni-freiburg.de/teaching/ss17/robotics/slides/11-ekf.pdf">Figure src</a></p>
+<p><a href="http://ais.informatik.uni-freiburg.de/teaching/ss17/robotics/slides/11-ekf.pdf">Sebastian Thrun, Wolfram Burgard, and Dieter Fox. 2005. Probabilistic Robotics (Intelligent Robotics and Autonomous Agents). The MIT Press.</a></p>
 
 <h1 id="simulation-results">Simulation results</h1>
 
@@ -1011,10 +1189,10 @@ H =
 <p>From top to bottom:</p>
 
 <ul>
-<li>Predicted target position <span  class="math">\(x_p\)</span> and real target position <span  class="math">\(x\)</span> w.r.t Seakeeping self-vessel frame</li>
-<li>Predicted target position <span  class="math">\(y_p\)</span> and real target position <span  class="math">\(y\)</span> w.r.t Seakeeping self-vessel frame</li>
-<li>Predicted target heading velocity <span  class="math">\(\upsilon_p\)</span> and real target heading velocity <span  class="math">\(\upsilon \)</span> w.r.t Seakeeping self-vessel frame</li>
-<li>Predicted target heading velocity <span  class="math">\(h_p\)</span> and real target heading velocity <span  class="math">\(h\)</span> w.r.t Seakeeping self-vessel frame</li>
+<li>Predicted target position <span  class="math">\(x_p\)</span> and real target position <span  class="math">\(x\)</span> w.r.t Seakeeping own-ship frame</li>
+<li>Predicted target position <span  class="math">\(y_p\)</span> and real target position <span  class="math">\(y\)</span> w.r.t Seakeeping own-ship frame</li>
+<li>Predicted target heading velocity <span  class="math">\(\upsilon_p\)</span> and real target heading velocity <span  class="math">\(\upsilon \)</span> w.r.t Seakeeping own-ship frame</li>
+<li>Predicted target heading velocity <span  class="math">\(h_p\)</span> and real target heading velocity <span  class="math">\(h\)</span> w.r.t Seakeeping own-ship frame</li>
 <li>Predicted target turn rate <span  class="math">\(\omega_{p}\)</span> and real target turn rate <span  class="math">\(\omega \)</span></li>
 <li>Absolute distance prediction error norm <span  class="math">\(|e| = \sqrt{(x-x_p)^2+(y-y_p)^2} \)</span></li>
 <li>Innovation norm <span  class="math">\(|v|\)</span>, is a measure of how accurate the filter is tracking the real target, an unbound innovation norm implies that the observations do not match the predicted trajectory anymore i.e the tracker diverged.</li>
