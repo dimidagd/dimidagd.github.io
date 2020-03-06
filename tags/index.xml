@@ -6,7 +6,7 @@
     <description>Recent content in Tags on /usr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Feb 2020 16:16:09 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 06 Mar 2020 09:56:46 +0100</lastBuildDate>
     
 	<atom:link href="https://dimidagd.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>Sensor-fusion</title>
       <link>https://dimidagd.github.io/tags/sensor-fusion/</link>
-      <pubDate>Wed, 19 Feb 2020 16:16:09 +0100</pubDate>
+      <pubDate>Fri, 06 Mar 2020 09:56:46 +0100</pubDate>
       
       <guid>https://dimidagd.github.io/tags/sensor-fusion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>State-estimation</title>
+      <link>https://dimidagd.github.io/tags/state-estimation/</link>
+      <pubDate>Fri, 06 Mar 2020 09:56:46 +0100</pubDate>
+      
+      <guid>https://dimidagd.github.io/tags/state-estimation/</guid>
       <description></description>
     </item>
     

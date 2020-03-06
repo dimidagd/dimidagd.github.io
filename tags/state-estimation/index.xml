@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sensor-fusion on /usr</title>
-    <link>https://dimidagd.github.io/tags/sensor-fusion/</link>
-    <description>Recent content in Sensor-fusion on /usr</description>
+    <title>State-estimation on /usr</title>
+    <link>https://dimidagd.github.io/tags/state-estimation/</link>
+    <description>Recent content in State-estimation on /usr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 06 Mar 2020 09:56:46 +0100</lastBuildDate>
     
-	<atom:link href="https://dimidagd.github.io/tags/sensor-fusion/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dimidagd.github.io/tags/state-estimation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,18 +20,6 @@
       <description>The essence of estimation This week I have been working on
  Work on filtering visualization Implement multiple moving objects in the Simulation Implement multiple tracked objects in the simulation Implement Particle Filter Algorithm for single target Implement EKF with Probabilistic data Assosiation (PDAF) Implement PF with Probabilistic Data Assosiation (PDAF)  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
 Filtering visualization   Filters visualization for single target.</description>
-    </item>
-    
-    <item>
-      <title>Thesis report Week#3</title>
-      <link>https://dimidagd.github.io/project/thesis/</link>
-      <pubDate>Wed, 19 Feb 2020 16:16:09 +0100</pubDate>
-      
-      <guid>https://dimidagd.github.io/project/thesis/</guid>
-      <description>The essence of estimation The generation of information that has the following properties
- quality (accuracy/reliability) higher than the raw measurements contains information not directly available in the measurements  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
-  Mathematical view of state estimation.  
- No access to variables inside the first two blocks The only accessible variable are the measurements which are affected by noise.</description>
     </item>
     
   </channel>
