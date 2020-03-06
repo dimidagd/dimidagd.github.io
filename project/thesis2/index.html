@@ -134,7 +134,7 @@ Filtering visualization   Filters visualization for single target.">
   
   <meta property="og:site_name" content="/usr">
   <meta property="og:url" content="https://dimidagd.github.io/project/thesis2/">
-  <meta property="og:title" content="Week 4-5 Report | /usr">
+  <meta property="og:title" content="Thesis report Week#4-5 | /usr">
   <meta property="og:description" content="The essence of estimation This week I have been working on
  Work on filtering visualization Implement multiple moving objects in the Simulation Implement multiple tracked objects in the simulation Implement Particle Filter Algorithm for single target Implement EKF with Probabilistic data Assosiation (PDAF) Implement PF with Probabilistic Data Assosiation (PDAF)  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
 Filtering visualization   Filters visualization for single target."><meta property="og:image" content="https://dimidagd.github.io/project/thesis2/featured.jpg">
@@ -149,7 +149,7 @@ Filtering visualization   Filters visualization for single target."><meta proper
 
   
 
-  <title>Week 4-5 Report | /usr</title>
+  <title>Thesis report Week#4-5 | /usr</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -287,7 +287,7 @@ Filtering visualization   Filters visualization for single target."><meta proper
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">Week 4-5 Report</h1>
+  <h1 itemprop="name">Thesis report Week#4-5</h1>
 
   
 
@@ -393,26 +393,26 @@ Filtering visualization   Filters visualization for single target."><meta proper
 
 <ol>
 <li>Initialize EKF at <span  class="math">\(x_0\)</span></li>
-<li>Initialize PF at <span  class="math">\(p_0\)</span></li>
+<li>Initialize PF at <span  class="math">\(x_0\)</span></li>
 <li>Perform target deterministic motion update</li>
-<li>Obtain noisy observations <span  class="math">\(z\)</span>from different rate sensors(if any).</li>
+<li>Obtain noisy observations (if any) <span  class="math">\(z\)</span> from different rate sensors.</li>
 <li>Update the estimate of each filter with the given observations if any, using PDA.</li>
-<li>Plot the weighted particles above the PF state estimate where the heigth of a particle depends on its likelihood.</li>
-<li>Plot x-y uncertainty ellipsoids of the EKF around the state estimation.a</li>
+<li>Plot the weighted particles above the PF state estimate where the height of a particle depends on its likelihood.</li>
+<li>Plot x-y uncertainty ellipsoids of the EKF around the state estimation.</li>
 </ol>
 
 <h2 id="multiple-moving-objects">Multiple moving objects</h2>
 
-<p>So far, the data assosiation problem was not considered, that is the filtering algorithms were certain about the origin on the measurements. Data association is a major component of a tracking algorithm both because of the existance of multiple measurement sources, but also because of the existance of outliers in the measurements.</p>
+<p>So far, the data association problem was not considered, that is the filtering algorithms were certain about the origin on the measurements. Data association is a major component of a tracking algorithm both because of the existence of multiple measurement sources, but also because of the existence of outliers in the measurements.</p>
 
-<p>The approach implemented so far is a Probablistlic Data Association(PDA) algorithm.
+<p>The approach implemented so far is a <em>Probablistlic Data Association(PDA)</em> algorithm.
 The goal again is in the update state, to associate measurements with different tracked targets based on a certain criterion described in the algorithm.</p>
 
-<p>Mathematical explanation will be documented at a later stage, for now a visualization of the simulation is shown below.</p>
+<p><strong>Mathematical explanation will be documented at a later stage, for now a visualization of the simulation is shown below.</strong></p>
 
 <ul>
-<li>Three different targets</li>
-<li>Both EKF &amp; PF Filtering</li>
+<li>Three different targets visualised</li>
+<li>Both EKF &amp; PF Filtering for each target</li>
 <li>Triple crossing of targets, but the filters are able to associate correctly the measurements and correctly estimate the trajectories.</li>
 </ul>
 
@@ -420,8 +420,8 @@ The goal again is in the update state, to associate measurements with different 
 
 <ul>
 <li>Continuous lines correspond to PF x-y state estimates for each target.</li>
-<li>Magenta ellipsoids correspond to EKF state uncertainty at the same sample estimate</li>
-<li>Point-clouds above the sailboats correspond to each target's particle distibutions where the height and size of a particle depends on its likelihood.(overall N=300 particles for each target)</li>
+<li>Magenta ellipsoids correspond to EKF state uncertainty</li>
+<li>Point-clouds above the sailboats correspond to each target's particle distibutions where the height and size of a particle depends on its likelihood.(overall number of particles N=300 for each target).</li>
 <li>Filters are associating the measurements to the correct targets at all times.</li>
 </ul>
 
