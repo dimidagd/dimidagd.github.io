@@ -465,6 +465,233 @@ The goal again is in the update state, to associate measurements with different 
 
 </figure></center></p>
 
+<h2 id="particle-filtering">Particle filtering</h2>
+
+<p>Particle filters (PFs) belong to the category of sub-optimal filters. They represent probability densities with point mass densities (&quot;particles&quot;), and perform sequential Monte Carlo (SMC) estimations. SMC ideas were historically introduced in statistics from the 1950s but the limited computational power available at the time constrained their use and development. As soon as faster computers were made available, the related research activity in the field increased, resulting in their improvement and adoption in numerous applications, namely tracking, localisation of agents, pattern recognition, fault-detection, and ADAS.</p>
+
+<h3 id="monte-carlo-integration">Monte carlo integration</h3>
+
+<p>The basis of SMC methods is Monte Carlo integration. If a multidimensional integral needs to be evaluated:</p>
+
+<p><span  class="math">\[\mathbf{I} = \int \mathbf{g(x)} d\mathbf{x}\]</span></p>
+
+<p>where <span  class="math">\( \mathbf{x} \in \mathbf{R}^{n_{x}} \)</span>.</p>
+
+<p>The Monte Carlo (MC) approach for numerical integration assumes a factorisation</p>
+
+<p><span  class="math">\(\mathbf{g(x)} = \mathbf{f(x)} \cdot \pi(\mathbf{x}) \)</span> , so that <span  class="math">\(\pi(\mathbf{x})\)</span> is interpreted as a probability density which is satisfying</p>
+
+<p><span  class="math">\[
+\begin{align}
+\pi(\mathbf{x}) \geq 0 \\
+\int \pi \mathbf{x} d \mathbf{x} = 1
+\end{align}
+\]</span></p>
+
+<p>If one can &quot;draw&quot; <span  class="math">\(N >> 1\)</span> samples <span  class="math">\({x^i; i = 1,...,N} \)</span> distributed according to <span  class="math">\(\pi (\mathbf{x}) \)</span> . Then the integral estimate
+can be approximated with the sample mean:</p>
+
+<p><span  class="math">\[
+I = \int \mathbf{f}(\mathbf{x})\pi(\mathbf{x}) d\mathbf{x} = I_N \approx \frac{1}{N}\sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i)
+\]</span></p>
+
+<p>Given that the samples <span  class="math">\(\mathbf{x}^i\)</span> are independent, then <span  class="math">\(I_N\)</span> is an unbiased estimator, and according to the law of large numbers it will almost surely converge to <span  class="math">\(I\)</span>.</p>
+
+<p>Given that the variance of <span  class="math">\(\mathbf{f}(\mathbf{x})\)</span>, <span  class="math">\(\sigma^2\)</span> is finite,</p>
+
+<p><span  class="math">\[
+\sigma^2 = \int (\mathbf{f}(\mathbf{x})- I)^2 \pi(\mathbf{x})
+\]</span></p>
+
+<p>then the central theorem holds and the estimation error converges to the distribution:</p>
+
+<p><span  class="math">\[
+\lim_{N\rightarrow \inf} \sqrt{N}(I_N - I) \sim \mathcal{N}(0,
+  \sigma^2)
+\]</span></p>
+
+<p>In the Bayesian context, <span  class="math">\(\pi(\mathbf{x})\)</span> conveniently corresponds to the posterior belief density. What is not convenient though, is the fact that the posterior is usually multivariate, nonstandard and only known up to proportionality, thus distributed sampling is usually not available from it. A solution to this is the use of <strong>Importance Sampling</strong>.</p>
+
+<h4 id="importance-sampling">Importance sampling</h4>
+
+<p>In order to generate samples directly from <span  class="math">\(\pi (\mathbf{x})\)</span> and estimate <span  class="math">\(I\)</span> using Monte Carlo integration, one can generate samples from a density <span  class="math">\(q(\mathbf{x})\)</span>, which is similar to <span  class="math">\(\pi(\mathbf{x})\)</span>. The pdf <span  class="math">\(q(\mathbf{x})\)</span> is usually referred to as <strong>importance</strong> or <strong>proposal</strong> density.</p>
+
+<p>Similarity between <span  class="math">\(\pi \text{ - } q \)</span> is expressed as:</p>
+
+<p><span  class="math">\[
+\pi(\mathbf{x}) > 0 \rightarrow q(\mathbf{x})>0 , \text{for all } \mathbf{x} \in R^{n_x}
+\]</span></p>
+
+<p>which means that <span  class="math">\(q(\mathbf{x})\)</span> and <span  class="math">\(\pi(\mathbf{x})\)</span> have the same support. The integral <span  class="math">\(I\)</span> can be rewritten thus as:</p>
+
+<p><span  class="math">\[
+I = \int \mathbf{f}(\mathbf{x}) d\mathbf{x} = \int f(\mathbf{x}) \frac{\pi(\mathbf{x})}{q(\mathbf{x})}q(\mathbf{x}) d\mathbf{x}
+\]</span></p>
+
+<p>Applying the <em>MC</em> sample mean:</p>
+
+<p><span  class="math">\[
+I_N = \frac{1}{N} \sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i) \tilde{w}(\mathbf{x}^i)
+\]</span></p>
+
+<p>where the importance weights shape a probability mass function(PMF), thus</p>
+
+<p><span  class="math">\[
+w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x}^j)}
+\]</span></p>
+
+<h4 id="bayesian-estimation">Bayesian estimation</h4>
+
+<p>As already mentioned, in the Bayseian context, <span  class="math">\(\pi (\mathbf{x})\)</span> is the posterior density. For selecting the proposal distribution <span  class="math">\(q(\mathbf{x})\)</span> it makes sense to try to mantain a degree of similarity between the proposal and the posterior, so that the finite <span  class="math">\(N\)</span> selected <span  class="math">\(\mathbf{x}^i\)</span> samples fall into probable regions of the posterior, that is regions that contain information about the actual posterior distribution <span  class="math">\( p(\mathbf{x} | z_i)\)</span>.</p>
+
+<h4 id="sequential-importance-sampling-sis">Sequential importance Sampling (SIS)</h4>
+
+<p>[reference to 1.3 and conceptual filtering solution]</p>
+
+<p>Intuitively, a recursive Bayesian nonlinear filter is a very suitable domain for applying MC integration. This <strong>sequential Monte Carlo</strong> approach is known with various names such as,</p>
+
+<ul>
+<li>boostrap Filtering</li>
+<li>condensation algorithm</li>
+<li>particle Filtering</li>
+<li>survival of the fittest</li>
+</ul>
+
+<p>The key idea again, is to represent the posterior density function by a limited set of samples and their importance weights, based on which estimates can be calculated. As the number of samples increases, the sampled distribution becomes an equivalent representation to the functional description of the posterior pdf, and the SIS filter approaches the optimal Bayesian filtering estimator.</p>
+
+<p>The recursive nature of <em>SIS</em> implies that the new weights --- posterior <span  class="math">\(p(\mathbf{x}_k | \mathbf{z}_k) \)</span> --- are being updated based on their previous values --- prior <span  class="math">\(p(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i)\)</span> --- and the likelihood of a new measurement <span  class="math">\(p(\mathbf{z}_k | \mathbf{x}_k^i)\)</span>, i.e</p>
+
+<p><span  class="math">\[
+w_k^i \sim w_{k-1}^i \frac{p(\mathbf{z}_k | \mathbf{x}_k^i)p(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i)}{q(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i , \mathbf{z}_k)}
+\]</span></p>
+
+<p>Then the posterior filtered density is described as a <strong><em>pmf</em></strong>  as:</p>
+
+<p><span  class="math">\[p(\mathbf{x}_k | \mathbf{z}_k) \approx \sum_{i=1}^N w_k^i \delta(\mathbf{x}_k - \mathbf{x}_k^i)\]</span></p>
+
+<p>The recursiveness of the algorithm is evident since the importance weights <span  class="math">\(w_k^i\)</span> and support points <span  class="math">\(x_k^i\)</span> are being propagated as each measurement is received sequentially. The SIS algorithm is the basis of most particle filtering algorithms, and the choice of the importance density function is crucial in the design.</p>
+
+<h4 id="importance-density-selection">Importance density selection</h4>
+
+<p>A popular and convenient selection of the importance density is the transitional prior, i.e. the motion model:</p>
+
+<p><span  class="math">\[q(\mathbf{x_k | x_{k-1}^i , \mathbf{z}_k}) = p(\mathbf{x}_k | \mathbf{x}_{k-1}^i)\]</span></p>
+
+<p>substituting the above in the <strong>SIS</strong> algorithm yields</p>
+
+<p><span  class="math">\[
+ w_k^i \sim w_{k-1}^i p(\mathbf{z}_k | \mathbf{x}_k^i)
+ \]</span></p>
+
+<h4 id="degeneracy-problem">Degeneracy problem</h4>
+
+<p>A general problem of a SIS particle filter is that the particle distribution becomes extremely peaked through the subsequent measurement updates. That is, the variance of the importance weights can only increase over time. This effect overtime leads to poor accuracy of the estimates and leads to a common problem of the SIS particle filter, that of degeneracy. An effective countermeasure is monitoring a measure of degeneracy of the algorithm. Such a measure is the effective sample size <span  class="math">\(N_{\text{eff}}\)</span> as introduced by [<a href="https://www.jstor.org/stable/2291224?seq=1">ref</a>]</p>
+
+<p><span  class="math">\[
+\hat{N}_{\text{eff}} = \frac{1}{\sum_{i=1}^{N}(w_k^i)^2}
+\]</span></p>
+
+<h4 id="resampling-algorithms">Resampling algorithms</h4>
+
+<p>Whenever a degeneracy is detected(i.e <span  class="math">\(N_{\text{eff}}\)</span> falling below a threshold value), resampling is performed. Resampling follows the strategy of survival of the fittest, by eliminating particles in the set with low weight values and replacing them with copies of the more probable ones.</p>
+
+<p>The resampling algorithm is:</p>
+
+<ol>
+<li>Normalize the particle set weights <span  class="math">\(w^j\)</span></li>
+<li>Calculate the cumulative mass function <span  class="math">\(F_k(i) = \sum_{j=1}^{i} w_k^j\)</span>.</li>
+<li>Draw <span  class="math">\(N\)</span> random samples <span  class="math">\(u_i\)</span>, <span  class="math">\(i=1,..,N\)</span> uniformly distributed on the interval <span  class="math">\([0,1]\)</span>.</li>
+<li>For every uniform sample <span  class="math">\(u_i\)</span>, pick <span  class="math">\(\hat{x}_k^i = x_k^j\)</span> , where</li>
+</ol>
+
+<p><span  class="math">\[
+j = \underset{i}{\arg\min} |F_k(i)-u_i|
+\]</span></p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/stratified_resampling.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Resampling process based on CSW. The particle x_k_j has a good chance of surviving.</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>The above strategy leads to a weight selection survival chance equal to the weight's value
+<span  class="math">\(P(\hat{x}_k^i = x_k^j) = w_k^j\)</span> . This results in useful samples having a higher likelihood of being selected for the new set. The new weights of the samples are uniform</p>
+
+<p>{<span  class="math">\(\hat{x}_k^i , 1/N\)</span>}</p>
+
+<p>The use of resampling technique might lead to other issues though. Diversity among particles is depleted as highly probable particles are through subsequent resampling steps genetically dominating the distribution. Moreover, if the process noise is too low then the distribution will not diversify enough in between measurement updates and will eventually become a replicate of a few weights. This phenomenon is also known as <em>sample impoverishment</em> or <em>particle depletion</em> . [<a href="https://www.researchgate.net/publication/228646515_The_unscented_Kalman_Filter_and_particle_filter_methods_for_nonlinear_structural_system_identification_with_non-collocated_heterogeneous_sensing">ref</a>].</p>
+
+<h2 id="pf-algorithm-outline">PF Algorithm outline</h2>
+
+<p>The sub-optimal PF algorithm thus summarises to:</p>
+
+<ol>
+<li>Initialise the filter by drawing particles according to an initial belief <span  class="math">\(p(\mathbf{x}_0)\)</span></li>
+</ol>
+
+<blockquote>
+<p>Usually <span  class="math">\(p(\mathbf{x}_0)\)</span> is Gaussian with known moments, or a uniform distribution around the initial estimate  <span  class="math">\(\mathbf{x}_{0} \)</span>.</p>
+</blockquote>
+
+<ol start="2">
+<li>Update the particle set weights according to a the likelihood of the new measurement.</li>
+</ol>
+
+<blockquote>
+<p>This step requires pointwise evaluation of the likelihood-function <span  class="math">\(p(\mathbf{z}_k | \mathbf{x}_k)\)</span> which depends on the stochastic properties, of the <em>measurement model</em>.</p>
+
+<p><em>Example</em>:
+For the radar sensor, the likelihood function is the <em>multivariate gaussian</em>:</p>
+
+<p><span  class="math">\[
+p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}\mathbf{R}(z-h(x)\right)}
+\]</span></p>
+
+<p>Where <span  class="math">\(\mathbf{R}_{k\times k}\)</span> is the measurement noise covariance matrix</p>
+</blockquote>
+
+<ol start="3">
+<li>Normalise weights to represent a pmf.</li>
+<li>Resample if required, based on <span  class="math">\(N_{\text{eff}} < \textit{threshold}\)</span></li>
+<li>Propagate every point according to the motion model.</li>
+</ol>
+
+<blockquote>
+<p>It is crucial to use non-zero process noise at that step, as that ensures that additional diversity is being introduced into the distribution.</p>
+</blockquote>
+
+<ol start="5">
+<li>Repeat from step #2</li>
+</ol>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/particle_filter_genetics.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>General particle filtering algorithm genetics</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>[<a href="https://www.researchgate.net/publication/228646515_The_unscented_Kalman_Filter_and_particle_filter_methods_for_nonlinear_structural_system_identification_with_non-collocated_heterogeneous_sensing">ref</a>]</p>
+
     </div>
 
     
