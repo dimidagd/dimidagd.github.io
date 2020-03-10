@@ -540,6 +540,22 @@ I_N = \frac{1}{N} \sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i) \tilde{w}(\mathbf{x}^i
 w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x}^j)}
 \]</span></p>
 
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/MC_importance.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Belief representation with weighted particles.</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
 <h4 id="bayesian-estimation">Bayesian estimation</h4>
 
 <p>As already mentioned, in the Bayseian context, <span  class="math">\(\pi (\mathbf{x})\)</span> is the posterior density. For selecting the proposal distribution <span  class="math">\(q(\mathbf{x})\)</span> it makes sense to try to mantain a degree of similarity between the proposal and the posterior, so that the finite <span  class="math">\(N\)</span> selected <span  class="math">\(\mathbf{x}^i\)</span> samples fall into probable regions of the posterior, that is regions that contain information about the actual posterior distribution <span  class="math">\( p(\mathbf{x} | z_i)\)</span>.</p>
@@ -648,7 +664,7 @@ j = \underset{i}{\arg\min} |F_k(i)-u_i|
 </ol>
 
 <blockquote>
-<p>This step requires pointwise evaluation of the likelihood-function <span  class="math">\(p(\mathbf{z}_k | \mathbf{x}_k)\)</span> which depends on the stochastic properties, of the <em>measurement model</em>.</p>
+<p>This step requires pointwise evaluation of the likelihood-function ( p(\mathbf{z}_k | \mathbf{x}_k)) which depends on the stochastic properties, of the <em>measurement model</em>.</p>
 
 <p><em>Example</em>:
 For the radar sensor, the likelihood function is the <em>multivariate gaussian</em>:</p>
@@ -684,7 +700,7 @@ p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}
 
 
 <figcaption data-pre="Figure " data-post=":" >
-  <h4>General particle filtering algorithm genetics</h4>
+  <h4>General particle filtering algorithm genetics.</h4>
   
 </figcaption>
 
