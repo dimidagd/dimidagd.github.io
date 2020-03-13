@@ -28,10 +28,11 @@
   
     
   
-  <meta name="description" content="Autonomous navigation in a structured environment.">
+  <meta name="description" content="Updates: Multisensor tracking - summary When measurements are obtained from multiple sensors, there is a need to distinguish between different cases:
+ Asynchronous measurements - i.e the sampling times are different for each sensor and not necessarily fixed. In this project&#39;s context, both the camera and the radar sensors, even though the sensors can process the data at a fixed time interval, an actual target measurement might arrive at arbitrary time samples due to environmental uncertainty.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/project/31388/">
+  <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/project/thesis3/">
 
   
 
@@ -120,7 +121,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="https://dimidagd.github.io/project/31388/">
+  <link rel="canonical" href="https://dimidagd.github.io/project/thesis3/">
 
   
   
@@ -131,21 +132,22 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="/usr">
-  <meta property="og:url" content="https://dimidagd.github.io/project/31388/">
-  <meta property="og:title" content="Autonomous navigation: 31388 | /usr">
-  <meta property="og:description" content="Autonomous navigation in a structured environment."><meta property="og:image" content="https://dimidagd.github.io/project/31388/featured.png">
+  <meta property="og:url" content="https://dimidagd.github.io/project/thesis3/">
+  <meta property="og:title" content="Thesis report Week#6 | /usr">
+  <meta property="og:description" content="Updates: Multisensor tracking - summary When measurements are obtained from multiple sensors, there is a need to distinguish between different cases:
+ Asynchronous measurements - i.e the sampling times are different for each sensor and not necessarily fixed. In this project&#39;s context, both the camera and the radar sensors, even though the sensors can process the data at a fixed time interval, an actual target measurement might arrive at arbitrary time samples due to environmental uncertainty."><meta property="og:image" content="https://dimidagd.github.io/project/thesis3/featured.jpg">
   <meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2020-03-10T13:14:15&#43;01:00">
+  <meta property="article:published_time" content="2020-03-11T16:24:31&#43;01:00">
   
-  <meta property="article:modified_time" content="2020-03-10T13:14:15&#43;01:00">
-  
-
+  <meta property="article:modified_time" content="2020-03-11T16:24:31&#43;01:00">
   
 
   
 
-  <title>Autonomous navigation: 31388 | /usr</title>
+  
+
+  <title>Thesis report Week#6 | /usr</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -283,7 +285,7 @@
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">Autonomous navigation: 31388</h1>
+  <h1 itemprop="name">Thesis report Week#6</h1>
 
   
 
@@ -292,8 +294,8 @@
 
 
 
-<meta content="2020-03-10 13:14:15 &#43;0100 CET" itemprop="datePublished">
-<meta content="2020-03-10 13:14:15 &#43;0100 CET" itemprop="dateModified">
+<meta content="2020-03-11 16:24:31 &#43;0100 CET" itemprop="datePublished">
+<meta content="2020-03-11 16:24:31 &#43;0100 CET" itemprop="dateModified">
 
 <div class="article-metadata">
 
@@ -306,7 +308,7 @@
     
       
     
-    <time>Mar 10, 2020</time>
+    <time>Mar 11, 2020</time>
   </span>
   
 
@@ -343,45 +345,6 @@
 
 
 
-<div class="btn-links mb-3">
-  
-  
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-<a class="btn btn-outline-primary my-1 mr-1" href="https://www.youtube.com/watch?v=NfoG2qjmwAU&amp;feature=youtu.be" target="_blank" rel="noopener">
-  Video
-</a>
-
-
-
-
-
-</div>
-
 
   
 </div>
@@ -391,104 +354,147 @@
   <div class="article-container">
 
     <div class="article-style" itemprop="articleBody">
-      
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-  <iframe src="https://www.youtube.com/embed/NfoG2qjmwAU?autoplay=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-</div>
+      <h3 id="updates">Updates:</h3>
 
+<h2 id="multisensor-tracking--summary">Multisensor tracking - summary</h2>
 
-<h1 id="project-outline">Project outline</h1>
-
-<h2 id="software-architecture">Software architecture</h2>
-
-<p>When thinking about a  mobile robot, there are three key questions that need to be addressed.</p>
+<p>When measurements are obtained from multiple sensors, there is a need to distinguish between different cases:</p>
 
 <ul>
-<li>Where am I?</li>
-<li>Where do I want to go?</li>
-<li>How do I get there?</li>
+<li><em>Asynchronous measurements</em> - i.e the sampling times are different for each sensor and not necessarily fixed. In this project's context, both the camera and the radar sensors, even though the sensors can process the data at a fixed time interval, an actual target measurement might arrive at arbitrary time samples due to environmental uncertainty. The camera can become blinded, and the radar can be obstructed by other objects.</li>
+<li>Synchronized measurements - the sampling times of all sensors are the same (unrealistic)</li>
 </ul>
 
-<p><center>
-<figure>
- <img src="/img/31388a.png" alt="Small picture of a kitten" />
- <figcaption>
- Autonomous robot software stack, graciously shared by <a href="https://asl.ethz.ch/education/lectures/autonomous_mobile_robots/spring-2020.html">ETHZ.</a>
- </figcaption>
-</figure>
-</center></p>
+<h4 id="synchronized">Synchronized</h4>
 
-<p>In order to answer to these questions, the systems has to be able to:</p>
+<p>In the case of syncrhonized measurements from different sensors, and the measurement noises among them are uncorrelated, which is a fair assumption, then the update process can be:</p>
 
 <ul>
-<li>Model the environment</li>
-<li>Perceive the environment</li>
-<li>Localise in the environment</li>
-<li>Plan a trajectory and execute the movement</li>
+<li>sequential - with the data from one sensor at a time</li>
+<li>parallel - simultaneously by stacking the measurements vector</li>
 </ul>
 
-<p>The simple robot demonstrated in the video is addressing the previous topics by</p>
+<p>The approaches are equivalent for <em>linear systems</em>, but the second approach is computationaly more expensive because of the stacked covariance matrix inversion.</p>
 
-<ul>
-<li>Perceiving the environment using a laser range sensor and a camera</li>
-<li>Model the environment as straight line features on a map.</li>
-<li>Localise using <em>exteroceptive(laser)</em> &amp; <em>proprioceptive(wheel encoders)</em> measurements and Extended Kalman Filtering.</li>
-<li>Plan a path using wavefront-planner.</li>
-<li>Execute the path using a piecewise stable motion controller.</li>
-</ul>
+<p>It is important to note that so far it has been assumed that there is no <em>origin uncertainty</em> for the measurements.</p>
 
-<h3 id="environment-perception--modelling">Environment perception &amp; modelling</h3>
+<h2 id="measurements-validation">Measurements validation</h2>
 
-<p>The world is described by hand-crafter features, that we as humans perceive as lines. The robot is extracting line features from the raw laser-point data by running a <strong>RANSAC</strong> algorithm.</p>
+<h3 id="the-association-problem">The association problem</h3>
 
-<p><center>
-<figure>
- <img src="/img/line_extraction.png" alt="Small picture of a kitten"  width="60%" />
- <figcaption>
- Line fitting using RANSAC.
- </figcaption></p>
+<p>When tracking multiple objects, one needs to associate sensor observations, which at the moment of capture are <em>origin agnostic</em> , to a tracked target, before actually performing the filtering step. The first step in data association is that of <em>gating</em> the observations, that is, to filter out unrealistic observations which most likely constitute outliers. The <strong>validation region</strong> is usually defined by a <em>probabilistic hypervolume</em> around the tracked target estimates.</p>
 
-<p></figure>
-</center></p>
+<p>A measurement within the <strong>validation region</strong>  does not necessarily originate from the target the gate pertains to, but it is a <em>valid association candidate</em> . As soon as multiple observations belong to the same gate, then there is an <em>association uncertainty</em> .</p>
 
-<h3 id="localisation">Localisation</h3>
+<h4 id="validation-region">Validation region</h4>
 
-<p>The robot is constantly using its <strong>kinematic model</strong> (differential drive) along with wheel encoder measurements to predict its traveled trajectory based on <strong>odometry</strong>, it is widely known that odometry world estimates are drifting due to a lot of effects which are either on purpose not being considered on the motion model, or they are not known. Extended Kalman filtering can reduce the estimate error of the robot's pose in the environment with respect to a a-priory known map of feature points.</p>
+<p>If one considers a tracked target, i.e the filter has already been initialized, then one should be able to calculate the <em>predicted observation</em> mean (\hat{z}(k+1|k)) and its associated covariance (S(k+1)) through the sensor's measurement model and the filter's estimate of the state.</p>
 
-<p><center>
-<figure>
- <img src="/img/odometry_error.png" alt="Odometry error corrections using EKF localisation." width="60%" />
- <figcaption>
-Odometry error corrections using EKF localisation.
- </figcaption>
-</figure>
-</center></p>
+<p>A fair assumption at this point, is that the <em>true measurement</em> <span  class="math">\( z(k+1| Z^k)\)</span> conditioned on the past, is <em>normaly distributed</em> with its probability distribution function given by the standard Gaussian</p>
 
-<h3 id="obstacle-avoidance">Obstacle avoidance</h3>
+<p><span  class="math">\[
+p[z(k+1)|Z^k] = \mathcal{N}[z(k+1); \hat{z}(k+1|k), S(k+1)]
+\]</span></p>
 
-<p>For path planning a wavefront-planning algorithm is being used:</p>
+<p>Then the true measurement belongs to the <em>validation region</em> with probability</p>
+
+<p><span  class="math">\[
+\mathcal{V}(k+1, \gamma) = \{z: [z-\hat{z}(k+1|k)]^T S(k+1)^{-1} [z-\hat{z}(k+1|k)] \leq \gamma \}
+\]</span></p>
+
+<p>The equation above describes a <em>validation region</em> or else a <em>probabilistic hypervolume</em> . In the simple case in which the measurement belongs to the three dimensional euclidean space <span  class="math">\(R^3\)</span> then <span  class="math">\(\mathcal{V}\)</span> defines an <em>ellipse of probability concentration</em> , that is the region of <em>minimum volume</em> that contains a given probability mass. The length of the ellipsoid semiaxes correspond to the square roots of the <em>eigenvalues(singular values)</em> of <span  class="math">\(\gamma S\)</span>.</p>
 
 <p><center>
+
+
 <figure>
- <img src="/img/wavefront_planner.png" alt="Planned path along an obstacle using a wavefront-planner."  width="60%"/>
- <figcaption>
-Planned path along an obstacle using a wavefront-planner.
- </figcaption>
-</figure>
-</center></p>
 
-<h3 id="motion-controller">Motion controller</h3>
+<img src="/thesis/ellipsoid.png" width="100%" />
 
-<p>The path planner is creating wheel velocity commands, based on a relative target pose. The controller is designed in polar coordinates as this provides a suitable framework to design an asympotically stable  feedback controller.</p>
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>γ = {1,3,9} Uncertainty ellipsoids and scattered points</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>The quadratic form in <span  class="math">\(\mathcal{V}\)</span> implies that the validation region is <em>chi-square distributed</em>, with number of degree of freedom equal to the dimensionality <span  class="math">\(n_z\)</span> of the observations.</p>
 
 <p><center>
+
+
 <figure>
- <img src="/img/motion_controller.png" alt="Controller smooth motion response to different target trajectory." width="60%" />
- <figcaption>
-Odometry error corrections using EKF localisation.
- </figcaption>
-</figure>
-</center></p>
+
+<img src="/thesis/chi_squared_pdf.png" width="60%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Probability distribution function of V</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>In order to have a gating probability <span  class="math">\(P_g\)</span>, one must use the cumulative distribution function <span  class="math">\(F_{n_{z}}(\gamma)=P(X \leq \gamma)\)</span> of <span  class="math">\(\mathcal{V}\)</span> and since as already mentioned <span  class="math">\(\mathcal{V}\)</span>$ is a chi-squared distributed function, the calculation of <span  class="math">\(\gamma\)</span> is the solution to the following equation.</p>
+
+<p><span  class="math">\[
+P(X \leq \gamma) = P_g
+\]</span></p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/chi_squared_cdf.png" width="60%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Cumulative distribution function F(x) for a gated k-dimensional observation V</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>Unfortunately no closed-form solution exists for the above equation since the function is highly non-linear, nevertheless look-up tables are available after point-wise evaluation.</p>
+
+<p><center>
+
+
+<figure>
+
+<img src="/thesis/chi_squared_table.png" width="100%" />
+
+
+
+<figcaption data-pre="Figure " data-post=":" >
+  <h4>Look up table for γ, right tail chi-squared percentile, df degrees of freedom</h4>
+  
+</figcaption>
+
+</figure></center></p>
+
+<p>One can verify that for the radar case, <span  class="math">\(df = n_z =3 \)</span> degrees of freedom and if the probability that the true observation will fall in the gate is</p>
+
+<p><span  class="math">\[P_g = P\{z(k+1)\} \in \mathcal{V}(k+1,\gamma)\} = 0.99\]</span></p>
+
+<p>That means an outlier probability</p>
+
+<p><span  class="math">\[P_{\text{outlier}} = 1 - P_g = 0.01 \]</span></p>
+
+<p>then a possible solution for the gating threshold is</p>
+
+<p><span  class="math">\[\gamma \approx 9.21\]</span></p>
+
+<p>The square root <span  class="math">\(g = \sqrt{\gamma}\)</span> is also referred to as <em>&quot;number of sigmas&quot;</em> or standard deviations of the gate.</p>
+
+<p>The <em>validation region</em> thus, consists of points whose  <em>statistical distance</em> to the predicted measurement is below a threshold <span  class="math">\(\gamma\)</span>.  This is equivalent to the <em>statistical innovation</em> being below this threshold.</p>
+
+<p>Measurements <em>outside the validation region</em> can be ignored, as they are too far and very unlikely( with probability <span  class="math">\(1-P_g\)</span>) to have originated from the target of interest. This argument holds, as long as the predicted observation is accurate enough.</p>
 
     </div>
 
@@ -500,8 +506,6 @@ Odometry error corrections using EKF localisation.
   <a class="badge badge-light" href="/tags/sensor-fusion/">Sensor-fusion</a>
   
   <a class="badge badge-light" href="/tags/state-estimation/">State-estimation</a>
-  
-  <a class="badge badge-light" href="/tags/mobile-robots/">Mobile-robots</a>
   
 </div>
 

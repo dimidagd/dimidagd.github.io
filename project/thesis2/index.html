@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="The essence of estimation This week I have been working on
+  <meta name="description" content="Updates: This week I have been working on
  Work on filtering visualization Implement multiple moving objects in the Simulation Implement multiple tracked objects in the simulation Implement Particle Filter Algorithm for single target Implement EKF with Probabilistic data Assosiation (PDAF) Implement PF with Probabilistic Data Assosiation (PDAF)  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
 Filtering visualization   Filters visualization for single target.">
 
@@ -135,7 +135,7 @@ Filtering visualization   Filters visualization for single target.">
   <meta property="og:site_name" content="/usr">
   <meta property="og:url" content="https://dimidagd.github.io/project/thesis2/">
   <meta property="og:title" content="Thesis report Week#4-5 | /usr">
-  <meta property="og:description" content="The essence of estimation This week I have been working on
+  <meta property="og:description" content="Updates: This week I have been working on
  Work on filtering visualization Implement multiple moving objects in the Simulation Implement multiple tracked objects in the simulation Implement Particle Filter Algorithm for single target Implement EKF with Probabilistic data Assosiation (PDAF) Implement PF with Probabilistic Data Assosiation (PDAF)  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
 Filtering visualization   Filters visualization for single target."><meta property="og:image" content="https://dimidagd.github.io/project/thesis2/featured.jpg">
   <meta property="og:locale" content="en-us">
@@ -356,7 +356,7 @@ Filtering visualization   Filters visualization for single target."><meta proper
   <div class="article-container">
 
     <div class="article-style" itemprop="articleBody">
-      <h3 id="the-essence-of-estimation">The essence of estimation</h3>
+      <h1 id="updates">Updates:</h1>
 
 <p>This week I have been working on</p>
 
@@ -416,7 +416,7 @@ The goal again is in the update state, to associate measurements with different 
 <li>Triple crossing of targets, but the filters are able to associate correctly the measurements and correctly estimate the trajectories.</li>
 </ul>
 
-<h3 id="3d-view">3d view</h3>
+<h2 id="3d-view">3d view</h2>
 
 <ul>
 <li>Continuous lines correspond to PF x-y state estimates for each target.</li>
@@ -441,7 +441,7 @@ The goal again is in the update state, to associate measurements with different 
 
 </figure></center></p>
 
-<h3 id="2d-view">2d view</h3>
+<h2 id="2d-view">2d view</h2>
 
 <ul>
 <li>Continuous lines correspond to moving objects deterministic trajectories.</li>
@@ -465,21 +465,23 @@ The goal again is in the update state, to associate measurements with different 
 
 </figure></center></p>
 
-<h2 id="particle-filtering">Particle filtering</h2>
+<h1 id="particle-filtering">Particle filtering</h1>
 
-<p>Particle filters (PFs) belong to the category of sub-optimal filters. They represent probability densities with point mass densities (&quot;particles&quot;), and perform sequential Monte Carlo (SMC) estimations. SMC ideas were historically introduced in statistics from the 1950s but the limited computational power available at the time constrained their use and development. As soon as faster computers were made available, the related research activity in the field increased, resulting in their improvement and adoption in numerous applications, namely tracking, localisation of agents, pattern recognition, fault-detection, and ADAS.</p>
+<p>Particle filters (PFs) belong to the category of sub-optimal filters. They represent probability densities with point mass densities (&quot;particles&quot;), and perform <strong><em>Sequential Monte Carlo</em></strong> (SMC) estimations. <strong><em>SMC</em></strong> ideas were historically introduced in statistics from the 1950s but the limited computational power available at the time constrained their use and development. As soon as faster computers were made available, the related research activity in the field increased, resulting in their improvement and adoption in numerous applications, namely tracking, localisation of agents, pattern recognition, fault-detection, and ADAS.</p>
 
 <h3 id="monte-carlo-integration">Monte carlo integration</h3>
 
-<p>The basis of SMC methods is Monte Carlo integration. If a multidimensional integral needs to be evaluated:</p>
+<p>The basis of SMC methods is <em>Monte Carlo integration</em>. If a multidimensional integral needs to be evaluated:</p>
 
 <p><span  class="math">\[\mathbf{I} = \int \mathbf{g(x)} d\mathbf{x}\]</span></p>
 
 <p>where <span  class="math">\( \mathbf{x} \in \mathbf{R}^{n_{x}} \)</span>.</p>
 
-<p>The Monte Carlo (MC) approach for numerical integration assumes a factorisation</p>
+<p>Then the Monte Carlo (MC) approach for numerical integration assumes a factorisation</p>
 
-<p><span  class="math">\(\mathbf{g(x)} = \mathbf{f(x)} \cdot \pi(\mathbf{x}) \)</span> , so that <span  class="math">\(\pi(\mathbf{x})\)</span> is interpreted as a probability density which is satisfying</p>
+<p><span  class="math">\[\mathbf{g(x)} = \mathbf{f(x)} \cdot \pi(\mathbf{x}) \]</span></p>
+
+<p>so that <span  class="math">\(\pi(\mathbf{x})\)</span> is interpreted as a probability density which is satisfying</p>
 
 <p><span  class="math">\[
 \begin{align}
@@ -488,8 +490,7 @@ The goal again is in the update state, to associate measurements with different 
 \end{align}
 \]</span></p>
 
-<p>If one can &quot;draw&quot; <span  class="math">\(N >> 1\)</span> samples <span  class="math">\({x^i; i = 1,...,N} \)</span> distributed according to <span  class="math">\(\pi (\mathbf{x}) \)</span> . Then the integral estimate
-can be approximated with the sample mean:</p>
+<p>If one can &quot;draw&quot; <span  class="math">\(N >> 1\)</span> samples <span  class="math">\({x^i; i = 1,...,N} \)</span> distributed according to <span  class="math">\(\pi (\mathbf{x}) \)</span> , then the integral estimate can be approximated with the sample mean:</p>
 
 <p><span  class="math">\[
 I = \int \mathbf{f}(\mathbf{x})\pi(\mathbf{x}) d\mathbf{x} = I_N \approx \frac{1}{N}\sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i)
@@ -510,9 +511,9 @@ I = \int \mathbf{f}(\mathbf{x})\pi(\mathbf{x}) d\mathbf{x} = I_N \approx \frac{1
   \sigma^2)
 \]</span></p>
 
-<p>In the Bayesian context, <span  class="math">\(\pi(\mathbf{x})\)</span> conveniently corresponds to the posterior belief density. What is not convenient though, is the fact that the posterior is usually multivariate, nonstandard and only known up to proportionality, thus distributed sampling is usually not available from it. A solution to this is the use of <strong>Importance Sampling</strong>.</p>
+<p>In the <strong><em>Bayesian</em></strong> context, <span  class="math">\(\pi(\mathbf{x})\)</span> conveniently corresponds to the posterior belief density. What is not convenient though, is the fact that the posterior is usually multivariate, nonstandard and only known up to proportionality, thus distributed sampling is usually not available from it. A solution to this is the use of <strong>Importance Sampling</strong>.</p>
 
-<h4 id="importance-sampling">Importance sampling</h4>
+<h2 id="importance-sampling">Importance sampling</h2>
 
 <p>In order to generate samples directly from <span  class="math">\(\pi (\mathbf{x})\)</span> and estimate <span  class="math">\(I\)</span> using Monte Carlo integration, one can generate samples from a density <span  class="math">\(q(\mathbf{x})\)</span>, which is similar to <span  class="math">\(\pi(\mathbf{x})\)</span>. The pdf <span  class="math">\(q(\mathbf{x})\)</span> is usually referred to as <strong>importance</strong> or <strong>proposal</strong> density.</p>
 
@@ -528,13 +529,13 @@ I = \int \mathbf{f}(\mathbf{x})\pi(\mathbf{x}) d\mathbf{x} = I_N \approx \frac{1
 I = \int \mathbf{f}(\mathbf{x}) d\mathbf{x} = \int f(\mathbf{x}) \frac{\pi(\mathbf{x})}{q(\mathbf{x})}q(\mathbf{x}) d\mathbf{x}
 \]</span></p>
 
-<p>Applying the <em>MC</em> sample mean:</p>
+<p>Applying the <strong><em>MC</em></strong> sample mean:</p>
 
 <p><span  class="math">\[
 I_N = \frac{1}{N} \sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i) \tilde{w}(\mathbf{x}^i)
 \]</span></p>
 
-<p>where the importance weights shape a probability mass function(PMF), thus</p>
+<p>where the importance weights shape a probability mass function(PMF), and thus need to be normalised.</p>
 
 <p><span  class="math">\[
 w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x}^j)}
@@ -550,7 +551,7 @@ w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x
 
 
 <figcaption data-pre="Figure " data-post=":" >
-  <h4>Belief representation with weighted particles.</h4>
+  <h4>1-D Belief representation with weighted particles.</h4>
   
 </figcaption>
 
@@ -564,7 +565,7 @@ w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x
 
 <p>[reference to 1.3 and conceptual filtering solution]</p>
 
-<p>Intuitively, a recursive Bayesian nonlinear filter is a very suitable domain for applying MC integration. This <strong>sequential Monte Carlo</strong> approach is known with various names such as,</p>
+<p>Intuitively, a recursive Bayesian nonlinear filter is a very suitable domain for applying <strong><em>MC</em></strong> integration. This <strong>sequential Monte Carlo</strong> approach is known with various names such as,</p>
 
 <ul>
 <li>boostrap Filtering</li>
@@ -573,7 +574,7 @@ w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x
 <li>survival of the fittest</li>
 </ul>
 
-<p>The key idea again, is to represent the posterior density function by a limited set of samples and their importance weights, based on which estimates can be calculated. As the number of samples increases, the sampled distribution becomes an equivalent representation to the functional description of the posterior pdf, and the SIS filter approaches the optimal Bayesian filtering estimator.</p>
+<p>The key idea again, is to represent the posterior density function by a limited set of samples and their importance weights, based on which estimates can be calculated. As the number of samples increases, the sampled distribution becomes an equivalent representation to the functional description of the posterior pdf, and the <strong><em>SIS</em></strong> filter approaches the optimal Bayesian filtering estimator.</p>
 
 <p>The recursive nature of <em>SIS</em> implies that the new weights --- posterior <span  class="math">\(p(\mathbf{x}_k | \mathbf{z}_k) \)</span> --- are being updated based on their previous values --- prior <span  class="math">\(p(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i)\)</span> --- and the likelihood of a new measurement <span  class="math">\(p(\mathbf{z}_k | \mathbf{x}_k^i)\)</span>, i.e</p>
 
@@ -601,22 +602,30 @@ w_k^i \sim w_{k-1}^i \frac{p(\mathbf{z}_k | \mathbf{x}_k^i)p(\mathbf{x}_k^i | \m
 
 <h4 id="degeneracy-problem">Degeneracy problem</h4>
 
-<p>A general problem of a SIS particle filter is that the particle distribution becomes extremely peaked through the subsequent measurement updates. That is, the variance of the importance weights can only increase over time. This effect overtime leads to poor accuracy of the estimates and leads to a common problem of the SIS particle filter, that of degeneracy. An effective countermeasure is monitoring a measure of degeneracy of the algorithm. Such a measure is the effective sample size <span  class="math">\(N_{\text{eff}}\)</span> as introduced by [<a href="https://www.jstor.org/stable/2291224?seq=1">ref</a>]</p>
+<p>A general problem of a SIS particle filter is that the particle distribution becomes extremely peaked through the subsequent measurement updates. That is, the variance of the importance weights can only increase over time. This effect overtime leads to poor accuracy of the estimates and leads to a common problem of the SIS particle filter, that of <strong><em>degeneracy</em></strong>. An effective countermeasure is monitoring the level of degenracy of the filter and resample when appropriate. Such a measure is the effective sample size <span  class="math">\(N_{\text{eff}}\)</span> as introduced by [<a href="https://www.jstor.org/stable/2291224?seq=1">ref</a>]</p>
 
 <p><span  class="math">\[
 \hat{N}_{\text{eff}} = \frac{1}{\sum_{i=1}^{N}(w_k^i)^2}
 \]</span></p>
 
+<p>It can be seen that <span  class="math">\(1 < N_{\text{eff}} < N\)</span> , thus a usual degeneracy criterion is</p>
+
+<p><span  class="math">\[
+\begin{aligned}
+N_{\text{eff}} &< \alpha N  \\ \alpha \in \mathcal{R}: &\alpha \in (0,1)
+\end{aligned}
+\]</span></p>
+
 <h4 id="resampling-algorithms">Resampling algorithms</h4>
 
-<p>Whenever a degeneracy is detected(i.e <span  class="math">\(N_{\text{eff}}\)</span> falling below a threshold value), resampling is performed. Resampling follows the strategy of survival of the fittest, by eliminating particles in the set with low weight values and replacing them with copies of the more probable ones.</p>
+<p>Whenever a degeneracy is detected(i.e <span  class="math">\(N_{\text{eff}}\)</span> falling below a threshold value), resampling is performed. Resampling follows the strategy of <strong><em>survival of the fittest</em></strong>, by eliminating particles in the set with low weight values and replacing them with copies of the more probable ones.</p>
 
 <p>The resampling algorithm is:</p>
 
 <ol>
 <li>Normalize the particle set weights <span  class="math">\(w^j\)</span></li>
 <li>Calculate the cumulative mass function <span  class="math">\(F_k(i) = \sum_{j=1}^{i} w_k^j\)</span>.</li>
-<li>Draw <span  class="math">\(N\)</span> random samples <span  class="math">\(u_i\)</span>, <span  class="math">\(i=1,..,N\)</span> uniformly distributed on the interval <span  class="math">\([0,1]\)</span>.</li>
+<li>Draw <span  class="math">\(N\)</span> random samples <span  class="math">\(u_i \in \mathcal{R}\)</span>, <span  class="math">\(i=1,..,N\)</span> uniformly distributed on the interval <span  class="math">\([0,1]\)</span>.</li>
 <li>For every uniform sample <span  class="math">\(u_i\)</span>, pick <span  class="math">\(\hat{x}_k^i = x_k^j\)</span> , where</li>
 </ol>
 
@@ -640,16 +649,16 @@ j = \underset{i}{\arg\min} |F_k(i)-u_i|
 
 </figure></center></p>
 
-<p>The above strategy leads to a weight selection survival chance equal to the weight's value
+<p>The above strategy leads to a weight selection <strong>survival chance</strong> equal to the <strong>weight's value</strong>
 <span  class="math">\(P(\hat{x}_k^i = x_k^j) = w_k^j\)</span> . This results in useful samples having a higher likelihood of being selected for the new set. The new weights of the samples are uniform</p>
 
-<p>{<span  class="math">\(\hat{x}_k^i , 1/N\)</span>}</p>
+<p><span  class="math">\[\{\hat{x}_k^i , 1/N\}\]</span></p>
 
-<p>The use of resampling technique might lead to other issues though. Diversity among particles is depleted as highly probable particles are through subsequent resampling steps genetically dominating the distribution. Moreover, if the process noise is too low then the distribution will not diversify enough in between measurement updates and will eventually become a replicate of a few weights. This phenomenon is also known as <em>sample impoverishment</em> or <em>particle depletion</em> . [<a href="https://www.researchgate.net/publication/228646515_The_unscented_Kalman_Filter_and_particle_filter_methods_for_nonlinear_structural_system_identification_with_non-collocated_heterogeneous_sensing">ref</a>].</p>
+<p>The use of resampling technique might lead to other issues though. Diversity among particles is depleted as highly probable particles are through subsequent resampling steps <strong><em>genetically dominating</em></strong> the distribution. Moreover, if the process noise is too low then the distribution will not <em>diversify</em> enough in between measurement updates and will eventually become a uniformly weighted replicate of a few particles. This phenomenon is also known as <strong><em>sample impoverishment</em></strong> or <strong><em>particle depletion</em></strong> . [<a href="https://www.researchgate.net/publication/228646515_The_unscented_Kalman_Filter_and_particle_filter_methods_for_nonlinear_structural_system_identification_with_non-collocated_heterogeneous_sensing">ref</a>].</p>
 
 <h2 id="pf-algorithm-outline">PF Algorithm outline</h2>
 
-<p>The sub-optimal PF algorithm thus summarises to:</p>
+<p>The PF algorithm thus summarises to:</p>
 
 <ol>
 <li>Initialise the filter by drawing particles according to an initial belief <span  class="math">\(p(\mathbf{x}_0)\)</span></li>
@@ -664,7 +673,7 @@ j = \underset{i}{\arg\min} |F_k(i)-u_i|
 </ol>
 
 <blockquote>
-<p>This step requires pointwise evaluation of the likelihood-function ( p(\mathbf{z}_k | \mathbf{x}_k)) which depends on the stochastic properties, of the <em>measurement model</em>.</p>
+<p>This step requires pointwise evaluation of the likelihood-function <span  class="math">\( p(\mathbf{z}_k | \mathbf{x}_k) \)</span> which depends on the stochastic properties, of the <em>measurement model</em>.</p>
 
 <p><em>Example</em>:
 For the radar sensor, the likelihood function is the <em>multivariate gaussian</em>:</p>

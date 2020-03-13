@@ -6,24 +6,15 @@
     <description>Recent content in Tags on /usr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Mar 2020 13:14:15 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 11 Mar 2020 16:24:31 +0100</lastBuildDate>
     
 	<atom:link href="https://dimidagd.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Mobile-robots</title>
-      <link>https://dimidagd.github.io/tags/mobile-robots/</link>
-      <pubDate>Tue, 10 Mar 2020 13:14:15 +0100</pubDate>
-      
-      <guid>https://dimidagd.github.io/tags/mobile-robots/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Sensor-fusion</title>
       <link>https://dimidagd.github.io/tags/sensor-fusion/</link>
-      <pubDate>Tue, 10 Mar 2020 13:14:15 +0100</pubDate>
+      <pubDate>Wed, 11 Mar 2020 16:24:31 +0100</pubDate>
       
       <guid>https://dimidagd.github.io/tags/sensor-fusion/</guid>
       <description></description>
@@ -32,9 +23,18 @@
     <item>
       <title>State-estimation</title>
       <link>https://dimidagd.github.io/tags/state-estimation/</link>
-      <pubDate>Tue, 10 Mar 2020 13:14:15 +0100</pubDate>
+      <pubDate>Wed, 11 Mar 2020 16:24:31 +0100</pubDate>
       
       <guid>https://dimidagd.github.io/tags/state-estimation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mobile-robots</title>
+      <link>https://dimidagd.github.io/tags/mobile-robots/</link>
+      <pubDate>Tue, 10 Mar 2020 13:14:15 +0100</pubDate>
+      
+      <guid>https://dimidagd.github.io/tags/mobile-robots/</guid>
       <description></description>
     </item>
     
