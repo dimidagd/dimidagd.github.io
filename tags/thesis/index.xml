@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Thesis | /usr</title>
+    <link>https://dimidagd.github.io/tags/thesis/</link>
+      <atom:link href="https://dimidagd.github.io/tags/thesis/index.xml" rel="self" type="application/rss+xml" />
+    <description>Thesis</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 11 Mar 2020 16:24:31 +0100</lastBuildDate>
+    <image>
+      <url>img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]</url>
+      <title>Thesis</title>
+      <link>https://dimidagd.github.io/tags/thesis/</link>
+    </image>
+    
+    <item>
+      <title>Thesis report Week#6</title>
+      <link>https://dimidagd.github.io/project/thesis3/</link>
+      <pubDate>Wed, 11 Mar 2020 16:24:31 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/thesis3/</guid>
+      <description>&lt;h2 id=&#34;multisensor-tracking---summary&#34;&gt;Multisensor tracking - summary&lt;/h2&gt;
+&lt;p&gt;When measurements are obtained from multiple sensors, there is a need to distinguish between different cases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Asynchronous measurements&lt;/strong&gt; - i.e the sampling times are different for each sensor and not necessarily fixed.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In this project&amp;rsquo;s context, both the camera and the radar sensors are asynchronous, even though they can process the data at a fixed time interval, an actual target measurement might arrive at arbitrary time samples due to missed detections. The camera can become blinded, and the radar data processing algorithm can miss in extracting an observation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Synchronized measurements&lt;/strong&gt; - the sampling times of all sensors are the same (unrealistic)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;synchronized&#34;&gt;Synchronized&lt;/h3&gt;
+&lt;p&gt;In the case of syncrhonized measurements from different sensors, and the measurement noises among them are uncorrelated, which is a fair assumption, then the update process can be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;sequential&lt;/strong&gt; - with the data from one sensor at a time&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;parallel&lt;/strong&gt; - simultaneously by stacking the measurements vector&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The approaches are equivalent for &lt;em&gt;linear systems&lt;/em&gt;, but the second approach is computationaly more expensive because of the stacked covariance matrix inversion.&lt;/p&gt;
+&lt;p&gt;It is important to note that so far it has been assumed that there is no &lt;em&gt;origin uncertainty&lt;/em&gt; for the measurements.&lt;/p&gt;
+&lt;h2 id=&#34;measurements-validation&#34;&gt;Measurements validation&lt;/h2&gt;
+&lt;h3 id=&#34;the-association-problem&#34;&gt;The association problem&lt;/h3&gt;
+&lt;p&gt;When tracking multiple objects, one needs to associate sensor observations, which at the moment of capture are &lt;em&gt;&lt;strong&gt;origin agnostic&lt;/strong&gt;&lt;/em&gt; , to a tracked target, before actually performing the filtering step.&lt;/p&gt;
+&lt;p&gt;The first step towards identifying an observations&amp;rsquo;s origin &lt;em&gt;&lt;strong&gt;gating&lt;/strong&gt;&lt;/em&gt; , that is to filter out unrealistic observations which most likely constitute outliers. This can be done in a probabilistic way by defining a &lt;strong&gt;validation region&lt;/strong&gt;, or else a &lt;em&gt;probabilistic hypervolume&lt;/em&gt; around the tracked target estimates.&lt;/p&gt;
+&lt;p&gt;A measurement within the &lt;strong&gt;validation region&lt;/strong&gt;  does not necessarily originate from the target the gate pertains to, but it is a &lt;em&gt;valid association candidate&lt;/em&gt; . As soon as multiple observations belong to the same gate, then there is an &lt;em&gt;association uncertainty&lt;/em&gt; .&lt;/p&gt;
+&lt;h4 id=&#34;validation-region&#34;&gt;Validation region&lt;/h4&gt;
+&lt;p&gt;If one considers a tracked target, i.e the filter has already been initialized, then one should be able to calculate the &lt;em&gt;predicted observation&lt;/em&gt; mean $\hat{z}(k+1|k)$ and its associated covariance $S(k+1)$ through the sensor&amp;rsquo;s measurement model and the filter&amp;rsquo;s estimate of the state.&lt;/p&gt;
+&lt;p&gt;A fair assumption at this point, is that the &lt;em&gt;true measurement&lt;/em&gt; $$ z(k+1| Z^k)$$ conditioned on the past, is &lt;em&gt;normaly distributed&lt;/em&gt; with its probability distribution function given by the standard Gaussian&lt;/p&gt;
+&lt;p&gt;$$
+p[z(k+1)|Z^k] = \mathcal{N}[z(k+1); \hat{z}(k+1|k), S(k+1)]
+$$&lt;/p&gt;
+&lt;p&gt;Then the true measurement belongs to the &lt;em&gt;validation region&lt;/em&gt; with probability&lt;/p&gt;
+&lt;p&gt;$$
+\mathcal{V}(k+1, \gamma) = {z: [z-\hat{z}(k+1|k)]^T S(k+1)^{-1} [z-\hat{z}(k+1|k)] \leq \gamma }
+$$&lt;/p&gt;
+&lt;p&gt;The equation above describes a &lt;em&gt;validation region&lt;/em&gt; or else a &lt;em&gt;probabilistic hypervolume&lt;/em&gt; . In the simple case in which the measurement belongs to the three dimensional euclidean space $R^3$ then $\mathcal{V}$ defines an &lt;em&gt;ellipse of probability concentration&lt;/em&gt; , that is the region of &lt;em&gt;minimum volume&lt;/em&gt; that contains a given probability mass. The length of the ellipsoid semiaxes correspond to the square roots of the &lt;em&gt;eigenvalues(singular values)&lt;/em&gt; of $\gamma S$.&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-γ--139-uncertainty-ellipsoids-and-scattered-points&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/ellipsoid.png&#34; data-caption=&#34;γ = {1,3,9} Uncertainty ellipsoids and scattered points&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/ellipsoid.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    γ = {1,3,9} Uncertainty ellipsoids and scattered points
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;The quadratic form in $\mathcal{V}$ implies that the validation region is &lt;em&gt;chi-square distributed&lt;/em&gt;, with number of degree of freedom equal to the dimensionality $n_z$ of the observations.&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-probability-distribution-function-of-v&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/chi_squared_pdf.png&#34; data-caption=&#34;Probability distribution function of V&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/chi_squared_pdf.png&#34; alt=&#34;&#34; width=&#34;60%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Probability distribution function of V
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;In order to have a gating probability $P_g$, one must use the cumulative distribution function $F_{n_{z}}(\gamma)=P(X \leq \gamma)$ of $\mathcal{V}$ and since as already mentioned $\mathcal{V}$ is a chi-squared distributed function, the calculation of $\gamma$ is the solution to the following equation.&lt;/p&gt;
+&lt;p&gt;$$
+P(X \leq \gamma) = P_g
+$$&lt;/p&gt;
+&lt;p&gt;Unfortunately no closed-form solution exists for the above equation since the function is highly non-linear, nevertheless look-up tables are available after point-wise evaluation.&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-cumulative-distribution-function-fx-for-a-gated-k-dimensional-observation-v&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/chi_squared_cdf.png&#34; data-caption=&#34;Cumulative distribution function F(x) for a gated k-dimensional observation V&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/chi_squared_cdf.png&#34; alt=&#34;&#34; width=&#34;60%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Cumulative distribution function F(x) for a gated k-dimensional observation V
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-look-up-table-for-γ-right-tail-chi-squared-percentile-df-degrees-of-freedom-&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/chi_squared_table.png&#34; data-caption=&#34;Look up table for γ, right tail chi-squared percentile, df degrees of freedom&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/chi_squared_table.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Look up table for γ, right tail chi-squared percentile, df degrees of freedom
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;One can verify that for the radar case, $df = n_z =3 $ degrees of freedom and if the probability that the true observation will fall in the gate is&lt;/p&gt;
+&lt;p&gt;$$P_{g} = P\{ z(k+1)\in\mathcal{V}(k+1,\gamma)\}=0.99$$&lt;/p&gt;
+&lt;p&gt;That means that an outlier&amp;rsquo;s probability $P_{\text{outlier}}$ will be&lt;/p&gt;
+&lt;p&gt;$$P_{\text{outlier}} = 1 - P_g = 0.01$$&lt;/p&gt;
+&lt;p&gt;then a possible solution for the gating threshold is&lt;/p&gt;
+&lt;p&gt;$$\gamma \approx 9.21$$&lt;/p&gt;
+&lt;p&gt;The square root $g = \sqrt{\gamma}$ is also referred to as &lt;em&gt;&amp;ldquo;number of sigmas&amp;rdquo;&lt;/em&gt; or standard deviations of the gate.&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;validation region&lt;/em&gt; thus, consists of points whose  &lt;em&gt;statistical distance&lt;/em&gt; to the predicted measurement is below a threshold $\gamma$.  This is equivalent to the &lt;em&gt;statistical innovation&lt;/em&gt; $[z-\hat{z}(k+1|k)]^T S(k+1)^{-1} [z-\hat{z}(k+1|k)]$ being below this threshold.&lt;/p&gt;
+&lt;p&gt;Measurements &lt;em&gt;outside the validation region&lt;/em&gt; can be ignored, as they are too far and very unlikely(at least with probability $1-P_g$) to have originated from the target of interest. This argument holds, as long as the predicted observation is accurate enough.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Source Themes Academic 4.1.0">
-  <meta name="generator" content="Hugo 0.64.1" />
+  <meta name="generator" content="Source Themes Academic 4.8.0">
 
   
 
@@ -28,27 +28,13 @@
   
     
   
-  <meta name="description" content="Updates: This week I have been working on
- Work on filtering visualization Implement multiple moving objects in the Simulation Implement multiple tracked objects in the simulation Implement Particle Filter Algorithm for single target Implement EKF with Probabilistic data Assosiation (PDAF) Implement PF with Probabilistic Data Assosiation (PDAF)  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
-Filtering visualization   Filters visualization for single target.">
+  <meta name="description" content="Weekly thesis logbook">
 
   
   <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/project/thesis2/">
 
   
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
   
@@ -59,12 +45,17 @@ Filtering visualization   Filters visualization for single target.">
   
   
   
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
   
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
     
     
@@ -75,52 +66,195 @@ Filtering visualization   Filters visualization for single target.">
       
       
         
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" crossorigin="anonymous" title="hl-light">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
         
       
     
 
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
 
     
 
-  
-
-  
-  
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,400italic,700|Roboto+Mono">
-  
-
-  <link rel="stylesheet" href="/styles.css">
-  
-
-  
-  
-    <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', 'UA-152056153-1', 'auto');
+    
+    
       
-      ga('require', 'eventTracker');
-      ga('require', 'outboundLinkTracker');
-      ga('require', 'urlChangeTracker');
-      ga('send', 'pageview');
-    </script>
-    <script async src="//www.google-analytics.com/analytics.js"></script>
+
+      
+      
+
+      
     
-    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
     
-  
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
   
 
   
-  <link rel="alternate" href="https://dimidagd.github.io/index.xml" type="application/rss+xml" title="/usr">
-  <link rel="feed" href="https://dimidagd.github.io/index.xml" type="application/rss+xml" title="/usr">
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
   
 
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="icon" type="image/png" href="/img/icon.png">
-  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-152056153-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-152056153-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
   <link rel="canonical" href="https://dimidagd.github.io/project/thesis2/">
 
@@ -128,31 +262,91 @@ Filtering visualization   Filters visualization for single target.">
   
   
   
+  
     
+  
   
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="/usr">
   <meta property="og:url" content="https://dimidagd.github.io/project/thesis2/">
   <meta property="og:title" content="Thesis report Week#4-5 | /usr">
-  <meta property="og:description" content="Updates: This week I have been working on
- Work on filtering visualization Implement multiple moving objects in the Simulation Implement multiple tracked objects in the simulation Implement Particle Filter Algorithm for single target Implement EKF with Probabilistic data Assosiation (PDAF) Implement PF with Probabilistic Data Assosiation (PDAF)  [Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]
-Filtering visualization   Filters visualization for single target."><meta property="og:image" content="https://dimidagd.github.io/project/thesis2/featured.jpg">
-  <meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Weekly thesis logbook"><meta property="og:image" content="https://dimidagd.github.io/project/thesis2/featured.jpg">
+  <meta property="twitter:image" content="https://dimidagd.github.io/project/thesis2/featured.jpg"><meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2020-03-06T09:56:46&#43;01:00">
+    
+      <meta property="article:published_time" content="2020-03-06T09:56:46&#43;01:00">
+    
+    <meta property="article:modified_time" content="2020-03-06T09:56:46&#43;01:00">
   
-  <meta property="article:modified_time" content="2020-03-06T09:56:46&#43;01:00">
+
   
+
+
+    
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://dimidagd.github.io/project/thesis2/"
+  },
+  "headline": "Thesis report Week#4-5",
+  
+  "image": [
+    "https://dimidagd.github.io/project/thesis2/featured.jpg"
+  ],
+  
+  "datePublished": "2020-03-06T09:56:46+01:00",
+  "dateModified": "2020-03-06T09:56:46+01:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Dimitrios Dagdilelis"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "/usr",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dimidagd.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Weekly thesis logbook"
+}
+</script>
 
   
 
   
+
+
+  
+
+
+  
+
+
+
+
 
   <title>Thesis report Week#4-5 | /usr</title>
 
 </head>
-<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
   <aside class="search-results" id="search">
   <div class="container">
     <section class="search-header">
@@ -184,89 +378,126 @@ Filtering visualization   Filters visualization for single target."><meta proper
 </aside>
 
 
-<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
   <div class="container">
 
     
+    <div class="d-none d-lg-inline-flex">
       <a class="navbar-brand" href="/">/usr</a>
-      
-      <button type="button" class="navbar-toggler" data-toggle="collapse"
-              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
-      </button>
-      
+    </div>
+    
 
     
-    <div class="collapse navbar-collapse" id="navbar">
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
 
-      
-      
-      <ul class="navbar-nav mr-auto">
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#about">
-            
-            <span>About</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        <li class="nav-item">
-          <a class="nav-link" href="/#projects">
-            
-            <span>/Projects</span>
-            
-          </a>
-        </li>
-
-        
-        
-
-      
-      </ul>
-      <ul class="navbar-nav ml-auto">
-      
-
-        
-
-        
-
-        
-
-        
-        <li class="nav-item">
-          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
-        </li>
-        
-
-      </ul>
-
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">/usr</a>
     </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>/Projects</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
   </div>
 </nav>
 
 
-<article class="article article-project" itemscope itemtype="http://schema.org/Article">
+  <article class="article article-project">
 
   
 
@@ -287,17 +518,13 @@ Filtering visualization   Filters visualization for single target."><meta proper
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">Thesis report Week#4-5</h1>
+  <h1>Thesis report Week#4-5</h1>
 
   
 
   
     
 
-
-
-<meta content="2020-03-06 09:56:46 &#43;0100 CET" itemprop="datePublished">
-<meta content="2020-03-06 09:56:46 &#43;0100 CET" itemprop="dateModified">
 
 <div class="article-metadata">
 
@@ -310,7 +537,7 @@ Filtering visualization   Filters visualization for single target."><meta proper
     
       
     
-    <time>Mar 6, 2020</time>
+    Mar 6, 2020
   </span>
   
 
@@ -320,12 +547,9 @@ Filtering visualization   Filters visualization for single target."><meta proper
 
   
   
-
   
 
   
-    
-
   
 
 </div>
@@ -336,9 +560,6 @@ Filtering visualization   Filters visualization for single target."><meta proper
 
 
 
-
-
-  
 
 
 
@@ -355,7 +576,7 @@ Filtering visualization   Filters visualization for single target."><meta proper
 
   <div class="article-container">
 
-    <div class="article-style" itemprop="articleBody">
+    <div class="article-style">
       <h1 id="updates">Updates:</h1>
 
 <p>This week I have been working on</p>
@@ -376,26 +597,45 @@ Filtering visualization   Filters visualization for single target."><meta proper
 <p><center>
 
 
-<figure>
-
-<img src="/thesis/simulator.png" width="100%" />
 
 
 
-<figcaption data-pre="Figure " data-post=":" >
-  <h4>Filters visualization for single target.</h4>
+
+
+
+
+
+
+
+
+
+<figure id="figure-filters-visualization-for-single-target">
+
+
+  <a data-fancybox="" href="/thesis/simulator.png" data-caption="Filters visualization for single target.">
+
+
+  <img src="/thesis/simulator.png" alt="" width="100%" >
+</a>
+
+
   
-</figcaption>
+  
+  <figcaption>
+    Filters visualization for single target.
+  </figcaption>
 
-</figure></center></p>
 
-<p>A simple sailboat model is moving according to a deterministic Constant Turn rate and Velocity (CTRV) model. Given the known starting state of the target <span  class="math">\(x_0\)</span> ,</p>
+</figure>
+</center></p>
+
+<p>A simple sailboat model is moving according to a deterministic Constant Turn rate and Velocity (CTRV) model. Given the known starting state of the target $x_0$ ,</p>
 
 <ol>
-<li>Initialize EKF at <span  class="math">\(x_0\)</span></li>
-<li>Initialize PF at <span  class="math">\(x_0\)</span></li>
+<li>Initialize EKF at $x_0$</li>
+<li>Initialize PF at $x_0$</li>
 <li>Perform target deterministic motion update</li>
-<li>Obtain noisy observations (if any) <span  class="math">\(z\)</span> from different rate sensors.</li>
+<li>Obtain noisy observations (if any) $z$ from different rate sensors.</li>
 <li>Update the estimate of each filter with the given observations if any, using PDA.</li>
 <li>Plot the weighted particles above the PF state estimate where the height of a particle depends on its likelihood.</li>
 <li>Plot x-y uncertainty ellipsoids of the EKF around the state estimation.</li>
@@ -425,21 +665,40 @@ The goal again is in the update state, to associate measurements with different 
 <li>Filters are associating the measurements to the correct targets at all times.</li>
 </ul>
 
-<p><center>
-
-
-<figure>
-
-<img src="/thesis/3dViewPDA.gif" width="100%" />
 
 
 
-<figcaption data-pre="Figure " data-post=":" >
-  <h4>3d view - multiple targets crossing PDA with EKF and PF.</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-3d-view---multiple-targets-crossing-pda-with-ekf-and-pf">
+
+
+  <a data-fancybox="" href="/thesis/3dViewPDA.gif" data-caption="3d view - multiple targets crossing PDA with EKF and PF.">
+
+
+  <img src="/thesis/3dViewPDA.gif" alt="" width="100%" >
+</a>
+
+
   
-</figcaption>
+  
+  <figcaption>
+    3d view - multiple targets crossing PDA with EKF and PF.
+  </figcaption>
 
-</figure></center></p>
+
+</figure>
+
 
 <h2 id="2d-view">2d view</h2>
 
@@ -449,21 +708,40 @@ The goal again is in the update state, to associate measurements with different 
 <li>Dashed lines correspond to the Particle Filtered x-y state estimate evolution over time. PDA is correctly associating the measurements to the measurement origin.</li>
 </ul>
 
-<p><center>
-
-
-<figure>
-
-<img src="/thesis/2dViewPDA.gif" width="100%" />
 
 
 
-<figcaption data-pre="Figure " data-post=":" >
-  <h4>2d top-view multiple targets crossing</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-2d-top-view-of-multiple-tracked-targets-crossing">
+
+
+  <a data-fancybox="" href="/thesis/2dViewPDA.gif" data-caption="2d top-view of multiple tracked targets crossing">
+
+
+  <img src="/thesis/2dViewPDA.gif" alt="" width="100%" >
+</a>
+
+
   
-</figcaption>
+  
+  <figcaption>
+    2d top-view of multiple tracked targets crossing
+  </figcaption>
 
-</figure></center></p>
+
+</figure>
+
 
 <h1 id="particle-filtering">Particle filtering</h1>
 
@@ -475,13 +753,15 @@ The goal again is in the update state, to associate measurements with different 
 
 <p><span  class="math">\[\mathbf{I} = \int \mathbf{g(x)} d\mathbf{x}\]</span></p>
 
-<p>where <span  class="math">\( \mathbf{x} \in \mathbf{R}^{n_{x}} \)</span>.</p>
+<p>where</p>
+
+<p><span  class="math">\[ \mathbf{x} \in \mathbf{R}^{n_{x}} \]</span></p>
 
 <p>Then the Monte Carlo (MC) approach for numerical integration assumes a factorisation</p>
 
 <p><span  class="math">\[\mathbf{g(x)} = \mathbf{f(x)} \cdot \pi(\mathbf{x}) \]</span></p>
 
-<p>so that <span  class="math">\(\pi(\mathbf{x})\)</span> is interpreted as a probability density which is satisfying</p>
+<p>so  as that $\pi(\mathbf{x})$ is interpreted as a probability density which is satisfying</p>
 
 <p><span  class="math">\[
 \begin{align}
@@ -490,15 +770,15 @@ The goal again is in the update state, to associate measurements with different 
 \end{align}
 \]</span></p>
 
-<p>If one can &quot;draw&quot; <span  class="math">\(N >> 1\)</span> samples <span  class="math">\({x^i; i = 1,...,N} \)</span> distributed according to <span  class="math">\(\pi (\mathbf{x}) \)</span> , then the integral estimate can be approximated with the sample mean:</p>
+<p>If one can &quot;draw&quot; $N &gt;&gt; 1$ samples ${x^i; i = 1,...,N}$ distributed according to $\pi (\mathbf{x})$ , then the integral estimate can be approximated with the sample mean:</p>
 
 <p><span  class="math">\[
 I = \int \mathbf{f}(\mathbf{x})\pi(\mathbf{x}) d\mathbf{x} = I_N \approx \frac{1}{N}\sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i)
 \]</span></p>
 
-<p>Given that the samples <span  class="math">\(\mathbf{x}^i\)</span> are independent, then <span  class="math">\(I_N\)</span> is an unbiased estimator, and according to the law of large numbers it will almost surely converge to <span  class="math">\(I\)</span>.</p>
+<p>Given that the samples $\mathbf{x}^i$ are independent, then $I_N$ is an unbiased estimator, and according to the law of large numbers it will almost surely converge to $I$.</p>
 
-<p>Given that the variance of <span  class="math">\(\mathbf{f}(\mathbf{x})\)</span>, <span  class="math">\(\sigma^2\)</span> is finite,</p>
+<p>Given that the variance of $\mathbf{f}(\mathbf{x})$, $\sigma^2$ is finite,</p>
 
 <p><span  class="math">\[
 \sigma^2 = \int (\mathbf{f}(\mathbf{x})- I)^2 \pi(\mathbf{x})
@@ -511,19 +791,19 @@ I = \int \mathbf{f}(\mathbf{x})\pi(\mathbf{x}) d\mathbf{x} = I_N \approx \frac{1
   \sigma^2)
 \]</span></p>
 
-<p>In the <strong><em>Bayesian</em></strong> context, <span  class="math">\(\pi(\mathbf{x})\)</span> conveniently corresponds to the posterior belief density. What is not convenient though, is the fact that the posterior is usually multivariate, nonstandard and only known up to proportionality, thus distributed sampling is usually not available from it. A solution to this is the use of <strong>Importance Sampling</strong>.</p>
+<p>In the <strong><em>Bayesian</em></strong> context, $\pi(\mathbf{x})$ conveniently corresponds to the posterior belief density. What is not convenient though, is the fact that the posterior is usually multivariate, nonstandard and only known up to proportionality, thus distributed sampling is usually not available from it. A solution to this is the use of <strong>Importance Sampling</strong>.</p>
 
 <h2 id="importance-sampling">Importance sampling</h2>
 
-<p>In order to generate samples directly from <span  class="math">\(\pi (\mathbf{x})\)</span> and estimate <span  class="math">\(I\)</span> using Monte Carlo integration, one can generate samples from a density <span  class="math">\(q(\mathbf{x})\)</span>, which is similar to <span  class="math">\(\pi(\mathbf{x})\)</span>. The pdf <span  class="math">\(q(\mathbf{x})\)</span> is usually referred to as <strong>importance</strong> or <strong>proposal</strong> density.</p>
+<p>In order to generate samples directly from $\pi (\mathbf{x})$ and estimate $I$ using Monte Carlo integration, one can generate samples from a density $q(\mathbf{x})$, which is similar to $\pi(\mathbf{x})$. The pdf $q(\mathbf{x})$ is usually referred to as <strong>importance</strong> or <strong>proposal</strong> density.</p>
 
-<p>Similarity between <span  class="math">\(\pi \text{ - } q \)</span> is expressed as:</p>
+<p>Similarity between $\pi \text{ - } q $ is expressed as:</p>
 
 <p><span  class="math">\[
 \pi(\mathbf{x}) > 0 \rightarrow q(\mathbf{x})>0 , \text{for all } \mathbf{x} \in R^{n_x}
 \]</span></p>
 
-<p>which means that <span  class="math">\(q(\mathbf{x})\)</span> and <span  class="math">\(\pi(\mathbf{x})\)</span> have the same support. The integral <span  class="math">\(I\)</span> can be rewritten thus as:</p>
+<p>which means that $q(\mathbf{x})$ and $\pi(\mathbf{x})$ have the same support. The integral $I$ can be rewritten thus as:</p>
 
 <p><span  class="math">\[
 I = \int \mathbf{f}(\mathbf{x}) d\mathbf{x} = \int f(\mathbf{x}) \frac{\pi(\mathbf{x})}{q(\mathbf{x})}q(\mathbf{x}) d\mathbf{x}
@@ -544,22 +824,41 @@ w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x
 <p><center>
 
 
-<figure>
-
-<img src="/thesis/MC_importance.png" width="100%" />
 
 
 
-<figcaption data-pre="Figure " data-post=":" >
-  <h4>1-D Belief representation with weighted particles.</h4>
+
+
+
+
+
+
+
+
+
+<figure id="figure-1-d-belief-representation-with-weighted-particles">
+
+
+  <a data-fancybox="" href="/thesis/MC_importance.png" data-caption="1-D Belief representation with weighted particles.">
+
+
+  <img src="/thesis/MC_importance.png" alt="" width="100%" >
+</a>
+
+
   
-</figcaption>
+  
+  <figcaption>
+    1-D Belief representation with weighted particles.
+  </figcaption>
 
-</figure></center></p>
+
+</figure>
+</center></p>
 
 <h4 id="bayesian-estimation">Bayesian estimation</h4>
 
-<p>As already mentioned, in the Bayseian context, <span  class="math">\(\pi (\mathbf{x})\)</span> is the posterior density. For selecting the proposal distribution <span  class="math">\(q(\mathbf{x})\)</span> it makes sense to try to mantain a degree of similarity between the proposal and the posterior, so that the finite <span  class="math">\(N\)</span> selected <span  class="math">\(\mathbf{x}^i\)</span> samples fall into probable regions of the posterior, that is regions that contain information about the actual posterior distribution <span  class="math">\( p(\mathbf{x} | z_i)\)</span>.</p>
+<p>As already mentioned, in the Bayseian context, $\pi (\mathbf{x})$ is the posterior density. For selecting the proposal distribution $q(\mathbf{x})$ it makes sense to try to mantain a degree of similarity between the proposal and the posterior, so that the finite $N$ selected $\mathbf{x}^i$ samples fall into probable regions of the posterior, that is regions that contain information about the actual posterior distribution $p(\mathbf{x} | z_i)$.</p>
 
 <h4 id="sequential-importance-sampling-sis">Sequential importance Sampling (SIS)</h4>
 
@@ -576,7 +875,7 @@ w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x
 
 <p>The key idea again, is to represent the posterior density function by a limited set of samples and their importance weights, based on which estimates can be calculated. As the number of samples increases, the sampled distribution becomes an equivalent representation to the functional description of the posterior pdf, and the <strong><em>SIS</em></strong> filter approaches the optimal Bayesian filtering estimator.</p>
 
-<p>The recursive nature of <em>SIS</em> implies that the new weights --- posterior <span  class="math">\(p(\mathbf{x}_k | \mathbf{z}_k) \)</span> --- are being updated based on their previous values --- prior <span  class="math">\(p(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i)\)</span> --- and the likelihood of a new measurement <span  class="math">\(p(\mathbf{z}_k | \mathbf{x}_k^i)\)</span>, i.e</p>
+<p>The recursive nature of <em>SIS</em> implies that the new weights describing the posterior $p(\mathbf{x}_k | \mathbf{z}_k)$ are being updated based on their previous values, and the likelihood of a new measurement <span  class="math">\(p(\mathbf{z}_k | \mathbf{x}_k^i)\)</span>, i.e</p>
 
 <p><span  class="math">\[
 w_k^i \sim w_{k-1}^i \frac{p(\mathbf{z}_k | \mathbf{x}_k^i)p(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i)}{q(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i , \mathbf{z}_k)}
@@ -586,7 +885,7 @@ w_k^i \sim w_{k-1}^i \frac{p(\mathbf{z}_k | \mathbf{x}_k^i)p(\mathbf{x}_k^i | \m
 
 <p><span  class="math">\[p(\mathbf{x}_k | \mathbf{z}_k) \approx \sum_{i=1}^N w_k^i \delta(\mathbf{x}_k - \mathbf{x}_k^i)\]</span></p>
 
-<p>The recursiveness of the algorithm is evident since the importance weights <span  class="math">\(w_k^i\)</span> and support points <span  class="math">\(x_k^i\)</span> are being propagated as each measurement is received sequentially. The SIS algorithm is the basis of most particle filtering algorithms, and the choice of the importance density function is crucial in the design.</p>
+<p>The recursiveness of the algorithm is evident since the importance weights $w_k^i$ and support points $x_k^i$ are being propagated as each measurement is received sequentially. The SIS algorithm is the basis of most particle filtering algorithms, and the choice of the importance density function is crucial in the design.</p>
 
 <h4 id="importance-density-selection">Importance density selection</h4>
 
@@ -602,13 +901,13 @@ w_k^i \sim w_{k-1}^i \frac{p(\mathbf{z}_k | \mathbf{x}_k^i)p(\mathbf{x}_k^i | \m
 
 <h4 id="degeneracy-problem">Degeneracy problem</h4>
 
-<p>A general problem of a SIS particle filter is that the particle distribution becomes extremely peaked through the subsequent measurement updates. That is, the variance of the importance weights can only increase over time. This effect overtime leads to poor accuracy of the estimates and leads to a common problem of the SIS particle filter, that of <strong><em>degeneracy</em></strong>. An effective countermeasure is monitoring the level of degenracy of the filter and resample when appropriate. Such a measure is the effective sample size <span  class="math">\(N_{\text{eff}}\)</span> as introduced by [<a href="https://www.jstor.org/stable/2291224?seq=1">ref</a>]</p>
+<p>A general problem of a SIS particle filter is that the particle distribution becomes extremely peaked through the subsequent measurement updates. That is, the variance of the importance weights can only increase over time. This effect overtime leads to poor accuracy of the estimates and leads to a common problem of the SIS particle filter, that of <strong><em>degeneracy</em></strong>. An effective countermeasure is monitoring the level of degenracy of the filter and resample when appropriate. Such a measure is the effective sample size $N_{\text{eff}}$ as introduced by [<a href="https://www.jstor.org/stable/2291224?seq=1">ref</a>]</p>
 
 <p><span  class="math">\[
 \hat{N}_{\text{eff}} = \frac{1}{\sum_{i=1}^{N}(w_k^i)^2}
 \]</span></p>
 
-<p>It can be seen that <span  class="math">\(1 < N_{\text{eff}} < N\)</span> , thus a usual degeneracy criterion is</p>
+<p>It verify that <span  class="math">\(1 < N_{\text{eff}} < N\)</span> , thus a usual degeneracy criterion is</p>
 
 <p><span  class="math">\[
 \begin{aligned}
@@ -618,15 +917,15 @@ N_{\text{eff}} &< \alpha N  \\ \alpha \in \mathcal{R}: &\alpha \in (0,1)
 
 <h4 id="resampling-algorithms">Resampling algorithms</h4>
 
-<p>Whenever a degeneracy is detected(i.e <span  class="math">\(N_{\text{eff}}\)</span> falling below a threshold value), resampling is performed. Resampling follows the strategy of <strong><em>survival of the fittest</em></strong>, by eliminating particles in the set with low weight values and replacing them with copies of the more probable ones.</p>
+<p>Whenever a degeneracy is detected(i.e $N_{\text{eff}}$ falling below a threshold value), resampling is performed. Resampling follows the strategy of <strong><em>survival of the fittest</em></strong>, by eliminating particles in the set with low weight values and replacing them with copies of the more probable ones.</p>
 
-<p>The resampling algorithm is:</p>
+<p>The resampling algorithm is thus:</p>
 
 <ol>
-<li>Normalize the particle set weights <span  class="math">\(w^j\)</span></li>
+<li>Normalize the particle set weights $w^j$</li>
 <li>Calculate the cumulative mass function <span  class="math">\(F_k(i) = \sum_{j=1}^{i} w_k^j\)</span>.</li>
-<li>Draw <span  class="math">\(N\)</span> random samples <span  class="math">\(u_i \in \mathcal{R}\)</span>, <span  class="math">\(i=1,..,N\)</span> uniformly distributed on the interval <span  class="math">\([0,1]\)</span>.</li>
-<li>For every uniform sample <span  class="math">\(u_i\)</span>, pick <span  class="math">\(\hat{x}_k^i = x_k^j\)</span> , where</li>
+<li>Draw $N$ random samples $u_i \in \mathcal{R}$, $i=1,..,N$ uniformly distributed on the interval $[0,1]$.</li>
+<li>For every uniform sample $u_i$, pick $\hat{x}_k^i = x_k^j$ out of the current samples pool, where the picking index $j$ depends on the weight's value as</li>
 </ol>
 
 <p><span  class="math">\[
@@ -636,21 +935,40 @@ j = \underset{i}{\arg\min} |F_k(i)-u_i|
 <p><center>
 
 
-<figure>
-
-<img src="/thesis/stratified_resampling.png" width="100%" />
 
 
 
-<figcaption data-pre="Figure " data-post=":" >
-  <h4>Resampling process based on CSW. The particle x_k_j has a good chance of surviving.</h4>
+
+
+
+
+
+
+
+
+
+<figure id="figure-resampling-process-based-on-csw-the-particle-x_k_j-has-a-good-chance-of-surviving">
+
+
+  <a data-fancybox="" href="/thesis/stratified_resampling.png" data-caption="Resampling process based on CSW. The particle x_k_j has a good chance of surviving.">
+
+
+  <img src="/thesis/stratified_resampling.png" alt="" width="100%" >
+</a>
+
+
   
-</figcaption>
+  
+  <figcaption>
+    Resampling process based on CSW. The particle x_k_j has a good chance of surviving.
+  </figcaption>
 
-</figure></center></p>
+
+</figure>
+</center></p>
 
 <p>The above strategy leads to a weight selection <strong>survival chance</strong> equal to the <strong>weight's value</strong>
-<span  class="math">\(P(\hat{x}_k^i = x_k^j) = w_k^j\)</span> . This results in useful samples having a higher likelihood of being selected for the new set. The new weights of the samples are uniform</p>
+$P(\hat{x}_k^i = x_k^j) = w_k^j$ . This results in useful samples having a higher likelihood of being selected for the new set. The new weights of the samples are uniform i.e. the weights are set to</p>
 
 <p><span  class="math">\[\{\hat{x}_k^i , 1/N\}\]</span></p>
 
@@ -661,11 +979,11 @@ j = \underset{i}{\arg\min} |F_k(i)-u_i|
 <p>The PF algorithm thus summarises to:</p>
 
 <ol>
-<li>Initialise the filter by drawing particles according to an initial belief <span  class="math">\(p(\mathbf{x}_0)\)</span></li>
+<li>Initialise the filter by drawing particles according to an initial belief $p(\mathbf{x}_0)$</li>
 </ol>
 
 <blockquote>
-<p>Usually <span  class="math">\(p(\mathbf{x}_0)\)</span> is Gaussian with known moments, or a uniform distribution around the initial estimate  <span  class="math">\(\mathbf{x}_{0} \)</span>.</p>
+<p>Usually  <span  class="math">\(p(\mathbf{x}_0)\)</span> is Gaussian with known moments, or a uniform distribution around the initial estimate  $\mathbf{x}_{0}$.</p>
 </blockquote>
 
 <ol start="2">
@@ -673,7 +991,7 @@ j = \underset{i}{\arg\min} |F_k(i)-u_i|
 </ol>
 
 <blockquote>
-<p>This step requires pointwise evaluation of the likelihood-function <span  class="math">\( p(\mathbf{z}_k | \mathbf{x}_k) \)</span> which depends on the stochastic properties, of the <em>measurement model</em>.</p>
+<p>This step requires pointwise evaluation of the likelihood-function $p(\mathbf{z}_k | \mathbf{x}_k)$ which depends on the stochastic properties, of the <em>measurement model</em>.</p>
 
 <p><em>Example</em>:
 For the radar sensor, the likelihood function is the <em>multivariate gaussian</em>:</p>
@@ -682,12 +1000,12 @@ For the radar sensor, the likelihood function is the <em>multivariate gaussian</
 p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}\mathbf{R}(z-h(x)\right)}
 \]</span></p>
 
-<p>Where <span  class="math">\(\mathbf{R}_{k\times k}\)</span> is the measurement noise covariance matrix</p>
+<p>Where $\mathbf{R}_{k\times k}$ is the measurement noise covariance matrix</p>
 </blockquote>
 
 <ol start="3">
 <li>Normalise weights to represent a pmf.</li>
-<li>Resample if required, based on <span  class="math">\(N_{\text{eff}} < \textit{threshold}\)</span></li>
+<li>Resample if required, based on $N_{\text{eff}} &lt; \textit{threshold}$</li>
 <li>Propagate every point according to the motion model.</li>
 </ol>
 
@@ -702,24 +1020,44 @@ p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}
 <p><center>
 
 
-<figure>
-
-<img src="/thesis/particle_filter_genetics.png" width="100%" />
 
 
 
-<figcaption data-pre="Figure " data-post=":" >
-  <h4>General particle filtering algorithm genetics.</h4>
+
+
+
+
+
+
+
+
+
+<figure id="figure-general-particle-filtering-algorithm-genetics">
+
+
+  <a data-fancybox="" href="/thesis/particle_filter_genetics.png" data-caption="General particle filtering algorithm genetics.">
+
+
+  <img src="/thesis/particle_filter_genetics.png" alt="" width="100%" >
+</a>
+
+
   
-</figcaption>
+  
+  <figcaption>
+    General particle filtering algorithm genetics.
+  </figcaption>
 
-</figure></center></p>
+
+</figure>
+</center></p>
 
 <p>[<a href="https://www.researchgate.net/publication/228646515_The_unscented_Kalman_Filter_and_particle_filter_methods_for_nonlinear_structural_system_identification_with_non-collocated_heterogeneous_sensing">ref</a>]</p>
 
     </div>
 
     
+
 
 
 <div class="article-tags">
@@ -732,126 +1070,232 @@ p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu9a5bbf0657111f252bed6cd0c360848b_15195_270x270_fill_q90_lanczos_center.jpg" alt="Avatar">
     
 
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://dimidagd.github.io/">Dimitrios Dagdilelis</a></h5>
+      <h6 class="card-subtitle">Pursuing MSc at</h6>
+      <p class="card-text">My research interests include sensor fusion, perception, mapping and estimation in the context of autonomous systems.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:dimidagd_at_gmail_dot_com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/dimidagd/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/dimidagd" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/docs/resume.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
 
 
 
 
 
   
-
-
-
-
-
-
-
-<div class="media author-card" itemscope itemtype="http://schema.org/Person">
   
-  
-  <img class="portrait mr-3" src="/author/admin/avatar_hu9a5bbf0657111f252bed6cd0c360848b_15195_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
-  
-
-  <div class="media-body">
-    <h5 class="card-title" itemprop="name"><a href="/authors/admin">Dimitrios Dagdilelis</a></h5>
-    <h6 class="card-subtitle">Pursuing MSc at</h6>
-    <p class="card-text" itemprop="description">My research interests include sensor fusion, perception, mapping and estimation in the context of autonomous systems.</p>
-    <ul class="network-icon" aria-hidden="true">
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
       
-      
-      
-      
-        
-      
-      
-      
-      
-      
-      <li>
-        <a itemprop="sameAs" href="mailto:dimidagd_at_gmail_dot_com" >
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="https://www.linkedin.com/in/dimidagd/" target="_blank" rel="noopener">
-          <i class="fab fa-linkedin"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-        
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="https://github.com/dimidagd" target="_blank" rel="noopener">
-          <i class="fab fa-github"></i>
-        </a>
-      </li>
-      
-      
-      
-      
-      
-      
-      
-      
-        
-      
-      <li>
-        <a itemprop="sameAs" href="/docs/resume.pdf" >
-          <i class="ai ai-cv"></i>
-        </a>
-      </li>
+      <li><a href="/project/thesis/">Thesis report Week#3</a></li>
       
     </ul>
   </div>
-</div>
+  
 
 
 
+    <div class="project-related-pages content-widget-hr">
+      
+      
 
-    
-    
+      
+      
+      
 
-    
-    
-    
+      
+      
+      
 
-    
-    
-    
-
-    
-    
-    
-
+      
+      
+      
+    </div>
   </div>
 </article>
 
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.738eb6c268ee4959345a9f0efc01a6e9.js"></script>
+
+    
 
 
-<div class="container">
-  <footer class="site-footer">
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
   
 
   <p class="powered-by">
@@ -863,7 +1307,7 @@ p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}
 
     
     <span class="float-right" aria-hidden="true">
-      <a href="#" id="back_to_top">
+      <a href="#" class="back-to-top">
         <span class="button_icon">
           <i class="fas fa-chevron-up fa-2x"></i>
         </span>
@@ -873,9 +1317,10 @@ p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}
   </p>
 </footer>
 
-</div>
+  </div>
+  
 
-
+  
 <div id="modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -901,74 +1346,5 @@ p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}
   </div>
 </div>
 
-    
-
-    
-    
-    
-    <script src="/js/mathjax-config.js"></script>
-    
-
-    
-    
-    
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
-
-      
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
-        
-      
-
-      
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
-      
-    
-
-    
-    
-
-    
-    
-    
-
-    
-    
-    <script>hljs.initHighlightingOnLoad();</script>
-    
-
-    
-
-    
-    
-
-    
-
-    
-    
-
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-      
-    
-    
-    
-    
-    <script src="/js/academic.min.59444117f1957a46872930c49af65e4d.js"></script>
-
-  </body>
+</body>
 </html>
-
