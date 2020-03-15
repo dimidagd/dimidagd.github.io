@@ -5,12 +5,279 @@
     <link>https://dimidagd.github.io/tags/thesis/</link>
       <atom:link href="https://dimidagd.github.io/tags/thesis/index.xml" rel="self" type="application/rss+xml" />
     <description>Thesis</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 11 Mar 2020 16:24:31 +0100</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 15 Mar 2020 16:19:16 +0100</lastBuildDate>
     <image>
       <url>img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]</url>
       <title>Thesis</title>
       <link>https://dimidagd.github.io/tags/thesis/</link>
     </image>
+    
+    <item>
+      <title>Thesis report Week#7</title>
+      <link>https://dimidagd.github.io/project/thesis4/</link>
+      <pubDate>Sun, 15 Mar 2020 16:19:16 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/thesis4/</guid>
+      <description>&lt;h2 id=&#34;tracking-a-single-target-in-clutter&#34;&gt;Tracking a single target in clutter&lt;/h2&gt;
+
+&lt;h3 id=&#34;problem-formulation&#34;&gt;Problem formulation:&lt;/h3&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;Perform &lt;em&gt;state estimation&lt;/em&gt; of a &lt;strong&gt;&lt;em&gt;single target&lt;/em&gt;&lt;/strong&gt; using observations of &lt;strong&gt;&lt;em&gt;uncertain origin&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Target&#39;s tracked state at sample time $k$ is, $\mathbf{x}_k=(x,y,V,h,\omega)^T$ with respect to the self-vehicle sea-keeping frame.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Assume its track is &lt;em&gt;initialized tracks&lt;/em&gt; i.e the problem is that of &lt;strong&gt;track maintenance&lt;/strong&gt; .&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Observations $z_k = h(\mathbf{x}_k) + w_k$ from various sensors, defined my a corresponding measurement model and the target&#39;s state.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$w$ is gaussian white and its covariance matrix depends on the sensor properties.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Detection probability $P_D$ less than unity, i.e. there exists the possibility of the sensor &lt;strong&gt;&lt;em&gt;not returning&lt;/em&gt;&lt;/strong&gt; an observation that belongs to the target, due to various reasons.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Non zero $P_{FD}$, ie the sensor can provide  &lt;em&gt;false positive&lt;/em&gt; observations that do not originate from the tracked target, usually due to clutter.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Possibility for &lt;strong&gt;&lt;em&gt;multiple validated&lt;/em&gt;&lt;/strong&gt; observations for a single target.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;clutter-model&#34;&gt;Clutter model&lt;/h3&gt;
+
+&lt;p&gt;The target tracker estimates the target state such as position and orientation from the noisy measurement observations originating from various object&#39;s sources such as real targets, clouds, terrain reflections and thermal noise. The unwanted measurements are referred as &lt;strong&gt;&lt;em&gt;clutter measurements&lt;/em&gt;&lt;/strong&gt;.[&lt;a href=&#34;https://www.sciencedirect.com/science/article/abs/pii/S0957417419306876&#34;&gt;source&lt;/a&gt;]&lt;/p&gt;
+
+&lt;p&gt;Most of the sensors are finite in their perception resolution, that is they have $N$  &lt;em&gt;&lt;strong&gt;resolution cells&lt;/strong&gt;&lt;/em&gt;. A detection is declared in a cell if  the output of the signal for the specific cell exceeds a threshold. If the sensor points to a region which is not occupied by a target, then false detections can still occur  due to sensor noise or background noise. Usually filtering is performed with &lt;em&gt;observations&lt;/em&gt; instead of detections, that is with the output of the raw-data preprocessor.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In radar tracking for instance, the preprocessor might run clustering algorithms on the raw detections and provide the mean of each cluster as a different observation. The preprocessing of the raw data should remove what was defined as clutter, nevertheless preprocessors still produce false positive observations. &lt;strong&gt;&lt;em&gt;Observations&lt;/em&gt;&lt;/strong&gt;(post-processed information from raw data) can have a similar clutter model.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The probability of a &lt;em&gt;false positive&lt;/em&gt; observation inside the sensors grid cell is $P_{FA} = p$ in each cell&lt;/li&gt;
+&lt;li&gt;The events of observations in each cell are independent of each other.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Then the &lt;strong&gt;&lt;em&gt;probability mass function (pmf)&lt;/em&gt;&lt;/strong&gt; of the number of false alarms in these $N$ cells, follows a &lt;strong&gt;&lt;em&gt;binomial(Bernouli)&lt;/em&gt;&lt;/strong&gt; distribution&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+P\{n_{FA}=m\} = \mu_{FA}(m) = \begin{pmatrix}N \\m \end{pmatrix} p^m (1-p)^{N-m}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;If $V$ is the volume of the $N$ cells under consideration, then $\lambda$ is the &lt;strong&gt;&lt;em&gt;spatial density of the false alarms&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\lambda = \frac{E{n_{FA}}}{V} = \frac{Np}{V}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;If $Np &amp;gt;1$ then the &lt;em&gt;Poisson distribution&lt;/em&gt; can be approximated by&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\mu_{FA}(m) \approx e^{-Np}\frac{(Np)^m}{m!}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;thus the &lt;strong&gt;&lt;em&gt;number of false alarms(clutter observations)&lt;/em&gt;&lt;/strong&gt; in a volume $V$ given a spatial density of clutter observations $\lambda$ is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\mu_{FA}(m) \approx e^{-\lambda V}\frac{(\lambda V)^m}{m!}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The justification of using the above clutter model, is that the &lt;strong&gt;&lt;em&gt;pdf of a false observation&lt;/em&gt;&lt;/strong&gt;  is &lt;strong&gt;&lt;em&gt;uniform&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+p(z|{z = \text{false measurement}}) = \frac{1}{V}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $V$ corresponds to the subspace volume in which the observation is originated from.&lt;/p&gt;
+
+&lt;h3 id=&#34;approaches-to-filtering&#34;&gt;Approaches to filtering&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Non-Bayesian techniques
+
+&lt;ul&gt;
+&lt;li&gt;Nearest Neighbour association&lt;/li&gt;
+&lt;li&gt;Strongest Neighbour association (assuming intensity information)&lt;/li&gt;
+&lt;li&gt;Track-Split approach&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Bayesian techniques
+
+&lt;ul&gt;
+&lt;li&gt;Probabilistic Data Association filter&lt;/li&gt;
+&lt;li&gt;Optimal Bayesian approach, multiple hypothesis (&lt;em&gt;MH&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;probabilistic-data-association-filter-pdaf-overview&#34;&gt;Probabilistic Data Association Filter (PDAF) overview&lt;/h3&gt;
+
+&lt;p&gt;This filter is based on the KF/EKF algorithm, it keeps the update equations the same but is probabilistically fusing
+observations within the target&#39;s validating region into a single fused innovation update step.&lt;/p&gt;
+
+&lt;h4 id=&#34;modeling-assumptions-of-the-pdaf&#34;&gt;Modeling assumptions of the PDAF&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Single target of interested modeled by white-noise driven state motion modele as in KF/EFK&lt;/li&gt;
+&lt;li&gt;The target&#39;s track is already initialized&lt;/li&gt;
+&lt;li&gt;At each sensor sample time, a validation region(gate) to filter the highly unprobable observations is created.&lt;/li&gt;
+&lt;li&gt;The target exhibits a detection probability at eash sensor scan $P_D$&lt;/li&gt;
+&lt;li&gt;The remaining observations(not originating from the target) are assumed due to false detection or clutter, and are assumed to be of uniform spatial distribution.&lt;/li&gt;
+&lt;li&gt;All past information about the target is summarised by a single state estimate  $\hat{\mathbf{x}(k-1|k-1)}$ and its associated covariance $P(k-1|k-1)$&lt;/li&gt;
+&lt;li&gt;The observation pdf originating from the target  is Gaussian with mean $\hat{z}(k|k-1)$ and &lt;em&gt;innovation covariance&lt;/em&gt;  $S(k)$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;pdaf-algorithm&#34;&gt;PDAF algorithm&lt;/h3&gt;
+
+&lt;p&gt;Two versions exist&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;em&gt;Non parametric&lt;/em&gt;&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A &lt;em&gt;diffuse prior&lt;/em&gt; is used as knowledge for the number of false measurements&lt;/li&gt;
+&lt;li&gt;This requires no knowledge about the &lt;em&gt;spatial density&lt;/em&gt; of false measurements&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;em&gt;Parametric&lt;/em&gt;&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A Poisson &lt;strong&gt;&lt;em&gt;pmf&lt;/em&gt;&lt;/strong&gt; is used for the number of false measurements.&lt;/li&gt;
+&lt;li&gt;Requires the spatial density parameter $\lambda$ (expected number per unit volume) of the false measurements.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;prediction&#34;&gt;Prediction&lt;/h4&gt;
+
+&lt;p&gt;Predict the state and the observation:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{align}
+\hat{\mathbf{x}}(x+1|k) &amp;=  F(k)\hat{\mathbf{x}}(k|k) \\
+\hat{z}(k+1|k) &amp;= H(k+1)\hat{\mathbf{x}}(x+1|k)
+\end{align}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Calculate the &lt;em&gt;predicted state covariance&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[P(k+1|k) = F(k)P(k|k)F(k)^T + Q(k)\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The innovation covariance is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[S(k+1) = H(k+1)P(k+1|k)H(k+1)^T + R(k+1)\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The above steps are the same as in the standard KF/EKF.&lt;/p&gt;
+
+&lt;h4 id=&#34;observations-validation&#34;&gt;Observations validation&lt;/h4&gt;
+
+&lt;p&gt;A validation region(gate) is defined by the ellipsoid:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\mathcal{V}(k+1, \gamma) = \{z: [z-\hat{z}(k+1|k)]^T S(k+1)^{-1} [z-\hat{z}(k+1|k)] \leq \gamma \}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $\gamma$ is the gate threshold and can be calculated by the chosen &lt;em&gt;gate probability&lt;/em&gt; $P_G$ and the chi-squared distribution lookup matrix.&lt;/p&gt;
+
+&lt;p&gt;This leads to a validated observations set&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\{z_i(k+1), i = 1, ..., m(k+1)\}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The innovation $\nu_i$ corresponding to the i-th validated observation is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\begin{align}
+\nu_i(k+1) = z_i(k+1) - \hat{z}(k+1|k)  &amp;&amp; i= 1, ...,m(k+1)
+\end{align}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The validation region volume $V$ is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[V(k+1) = c_{n_{z}}|\gamma S(k+1)|^\frac{1}{2}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $c_{n_z}$ is the volume of the $n_z$ &lt;em&gt;dimensional unit hypersphere&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[ c_i =
+\left\{\begin{array}{ll}
+2  &amp; i = 1 \\
+\pi &amp; i=2 \\
+\frac{4\pi}{3} &amp; i = 3
+\end{array}
+\right.
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;probabilistic-data-association--non-parametric-version&#34;&gt;Probabilistic Data Association ~ non parametric version&lt;/h4&gt;
+
+&lt;p&gt;The probability that the i-th measurement is the correct one can be calculated&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\beta_i(k+1)=
+\left\{\begin{array}{ll}
+\frac{e_i}{b+\sum_{j=1}^{m(k+1)}e_j}  &amp; i = 1,...,m(k+1) \\
+\frac{b}{b+\sum_{j=1}^{m(k+1)}e_j} &amp; i=0
+\end{array}
+\right.
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $\beta_0$ corresponds to the &lt;em&gt;probability that none of the measurements is correct&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The likelihood $e_i$ is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+e_i \overset{\Delta}{=}  e^{-\frac{1}{2} \nu_i(k+1)^T S(k+1)^-1 \nu_i(k+1)}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+b \overset{\Delta}{=} \left(\frac{2\pi}{\gamma}\right)^{\frac{n_z}{2}}m(k+1)c_{n_z}^-1\frac{1-P_D P_G}{P_D}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;update&#34;&gt;Update&lt;/h4&gt;
+
+&lt;p&gt;The &lt;strong&gt;&lt;em&gt;state update&lt;/em&gt;&lt;/strong&gt; can be carried by first calculating the weighted combined innovation&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\nu(k+1) \overset{\Delta}{=} \sum_{i=1}^{m(k+1)}\beta_i(k+1)\nu_i(k+1)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;Then the &lt;em&gt;state update&lt;/em&gt; follows&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\hat{x}(k+1|k+1) = \hat{x}(k+1|k) + K(k+1)\nu(k+1)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where the Kalman gain $K(k+1)$ follows the standard EKF/KF calculation.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;The &lt;strong&gt;updated covariance&lt;/strong&gt; is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+P(k+1|k+1) = P(k+1|k) -  [ (1-\beta_0(k+1)) ] K(k+1)S(k+1)W(k+1)^T + \tilde{P}(k+1)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $\tilde{P}(k+1)$ is responsible for &lt;em&gt;spreading&lt;/em&gt; the updated estimate variance(increase uncertainty)&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\tilde{P}(k+1) \overset{\Delta}{=} K(k+1)\left[ \sum_{i=1}^{m(k+1)}\beta_i(k+1)\nu_i(k+1)\nu_i(k+1)^T - \nu_i(k+1)\nu_i(k+1)^T \right]K(k+1)^T
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;remarks-on-pdaf&#34;&gt;Remarks on PDAF&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;$\tilde{P}(k+1)$ is &lt;em&gt;positive definite&lt;/em&gt; and increases the covariance of the updated state, and is capturing the effect of origin uncertainty.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The estimation accuracy is &lt;em&gt;data dependend&lt;/em&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In the parametric &lt;strong&gt;PDA&lt;/strong&gt; , $\beta$ is calculated by replacing $m(k+1)$ with $\lambda V(k+1)$ , where $\lambda$ is the spatial density of the false measurements of the clutter model.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The distinctive difference between the parametric and the non-parametric variants, is that the parametric asssumes an apriori known diffusion density $\lambda$ , where as the non-parametric one is calculating it based on the current number of validated observations $m(k+1)$ and the validation volume $V$.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;While the structure is the same as in a linear filter, &lt;strong&gt;&lt;em&gt;PDAF&lt;/em&gt;&lt;/strong&gt; is a non-linear filter due to the &lt;em&gt;weighted innovation&lt;/em&gt; calculation.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Thesis report Week#6</title>
