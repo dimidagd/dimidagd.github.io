@@ -2630,7 +2630,7 @@ For the project, we would focus on the CamVid dataset recorded from automobile. 
     <item>
       <title>Formula car aerodynamics</title>
       <link>https://dimidagd.github.io/project/external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0300</pubDate>
       <guid>https://dimidagd.github.io/project/external-project/</guid>
       <description>&lt;p&gt;Design and construction of FSAE car aerodynamic elements. Use of computational fluid dynamics and goal driven algorithms to optimize the geometries and setups. Initial geometry was designed in &lt;code&gt;Solidworks&lt;/code&gt; , then a parametric CAD file was created in &lt;code&gt;ANSYS&lt;/code&gt;. Spallart-Allmaras and K-epsilon turbulence models were used for the solver. The optimization algorithm altered variables such as absolute and relative elements pitch and relative and absolute element location and scaling, and tried to maximize the lift to drag ratio. The solver used was ANSYS-Fluent&lt;/p&gt;
 
@@ -2653,7 +2653,7 @@ For the project, we would focus on the CamVid dataset recorded from automobile. 
     <item>
       <title>Plasma Actuators</title>
       <link>https://dimidagd.github.io/project/internal-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0300</pubDate>
       <guid>https://dimidagd.github.io/project/internal-project/</guid>
       <description>&lt;p&gt;The capabilities of flow control using DBD were studied with a vision of being implemented in UAVs to alter flight characteristics such as power efficiency, lift off velocity, and provide abilities such as direction control without the use of moving surfaces.&lt;/p&gt;
 

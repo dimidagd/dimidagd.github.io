@@ -5,7 +5,7 @@
     <link>https://dimidagd.github.io/tags/control/</link>
       <atom:link href="https://dimidagd.github.io/tags/control/index.xml" rel="self" type="application/rss+xml" />
     <description>Control</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0300</lastBuildDate>
     <image>
       <url>img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]</url>
       <title>Control</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Plasma Actuators</title>
       <link>https://dimidagd.github.io/project/internal-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0300</pubDate>
       <guid>https://dimidagd.github.io/project/internal-project/</guid>
       <description>&lt;p&gt;The capabilities of flow control using DBD were studied with a vision of being implemented in UAVs to alter flight characteristics such as power efficiency, lift off velocity, and provide abilities such as direction control without the use of moving surfaces.&lt;/p&gt;
 

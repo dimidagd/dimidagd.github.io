@@ -5,7 +5,7 @@
     <link>https://dimidagd.github.io/tags/aerodynamics/</link>
       <atom:link href="https://dimidagd.github.io/tags/aerodynamics/index.xml" rel="self" type="application/rss+xml" />
     <description>aerodynamics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0300</lastBuildDate>
     <image>
       <url>img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]</url>
       <title>aerodynamics</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Formula car aerodynamics</title>
       <link>https://dimidagd.github.io/project/external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0200</pubDate>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0300</pubDate>
       <guid>https://dimidagd.github.io/project/external-project/</guid>
       <description>&lt;p&gt;Design and construction of FSAE car aerodynamic elements. Use of computational fluid dynamics and goal driven algorithms to optimize the geometries and setups. Initial geometry was designed in &lt;code&gt;Solidworks&lt;/code&gt; , then a parametric CAD file was created in &lt;code&gt;ANSYS&lt;/code&gt;. Spallart-Allmaras and K-epsilon turbulence models were used for the solver. The optimization algorithm altered variables such as absolute and relative elements pitch and relative and absolute element location and scaling, and tried to maximize the lift to drag ratio. The solver used was ANSYS-Fluent&lt;/p&gt;
 

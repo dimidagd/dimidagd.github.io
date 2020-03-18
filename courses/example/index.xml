@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Overview | /usr</title>
+    <link>https://dimidagd.github.io/courses/example/</link>
+      <atom:link href="https://dimidagd.github.io/courses/example/index.xml" rel="self" type="application/rss+xml" />
+    <description>Overview</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 09 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]</url>
+      <title>Overview</title>
+      <link>https://dimidagd.github.io/courses/example/</link>
+    </image>
+    
+    <item>
+      <title>State-space</title>
+      <link>https://dimidagd.github.io/courses/example/state_space/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/courses/example/state_space/</guid>
+      <description>&lt;h2 id=&#34;state-vector&#34;&gt;State vector&lt;/h2&gt;
+
+&lt;p&gt;Assuming the target&#39;s motion on the &lt;strong&gt;&lt;em&gt;two-dimensional&lt;/em&gt;&lt;/strong&gt; own-ship&#39;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Cartesian velocity model
+&lt;span  class=&#34;math&#34;&gt;\(\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} \)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Polar velocity model
+&lt;span  class=&#34;math&#34;&gt;\(\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} \)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;where&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{align*}
+\upsilon &amp;= \sqrt{\dot{x}^2 + \dot{y}^2}  \\\\
+\psi &amp;= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\\\
+\omega &amp;= \dot{\psi}
+\end{align*}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;$(x,y)$ is the displacement relative to the local self-body fixed coordinate system&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$\upsilon$ is the target&#39;s linear velocity&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$\psi$ is the heading angle w.r.t the tracking system&#39;s x-axis.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$\omega$ is the turn-rate of the target&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;all expressed w.r.t the own-ship&#39;s tracking coordinate system.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-tracked-target-state-vector-top-view-in-the-tracking-coordinate-system&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; data-caption=&#34;Tracked target state vector top view, in the tracking coordinate system&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Tracked target state vector top view, in the tracking coordinate system
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dimidagd.github.io/courses/example/estimation/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/courses/example/estimation/</guid>
+      <description>&lt;h1 id=&#34;the-problem&#34;&gt;The problem&lt;/h1&gt;
+&lt;p&gt;The generation of information that has the following properties&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;quality (accuracy/reliability) higher than the raw measurements&lt;/li&gt;
+&lt;li&gt;contains information not directly available in the measurements&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-mathematical-view-of-state-estimation&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/SE.png&#34; data-caption=&#34;Mathematical view of state estimation.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/SE.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Mathematical view of state estimation.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;ul&gt;
+&lt;li&gt;No access to variables inside the first two blocks&lt;/li&gt;
+&lt;li&gt;The only accessible variable are the measurements which are affected by noise.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;the-estimator&#34;&gt;The estimator&lt;/h1&gt;
+&lt;p&gt;Uses knowledge and processes the measurements to yield an estimate of a variable of interest(state or state uncertainty), while trying to make best use of the available data. In this process it is taking into account the:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;System dynamics&lt;/li&gt;
+&lt;li&gt;Sensor Models&lt;/li&gt;
+&lt;li&gt;Prior information &amp;amp; probabilistic nature of the uncertainties&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dimidagd.github.io/courses/example/tracking/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/courses/example/tracking/</guid>
+      <description>&lt;h1 id=&#34;the-problem&#34;&gt;The problem&lt;/h1&gt;
+
+&lt;p&gt;Tracking is the &lt;em&gt;processing of measurements&lt;/em&gt; or &lt;em&gt;observations&lt;/em&gt; obtained from a &lt;em&gt;target&lt;/em&gt; in order to maintain an &lt;em&gt;estimate of its current&lt;/em&gt; &lt;strong&gt;&lt;em&gt;state&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The state of a target usually consists of:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Kinematics - position, velocity, acceleration , turn rate, etc. expressed  w.r.t a coordinate frame&lt;/li&gt;
+&lt;li&gt;Feature components - target classificiation, spectral characteristics, radar cross-section etc.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Measurements or observations&lt;/em&gt;&lt;/strong&gt; are noise-corrupted quantities which are related to the state of a target, such as&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Direct estimate of position (GPS)&lt;/li&gt;
+&lt;li&gt;Range and azimuth(bearing) from the sensor (radar, cameras)&lt;/li&gt;
+&lt;li&gt;Range rate (radar)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The observations are not raw data sequences but usually the output of a complex signal processing subsystem.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-tracking-system-components&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/information.png&#34; data-caption=&#34;Tracking system components.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/information.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Tracking system components.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Coordinate systems</title>
+      <link>https://dimidagd.github.io/courses/example/coordinate_systems/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dimidagd.github.io/courses/example/coordinate_systems/</guid>
+      <description>&lt;!-- TOC --&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#earth-coordinate-systems&#34;&gt;Earth coordinate systems&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#geodetic-coordinates&#34;&gt;Geodetic coordinates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#local-tangential---enu&#34;&gt;Local-tangential - ENU&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#earth-centered-earth-fixed-ecef&#34;&gt;Earth Centered Earth-fixed (ECEF)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#transformations&#34;&gt;Transformations&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#geodetic-to-ecef&#34;&gt;Geodetic to ECEF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ecef-to-enu&#34;&gt;ECEF to ENU&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ship-coordinate-systems&#34;&gt;Ship coordinate systems&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#body-fixed-coordinate-system&#34;&gt;Body fixed coordinate system&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#seakeeping-coordinate-system&#34;&gt;Seakeeping coordinate system&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tracking-coordinates-system&#34;&gt;Tracking coordinates system&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#purpose-of-using-different-coordinate-systems&#34;&gt;Purpose of using different coordinate systems&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#transformations-1&#34;&gt;Transformations&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#from-enu-to-tracking-coordinates&#34;&gt;From ENU to tracking coordinates&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#purpose-of-using-different-coordinate-systems-1&#34;&gt;Purpose of using different coordinate systems&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /TOC --&gt;
+
+&lt;h1 id=&#34;earth-coordinate-systems&#34;&gt;Earth coordinate systems&lt;/h1&gt;
+
+&lt;p&gt;When defining the configuration space, four coordinate systems are usually involved in &lt;em&gt;target tracking&lt;/em&gt; algorithms.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Geodetic&lt;/li&gt;
+&lt;li&gt;Local-tangential East-North-Up (ENU)&lt;/li&gt;
+&lt;li&gt;Earth-Centered Earth-fixed (ECEF)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The transformations between the systems exist and are non-linear.&lt;/p&gt;
+
+&lt;h4 id=&#34;geodetic-coordinates&#34;&gt;Geodetic coordinates&lt;/h4&gt;
+
+&lt;p&gt;The earth&#39;s surface is approximated by an ellipsoid of revolution of known parameters. The parameters depend on the datum of choice. In the scope of this chapter, the selected datum is the &lt;strong&gt;&lt;em&gt;WGS 84&lt;/em&gt;&lt;/strong&gt;. Locations near the surface are described in terms of latitude, longitude, and height $(\phi, \lambda, h)^T$.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-geodetic-coordinate-system&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/geodetic.png&#34; data-caption=&#34;Geodetic coordinate system&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/geodetic.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Geodetic coordinate system
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h4 id=&#34;localtangential--enu&#34;&gt;Local-tangential - ENU&lt;/h4&gt;
+
+&lt;p&gt;The local tangential plane coordinates, are based on the local &lt;em&gt;vertical direction&lt;/em&gt; and the earth&#39;s axis of rotation.&lt;/p&gt;
+
+&lt;p&gt;Two variants exist, the selection of which is a matter of convention but leads to slightly different state vectors in tracking applications.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;East, North, Up (&lt;strong&gt;&lt;em&gt;ENU&lt;/em&gt;&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;North, East, Down (&lt;strong&gt;&lt;em&gt;NED&lt;/em&gt;&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The local-tangential &lt;strong&gt;&lt;em&gt;east-north-up&lt;/em&gt;&lt;/strong&gt;  plane is the rectangular coordinate system determined by &lt;em&gt;fitting a tangential plane&lt;/em&gt; to the surface of the earth at some reference point $[X_0,Y_0,Z_0]$. The reference point is the origin of the frame.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Such a system is convenient in the context of tracking nearby ships because the tracking problem can be reduced to tracking a target on a two-dimensional plane&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;earth-centered-earthfixed-ecef&#34;&gt;Earth Centered Earth-fixed (ECEF)&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;ECEF&lt;/strong&gt; is a &lt;em&gt;cartesian coordinate system&lt;/em&gt; $[X,Y,Z]^T$ with its origin placed at the earth&#39;s &lt;em&gt;center of mass&lt;/em&gt;, hence the naming convention. It is a rotating system as the &lt;em&gt;z-axis&lt;/em&gt; is pointing through &lt;em&gt;true north&lt;/em&gt; and the x-axis intersects the earth&#39;s sphere at $[\phi,\lambda]^{T} =  [0,0]^{T}$.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-ecef-and-enu-systems&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/ECEF_ENU.png&#34; data-caption=&#34;ECEF and ENU systems&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/ECEF_ENU.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    ECEF and ENU systems
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;transformations&#34;&gt;Transformations&lt;/h2&gt;
+
+&lt;p&gt;There is a need to define transformations between different coordinate systems.&lt;/p&gt;
+
+&lt;h4 id=&#34;geodetic-to-ecef&#34;&gt;Geodetic to ECEF&lt;/h4&gt;
+
+&lt;p&gt;GPS measurements usually arrive in &lt;strong&gt;&lt;em&gt;geodetic&lt;/em&gt;&lt;/strong&gt; coordinates, where as tracking is usually performed in the &lt;strong&gt;&lt;em&gt;local tangential&lt;/em&gt;&lt;/strong&gt; plane of the own-ship.&lt;/p&gt;
+
+&lt;p&gt;The transformation between these two systems requires an intermediate transformation from &lt;strong&gt;&lt;em&gt;geodetic&lt;/em&gt;&lt;/strong&gt; $(\phi,\lambda,h)$ to &lt;strong&gt;&lt;em&gt;ECEF&lt;/em&gt;&lt;/strong&gt;   $(X,Y,Z)$ coordinates.&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\begin{align*}
+X &amp;=(N+h)cos\lambda cos\phi \\
+Y &amp;= (N+h)cos\lambda sin\phi \\
+Z &amp;= [N(1-e^2)+h] sin\lambda
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;ecef-to-enu&#34;&gt;ECEF to ENU&lt;/h4&gt;
+
+&lt;p&gt;Given a reference point in Geodetic $[\phi_0,\lambda_0]$ and the corresponding ECEF $[X_0,Y_0,Z_0]$ coordinates, then any other point&#39;s ECEF coordinates $[X,Y,Z]$ can be converted to local tangential plane coordinates $[x,y,z]$ using the following transformation&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{bmatrix}
+x\\
+y\\
+z
+\end{bmatrix}= \mathcal{L}\left(\begin{bmatrix}
+X\\
+Y\\
+Z
+\end{bmatrix} - \begin{bmatrix}
+X_0\\
+Y_0\\
+Z_0
+\end{bmatrix}\right)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $\mathcal{L}$ is a function of the reference point $[\phi_0,\lambda_0,h_0]$&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\mathcal{L} = \begin{bmatrix}
+-sin\phi_0  &amp; cos\phi_0 &amp; 0 \\
+-sin\lambda_0cos\phi_0 &amp; -sin\lambda_0sin\phi_0 &amp; cos\lambda_0\\
+cos\lambda_0 cos\phi_0 &amp; cos\lambda_0 sin\phi_0 &amp; sin\lambda_0
+\end{bmatrix}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;ship-coordinate-systems&#34;&gt;Ship coordinate systems&lt;/h1&gt;
+
+&lt;p&gt;To describe the position and orientation of a ship, one can use the following orthogonal coordinate systems:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;NED/ENU, $\{n\} , \{e\}$&lt;/li&gt;
+&lt;li&gt;Body-fixed, $\{b\}$&lt;/li&gt;
+&lt;li&gt;Seakeeping, $\{s\}$&lt;/li&gt;
+&lt;li&gt;Tracking coordinates, $\{t\}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-body-fixed-sea-keeping-and-ned-systems&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/seakeeping_body.jpg&#34; data-caption=&#34;Body fixed sea-keeping and NED systems&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/seakeeping_body.jpg&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Body fixed sea-keeping and NED systems
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+src: [&lt;a href=&#34;https://www.researchgate.net/publication/41719906_Kinematic_Models_for_Manoeuvring_and_Seakeeping_of_Marine_Vessels&#34;&gt;Kinematic Models for Manoeuvring and Seakeeping of Marine Vessels&lt;/a&gt;]&lt;/p&gt;
+
+&lt;h4 id=&#34;body-fixed-coordinate-system&#34;&gt;Body fixed coordinate system&lt;/h4&gt;
+
+&lt;p&gt;This system is fixed to the hull of a vessel. The x-axis pointing towards the bow, y-axis point starboard and z-axis pointing downwards completing the orthogonal system. The origin of the system is usually the origin of the principal axes of inertia, which simplifies the solution of the dynamical equations of motion for the body.&lt;/p&gt;
+
+&lt;h4 id=&#34;seakeeping-coordinate-system&#34;&gt;Seakeeping coordinate system&lt;/h4&gt;
+
+&lt;p&gt;The &lt;strong&gt;&lt;em&gt;seakeeping&lt;/em&gt;&lt;/strong&gt; frame follows the average speed of the vessel. As such, the system is fixed to the ship&#39;s &lt;em&gt;equilibrium&lt;/em&gt; state, which is defined by the average speed and heading. The positive x-axis is pointing towards the forward velocity vector, the y-axis pointing starboard and the z-axis pointing down. The origin of the system is selected so that the z-axis is pointing through its mean center of mass, and the x-y plane coincides with the mean free water surface.&lt;/p&gt;
+
+&lt;h4 id=&#34;tracking-coordinates-system&#34;&gt;Tracking coordinates system&lt;/h4&gt;
+
+&lt;p&gt;For the shake of simplicity, one can define the tracking coordinates system $\{t\}$. The origin of the tracking system coincides with the origin of the seakeeping coordinate system of the own-ship. The x-axis is pointing in the heading direction of the own-ship, the y-axis is pointing port, and the z-axis up to complete a dextral orthogonal system. The x-y axes are always coplanar to the East North plane and since this is an &lt;strong&gt;&lt;em&gt;equilibrium coordinate system&lt;/em&gt;&lt;/strong&gt;, the coordinates of a tracked target in this system do not depend on the roll or pitch angles of the own-ship. Thus the configuration space for the tracking problem is reduced in tracking along two dimensions.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-enu-and-own-ship-tracking-coordinates&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/coords.png&#34; data-caption=&#34;ENU and own-ship tracking coordinates&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/coords.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    ENU and own-ship tracking coordinates
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;purpose-of-using-different-coordinate-systems&#34;&gt;Purpose of using different coordinate systems&lt;/h3&gt;
+
+&lt;p&gt;Both the motion and the measurement model equations depend on the coordinate system of choice. Sensor measurements from a radar usually arrive in the sensor&#39;s local spherical system, where as the GPS measurements either for the own-ship or for other vessels arrive in the geodetic system. It is convenient to consider that all floating targets move on the same plane, thus to express a target&#39;s motion model w.r.t the own-ship&#39;s local tangential plane.&lt;/p&gt;
+
+&lt;p&gt;Since the local sensors like the radar and the cameras are rigidly attached to the body-frame, it is important to consider the transformations from the body coordinate system to the own-ship&#39;s equilibrium coordinate system.&lt;/p&gt;
+
+&lt;!--
+
+This frame is the local-tangential frame rotated around the z-axis so that the x-axis is aligned with the own-ships heading direction from the true north $h_{self_{true}}$. This frame in case of a non rolling-pitching vessel coincides with the body-fixed frame. This is also called the sea-keeping frame because the vessel is assumed to move along the direction of its average velocity. Since this system is rotating along the vessel&#39;s heading direction and so do the local sensors, it is convenient to use for tracking purposes.
+--&gt;
+
+&lt;h3 id=&#34;transformations-1&#34;&gt;Transformations&lt;/h3&gt;
+
+&lt;h4 id=&#34;from-enu-to-tracking-coordinates&#34;&gt;From ENU to tracking coordinates&lt;/h4&gt;
+
+&lt;p&gt;If the origin of the ENU system is selected to coincide with the origin of the own-ship&#39;s tracking coordinates origin, and $\psi$ is the heading angle of the own-ship from the North direction, then the transformation from ENU, to the own-ship&#39;s tracking coordinates is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\begin{bmatrix}
+x \\
+y \\
+z
+\end{bmatrix}_{\text{{t}}} = R_{z}(\frac{\pi}{2}-\psi)
+\begin{bmatrix}
+E \\
+N \\
+U
+\end{bmatrix}_{\text{{e}}}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+R_{z}(\theta)=\begin{bmatrix}
+cos\theta &amp;-sin\theta &amp;0\\
+sin\theta &amp;cos\theta &amp;0 \\
+0 &amp;0 &amp;1
+\end{bmatrix}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;purpose-of-using-different-coordinate-systems-1&#34;&gt;Purpose of using different coordinate systems&lt;/h2&gt;
+
+&lt;p&gt;Both the &lt;em&gt;motion&lt;/em&gt; and the &lt;em&gt;measurement&lt;/em&gt; model equations depend on the coordinate system of choice.&lt;/p&gt;
+
+&lt;p&gt;Sensor measurements from a radar usually arrive in the local tangential system, where as the GPS measurements either for the own-ship or for other vessels arrive in the geodetic system.&lt;/p&gt;
+
+&lt;p&gt;It is convenient thus to express a &lt;strong&gt;&lt;em&gt;target&#39;s motion model&lt;/em&gt;&lt;/strong&gt; w.r.t the &lt;strong&gt;&lt;em&gt;local tangential &amp;amp; body fixed frame&lt;/em&gt;&lt;/strong&gt;, since the local sensors like the radar and the cameras are rigidly attached to the body-frame.&lt;/p&gt;
+
+&lt;p&gt;This simplifies the measurement models for local sensors, nevertheless working in the local tangential plane induces errors when one has to use models that depend on the &lt;strong&gt;&lt;em&gt;earth&#39;s curvature&lt;/em&gt;&lt;/strong&gt; like the &lt;strong&gt;AIS&lt;/strong&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Motion models</title>
+      <link>https://dimidagd.github.io/courses/example/motion_models/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/courses/example/motion_models/</guid>
+      <description>&lt;p&gt;When choosing a coordinate system for the target motion model, it is very convenient to assume the target&#39;s state on a the own-ship&#39;s two dimensional tracking plane.&lt;/p&gt;
+
+&lt;p&gt;The motion models proposed in literature are numerous. Trying to keep the complexity low, &lt;em&gt;linear motion&lt;/em&gt; models assume a constant velocity(CV) or constant acceleration (CA). These models have the advantage that the state transition equation is linear. Unfortunately they assume straight motions and are thus unable to capture rotational motion. If one introduces the angular speed of the target as well, the resulting models are referred to as &lt;em&gt;curvilinear&lt;/em&gt; models.&lt;/p&gt;
+
+&lt;h2 id=&#34;tracking-coordinates&#34;&gt;Tracking coordinates&lt;/h2&gt;
+
+&lt;p&gt;Tracking objects in the two dimensional equilibrium tracking frame is a fair assumption at sea since all  targets in the vicinity of the own-ship are floating, and thus assuming their motion on a plane is a fair approximation as long as the distance between the tracked target and the own-ship is not large enough for the earth&#39;s curvature to induce approximation errors. The model&#39;s fidelity using the tracking coordinates is a topic of debate. In the context of sensor fusion and local situational awareness, the on-board sensors used on a ship operate within a range limit that should --- at least intuitively --- ratify the tangential plane approximation.&lt;/p&gt;
+
+&lt;p&gt;When it comes to situational awareness in a more global context, i.e. tracking targets across the Atlantic, one could argue that there is no sense in applying sensor fusion since the targets are observable solely through GPS measurements.&lt;/p&gt;
+
+&lt;h3 id=&#34;continuous-constant-turn-rate-and-velocity-ctrv-model&#34;&gt;Continuous constant turn rate and velocity (CTRV) model&lt;/h3&gt;
+
+&lt;p&gt;Starting with a time continuous model&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\dot{\mathbf{x}}(t) = f(\mathbf{x}(t)) + w(t)\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;then assuming that the linear velocity &lt;span  class=&#34;math&#34;&gt;\(\upsilon\)&lt;/span&gt; and the turn rate &lt;span  class=&#34;math&#34;&gt;\(\omega\)&lt;/span&gt; remain constant  --- which is a fair assumption for a moving vessel --- the non-linear dynamics are&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[f = \begin{bmatrix}\upsilon cos(h) \\ \upsilon sin(h) \\ 0 \\ \omega \\ 0  \end{bmatrix}^{T}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;which is describing  constant turn rate and velocity(CTRV)model.&lt;/p&gt;
+
+&lt;h3 id=&#34;discretisation-of-the-ctrv-motion-model&#34;&gt;Discretisation of the CTRV motion model&lt;/h3&gt;
+
+&lt;p&gt;Since the system is simulated in discrete time, one can integrate the motion model within a sample time &lt;span  class=&#34;math&#34;&gt;\(T\)&lt;/span&gt; and obtain exactly&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\mathbf{x}(t+T) = \mathbf{x}(t) + \int_{t}^{t+T}(f(\mathbf{x}(\tau)+w(\tau) )d\tau
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;and hence the discrete update model by ignoring the noise is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+ \mathbf{x}(t+T) = g\left(\mathbf{x}(t)\right)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
+\frac{2\upsilon}{\omega}sin(\omega T)cos(h + \frac{\omega T}{2})\\
+-\frac{2\upsilon}{\omega}sin(\omega T)cos(h + \frac{\omega T}{2})\\
+0 \\
+\omega T \\
+0
+\end{bmatrix} , \omega \neq 0
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
+\upsilon T cos(h)\\
+\upsilon T sin(h)\\
+0 \\
+0 \\
+0
+\end{bmatrix} ,  \omega = 0
+\]&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sensors</title>
+      <link>https://dimidagd.github.io/courses/example/sensors/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/courses/example/sensors/</guid>
+      <description>&lt;h1 id=&#34;observation-models&#34;&gt;Observation models&lt;/h1&gt;
+
+&lt;p&gt;An observation model $z_k = h(\mathbf{x_k}) + w_k$ expresses a sensor&#39;s observations $z_k$ at time instances &lt;span  class=&#34;math&#34;&gt;\(t_k\)&lt;/span&gt; given the state vector $\mathbf{x}$ . $w_k$ is assumed to be white gaussian noise with covariance matrix that depends on the specific sensor. The selection of the state vector $\mathbf{x}$ can lead to linear or nonlinear observation models.&lt;/p&gt;
+
+&lt;h4 id=&#34;radar-observation-model&#34;&gt;Radar observation model&lt;/h4&gt;
+
+&lt;p&gt;The radar observation model includes calculating the distance and bearing from the own-ship to the target in polar form $z_{radar} = \begin{bmatrix}
+\rho,
+\theta
+\end{bmatrix}^{T}$ , given the target&#39;s position $\begin{bmatrix}x_t, y_t\end{bmatrix}^{T}$ w.r.t the sensor&#39;s coordinate frame. If the radar&#39;s coordinate system, is for simplicity  chosen to &lt;strong&gt;&lt;em&gt;coincide with the tracking coordinate system&lt;/em&gt;&lt;/strong&gt;, then the radar observation model can be expressed as:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[ z_{radar}(\mathbf{x}) = \begin{bmatrix}
+\rho \\
+\theta
+\end{bmatrix} = \begin{bmatrix}
+\sqrt{x^2 + y^2} \\
+arctan(\frac{x}{y})
+\end{bmatrix} + w_{radar}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where the measurement noise &lt;span  class=&#34;math&#34;&gt;\(w\)&lt;/span&gt; is assumed to be white, zero-mean Gaussian with covariance $R_{radar} = \text{diag}\left[\sigma^2_{\rho}, \sigma^2_{\theta}\right] $&lt;/p&gt;
+
+&lt;p&gt;A reasonable sizing of the noise variances can be&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$\sigma^2_\rho = 10 \textit{m}$&lt;/li&gt;
+&lt;li&gt;$\sigma^2_\theta = 3 \frac{\pi}{180} [rad] $&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;gps-observation-model&#34;&gt;GPS observation model&lt;/h4&gt;
+
+&lt;p&gt;The GPS observation model calculates the target&#39;s relative position &lt;span  class=&#34;math&#34;&gt;\(\begin{bmatrix}x, y\end{bmatrix}^{T} \)&lt;/span&gt; w.r.t the own-ship tangential coordinate frame given&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The own-ship&#39;s geodetic coordinates $\begin{bmatrix}\phi_{0}, \lambda_{0} \end{bmatrix}^{T}$&lt;/li&gt;
+&lt;li&gt;The own-ships sea-keeping heading angle from true north $h_{0_{\textit{TN}}}$&lt;/li&gt;
+&lt;li&gt;The target&#39;s measured geodetic coordinates $\begin{bmatrix}\phi, \lambda\end{bmatrix}^{T}$ which is usually available at sea through the Automatic Identification System.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+z_{GPS}(\mathbf{x},\begin{bmatrix}\phi_{0}, \lambda_{0}, h_{0_{\textit{TN}}} \end{bmatrix}^{T}) = \begin{bmatrix}
+x \\\\
+y
+\end{bmatrix}_{GPS} = \begin{bmatrix}
+x \\\\
+y
+\end{bmatrix} + w_{GPS}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The fact that the geodetic coordinates and the heading to true north of the self-vehicle is not included in the state-space representation leads to a linear measurement system, as the measurements are pre-transformed into the local-tangential plane w.r.t the self-vehicles heading direction and the noise is added on the the post-transformed measurements.&lt;/p&gt;
+
+&lt;p&gt;The AIS measurements can be transformed into local-tangential vessel coordinates by using the aforementioned transformations.&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{bmatrix}
+x \\\\
+y
+\end{bmatrix}_{\text{local tangential}} = R_z(\frac{\pi}{2}-h_{0_{\textit{TN}}}) \cdot F_1\left(F_2(\begin{bmatrix}
+\phi \\\\
+\lambda
+\end{bmatrix}),\begin{bmatrix}
+\phi_0 \\\\ \lambda_0
+\end{bmatrix}\right)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Where&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(F_1\left( \begin{bmatrix}
+X \\
+Y \\
+Z
+\end{bmatrix}_{ECEF},\begin{bmatrix}
+\phi_0 \\
+\lambda_0
+\end{bmatrix}\right)\)&lt;/span&gt; is the transformation from ECEF to ENU, given the geodetic coordinates of the own-ship $\begin{bmatrix}
+\phi_0,
+\lambda_0
+\end{bmatrix}^T$ as a reference point.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$F_2\left(\begin{bmatrix}
+\phi &lt;br&gt;
+\lambda
+\end{bmatrix}\right)$ is the transformation from geodetic to ECEF coordinates&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$R_z(\theta)$ is the transformation from ENU to sea-keeping frame.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;ais-observation-model&#34;&gt;AIS observation model&lt;/h4&gt;
+
+&lt;p&gt;An alternative method to using the aforementioned GPS model is to leverage the fact that the tracked targets are in the viscinity of the own-vehicle, and thus small differences in geodetical coordinates can be linearly mapped to ENU differences and the other way around.
+x
+[&lt;a href=&#34;https://en.wikipedia.org/wiki/Geographic_coordinate_conversion&#34;&gt;src:&amp;quot;Wikipedia:Geographic coordinate conversion&amp;quot;&lt;/a&gt;]&lt;/p&gt;
+
+&lt;p&gt;By differentiating the model mentioned in the Coordinate systems section, one can confirm that for given own-ship geodetic coordinates $(\phi,\lambda)_{\textit{own-ship}}$&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{bmatrix}
+dE\\dN\\dU
+\end{bmatrix}=
+\begin{bmatrix}
+(N(\phi)+h)\cos\phi &amp;0 &amp;0\\
+0 &amp;M(\phi) + h &amp;0\\
+0 &amp;0 &amp;1
+\end{bmatrix}
+\begin{bmatrix}
+d\lambda\\d\phi\\dh
+\end{bmatrix}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Which can be solved for&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{bmatrix}
+d\lambda\\ d\phi
+\end{bmatrix}=
+\mathbf{T}(\phi)^{-1}
+\begin{bmatrix}
+dE\\ dN
+\end{bmatrix}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Since the target&#39;s state is in the &lt;em&gt;sea-keeping&lt;/em&gt; frame, one needs to transform it to ENU.&lt;/p&gt;
+
+&lt;p&gt;If $\mathbf{R}_z(h)$ is the Euler&#39;s angle transformation for a rotation $h$ around the z-axis, then the transformation &lt;em&gt;from sea-keeping to ENU&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}} \]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;given the own-ship&#39;s &lt;em&gt;seakeeping heading from true-north&lt;/em&gt; $h_{0_{\textit{TN}}}$
+is ,&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}} = \mathbf{R_{z}}(\frac{\pi}{2}-h_{0_{\textit{TN}}})\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{bmatrix}
+dE\\ dN
+\end{bmatrix}=
+\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}}
+\begin{bmatrix}
+X\\ Y
+\end{bmatrix}_{\textit{target wrt}_{{\textit{sea-keeping}}}}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;and thus, by combining the above equations&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{bmatrix}
+\phi\\ \lambda
+\end{bmatrix}_{\textit{target}}=
+\begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix}_{\textit{own-ship}} + \mathbf{T}(\phi_{0})^{-1}\begin{bmatrix}
+dE\\ dN
+\end{bmatrix} + w_{\textit{AIS}}=\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix}_{\textit{own-ship}} + \mathbf{T}(\phi_{0})^{-1}
+\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}}(h_{0_{\textit{TN}}})
+\begin{bmatrix}
+X_{\textit{target}}\\ Y_{\textit{target}}
+\end{bmatrix}_{\textit{wrt}_{{\textit{sea-keeping}}}}+w_{\textit{AIS}}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Where&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(\mathbf{T}(\phi)=
+\begin{bmatrix}
+N(\phi)\cos\phi &amp;0\\
+0 &amp;M(\phi)
+\end{bmatrix}
+\)&lt;/span&gt; is the transformation matrix from geodetic differences to ENU differences.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(N(\phi) = \frac{\alpha}{\sqrt{1-e^2\sin^2\phi}}\)&lt;/span&gt; is the &lt;em&gt;prime vertical radius of curvature&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(M(\phi) = \frac{\alpha(1-e^2)}{(1-e^2\sin^2\phi)^\frac{3}{2}}\)&lt;/span&gt; is the &lt;em&gt;meridional radius of curvature&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(\alpha,\beta \)&lt;/span&gt; are the equitorial radius(6378.1370 km) and the Polar radius(6356.7523 km) respectively, as derived from the &lt;strong&gt;&lt;em&gt;WGS-84&lt;/em&gt;&lt;/strong&gt; ellipsoid model.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(e = \sqrt{1 -\frac{b^2}{a^2}}\)&lt;/span&gt; is the ellipsoid&#39;s eccentricity.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(h = 0 \)&lt;/span&gt; since the own-ship is always floating on the geoid.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\(w_{\textit{AIS}}\)&lt;/span&gt; is white gaussian zero-mean noise with covariance matrix &lt;span  class=&#34;math&#34;&gt;\(\mathbf{R}_{\textit{AIS}}\)&lt;/span&gt; depending on the noise intensity of the AIS source.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The above equation can be rewritten to the standard measurement model formulation&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[ z_{AIS}(\mathbf{x},\begin{bmatrix}\phi_{0}, \lambda_{0}, h_{0_{\textit{TN}}} \end{bmatrix}^{T}) = \begin{bmatrix}
+\phi\\ \lambda
+\end{bmatrix}_{\textit{target}} = \begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix} + \mathbf{H}\mathbf{x} + w_{\textit{AIS}}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;, which is a linear measurement model that is approximating the geoid with a &lt;strong&gt;&lt;em&gt;spherical-linearization&lt;/em&gt;&lt;/strong&gt; about the own-ship&#39;s geodetic location.&lt;/p&gt;
+
+&lt;h4 id=&#34;camera-model&#34;&gt;Camera model&lt;/h4&gt;
+
+&lt;p&gt;Assuming a camera sensor and a pinhole model, with the camera z-axis aligned with the own-ship body frame&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-camera-alignment-with-body-frame&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/camera.png&#34; data-caption=&#34;Camera alignment with body frame&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/camera.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Camera alignment with body frame
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;A top-view of the pinhole model seen in the figure below&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-pinhole-model-top-view&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/camera_pinhole.png&#34; data-caption=&#34;Pinhole model top-view&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/camera_pinhole.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Pinhole model top-view
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Then the measurement model for the predicted pixel location of a target obtained from a deep neural-network classifier and localiser along the y-axis is found by the projecting a point in homogeneous coordinates&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[x_{\text{wrt}_{\text{sea keeping}}} =\begin{bmatrix}x, y, 0, 1\end{bmatrix}^T\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;to the finite camera frame given measured information $z_{gyro}$ about the rotational state of the &lt;em&gt;own-ship w.r.t the sea-keeping frame&lt;/em&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+z_{\textit{cam}_{\textit{px}}}(\mathbf{x},z_{\textit{gyro}}) = \frac{\begin{bmatrix}-P_1-\\-P_2-\end{bmatrix}\mathbf{x}}{
+\begin{bmatrix}
+-P_3-
+\end{bmatrix}
+\mathbf{x}}+ w_{\text{camera}}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Where $\mathbf{P}$ is the projection matrix and $P_{i}$ it&#39;s rows&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[ \mathbf{P} = \begin{bmatrix}-P_1- \\-P_2-\\-P_3- \end{bmatrix} = \mathbf{K}\mathbf{\mathbf{R}_{\textit{own-ship}}^{\textit{camera}}}[\mathbf{I} | \mathbf{-C}]
+\begin{bmatrix}
+\mathbf{\mathbf{R}_{\textit{sea-keeping}}^{\textit{own-ship}}} &amp;\mathbf{0}\\
+\mathbf{0} &amp;1
+\end{bmatrix}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Because of the denominator this is a non-linear model, and a description of the matrices that comprise the projection matrix &lt;span  class=&#34;math&#34;&gt;\(P\)&lt;/span&gt; is given below:&lt;/p&gt;
+
+&lt;h3 id=&#34;mathbfk&#34;&gt;&lt;span  class=&#34;math&#34;&gt;\(\mathbf{K}\)&lt;/span&gt;&lt;/h3&gt;
+
+&lt;p&gt;is the &lt;strong&gt;&lt;em&gt;intrinsic camera calibration&lt;/em&gt;&lt;/strong&gt; matrix&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mathbf{K} = \begin{bmatrix}f m_x &amp;0 &amp;p_x \\
+  0 &amp;f m_y &amp;p_y \\
+  0 &amp;0 &amp;1
+  \end{bmatrix} \]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;with&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;span  class=&#34;math&#34;&gt;\(f\)&lt;/span&gt; is the intrinsic camera calibration parameter, focal length in mm&lt;/li&gt;
+&lt;li&gt;&lt;span  class=&#34;math&#34;&gt;\(m_x, m_y\)&lt;/span&gt; are the camera&#39;s sensor pixel density in &lt;span  class=&#34;math&#34;&gt;\(\frac{\text{number of pixels}}{mm}\)&lt;/span&gt; across the two different directions of the image plane.&lt;/li&gt;
+&lt;li&gt;&lt;span  class=&#34;math&#34;&gt;\(p_x,p_y\)&lt;/span&gt; correspond to the position of the principal point of the image in &lt;em&gt;pixel coordinates&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span  class=&#34;math&#34;&gt;\(w_{\textit{camera}}\)&lt;/span&gt; is white gaussian zero mean noise with variance related to the classifier accuracy, or any calibration errors in the extrinsic and intrinsic camera matrices.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;mathbfrtextitownshiptextitcamera&#34;&gt;$\mathbf{R}_{\textit{own-ship}}^{\textit{camera}}$&lt;/h3&gt;
+
+&lt;p&gt;is the &lt;strong&gt;&lt;em&gt;extrinsic camera rotation&lt;/em&gt;&lt;/strong&gt; matrix that describes the &lt;em&gt;orientation of the camera frame&lt;/em&gt; w.r.t. the &lt;em&gt;own-ship&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;mathbfc&#34;&gt;$\mathbf{C}$&lt;/h3&gt;
+
+&lt;p&gt;is the  &lt;strong&gt;&lt;em&gt;extrinsic origin of the camera frame&lt;/em&gt;&lt;/strong&gt; w.r.t. the &lt;em&gt;own-ship&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;mathbfrtextitseakeepingtextitownship&#34;&gt;$\mathbf{R}_{\textit{sea-keeping}}^{\textit{own-ship}}$&lt;/h3&gt;
+
+&lt;p&gt;Is the transformation matrix that corresponds to the &lt;strong&gt;&lt;em&gt;roll-pitch&lt;/em&gt;&lt;/strong&gt; rotation of the &lt;strong&gt;&lt;em&gt;own-ship&lt;/em&gt;&lt;/strong&gt; w.r.t the &lt;strong&gt;&lt;em&gt;sea-keeping&lt;/em&gt;&lt;/strong&gt; frame. Please note that the order of the rotations matters.&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\mathbf{R}_{\textit{sea-keeping}}^{\textit{own-ship}}=\left( R_{\textit{pitch}} R_{\textit{roll}}\right)^T
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;span  class=&#34;math&#34;&gt;\(R_{\textit{pitch}},R_{\textit{roll}}\)&lt;/span&gt; are the standard rotation matrices for Euler&#39;s angles $z_{\textit{gyro}}=(\alpha,\beta)^T = (\textit{roll},\textit{pitch})^T$.&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+  R_{\textit{roll}}= R_x(\alpha) =
+  \begin{bmatrix}
+  1 &amp;0 &amp;0\\
+  0 &amp;\cos\alpha &amp;-\sin \alpha\\
+  0 &amp;\sin \alpha &amp;\cos \alpha
+  \end{bmatrix}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;and&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+  R_{\textit{pitch}}= R_y(\beta) =
+  \begin{bmatrix}
+  \cos\beta &amp;0 &amp;\sin \beta\\
+  0 &amp;1 &amp;0\\
+  -\sin \beta &amp;0 &amp;\cos\beta
+  \end{bmatrix}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;A basic assumption at that point, is that the own-ship is able to measure the angles $(\alpha,\beta)$ of the &lt;em&gt;own-ship body frame&lt;/em&gt; w.r.t the &lt;em&gt;sea-keeping frame&lt;/em&gt;. These angles are usually available on a ship by using one or multiple &lt;strong&gt;&lt;em&gt;gyroscope sensors&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
