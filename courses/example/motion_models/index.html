@@ -28,8 +28,8 @@
   
     
   
-  <meta name="description" content="When choosing a coordinate system for the target motion model, it is very convenient to assume the target&#39;s state on a the own-ship&#39;s two dimensional tracking plane.
-The motion models proposed in literature are numerous. Trying to keep the complexity low, linear motion models assume a constant velocity(CV) or constant acceleration (CA). These models have the advantage that the state transition equation is linear. Unfortunately they assume straight motions and are thus unable to capture rotational motion.">
+  <meta name="description" content="When choosing a coordinate system for the target motion model, it is very convenient to assume the target&rsquo;s state on a the own-ship&rsquo;s two dimensional tracking plane.
+In order to improve the quality the stability and the accuracy of the estimations, the ships are assumed to comply with dynamic motion models. The tracking problem therefore is that of estimating the model&rsquo;s parameters for a target, taking into consideration all available observations from various sensors.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/courses/example/motion_models/">
@@ -273,8 +273,8 @@ The motion models proposed in literature are numerous. Trying to keep the comple
   <meta property="og:site_name" content="/usr">
   <meta property="og:url" content="https://dimidagd.github.io/courses/example/motion_models/">
   <meta property="og:title" content="Motion models | /usr">
-  <meta property="og:description" content="When choosing a coordinate system for the target motion model, it is very convenient to assume the target&#39;s state on a the own-ship&#39;s two dimensional tracking plane.
-The motion models proposed in literature are numerous. Trying to keep the complexity low, linear motion models assume a constant velocity(CV) or constant acceleration (CA). These models have the advantage that the state transition equation is linear. Unfortunately they assume straight motions and are thus unable to capture rotational motion."><meta property="og:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]">
+  <meta property="og:description" content="When choosing a coordinate system for the target motion model, it is very convenient to assume the target&rsquo;s state on a the own-ship&rsquo;s two dimensional tracking plane.
+In order to improve the quality the stability and the accuracy of the estimations, the ships are assumed to comply with dynamic motion models. The tracking problem therefore is that of estimating the model&rsquo;s parameters for a target, taking into consideration all available observations from various sensors."><meta property="og:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]">
   <meta property="twitter:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]"><meta property="og:locale" content="en-us">
   
     
@@ -572,7 +572,20 @@ The motion models proposed in literature are numerous. Trying to keep the comple
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#tracking-coordinates">Tracking coordinates</a>
+          <ul>
+            <li><a href="#continuous-constant-turn-rate-and-velocity-ctrv-model">Continuous constant turn rate and velocity (CTRV) model</a></li>
+            <li><a href="#discretisation-of-the-ctrv-motion-model">Discretisation of the CTRV motion model</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
       
     </div>
@@ -586,65 +599,87 @@ The motion models proposed in literature are numerous. Trying to keep the comple
           <h1>Motion models</h1>
 
           <div class="article-style">
-            <p>When choosing a coordinate system for the target motion model, it is very convenient to assume the target's state on a the own-ship's two dimensional tracking plane.</p>
-
-<p>The motion models proposed in literature are numerous. Trying to keep the complexity low, <em>linear motion</em> models assume a constant velocity(CV) or constant acceleration (CA). These models have the advantage that the state transition equation is linear. Unfortunately they assume straight motions and are thus unable to capture rotational motion. If one introduces the angular speed of the target as well, the resulting models are referred to as <em>curvilinear</em> models.</p>
-
+            <p>When choosing a coordinate system for the target motion model, it is very convenient to assume the target&rsquo;s state on a the own-ship&rsquo;s two dimensional tracking plane.</p>
+<p>In order to improve the quality the stability and the accuracy of the estimations, the ships are assumed to comply with dynamic <em><strong>motion models</strong></em>. The tracking problem therefore is that of estimating the model&rsquo;s parameters for a target, taking into consideration all available observations from various sensors.</p>
+<p>The motion models proposed in literature are numerous. Trying to keep the complexity low, <em>linear motion</em> models assume a constant velocity(CV) or constant acceleration (CA). These models have the advantage that the state transition equation is linear, and thus the state distribution can be optimally propagated. Unfortunately they are limited to straight motions and are thus unable to capture rotations. If one introduces the angular speed of the target around its z-axis as well, the resulting models are referred to as <em>curvilinear</em> models.</p>
 <h2 id="tracking-coordinates">Tracking coordinates</h2>
-
-<p>Tracking objects in the two dimensional equilibrium tracking frame is a fair assumption at sea since all  targets in the vicinity of the own-ship are floating, and thus assuming their motion on a plane is a fair approximation as long as the distance between the tracked target and the own-ship is not large enough for the earth's curvature to induce approximation errors. The model's fidelity using the tracking coordinates is a topic of debate. In the context of sensor fusion and local situational awareness, the on-board sensors used on a ship operate within a range limit that should --- at least intuitively --- ratify the tangential plane approximation.</p>
-
+<p>Tracking objects in the two dimensional equilibrium tracking frame is a fair assumption at sea since all  targets in the vicinity of the own-ship are floating, and thus assuming their motion on a plane is a fair approximation as long as the distance between the tracked target and the own-ship is not large enough for the earth&rsquo;s curvature to induce approximation errors. The model&rsquo;s fidelity using the tracking coordinates is a topic of debate. In the context of sensor fusion and local situational awareness, the on-board sensors used on a ship operate within a range limit that should &mdash; at least intuitively &mdash; ratify the tangential plane approximation.</p>
 <p>When it comes to situational awareness in a more global context, i.e. tracking targets across the Atlantic, one could argue that there is no sense in applying sensor fusion since the targets are observable solely through GPS measurements.</p>
-
 <h3 id="continuous-constant-turn-rate-and-velocity-ctrv-model">Continuous constant turn rate and velocity (CTRV) model</h3>
-
 <p>Starting with a time continuous model</p>
+<p>$$\begin{aligned}\dot{\mathbf{x}}(t) = f(\mathbf{x}(t)) + w(t) &amp;&amp;,\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T}  \end{aligned}$$</p>
+<p>then assuming that the linear velocity $\upsilon$ and the turn rate $\omega$ remain constant  &mdash; which is a fair assumption for a moving vessel &mdash; then the non-linear dynamics are</p>
+<p>$$f =\begin{bmatrix}\dot{x} \\ \dot{y} \\ \dot{\upsilon} \\ \dot{\psi} \\ \dot{\omega}  \end{bmatrix}=  \begin{bmatrix}\upsilon cos(\psi) \\ \upsilon sin(\psi) \\ 0 \\ \omega \\ 0  \end{bmatrix}$$</p>
+<p>which is describing  <em><strong>constant turn rate and velocity</strong></em>(CTRV)model since the derivatives of the <em>linear and angular velocities</em> are zero .</p>
 
-<p><span  class="math">\[\dot{\mathbf{x}}(t) = f(\mathbf{x}(t)) + w(t)\]</span></p>
 
-<p>then assuming that the linear velocity <span  class="math">\(\upsilon\)</span> and the turn rate <span  class="math">\(\omega\)</span> remain constant  --- which is a fair assumption for a moving vessel --- the non-linear dynamics are</p>
 
-<p><span  class="math">\[f = \begin{bmatrix}\upsilon cos(h) \\ \upsilon sin(h) \\ 0 \\ \omega \\ 0  \end{bmatrix}^{T}\]</span></p>
 
-<p>which is describing  constant turn rate and velocity(CTRV)model.</p>
 
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-tracked-target-state-vector-top-view-in-the-own-ships-tracking-coordinate-system">
+
+
+  <a data-fancybox="" href="/thesis/2d_track_state.png" data-caption="Tracked target state vector top view, in the own-ship&rsquo;s tracking coordinate system">
+
+
+  <img src="/thesis/2d_track_state.png" alt="" width="50%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    Tracked target state vector top view, in the own-ship&rsquo;s tracking coordinate system
+  </figcaption>
+
+
+</figure>
+
+<p>
+<a href="http://fusion.isif.org/proceedings/fusion08CD/papers/1569107835.pdf" target="_blank" rel="noopener">[src: Comparison and Evaluation of Advanced
+Motion Models for Vehicle Tracking]</a></p>
 <h3 id="discretisation-of-the-ctrv-motion-model">Discretisation of the CTRV motion model</h3>
-
-<p>Since the system is simulated in discrete time, one can integrate the motion model within a sample time <span  class="math">\(T\)</span> and obtain exactly</p>
-
-<p><span  class="math">\[
-\mathbf{x}(t+T) = \mathbf{x}(t) + \int_{t}^{t+T}(f(\mathbf{x}(\tau)+w(\tau) )d\tau
-\]</span></p>
-
-<p>and hence the discrete update model by ignoring the noise is</p>
-
-<p><span  class="math">\[
- \mathbf{x}(t+T) = g\left(\mathbf{x}(t)\right)
-\]</span></p>
-
-<p>where</p>
-
-<p><span  class="math">\[
-g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
-\frac{2\upsilon}{\omega}sin(\omega T)cos(h + \frac{\omega T}{2})\\
--\frac{2\upsilon}{\omega}sin(\omega T)cos(h + \frac{\omega T}{2})\\
-0 \\
-\omega T \\
+<p>Since the system is simulated in discrete time, one can integrate the motion model within a sample time $T$ and obtain exactly:</p>
+<p>[
+<a href="https://liu.diva-portal.org/smash/get/diva2:734112/FULLTEXT01.pdf" target="_blank" rel="noopener">src:ODE integration</a>]</p>
+<p>$$\begin{aligned}
+\mathbf{x}(t+T) = \mathbf{x}(t) + \int_{t}^{t+T}(f(\mathbf{x}(\tau)+w(\tau) )d\tau &amp;&amp;\text{and}&amp;&amp; f(\mathbf{x(\tau)})=  \begin{bmatrix}\upsilon cos(\psi) \\ \upsilon sin(\psi) \\ 0 \\ \omega \\ 0  \end{bmatrix}\\<br>
+\mathbf{x(\tau)} = \left[x,y,\upsilon, \psi,\omega\right]^{T}
+\end{aligned}$$</p>
+<p>and hence , the discrete update model(ignoring the noise) is</p>
+<p>$$
+\mathbf{x}(t+T) = g\left(\mathbf{x}(t)\right)
+$$</p>
+<p>therefore, the <em><strong>non linear discrete state transition function</strong></em> $g(\mathbf{x}(t)$ by direct integration, for $\mathbf{x}(t) =\left[x,y,\upsilon, \psi,\omega\right]^{T} $,</p>
+<p>$$
+g(\mathbf{x}(t)) = \mathbf{x}(t) +  \begin{bmatrix}
+\frac{2\upsilon}{\omega}sin(\omega T)cos(\psi + \frac{\omega T}{2})\\<br>
+-\frac{2\upsilon}{\omega}sin(\omega T)cos(\psi + \frac{\omega T}{2})\\<br>
+0 \\<br>
+\omega T \\<br>
 0
 \end{bmatrix} , \omega \neq 0
-\]</span></p>
-
+$$</p>
 <p>or</p>
-
-<p><span  class="math">\[
+<p>$$
 g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
-\upsilon T cos(h)\\
-\upsilon T sin(h)\\
-0 \\
-0 \\
+\upsilon T cos(\psi)\\<br>
+\upsilon T sin(\psi)\\<br>
+0 \\<br>
+0 \\<br>
 0
 \end{bmatrix} ,  \omega = 0
-\]</span></p>
+$$</p>
 
           </div>
 
