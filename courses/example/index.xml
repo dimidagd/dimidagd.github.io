@@ -13,6 +13,67 @@
     </image>
     
     <item>
+      <title></title>
+      <link>https://dimidagd.github.io/courses/example/estimation/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/courses/example/estimation/</guid>
+      <description>&lt;h1 id=&#34;the-problem&#34;&gt;The problem&lt;/h1&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-mathematical-view-of-state-estimation&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/SE.png&#34; data-caption=&#34;Mathematical view of state estimation.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/SE.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Mathematical view of state estimation.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;[Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;The generation of information that has the following properties&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Quality (accuracy/reliability) higher than the raw measurements&lt;/li&gt;
+&lt;li&gt;Contains information not directly available in the measurements&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note that in the figure above,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;No access to variables inside the first two blocks&lt;/li&gt;
+&lt;li&gt;The only accessible variable are the measurements which are affected by noise.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;the-estimator&#34;&gt;The estimator&lt;/h1&gt;
+&lt;p&gt;Uses knowledge and processes the measurements to yield an estimate of a variable of interest(state or state uncertainty), while trying to make best use of the available data. In this process it is taking into account the:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;System dynamics&lt;/li&gt;
+&lt;li&gt;Sensor Models&lt;/li&gt;
+&lt;li&gt;Prior information &amp;amp; probabilistic nature of the uncertainties&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>State-space</title>
       <link>https://dimidagd.github.io/courses/example/state_space/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
@@ -85,67 +146,6 @@
 
 &lt;/figure&gt;
 
-</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://dimidagd.github.io/courses/example/estimation/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>https://dimidagd.github.io/courses/example/estimation/</guid>
-      <description>&lt;h1 id=&#34;the-problem&#34;&gt;The problem&lt;/h1&gt;
-&lt;center&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-mathematical-view-of-state-estimation&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/SE.png&#34; data-caption=&#34;Mathematical view of state estimation.&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/SE.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Mathematical view of state estimation.
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-&lt;/center&gt;
-&lt;p&gt;[Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;&lt;strong&gt;The generation of information that has the following properties&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Quality (accuracy/reliability) higher than the raw measurements&lt;/li&gt;
-&lt;li&gt;Contains information not directly available in the measurements&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Note that in the figure above,&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;No access to variables inside the first two blocks&lt;/li&gt;
-&lt;li&gt;The only accessible variable are the measurements which are affected by noise.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;the-estimator&#34;&gt;The estimator&lt;/h1&gt;
-&lt;p&gt;Uses knowledge and processes the measurements to yield an estimate of a variable of interest(state or state uncertainty), while trying to make best use of the available data. In this process it is taking into account the:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;System dynamics&lt;/li&gt;
-&lt;li&gt;Sensor Models&lt;/li&gt;
-&lt;li&gt;Prior information &amp;amp; probabilistic nature of the uncertainties&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
