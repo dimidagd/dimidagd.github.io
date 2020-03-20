@@ -648,6 +648,40 @@ $$&lt;/p&gt;
 \rho,
 \theta
 \end{bmatrix}^{T}$ , given the target&amp;rsquo;s position $\begin{bmatrix}x_t, y_t\end{bmatrix}^{T}$ w.r.t the sensor&amp;rsquo;s coordinate system..&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-radar-alignment-with-the-tracking-frame&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/radar.png&#34; data-caption=&#34;Radar alignment with the tracking frame&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/radar.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Radar alignment with the &lt;em&gt;tracking&lt;/em&gt; frame
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
 &lt;p&gt;If the radar&amp;rsquo;s coordinate system, is for simplicity  chosen to &lt;em&gt;&lt;strong&gt;coincide with the tracking coordinate system&lt;/strong&gt;&lt;/em&gt;, then the radar observation model can be expressed as:&lt;/p&gt;
 &lt;p&gt;$$ z_{radar}(\mathbf{x}) = \begin{bmatrix}
 \rho \\&lt;br&gt;
