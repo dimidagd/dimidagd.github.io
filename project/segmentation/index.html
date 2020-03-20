@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Dimitrios Dagdilelis">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Deep Fully Convolutional Networks for pixel-wise class prediction">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/project/segmentation/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-152056153-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-152056153-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://dimidagd.github.io/project/segmentation/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="/usr">
+  <meta property="og:url" content="https://dimidagd.github.io/project/segmentation/">
+  <meta property="og:title" content="Semantic segmentation | /usr">
+  <meta property="og:description" content="Deep Fully Convolutional Networks for pixel-wise class prediction"><meta property="og:image" content="https://dimidagd.github.io/project/segmentation/featured.png">
+  <meta property="twitter:image" content="https://dimidagd.github.io/project/segmentation/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-12-05T13:34:06&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-12-05T13:34:06&#43;01:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://dimidagd.github.io/project/segmentation/"
+  },
+  "headline": "Semantic segmentation",
+  
+  "image": [
+    "https://dimidagd.github.io/project/segmentation/featured.png"
+  ],
+  
+  "datePublished": "2019-12-05T13:34:06+01:00",
+  "dateModified": "2019-12-05T13:34:06+01:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Dimitrios Dagdilelis"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "/usr",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://dimidagd.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Deep Fully Convolutional Networks for pixel-wise class prediction"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Semantic segmentation | /usr</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">/usr</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">/usr</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>/Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/thesis/"><span>Thesis</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article article-project">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Semantic segmentation</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Dec 5, 2019
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-links mb-3">
+  
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary my-1 mr-1" href="https://github.com/dimidagd/FCN-pytorch" target="_blank" rel="noopener">
+  Code
+</a>
+
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary my-1 mr-1" href="http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/" target="_blank" rel="noopener">
+  Dataset
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 405px;">
+  <div style="position: relative">
+    <img src="/project/segmentation/featured_hubd23f88acd19b2d2fa62654ec95eb954_213240_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h2 id="driving-scene-image-segmentation-using-fully-convolutional-networks">Driving scene image segmentation using Fully Convolutional Networks</h2>
+<h3 id="motivation">Motivation</h3>
+<p>Self-driving cars are one of the hottest areas of research and business for the tech giants. What seemed like a science-fiction, a few years ago, now seems more like something which is soon to become a part and parcel of life. “soon to be” is because of the fact that even though companies like Tesla, Nissan, Cadillac do have self-driving car assistance software. They still require a human to keep an eye on the road and take control when needed. However, it is fascinating to see how far we have come in terms of innovation and how fast technology is advancing.</p>
+<p>Other applications of semantic segmentation include and definetely not limited to:</p>
+<ul>
+<li>Classification of terrain visible in satellite imagery</li>
+<li>Medical imaging analysis</li>
+<li>Industrial inspection</li>
+</ul>
+<h3 id="background">Background</h3>
+<p>Fully Convolutional Networks <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> provide a solution to the image segmentation task, which is trying to answer to the question of ’where’ is something instead of just ’what’. The FCN complements the CNN architecture by following up the ”downsampling path” with an ”upsampling path”. Upsampling methods can include both learnable and non-learnable parameters.</p>
+<center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-fcn8s-proposed-architecture">
+
+
+  <a data-fancybox="" href="/img/model.png" data-caption="FCN8s proposed architecture">
+
+
+  <img src="/img/model.png" alt="" width="100%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    FCN8s proposed architecture
+  </figcaption>
+
+
+</figure>
+</center>
+<p><em>FCN</em> extends the classic convolutional network pipeline such such that it can be used for full image predictions. The input to an FCN is an <em>RGB</em> image and  its output is a pixelwise classification prediction. The initial layers of the pipeline are similar to a standard CNN architecture where the image is transformed into  a latent representation that includes contextual information but most structural information is lost due to the nature of convolution.</p>
+<ul>
+<li>
+<p>The use of CNN layers in the vanilla FCN architecture is reducing the structural information in the image as data flows through the ”downsampling path”, hence upsampling the low-dimensional information in the ”upsampling path” creates coarse bounding areas around the objects.</p>
+</li>
+<li>
+<p>The proposed architecture is leveraging the available structural information of the convolutional feature maps by forward passing information from their max-pooling layers to the up-sampling layers. Merging feature maps from various resolution levels helps combining context information with spatial information.
+􏰀* The proposed architecture is leveraging transfer learning by initializing the convolutional layers from an accurate pre-trained classification architecture(VGGnet).</p>
+</li>
+<li>
+<p>The convolutional layers can be frozen or trainable. Performance of the architecture has been evaluated for both cases.</p>
+</li>
+<li>
+<p>The architecture enables end-to-end training of the network. We define different models by adding forward passing feature maps from various resolution levels.</p>
+<ul>
+<li><code>FCN32s</code> : The original FCN without max-pooling forward passes.</li>
+<li><code>FCN16s</code> : Forward passing max pooled information from conv4 to the output of upsample6.</li>
+<li><code>FCN8s</code> : Extends FCN16s by upsampling the FCN16s skip connection, then fusing it with the
+max-pooled output of conv3 and applying upsample8.</li>
+<li><code>FCNs</code> : Extends FCN8s by summing the pooled output of conv2 with the FCN8s skip
+connection(not illustrated in Figure 1).
+Figure 1 illustrates the FCN8s architecture, the FCN16s is derived by cutting the skip2, and FCN32s by cutting both skip1 and skip2.</li>
+</ul>
+</li>
+</ul>
+<p>Structural information is being extracted from the pooling layers of the down- sampling path. Then this information is being fused with the up-sampled information by element-wise addition before moving upstream. Batch normalization and dropout layers are being applied to the outputs of every convolution and up-sampling layer. ReLu was used as the activation function.</p>
+<h3 id="dataset">Dataset:</h3>
+<p>Camvid and Cityscape are free available labeled dataset.</p>
+<ol>
+<li>Cambridge-driving Labeled Video Database (CamVid) is a collection of video and images where each pixel is labelled with one of the 32 semantic labels. This dataset contains both fix-perspective videos (CCTV footage) and from a driving automobile. The footage from automobile makes this dataset a suitable choice for this project.</li>
+</ol>
+<center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-camvid-sample-image">
+
+
+  <a data-fancybox="" href="/img/Camvid.jpg" data-caption="CamVid sample image">
+
+
+  <img src="/img/Camvid.jpg" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    CamVid sample image
+  </figcaption>
+
+
+</figure>
+</center>
+<ol start="2">
+<li>Cityscape dataset contains labelled video and images from fix-perspective videos in the streets of different cities. The images are labelled with one of the 32 semantic labels.
+For the project, we would focus on the CamVid dataset recorded from automobile. Fix-perspective videos will not be investigated.</li>
+</ol>
+<center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-cityscapes-ground-truth-sample-image-zurich">
+
+
+  <a data-fancybox="" href="/img/Cityscape_zuric.png" data-caption="Cityscapes ground truth sample image (Zurich)">
+
+
+  <img src="/img/Cityscape_zuric.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    Cityscapes ground truth sample image (Zurich)
+  </figcaption>
+
+
+</figure>
+</center>
+<h3 id="training">Training:</h3>
+<p>Different submodels of the original architecture were tested depending on the resolution of the information extracted from the convolutional layers. Namely FCN32s, FCN16s, FCN8s.</p>
+<h2 id="loss-and-performance-metrics">Loss and performance metrics</h2>
+<p>For the task of image segmentation pixel wise binary cross-entropy loss is used. It examines each pixels individually. Since the target vectors are one out of K encoded (total 32 class labels), the binary cross entropy is calculated using each encoded class and then averaged over all the 32 classes. This makes sure that each pixel is learning equally while training.</p>
+<p>To compare the performance of the FCN, we will consider two measures : pixel accuracy and IoU (Intersection over Union)</p>
+<p>$$\textrm{Pixel accuracy} = \frac{\textrm{No of pixels predicted accurately}}{\textrm{No of pixels}}$$</p>
+<p>$$\textrm{IoU} = \frac{\textrm{Area of Overlap}}{\textrm{Area of Union}}$$</p>
+<center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-from-left-to-right-model-performance-for-fcn32-fcn16-fcn8-ground-truth">
+
+
+  <a data-fancybox="" href="/img/FCNs.png" data-caption="From left to right model performance for, FCN32, FCN16, FCN8, Ground truth">
+
+
+  <img src="/img/FCNs.png" alt=""  >
+</a>
+
+
+  
+  
+  <figcaption>
+    From left to right model performance for, FCN32, FCN16, FCN8, Ground truth
+  </figcaption>
+
+
+</figure>
+</center>
+<center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-best-model-fcn8s-on-average-intersection-over-unioniou-performance">
+
+
+  <a data-fancybox="" href="/img/segmentation_IOU_best.png" data-caption="Best model (FCN8s) on average Intersection over Union(IoU) performance">
+
+
+  <img src="/img/segmentation_IOU_best.png" alt="" width="50%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    Best model (FCN8s) on average Intersection over Union(IoU) performance
+  </figcaption>
+
+
+</figure>
+</center>
+<center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-models-pixel-accuracy-over-epochs-mean-epoch-time-90s-on-a-single-gpu-setup">
+
+
+  <a data-fancybox="" href="/img/segmentation_pixel_accuracy.png" data-caption="Models pixel accuracy over epochs. (mean epoch time 90s on a single GPU setup)">
+
+
+  <img src="/img/segmentation_pixel_accuracy.png" alt="" width="50%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    Models pixel accuracy over epochs. (mean epoch time 90s on a single GPU setup)
+  </figcaption>
+
+
+</figure>
+</center>
+<h2 id="model-predictions">Model predictions</h2>
+<center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-different-model-predictions-">
+
+
+  <a data-fancybox="" href="/img/validation.png" data-caption="Different model predictions.">
+
+
+  <img src="/img/validation.png" alt="" width="100%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    Different model predictions.
+  </figcaption>
+
+
+</figure>
+</center>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>arXiv:1411.4038v2 [cs.CV] 8 Mar 2015 
+<a href="https://arxiv.org/pdf/1411.4038.pdf" title="Fully Convolutional Networks for Semantic Segmentation" target="_blank" rel="noopener">Fully Convolutional Networks for Semantic Segmentation</a>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+
+    
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/mobile-robots/">Mobile-robots</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu9a5bbf0657111f252bed6cd0c360848b_15195_270x270_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://dimidagd.github.io/">Dimitrios Dagdilelis</a></h5>
+      <h6 class="card-subtitle">Pursuing MSc at</h6>
+      <p class="card-text">My research interests include sensor fusion, perception, mapping and estimation in the context of autonomous systems.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    <li>
+      <a href="mailto:dimidagd_at_gmail_dot_com" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/dimidagd/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/dimidagd" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/docs/resume.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/project/ogm/">OGM</a></li>
+      
+      <li><a href="/project/fre/">Field Robot Event 2019</a></li>
+      
+      <li><a href="/project/my-project-name/">Moving object detector</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+    <div class="project-related-pages content-widget-hr">
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+    </div>
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.738eb6c268ee4959345a9f0efc01a6e9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

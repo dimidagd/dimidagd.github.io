@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>aerodynamics | /usr</title>
+    <link>https://dimidagd.github.io/tags/aerodynamics/</link>
+      <atom:link href="https://dimidagd.github.io/tags/aerodynamics/index.xml" rel="self" type="application/rss+xml" />
+    <description>aerodynamics</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0300</lastBuildDate>
+    <image>
+      <url>img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]</url>
+      <title>aerodynamics</title>
+      <link>https://dimidagd.github.io/tags/aerodynamics/</link>
+    </image>
+    
+    <item>
+      <title>Formula car aerodynamics</title>
+      <link>https://dimidagd.github.io/project/external-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0300</pubDate>
+      <guid>https://dimidagd.github.io/project/external-project/</guid>
+      <description>&lt;p&gt;Design and construction of FSAE car aerodynamic elements. Use of computational fluid dynamics and goal driven algorithms to optimize the geometries and setups. Initial geometry was designed in &lt;code&gt;Solidworks&lt;/code&gt; , then a parametric CAD file was created in &lt;code&gt;ANSYS&lt;/code&gt;. Spallart-Allmaras and K-epsilon turbulence models were used for the solver. The optimization algorithm altered variables such as absolute and relative elements pitch and relative and absolute element location and scaling, and tried to maximize the lift to drag ratio. The solver used was ANSYS-Fluent&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/UlE5aqorMjk&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;
+&lt;a href=&#34;http://www.aristurtle.gr&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;Aristurtle&lt;/code&gt;&lt;/a&gt;, is a research student team of the Aristotle University of Thessaloniki. The team’s department is the Department of Electrical and Computer Engineering of Aristotle University and its members are undergraduate students from various scientific fields. These include Electrical and Computer Engineering, Mechanical Engineering, Chemical Engineering, Architecture, Physics and Economics. Working under the pressure of demanding deadlines, the team’s members broaden their academic knowledge, theoretically and practically and gain great experience.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Aristurtle’s&lt;/code&gt; goal is to design and build electric race cars in order to compete in the international Formula Student competitions against universities from all over the world. Preparing towards this goal its members work in a fully structured professional environment. The team’s vision is to contribute to the upgrading of new technologies in the electric automotive field, in Greece and worldwide, by researching and getting in touch with high-level innovative products and pioneering ideas.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/d8xarB_aHxE&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+    </item>
+    
+  </channel>
+</rss>
