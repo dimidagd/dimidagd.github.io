@@ -651,7 +651,7 @@ Radar The radar observation model includes calculating the distance and bearing 
 \theta
 \end{bmatrix} = \begin{bmatrix}
 \sqrt{x^2 + y^2} \\<br>
-arctan(\frac{x}{y})
+arctan(\frac{y}{x})
 \end{bmatrix} + w_{radar}
 $$</p>
 <p>where the observation noise $w$ is commonly assumed to be white, zero-mean Gaussian with covariance $R_{radar} = \text{diag}\left[\sigma^2_{\rho}, \sigma^2_{\theta}\right] $</p>
@@ -661,7 +661,7 @@ $$</p>
 <li>$\sigma^2_\theta = 3 \frac{\pi}{180} [\textit{rad}] $</li>
 </ul>
 <h2 id="gps">GPS</h2>
-<p>A GPS observation model calculates the target&rsquo;s relative position $\begin{bmatrix}x, y\end{bmatrix}^{T} $ w.r.t the own-ship&rsquo;s tracking coordinate system, which is directly a part of the state vector, given the target&rsquo;s state $\mathbf{x}$</p>
+<p>A GPS observation model calculates the target&rsquo;s relative position $\begin{bmatrix}x, y\end{bmatrix}^{T} $ w.r.t the own-ship&rsquo;s tracking coordinate system, which is directly a part of the state vector, given the target&rsquo;s state vector $\mathbf{x}$</p>
 <ul>
 <li>The own-ship&rsquo;s geodetic coordinates $\begin{bmatrix}\phi_{0}, \lambda_{0} \end{bmatrix}^{T}$</li>
 <li>The own-ships sea-keeping heading angle from true north $\psi_{\textit{0}}$</li>
@@ -716,25 +716,34 @@ Z
 </li>
 </ul>
 <h2 id="ais">AIS</h2>
-<p>An alternative method to using the aforementioned GPS model is to leverage the fact that the tracked targets are in the viscinity of the own-vehicle, and thus small differences in geodetical coordinates can be linearly mapped to ENU differences and the other way around.
-x
+<p>An alternative method to using the aforementioned GPS model is to leverage the fact that the tracked targets are in the viscinity of the own-ship, and thus small differences in geodetical coordinates can be linearly mapped to ENU differences and the other way around.</p>
+<p>$$
+\begin{bmatrix}
+\phi\\ \lambda
+\end{bmatrix}_{\text{target}}=
+\begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix}_{\text{own-ship}} + \begin{bmatrix}
+\delta\phi \\ \delta\lambda
+\end{bmatrix} + w_{\textit{AIS}}$$</p>
+<p>x
 [
 <a href="https://en.wikipedia.org/wiki/Geographic_coordinate_conversion" target="_blank" rel="noopener">src:&ldquo;Wikipedia:Geographic coordinate conversion&rdquo;</a>]</p>
-<p>By differentiating the model mentioned in the Coordinate systems section, one can confirm that for given own-ship geodetic coordinates $(\phi,\lambda)_{\textit{own-ship}}$</p>
+<p>By differentiating the model mentioned in the Coordinate systems section, one can confirm that for given own-ship geodetic coordinates $(\phi_0,\lambda_0, h_0)_{\textit{own-ship}}$</p>
 <p>$$
 \begin{bmatrix}
 dE\\dN\\dU
 \end{bmatrix}=
 \begin{bmatrix}
-(N(\phi)+h)\cos\phi &amp;0 &amp;0\\<br>
-0 &amp;M(\phi) + h &amp;0\\<br>
+(N(\phi_0)+h_0)\cos\phi_0 &amp;0 &amp;0\\<br>
+0 &amp;M(\phi_0) + h_0 &amp;0\\<br>
 0 &amp;0 &amp;1
 \end{bmatrix}
 \begin{bmatrix}
 d\lambda\\d\phi\\dh
 \end{bmatrix}
 $$</p>
-<p>Tracking is performed at sea level, thus $h=0$, leading to</p>
+<p><em><strong>Tracking is performed at sea level</strong></em>, thus $h=0$, leading to</p>
 <p>$$
 \begin{bmatrix}
 d\lambda\\ d\phi
@@ -744,10 +753,10 @@ d\lambda\\ d\phi
 dE\\ dN
 \end{bmatrix}
 $$</p>
-<p>Since the target&rsquo;s state is in the *<em><strong>tracking</strong></em> coordinate system, one needs to transform it to ENU.</p>
-<p>If $\mathbf{R}_z(h)$ is the Euler&rsquo;s angle transformation for a rotation $h$ around the z-axis, then the transformation <em>from sea-keeping to ENU</em></p>
+<p>Since the target&rsquo;s state is in the <em><strong>tracking/seakeeping</strong></em> coordinate system, one needs to transform it to ENU.</p>
+<p>If $\mathbf{R}_z(\psi)$ is the Euler&rsquo;s angle transformation for a rotation $\psi$ around the z-axis, then the transformation <em>from sea-keeping/tracking to ENU</em></p>
 <p>$$\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}} $$</p>
-<p>given the own-ship&rsquo;s <em>seakeeping heading from true-north</em> $\psi_{\textit{0}}$
+<p>given the own-ship&rsquo;s <em>heading from true-north</em> $\psi_{\textit{0}}$
 is ,</p>
 <p>$$R_{\textit{sea-keeping}}^{\textit{ENU}} = R_{z}(\frac{\pi}{2}-\psi_{\textit{0}})$$</p>
 <p>$$
@@ -756,9 +765,43 @@ dE\\ dN
 \end{bmatrix}=
 R_{\textit{sea-keeping}}^{\textit{ENU}}
 \begin{bmatrix}
-X\\ Y
-\end{bmatrix}_{\textit{target wrt}_{{\textit{sea-keeping}}}}
+x\\ y
+\end{bmatrix}_{\textit{{t}}}
 $$</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-camera-alignment-with-the-tracking-frame">
+
+
+  <a data-fancybox="" href="/thesis/coords.png" data-caption="Camera alignment with the tracking frame">
+
+
+  <img src="/thesis/coords.png" alt="" width="50%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    Camera alignment with the <em>tracking</em> frame
+  </figcaption>
+
+
+</figure>
+
 <p>and thus, by combining the above equations, one can solve for the observed $[\phi, \lambda]^{T}$,</p>
 <p>$$
 \begin{bmatrix}
@@ -781,12 +824,12 @@ $$</p>
 <p>Where</p>
 <ul>
 <li>
-<p>$$\mathbf{T}(\phi)=
+<p>$\mathbf{T}(\phi)=
 \begin{bmatrix}
 N(\phi)\cos\phi &amp;0\\<br>
 0 &amp;M(\phi)
 \end{bmatrix}
-$$ is the transformation matrix from <em><strong>geodetic differences to ENU differences</strong></em>.</p>
+$ is the transformation matrix from <em><strong>geodetic differences to ENU differences</strong></em>.</p>
 </li>
 <li>
 <p>$N(\phi) = \frac{\alpha}{\sqrt{1-e^2\sin^2\phi}}$ is the <em>prime vertical radius of curvature</em></p>
