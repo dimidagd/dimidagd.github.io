@@ -28,12 +28,14 @@
   
     
   
-  <meta name="description" content="State vector Assuming the target&#39;s motion on the two-dimensional own-ship&#39;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:
- Cartesian velocity model \(\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} \)
- Polar velocity model \(\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} \)
+  <meta name="description" content="State vector Assuming the target&rsquo;s motion on the two-dimensional own-ship&rsquo;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:
+  Cartesian velocity model $$\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} $$
+  Polar velocity model $$\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} $$
   where
-\[ \begin{align*} \upsilon &= \sqrt{\dot{x}^2 &#43; \dot{y}^2} \\\\ \psi &= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\\\ \omega &= \dot{\psi} \end{align*} \]
- $(x,y)$ is the displacement relative to the local self-body fixed coordinate system">
+$$ \begin{align*} \upsilon &amp;= \sqrt{\dot{x}^2 &#43; \dot{y}^2} \\
+\psi &amp;= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\
+\omega &amp;= \dot{\psi} \end{align*} $$
+  $(x,y)$ is the displacement relative to the local self-body fixed coordinate system">
 
   
   <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/thesis/logbook/state_space/">
@@ -277,12 +279,14 @@
   <meta property="og:site_name" content="/usr">
   <meta property="og:url" content="https://dimidagd.github.io/thesis/logbook/state_space/">
   <meta property="og:title" content="State-space | /usr">
-  <meta property="og:description" content="State vector Assuming the target&#39;s motion on the two-dimensional own-ship&#39;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:
- Cartesian velocity model \(\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} \)
- Polar velocity model \(\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} \)
+  <meta property="og:description" content="State vector Assuming the target&rsquo;s motion on the two-dimensional own-ship&rsquo;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:
+  Cartesian velocity model $$\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} $$
+  Polar velocity model $$\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} $$
   where
-\[ \begin{align*} \upsilon &= \sqrt{\dot{x}^2 &#43; \dot{y}^2} \\\\ \psi &= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\\\ \omega &= \dot{\psi} \end{align*} \]
- $(x,y)$ is the displacement relative to the local self-body fixed coordinate system"><meta property="og:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]">
+$$ \begin{align*} \upsilon &amp;= \sqrt{\dot{x}^2 &#43; \dot{y}^2} \\
+\psi &amp;= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\
+\omega &amp;= \dot{\psi} \end{align*} $$
+  $(x,y)$ is the displacement relative to the local self-body fixed coordinate system"><meta property="og:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]">
   <meta property="twitter:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]"><meta property="og:locale" content="en-us">
   
     
@@ -593,7 +597,15 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      
+      <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#state-vector">State vector</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
       
     </div>
@@ -608,39 +620,40 @@
 
           <div class="article-style">
             <h2 id="state-vector">State vector</h2>
-
-<p>Assuming the target's motion on the <strong><em>two-dimensional</em></strong> own-ship's tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:</p>
-
+<p>Assuming the target&rsquo;s motion on the <em><strong>two-dimensional</strong></em> own-ship&rsquo;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:</p>
 <ul>
-<li><p>Cartesian velocity model
-<span  class="math">\(\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} \)</span></p></li>
-
-<li><p>Polar velocity model
-<span  class="math">\(\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} \)</span></p></li>
+<li>
+<p>Cartesian velocity model
+$$\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} $$</p>
+</li>
+<li>
+<p>Polar velocity model
+$$\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} $$</p>
+</li>
 </ul>
-
 <p>where</p>
-
-<p><span  class="math">\[
+<p>$$
 \begin{align*}
-\upsilon &= \sqrt{\dot{x}^2 + \dot{y}^2}  \\\\
-\psi &= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\\\
-\omega &= \dot{\psi}
+\upsilon &amp;= \sqrt{\dot{x}^2 + \dot{y}^2}  \\<br>
+\psi &amp;= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\<br>
+\omega &amp;= \dot{\psi}
 \end{align*}
-\]</span></p>
-
+$$</p>
 <ul>
-<li><p>$(x,y)$ is the displacement relative to the local self-body fixed coordinate system</p></li>
-
-<li><p>$\upsilon$ is the target's linear velocity</p></li>
-
-<li><p>$\psi$ is the heading angle w.r.t the tracking system's x-axis.</p></li>
-
-<li><p>$\omega$ is the turn-rate of the target</p></li>
+<li>
+<p>$(x,y)$ is the displacement relative to the local self-body fixed coordinate system</p>
+</li>
+<li>
+<p>$\upsilon$ is the target&rsquo;s linear velocity</p>
+</li>
+<li>
+<p>$\psi$ is the heading angle w.r.t the tracking system&rsquo;s x-axis.</p>
+</li>
+<li>
+<p>$\omega$ is the turn-rate of the target</p>
+</li>
 </ul>
-
-<p>all expressed w.r.t the own-ship's tracking coordinate system.</p>
-
+<p>all expressed w.r.t the own-ship&rsquo;s tracking coordinate system.</p>
 
 
 

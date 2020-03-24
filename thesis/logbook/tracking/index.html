@@ -587,7 +587,11 @@ The state of a target usually consists of:
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-problem">The problem</a></li>
+  </ul>
+</nav>
 
       
     </div>
@@ -602,27 +606,20 @@ The state of a target usually consists of:
 
           <div class="article-style">
             <h1 id="the-problem">The problem</h1>
-
-<p>Tracking is the <em>processing of measurements</em> or <em>observations</em> obtained from a <em>target</em> in order to maintain an <em>estimate of its current</em> <strong><em>state</em></strong></p>
-
+<p>Tracking is the <em>processing of measurements</em> or <em>observations</em> obtained from a <em>target</em> in order to maintain an <em>estimate of its current</em> <em><strong>state</strong></em></p>
 <p>The state of a target usually consists of:</p>
-
 <ul>
 <li>Kinematics - position, velocity, acceleration , turn rate, etc. expressed  w.r.t a coordinate frame</li>
 <li>Feature components - target classificiation, spectral characteristics, radar cross-section etc.</li>
 </ul>
-
-<p><strong><em>Measurements or observations</em></strong> are noise-corrupted quantities which are related to the state of a target, such as</p>
-
+<p><em><strong>Measurements or observations</strong></em> are noise-corrupted quantities which are related to the state of a target, such as</p>
 <ul>
 <li>Direct estimate of position (GPS)</li>
 <li>Range and azimuth(bearing) from the sensor (radar, cameras)</li>
 <li>Range rate (radar)</li>
 </ul>
-
 <p>The observations are not raw data sequences but usually the output of a complex signal processing subsystem.</p>
-
-<p><center>
+<center>
 
 
 
@@ -655,7 +652,7 @@ The state of a target usually consists of:
 
 
 </figure>
-</center></p>
+</center>
 
           </div>
 

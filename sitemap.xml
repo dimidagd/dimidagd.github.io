@@ -13,27 +13,12 @@
   </url>
   
   <url>
-    <loc>https://dimidagd.github.io/thesis/logbook/motion_models/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://dimidagd.github.io/thesis/logbook/state_space/</loc>
     <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dimidagd.github.io/thesis/logbook/sensors/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://dimidagd.github.io/thesis/logbook/coordinate_systems/</loc>
-  </url>
-  
-  <url>
-    <loc>https://dimidagd.github.io/thesis/logbook/tracking/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   
   <url>
@@ -139,6 +124,21 @@
   <url>
     <loc>https://dimidagd.github.io/project/my-project-name/</loc>
     <lastmod>2019-11-11T19:53:36+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dimidagd.github.io/thesis/logbook/motion_models/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dimidagd.github.io/thesis/logbook/sensors/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://dimidagd.github.io/thesis/logbook/tracking/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
   </url>
   
   <url>
