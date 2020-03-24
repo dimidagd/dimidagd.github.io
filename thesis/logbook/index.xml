@@ -13,82 +13,6 @@
     </image>
     
     <item>
-      <title>State-space</title>
-      <link>https://dimidagd.github.io/thesis/logbook/state_space/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>https://dimidagd.github.io/thesis/logbook/state_space/</guid>
-      <description>&lt;h2 id=&#34;state-vector&#34;&gt;State vector&lt;/h2&gt;
-
-&lt;p&gt;Assuming the target&#39;s motion on the &lt;strong&gt;&lt;em&gt;two-dimensional&lt;/em&gt;&lt;/strong&gt; own-ship&#39;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Cartesian velocity model
-&lt;span  class=&#34;math&#34;&gt;\(\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} \)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Polar velocity model
-&lt;span  class=&#34;math&#34;&gt;\(\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} \)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;where&lt;/p&gt;
-
-&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
-\begin{align*}
-\upsilon &amp;= \sqrt{\dot{x}^2 + \dot{y}^2}  \\\\
-\psi &amp;= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\\\
-\omega &amp;= \dot{\psi}
-\end{align*}
-\]&lt;/span&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;$(x,y)$ is the displacement relative to the local self-body fixed coordinate system&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;$\upsilon$ is the target&#39;s linear velocity&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;$\psi$ is the heading angle w.r.t the tracking system&#39;s x-axis.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;$\omega$ is the turn-rate of the target&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;all expressed w.r.t the own-ship&#39;s tracking coordinate system.&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-tracked-target-state-vector-top-view-in-the-tracking-coordinate-system&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; data-caption=&#34;Tracked target state vector top view, in the tracking coordinate system&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Tracked target state vector top view, in the tracking coordinate system
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-
-</description>
-    </item>
-    
-    <item>
       <title></title>
       <link>https://dimidagd.github.io/thesis/logbook/estimation/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
@@ -235,6 +159,82 @@ g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
 0
 \end{bmatrix} ,  \omega = 0
 $$&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>State-space</title>
+      <link>https://dimidagd.github.io/thesis/logbook/state_space/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/state_space/</guid>
+      <description>&lt;h2 id=&#34;state-vector&#34;&gt;State vector&lt;/h2&gt;
+
+&lt;p&gt;Assuming the target&#39;s motion on the &lt;strong&gt;&lt;em&gt;two-dimensional&lt;/em&gt;&lt;/strong&gt; own-ship&#39;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Cartesian velocity model
+&lt;span  class=&#34;math&#34;&gt;\(\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} \)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Polar velocity model
+&lt;span  class=&#34;math&#34;&gt;\(\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} \)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;where&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{align*}
+\upsilon &amp;= \sqrt{\dot{x}^2 + \dot{y}^2}  \\\\
+\psi &amp;= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\\\
+\omega &amp;= \dot{\psi}
+\end{align*}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;$(x,y)$ is the displacement relative to the local self-body fixed coordinate system&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$\upsilon$ is the target&#39;s linear velocity&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$\psi$ is the heading angle w.r.t the tracking system&#39;s x-axis.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$\omega$ is the turn-rate of the target&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;all expressed w.r.t the own-ship&#39;s tracking coordinate system.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-tracked-target-state-vector-top-view-in-the-tracking-coordinate-system&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; data-caption=&#34;Tracked target state vector top view, in the tracking coordinate system&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Tracked target state vector top view, in the tracking coordinate system
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
 </description>
     </item>
     
