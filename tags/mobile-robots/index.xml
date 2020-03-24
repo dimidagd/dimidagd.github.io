@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mobile-robots | /usr</title>
+    <link>https://dimidagd.github.io/tags/mobile-robots/</link>
+      <atom:link href="https://dimidagd.github.io/tags/mobile-robots/index.xml" rel="self" type="application/rss+xml" />
+    <description>Mobile-robots</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 10 Mar 2020 13:14:15 +0100</lastBuildDate>
+    <image>
+      <url>img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]</url>
+      <title>Mobile-robots</title>
+      <link>https://dimidagd.github.io/tags/mobile-robots/</link>
+    </image>
+    
+    <item>
+      <title>Autonomous navigation: 31388</title>
+      <link>https://dimidagd.github.io/project/31388/</link>
+      <pubDate>Tue, 10 Mar 2020 13:14:15 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/31388/</guid>
+      <description>
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/NfoG2qjmwAU?autoplay=1&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;project-outline&#34;&gt;Project outline&lt;/h1&gt;
+&lt;h2 id=&#34;software-architecture&#34;&gt;Software architecture&lt;/h2&gt;
+&lt;p&gt;When thinking about a  mobile robot, there are three key questions that need to be addressed.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Where am I?&lt;/li&gt;
+&lt;li&gt;Where do I want to go?&lt;/li&gt;
+&lt;li&gt;How do I get there?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/31388a.png&#34; alt=&#34;Small picture of a kitten&#34; /&gt;
+ &lt;figcaption&gt;
+ Autonomous robot software stack, graciously shared by &lt;a href=&#34;https://asl.ethz.ch/education/lectures/autonomous_mobile_robots/spring-2020.html&#34;&gt;ETHZ.&lt;/a&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;In order to answer to these questions, the systems has to be able to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Model the environment&lt;/li&gt;
+&lt;li&gt;Perceive the environment&lt;/li&gt;
+&lt;li&gt;Localise in the environment&lt;/li&gt;
+&lt;li&gt;Plan a trajectory and execute the movement&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The simple robot demonstrated in the video is addressing the previous topics by&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Perceiving the environment using a laser range sensor and a camera&lt;/li&gt;
+&lt;li&gt;Model the environment as straight line features on a map.&lt;/li&gt;
+&lt;li&gt;Localise using &lt;em&gt;exteroceptive(laser)&lt;/em&gt; &amp;amp; &lt;em&gt;proprioceptive(wheel encoders)&lt;/em&gt; measurements and Extended Kalman Filtering.&lt;/li&gt;
+&lt;li&gt;Plan a path using wavefront-planner.&lt;/li&gt;
+&lt;li&gt;Execute the path using a piecewise stable motion controller.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;environment-perception--modelling&#34;&gt;Environment perception &amp;amp; modelling&lt;/h3&gt;
+&lt;p&gt;The world is described by hand-crafter features, that we as humans perceive as lines. The robot is extracting line features from the raw laser-point data by running a &lt;strong&gt;RANSAC&lt;/strong&gt; algorithm.&lt;/p&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/line_extraction.png&#34; alt=&#34;Small picture of a kitten&#34;  width=&#34;60%&#34; /&gt;
+ &lt;figcaption&gt;
+ Line fitting using RANSAC.
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;h3 id=&#34;localisation&#34;&gt;Localisation&lt;/h3&gt;
+&lt;p&gt;The robot is constantly using its &lt;strong&gt;kinematic model&lt;/strong&gt; (differential drive) along with wheel encoder measurements to predict its traveled trajectory based on &lt;strong&gt;odometry&lt;/strong&gt;, it is widely known that odometry world estimates are drifting due to a lot of effects which are either on purpose not being considered on the motion model, or they are not known. Extended Kalman filtering can reduce the estimate error of the robot&amp;rsquo;s pose in the environment with respect to a a-priory known map of feature points.&lt;/p&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/odometry_error.png&#34; alt=&#34;Odometry error corrections using EKF localisation.&#34; width=&#34;60%&#34; /&gt;
+ &lt;figcaption&gt;
+Odometry error corrections using EKF localisation.
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;h3 id=&#34;obstacle-avoidance&#34;&gt;Obstacle avoidance&lt;/h3&gt;
+&lt;p&gt;For path planning a wavefront-planning algorithm is being used:&lt;/p&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/wavefront_planner.png&#34; alt=&#34;Planned path along an obstacle using a wavefront-planner.&#34;  width=&#34;60%&#34;/&gt;
+ &lt;figcaption&gt;
+Planned path along an obstacle using a wavefront-planner.
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;h3 id=&#34;motion-controller&#34;&gt;Motion controller&lt;/h3&gt;
+&lt;p&gt;The path planner is creating wheel velocity commands, based on a relative target pose. The controller is designed in polar coordinates as this provides a suitable framework to design an asympotically stable  feedback controller.&lt;/p&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/motion_controller.png&#34; alt=&#34;Controller smooth motion response to different target trajectory.&#34; width=&#34;60%&#34; /&gt;
+ &lt;figcaption&gt;
+Odometry error corrections using EKF localisation.
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Semantic segmentation</title>
+      <link>https://dimidagd.github.io/project/segmentation/</link>
+      <pubDate>Thu, 05 Dec 2019 13:34:06 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/segmentation/</guid>
+      <description>&lt;h2 id=&#34;driving-scene-image-segmentation-using-fully-convolutional-networks&#34;&gt;Driving scene image segmentation using Fully Convolutional Networks&lt;/h2&gt;
+&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
+&lt;p&gt;Self-driving cars are one of the hottest areas of research and business for the tech giants. What seemed like a science-fiction, a few years ago, now seems more like something which is soon to become a part and parcel of life. “soon to be” is because of the fact that even though companies like Tesla, Nissan, Cadillac do have self-driving car assistance software. They still require a human to keep an eye on the road and take control when needed. However, it is fascinating to see how far we have come in terms of innovation and how fast technology is advancing.&lt;/p&gt;
+&lt;p&gt;Other applications of semantic segmentation include and definetely not limited to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Classification of terrain visible in satellite imagery&lt;/li&gt;
+&lt;li&gt;Medical imaging analysis&lt;/li&gt;
+&lt;li&gt;Industrial inspection&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;
+&lt;p&gt;Fully Convolutional Networks &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; provide a solution to the image segmentation task, which is trying to answer to the question of ’where’ is something instead of just ’what’. The FCN complements the CNN architecture by following up the ”downsampling path” with an ”upsampling path”. Upsampling methods can include both learnable and non-learnable parameters.&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-fcn8s-proposed-architecture&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/img/model.png&#34; data-caption=&#34;FCN8s proposed architecture&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/img/model.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    FCN8s proposed architecture
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;&lt;em&gt;FCN&lt;/em&gt; extends the classic convolutional network pipeline such such that it can be used for full image predictions. The input to an FCN is an &lt;em&gt;RGB&lt;/em&gt; image and  its output is a pixelwise classification prediction. The initial layers of the pipeline are similar to a standard CNN architecture where the image is transformed into  a latent representation that includes contextual information but most structural information is lost due to the nature of convolution.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The use of CNN layers in the vanilla FCN architecture is reducing the structural information in the image as data flows through the ”downsampling path”, hence upsampling the low-dimensional information in the ”upsampling path” creates coarse bounding areas around the objects.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The proposed architecture is leveraging the available structural information of the convolutional feature maps by forward passing information from their max-pooling layers to the up-sampling layers. Merging feature maps from various resolution levels helps combining context information with spatial information.
+􏰀* The proposed architecture is leveraging transfer learning by initializing the convolutional layers from an accurate pre-trained classification architecture(VGGnet).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The convolutional layers can be frozen or trainable. Performance of the architecture has been evaluated for both cases.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The architecture enables end-to-end training of the network. We define different models by adding forward passing feature maps from various resolution levels.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;FCN32s&lt;/code&gt; : The original FCN without max-pooling forward passes.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FCN16s&lt;/code&gt; : Forward passing max pooled information from conv4 to the output of upsample6.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FCN8s&lt;/code&gt; : Extends FCN16s by upsampling the FCN16s skip connection, then fusing it with the
+max-pooled output of conv3 and applying upsample8.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FCNs&lt;/code&gt; : Extends FCN8s by summing the pooled output of conv2 with the FCN8s skip
+connection(not illustrated in Figure 1).
+Figure 1 illustrates the FCN8s architecture, the FCN16s is derived by cutting the skip2, and FCN32s by cutting both skip1 and skip2.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Structural information is being extracted from the pooling layers of the down- sampling path. Then this information is being fused with the up-sampled information by element-wise addition before moving upstream. Batch normalization and dropout layers are being applied to the outputs of every convolution and up-sampling layer. ReLu was used as the activation function.&lt;/p&gt;
+&lt;h3 id=&#34;dataset&#34;&gt;Dataset:&lt;/h3&gt;
+&lt;p&gt;Camvid and Cityscape are free available labeled dataset.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Cambridge-driving Labeled Video Database (CamVid) is a collection of video and images where each pixel is labelled with one of the 32 semantic labels. This dataset contains both fix-perspective videos (CCTV footage) and from a driving automobile. The footage from automobile makes this dataset a suitable choice for this project.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-camvid-sample-image&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/img/Camvid.jpg&#34; data-caption=&#34;CamVid sample image&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/img/Camvid.jpg&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    CamVid sample image
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Cityscape dataset contains labelled video and images from fix-perspective videos in the streets of different cities. The images are labelled with one of the 32 semantic labels.
+For the project, we would focus on the CamVid dataset recorded from automobile. Fix-perspective videos will not be investigated.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-cityscapes-ground-truth-sample-image-zurich&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/img/Cityscape_zuric.png&#34; data-caption=&#34;Cityscapes ground truth sample image (Zurich)&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/img/Cityscape_zuric.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Cityscapes ground truth sample image (Zurich)
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;h3 id=&#34;training&#34;&gt;Training:&lt;/h3&gt;
+&lt;p&gt;Different submodels of the original architecture were tested depending on the resolution of the information extracted from the convolutional layers. Namely FCN32s, FCN16s, FCN8s.&lt;/p&gt;
+&lt;h2 id=&#34;loss-and-performance-metrics&#34;&gt;Loss and performance metrics&lt;/h2&gt;
+&lt;p&gt;For the task of image segmentation pixel wise binary cross-entropy loss is used. It examines each pixels individually. Since the target vectors are one out of K encoded (total 32 class labels), the binary cross entropy is calculated using each encoded class and then averaged over all the 32 classes. This makes sure that each pixel is learning equally while training.&lt;/p&gt;
+&lt;p&gt;To compare the performance of the FCN, we will consider two measures : pixel accuracy and IoU (Intersection over Union)&lt;/p&gt;
+&lt;p&gt;$$\textrm{Pixel accuracy} = \frac{\textrm{No of pixels predicted accurately}}{\textrm{No of pixels}}$$&lt;/p&gt;
+&lt;p&gt;$$\textrm{IoU} = \frac{\textrm{Area of Overlap}}{\textrm{Area of Union}}$$&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-from-left-to-right-model-performance-for-fcn32-fcn16-fcn8-ground-truth&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/img/FCNs.png&#34; data-caption=&#34;From left to right model performance for, FCN32, FCN16, FCN8, Ground truth&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/img/FCNs.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    From left to right model performance for, FCN32, FCN16, FCN8, Ground truth
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-best-model-fcn8s-on-average-intersection-over-unioniou-performance&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/img/segmentation_IOU_best.png&#34; data-caption=&#34;Best model (FCN8s) on average Intersection over Union(IoU) performance&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/img/segmentation_IOU_best.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Best model (FCN8s) on average Intersection over Union(IoU) performance
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-models-pixel-accuracy-over-epochs-mean-epoch-time-90s-on-a-single-gpu-setup&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/img/segmentation_pixel_accuracy.png&#34; data-caption=&#34;Models pixel accuracy over epochs. (mean epoch time 90s on a single GPU setup)&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/img/segmentation_pixel_accuracy.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Models pixel accuracy over epochs. (mean epoch time 90s on a single GPU setup)
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;h2 id=&#34;model-predictions&#34;&gt;Model predictions&lt;/h2&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-different-model-predictions-&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/img/validation.png&#34; data-caption=&#34;Different model predictions.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/img/validation.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Different model predictions.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;arXiv:1411.4038v2 [cs.CV] 8 Mar 2015 
+&lt;a href=&#34;https://arxiv.org/pdf/1411.4038.pdf&#34; title=&#34;Fully Convolutional Networks for Semantic Segmentation&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Fully Convolutional Networks for Semantic Segmentation&lt;/a&gt;. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>OGM</title>
+      <link>https://dimidagd.github.io/project/ogm/</link>
+      <pubDate>Tue, 12 Nov 2019 01:08:41 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/ogm/</guid>
+      <description>&lt;h2 id=&#34;occupancy-grid-mapping-in-matlab2018a&#34;&gt;Occupancy grid mapping in MATLAB2018a&lt;/h2&gt;
+&lt;p&gt;Test-case of occupancy grid mapping using real pose data, and laser measurements.&lt;/p&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-occupancy-grid-mapping-with-known-poses&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/img/OGM.gif&#34; data-caption=&#34;Occupancy grid mapping with known poses.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/img/OGM.gif&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Occupancy grid mapping with known poses.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;!--
+&lt;img src=&#34;https://dimidagd.github.io/img/OGM.gif&#34; alt=&#34;drawing&#34; title=&#34;A caption&#34; style=&#34;width:70%;&#34;/&gt;
+--&gt;
+&lt;h3 id=&#34;getting-started&#34;&gt;Getting Started&lt;/h3&gt;
+&lt;p&gt;For a showcase you can copy the whole rep and run the script&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;occupancy_grid_mapping.m
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The script will run by using the measurement file &lt;code&gt;laser_0.log&lt;/code&gt; which includes laser sensor data as well as odometry data.&lt;/p&gt;
+&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+&lt;p&gt;Odometry pose data is treated as the real pose of the robot, in that sense there is no variance/uncertainty in the pose data, hence the robot belief distribution at every step is  represented by a dirac centered at the robots pose. This assumption should make sense, since we are addressing exclusively a mapping problem which requires good knowledge or the robots position to create an accurate map. By relaxing this requirement, the problem gets transformed into a SLAM problem, which is beyond the scope of this example. Another assumption is that the environment is static, thus it can get only more certain(brighter), and not more uncertain(darker) that in the initialisation.&lt;/p&gt;
+&lt;h3 id=&#34;what-is-occupancy-grid-mapping&#34;&gt;What is occupancy grid mapping&lt;/h3&gt;
+&lt;p&gt;Occupancy grid mapping is a probabilistic representation of an environment. The environment is discretised into (here even) cells and the grid values represent obstacle uncertainty. In the example above, the darker the grid the more uncertain the representation. As the robot moves around getting laser range measurements, it &amp;ldquo;sheds light&amp;rdquo; into the map and brightens the free-space areas. This is done by ray-casting the measurements on the grid and decreasing the associated cell&amp;rsquo;s probability. This is a rough explanation omitting mathematical details. For a  detailed and mathematically involved explanation please refer to 
+&lt;a href=&#34;http://www.probabilistic-robotics.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;a very nice book&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Field Robot Event 2019</title>
+      <link>https://dimidagd.github.io/project/fre/</link>
+      <pubDate>Tue, 12 Nov 2019 00:29:44 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/fre/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Moving object detector</title>
+      <link>https://dimidagd.github.io/project/my-project-name/</link>
+      <pubDate>Mon, 11 Nov 2019 19:53:36 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/my-project-name/</guid>
+      <description>&lt;h3 id=&#34;motivation&#34;&gt;Motivation&lt;/h3&gt;
+&lt;p&gt;Mobile robots need to be aware of moving targets in their environment, let alone they have to do it fast and using the least resources possible. The case of particular interests is the one of mobile robots operating in a factory environment, in which they have to constantly avoid other dangerous moving targets such as forklifts. The motivation for this algorithm was a company that wanted to implement a computationaly light solution since their main processing unit was already busy with running other computationally expensive tasks.&lt;/p&gt;
+&lt;h3 id=&#34;constraints&#34;&gt;Constraints&lt;/h3&gt;
+&lt;p&gt;Low computational efforts exclude grid-based method, because they are having a difficulty scaling to larger areas while keeping computations low and therefore, a &lt;span class=&#34;markup-quote&#34;&gt;continuous method&lt;/span&gt; had to be used. Inspired from the probabilistic estimation methods the algorithm can be summarized to the following steps.&lt;/p&gt;
+&lt;h3 id=&#34;algorithm-overview&#34;&gt;Algorithm overview&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Mark polygon area as free space from t-1 scan measurement.&lt;/li&gt;
+&lt;li&gt;Shrink polygon area according to sensor noise model in order to avoid false positives on step#3.&lt;/li&gt;
+&lt;li&gt;Find scan points from the last scan t that are violating the free space from step#2&lt;/li&gt;
+&lt;li&gt;Assign gaussian measurement model to each violation.&lt;/li&gt;
+&lt;li&gt;Calculate overall probability distribution function.&lt;/li&gt;
+&lt;li&gt;Filter out violations with a lower probability than a threshold.&lt;/li&gt;
+&lt;li&gt;Calculate new PDF, given the confirmed violations.&lt;/li&gt;
+&lt;li&gt;Cluster confirmed violating points to separate targets.&lt;/li&gt;
+&lt;li&gt;Calculate expected value of every cluster as the moving targets location and assign it to a moving target object.&lt;/li&gt;
+&lt;li&gt;Propagate possible previous moving target objects based on confirmed violations field.&lt;/li&gt;
+&lt;li&gt;Repeat #1 for new scan sample.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-detector-animation-in-a-structured-environment-with-a-walking-target&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/img/no_mov_targs.gif&#34; data-caption=&#34;Detector animation in a structured environment with a walking target.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/img/no_mov_targs.gif&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Detector animation in a structured environment with a walking target.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;!--
+&lt;img src=&#34;https://dimidagd.github.io/img/no_mov_targs.gif&#34; alt=&#34;drawing&#34; title=&#34;Detector animation in a structured environment and a walking target&#34; style=&#34;width:70%;&#34;/&gt;
+--&gt;
+&lt;h2 id=&#34;remarks&#34;&gt;Remarks&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;The advantage of this method is that is effectively capitalizing the low dimensionality of the laser data, to create a fast and robust estimator, in constrast to using camera based methods which are prone to classification errors/illumination noise.&lt;/li&gt;
+&lt;li&gt;It is worth noting that the &amp;ldquo;free-space&amp;rdquo; algorithm will not work for objects moving away from the laser frame, which is not necessarily a disadvantage, since generally objects moving away from the robot are not a safety concern.&lt;/li&gt;
+&lt;li&gt;Although the method is robust, it is generally noisy, due to the nature of violating points. By including a dynamical model of the moving targets, one could include an optimal estimator in the pipeline that smooths out the estimated position of the targets.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;next-steps&#34;&gt;Next steps&lt;/h2&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

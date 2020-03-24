@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Dimitrios Dagdilelis">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Observation models An observation model $z_k = h(\mathbf{x_k}) &#43; w_k$ expresses a sensor&rsquo;s observations $z_k$ at time instances $t_k$ given the state vector $\mathbf{x}$ . $w_k$ is assumed to be white gaussian noise with covariance matrix that depends on the specific sensor. The selection of the state vector $\mathbf{x}$ can lead to linear or nonlinear observation models.
+Radar The radar observation model includes calculating the distance and bearing from the own-ship to the target in polar form $z_{radar} = \begin{bmatrix} \rho, \theta \end{bmatrix}^{T}$ , given the target&rsquo;s position $\begin{bmatrix}x_t, y_t\end{bmatrix}^{T}$ w.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/thesis/logbook/sensors/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#3f51b5">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-152056153-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-152056153-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="https://dimidagd.github.io/thesis/logbook/sensors/">
+
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="/usr">
+  <meta property="og:url" content="https://dimidagd.github.io/thesis/logbook/sensors/">
+  <meta property="og:title" content="Sensors | /usr">
+  <meta property="og:description" content="Observation models An observation model $z_k = h(\mathbf{x_k}) &#43; w_k$ expresses a sensor&rsquo;s observations $z_k$ at time instances $t_k$ given the state vector $\mathbf{x}$ . $w_k$ is assumed to be white gaussian noise with covariance matrix that depends on the specific sensor. The selection of the state vector $\mathbf{x}$ can lead to linear or nonlinear observation models.
+Radar The radar observation model includes calculating the distance and bearing from the own-ship to the target in polar form $z_{radar} = \begin{bmatrix} \rho, \theta \end{bmatrix}^{T}$ , given the target&rsquo;s position $\begin{bmatrix}x_t, y_t\end{bmatrix}^{T}$ w."><meta property="og:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]">
+  <meta property="twitter:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Sensors | /usr</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">/usr</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">/usr</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>/Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/thesis/"><span>Thesis</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+
+      
+      <li class="nav-item">
+        <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+    
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/thesis/logbook/">Introduction</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/thesis/logbook/estimation/">Estimation</a>
+      </li>
+      
+      <li >
+        <a href="/thesis/logbook/tracking/">Tracking</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/thesis/logbook/categenv/">Environment</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/thesis/logbook/coordinate_systems/">Coordinate systems</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/thesis/logbook/categmodel/">Modeling</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/thesis/logbook/state_space/">State-space</a>
+      </li>
+      
+      <li >
+        <a href="/thesis/logbook/motion_models/">Motion models</a>
+      </li>
+      
+      <li class="active">
+        <a href="/thesis/logbook/sensors/">Sensors</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/thesis/logbook/categfilt/">Filtering</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/thesis/logbook/kf_ekf/">KF/EKF</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#observation-models">Observation models</a>
+      <ul>
+        <li><a href="#radar">Radar</a></li>
+        <li><a href="#gps">GPS</a></li>
+        <li><a href="#ais">AIS</a></li>
+        <li><a href="#camera">Camera</a>
+          <ul>
+            <li><a href="#mathbfk">$\mathbf{K}$</a></li>
+            <li><a href="#mathbfr_textitown-shiptextitcamera">$\mathbf{R}_{\textit{own-ship}}^{\textit{camera}}$</a></li>
+            <li><a href="#mathbfc">$\mathbf{C}$</a></li>
+            <li><a href="#mathbfr_textittrackingtextitown-ship">$\mathbf{R}_{\textit{tracking}}^{\textit{own-ship}}$</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>Sensors</h1>
+
+          <div class="article-style">
+            <h1 id="observation-models">Observation models</h1>
+<p>An observation model $z_k = h(\mathbf{x_k}) + w_k$ expresses a sensor&rsquo;s observations $z_k$ at time instances $t_k$ given the state vector $\mathbf{x}$ . $w_k$ is assumed to be white gaussian noise with covariance matrix that depends on the specific sensor. The selection of the state vector $\mathbf{x}$ can lead to linear or nonlinear observation models.</p>
+<h2 id="radar">Radar</h2>
+<p>The radar observation model includes calculating the distance and bearing from the own-ship to the target in polar form $z_{radar} = \begin{bmatrix}
+\rho,
+\theta
+\end{bmatrix}^{T}$ , given the target&rsquo;s position $\begin{bmatrix}x_t, y_t\end{bmatrix}^{T}$ w.r.t the sensor&rsquo;s coordinate system..</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-radar-alignment-with-the-tracking-frame">
+
+
+  <a data-fancybox="" href="/thesis/radar.png" data-caption="Radar alignment with the tracking frame">
+
+
+  <img src="/thesis/radar.png" alt="" width="50%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    Radar alignment with the <em>tracking</em> frame
+  </figcaption>
+
+
+</figure>
+
+<p>If the radar&rsquo;s coordinate system, is for simplicity  chosen to <em><strong>coincide with the tracking coordinate system</strong></em>, then the radar observation model can be expressed as:</p>
+<p>$$ z_{radar}(\mathbf{x}) = \begin{bmatrix}
+\rho \\<br>
+\theta
+\end{bmatrix} = \begin{bmatrix}
+\sqrt{x^2 + y^2} \\<br>
+arctan(\frac{y}{x})
+\end{bmatrix} + w_{radar}
+$$</p>
+<p>where the observation noise $w$ is commonly assumed to be white, zero-mean Gaussian with covariance $R_{radar} = \text{diag}\left[\sigma^2_{\rho}, \sigma^2_{\theta}\right] $</p>
+<p>A reasonable sizing of the noise variances can be</p>
+<ul>
+<li>$\sigma^2_\rho = 10 [\textit{m}]$</li>
+<li>$\sigma^2_\theta = 3 \frac{\pi}{180} [\textit{rad}] $</li>
+</ul>
+<h2 id="gps">GPS</h2>
+<p>A GPS observation model calculates the target&rsquo;s relative position $\begin{bmatrix}x, y\end{bmatrix}^{T} $ w.r.t the own-ship&rsquo;s tracking coordinate system, which is directly a part of the state vector, given the target&rsquo;s state vector $\mathbf{x}$</p>
+<ul>
+<li>The own-ship&rsquo;s geodetic coordinates $\begin{bmatrix}\phi_{0}, \lambda_{0} \end{bmatrix}^{T}$</li>
+<li>The own-ships sea-keeping heading angle from true north $\psi_{\textit{0}}$</li>
+<li>The target&rsquo;s measured geodetic coordinates $\begin{bmatrix}\phi, \lambda\end{bmatrix}^{T}$ which is usually available at sea through the Automatic Identification System.</li>
+</ul>
+<p>$$
+z_{GPS}(\mathbf{x},\begin{bmatrix}\phi_{0}, \lambda_{0}, \psi_{\textit{0}} \end{bmatrix}^{T}) = \begin{bmatrix}
+x \\\\<br>
+y
+\end{bmatrix}_{GPS} = \begin{bmatrix}
+x \\\\<br>
+y
+\end{bmatrix} + w_{GPS}
+$$</p>
+<p>The fact that the geodetic coordinates origin and the heading angle of the own-ship is not included in the state-space representation leads to a <em><strong>linear observation model</strong></em>.</p>
+<p>The observations are pre-converted into <em><strong>tracking coordinates</strong></em>, and the noise is added on the the post-converted observations.</p>
+<p>The AIS observations $[\phi, \lambda]^{T}$ can be transformed into tracking coordinates $[x,y]^{T}$ by using the transformations from the relative chapter.</p>
+<p>$$
+\begin{bmatrix}
+x \\<br>
+y
+\end{bmatrix} = R_z(\frac{\pi}{2}-\psi_{\textit{0}}) \cdot F_1\left(F_2(\begin{bmatrix}
+\phi \\<br>
+\lambda
+\end{bmatrix}),\begin{bmatrix}
+\phi_0 \\ \lambda_0
+\end{bmatrix}\right)
+$$</p>
+<p>Where</p>
+<ul>
+<li>
+<p>$F_2\left(\begin{bmatrix}
+\phi \\<br>
+\lambda
+\end{bmatrix}\right)$ is the transformation from geodetic to ECEF coordinates</p>
+</li>
+<li>
+<p>$F_1\left( \begin{bmatrix}
+X \\<br>
+Y \\<br>
+Z
+\end{bmatrix}_{ECEF},\begin{bmatrix}
+\phi_0 \\<br>
+\lambda_0
+\end{bmatrix}\right)$ is the transformation from ECEF to ENU, given the geodetic coordinates of the own-ship $\begin{bmatrix}
+\phi_0,
+\lambda_0
+\end{bmatrix}^T$ as a reference point.</p>
+</li>
+<li>
+<p>$R_z(\theta)$ is the transformation from ENU to <em><strong>sea-keeping/tracking</strong></em> coordinate system..</p>
+</li>
+</ul>
+<h2 id="ais">AIS</h2>
+<p>An alternative method to using the aforementioned GPS model is to leverage the fact that the tracked targets are in the viscinity of the own-ship, and thus small differences in geodetical coordinates can be linearly mapped to ENU differences and the other way around.</p>
+<p>$$
+\begin{bmatrix}
+\phi\\ \lambda
+\end{bmatrix}_{\text{target}}=
+\begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix}_{\text{own-ship}} + \begin{bmatrix}
+\delta\phi \\ \delta\lambda
+\end{bmatrix} + w_{\textit{AIS}}$$</p>
+<p>x
+[
+<a href="https://en.wikipedia.org/wiki/Geographic_coordinate_conversion" target="_blank" rel="noopener">src:&ldquo;Wikipedia:Geographic coordinate conversion&rdquo;</a>]</p>
+<p>By differentiating the model mentioned in the Coordinate systems section, one can confirm that for given own-ship geodetic coordinates $(\phi_0,\lambda_0, h_0)_{\textit{own-ship}}$</p>
+<p>$$
+\begin{bmatrix}
+dE\\dN\\dU
+\end{bmatrix}=
+\begin{bmatrix}
+(N(\phi_0)+h_0)\cos\phi_0 &amp;0 &amp;0\\<br>
+0 &amp;M(\phi_0) + h_0 &amp;0\\<br>
+0 &amp;0 &amp;1
+\end{bmatrix}
+\begin{bmatrix}
+d\lambda\\d\phi\\dh
+\end{bmatrix}
+$$</p>
+<p><em><strong>Tracking is performed at sea level</strong></em>, thus $h=0$, leading to</p>
+<p>$$
+\begin{bmatrix}
+d\lambda\\ d\phi
+\end{bmatrix}=
+\mathbf{T}(\phi)^{-1}
+\begin{bmatrix}
+dE\\ dN
+\end{bmatrix}
+$$</p>
+<p>Since the target&rsquo;s state is in the <em><strong>tracking/seakeeping</strong></em> coordinate system, one needs to transform it to ENU.</p>
+<p>If $\mathbf{R}_z(\psi)$ is the Euler&rsquo;s angle transformation for a rotation $\psi$ around the z-axis, then the transformation <em>from sea-keeping/tracking to ENU</em></p>
+<p>$$\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}} $$</p>
+<p>given the own-ship&rsquo;s <em>heading from true-north</em> $\psi_{\textit{0}}$
+is ,</p>
+<p>$$R_{\textit{sea-keeping}}^{\textit{ENU}} = R_{z}(\frac{\pi}{2}-\psi_{\textit{0}})$$</p>
+<p>$$
+\begin{bmatrix}
+dE\\ dN
+\end{bmatrix}=
+R_{\textit{sea-keeping}}^{\textit{ENU}}
+\begin{bmatrix}
+x\\ y
+\end{bmatrix}_{\textit{{t}}}
+$$</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-camera-alignment-with-the-tracking-frame">
+
+
+  <a data-fancybox="" href="/thesis/coords.png" data-caption="Camera alignment with the tracking frame">
+
+
+  <img src="/thesis/coords.png" alt="" width="50%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    Camera alignment with the <em>tracking</em> frame
+  </figcaption>
+
+
+</figure>
+
+<p>and thus, by combining the above equations, one can solve for the observed $[\phi, \lambda]^{T}$,</p>
+<p>$$
+\begin{bmatrix}
+\phi\\ \lambda
+\end{bmatrix}=
+\begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix} + {\mathbf{T}(\phi_{0})}^{-1}\begin{bmatrix}
+dE\\ dN
+\end{bmatrix} + w_{\textit{AIS}}=$$</p>
+<p>$$
+\begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix}_{\textit{own-ship}} + \mathbf{T}(\phi_{0})^{-1}
+\mathbf{R}^{\textit{ENU}}_{\textit{sea-keeping}}(\psi_{\textit{0}})
+\begin{bmatrix}
+X_{\textit{target}}\\ Y_{\textit{target}}
+\end{bmatrix}_{\textit{wrt}_{{\textit{sea-keeping}}}}+w_{\textit{AIS}}
+$$</p>
+<p>Where</p>
+<ul>
+<li>
+<p>$\mathbf{T}(\phi)=
+\begin{bmatrix}
+N(\phi)\cos\phi &amp;0\\<br>
+0 &amp;M(\phi)
+\end{bmatrix}
+$ is the transformation matrix from <em><strong>geodetic differences to ENU differences</strong></em>.</p>
+</li>
+<li>
+<p>$N(\phi) = \frac{\alpha}{\sqrt{1-e^2\sin^2\phi}}$ is the <em>prime vertical radius of curvature</em></p>
+</li>
+<li>
+<p>$M(\phi) = \frac{\alpha(1-e^2)}{(1-e^2\sin^2\phi)^\frac{3}{2}}$ is the <em>meridional radius of curvature</em></p>
+</li>
+<li>
+<p>$\alpha,\beta$ are the equitorial radius(6378.1370 km) and the Polar radius(6356.7523 km) respectively, as derived from the <em><strong>WGS-84</strong></em> ellipsoid model.</p>
+</li>
+<li>
+<p>$e = \sqrt{1 -\frac{b^2}{a^2}}$ is the ellipsoid&rsquo;s eccentricity.</p>
+</li>
+<li>
+<p>$h = 0 $ since the own-ship is always floating on the geoid.</p>
+</li>
+<li>
+<p>$w_{\textit{AIS}}$ is white gaussian zero-mean noise with covariance matrix $\mathbf{R}_{\textit{AIS}}$ depending on the noise intensity of the AIS source.</p>
+</li>
+</ul>
+<p>The above equation can be rewritten to the standard observation model formulation</p>
+<p>$$ z_{AIS}(\mathbf{x},\begin{bmatrix}\phi_{0}, \lambda_{0}, \psi_{\textit{0}} \end{bmatrix}^{T}) = \begin{bmatrix}
+\phi\\ \lambda
+\end{bmatrix}_{\textit{target}} = \begin{bmatrix}
+\phi_{0}\\ \lambda_{0}
+\end{bmatrix} + \mathbf{H}\mathbf{x} + w_{\textit{AIS}}
+$$</p>
+<p>, which is a linear observation model that is approximating the geoid with a <em><strong>spherical-linearization</strong></em> about the own-ship&rsquo;s geodetic location.</p>
+<h2 id="camera">Camera</h2>
+<p>Assuming a camera sensor on a mast with the camera z-axis aligned with the <em><strong>own-ship&rsquo;s body coordinate system</strong></em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-camera-alignment-with-the-tracking-frame">
+
+
+  <a data-fancybox="" href="/thesis/camera2.png" data-caption="Camera alignment with the tracking frame">
+
+
+  <img src="/thesis/camera2.png" alt="" width="50%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    Camera alignment with the <em>tracking</em> frame
+  </figcaption>
+
+
+</figure>
+
+<p>A top-view of the pinhole model seen in the figure below</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-pinhole-model-top-view">
+
+
+  <a data-fancybox="" href="/thesis/camera_pinhole.png" data-caption="Pinhole model top-view">
+
+
+  <img src="/thesis/camera_pinhole.png" alt="" width="50%" >
+</a>
+
+
+  
+  
+  <figcaption>
+    Pinhole model top-view
+  </figcaption>
+
+
+</figure>
+
+<p>Then the observation model for the predicted pixel location of a target obtained from a deep neural-network classifier and localiser is found by projecting a point in homogeneous coordinates</p>
+<p>$$x_{\text{wrt}_{\text{sea keeping}}} =\begin{bmatrix}x, y, 0, 1\end{bmatrix}^T$$</p>
+<p>to the finite camera frame, given measured information $z_{gyro}$ about the rotational angle of the *own-ship body coord system*, w.r.t the ***tracking coord system***</p>
+<p>$$
+z_{\textit{cam}_{\textit{px}}}(\mathbf{x},z_{\textit{gyro}}) = \begin{bmatrix}u\\v\end{bmatrix}_{px}= \frac{\begin{bmatrix}-P_1-\\-P_2-\end{bmatrix}\mathbf{x}}{
+\begin{bmatrix}
+-P_3-
+\end{bmatrix}
+\mathbf{x}}+ w_{\text{camera}}
+$$</p>
+<p>Where $\mathbf{P}$ is the projection matrix and $P_{i}$ it&rsquo;s rows</p>
+<p>$$ P = \begin{bmatrix}-P_1- \\-P_2-\\-P_3- \end{bmatrix} = \mathbf{K}\mathbf{R_{\textit{own-ship}}^{\textit{camera}}}[\mathbf{I} | \mathbf{-C}]
+\begin{bmatrix}
+\mathbf{\mathbf{R}_{\textit{sea-keeping}}^{\textit{own-ship}}} &amp;\mathbf{0}\\<br>
+\mathbf{0} &amp;1
+\end{bmatrix}$$</p>
+<p>Because of the denominator this is a non-linear model, and a description of the matrices that comprise the projection matrix $P$ is given below:</p>
+<h3 id="mathbfk">$\mathbf{K}$</h3>
+<p>is the <em><strong>intrinsic camera calibration</strong></em> matrix</p>
+<p>$$\mathbf{K} = \begin{bmatrix}f m_x &amp;0 &amp;p_x \\<br>
+0 &amp;f m_y &amp;p_y \\<br>
+0 &amp;0 &amp;z
+\end{bmatrix} $$</p>
+<p>with</p>
+<ul>
+<li>$f$ is the intrinsic camera calibration parameter, focal length in mm</li>
+<li>$m_x, m_y$ are the camera&rsquo;s sensor pixel density in $\frac{\text{number of pixels}}{mm}$ across the two different directions of the image plane.</li>
+<li>$p_x,p_y$ correspond to the position of the principal point of the image in <em>pixel coordinates</em></li>
+<li>$w_{\textit{camera}}$ is white gaussian zero mean noise with variance related to the classifier accuracy, or any calibration errors in the extrinsic and intrinsic camera matrices.</li>
+</ul>
+<h3 id="mathbfr_textitown-shiptextitcamera">$\mathbf{R}_{\textit{own-ship}}^{\textit{camera}}$</h3>
+<p>is the <em><strong>extrinsic camera rotation</strong></em> matrix that describes the <em>orientation of the camera coordinate system.</em> w.r.t. the <em>own-ship</em>.</p>
+<h3 id="mathbfc">$\mathbf{C}$</h3>
+<p>is the  <em><strong>extrinsic origin of the camera coordinate system.</strong></em> w.r.t. the <em>own-ship</em>.</p>
+<h3 id="mathbfr_textittrackingtextitown-ship">$\mathbf{R}_{\textit{tracking}}^{\textit{own-ship}}$</h3>
+<p>Is the transformation matrix that corresponds to the <em><strong>roll-pitch</strong></em> rotation of the <em><strong>own-ship&rsquo;s body coordinate system.</strong></em> w.r.t the <em><strong>tracking</strong></em> coordinate system.. Please note that the order of the rotations matters.</p>
+<p>$$
+R_{\textit{tracking}}^{\textit{own-ship}}=\left( R_{\textit{pitch}} R_{\textit{roll}}\right)^T
+$$</p>
+<p>Where $$R_{\textit{pitch}},R_{\textit{roll}}$$ are the standard rotation matrices for Euler&rsquo;s angles $z_{\textit{gyro}}=(\alpha,\beta)^T = (\textit{roll},\textit{pitch})^T$.</p>
+<p>$$
+R_{\textit{roll}}= R_x(\alpha) =
+\begin{bmatrix}
+1 &amp;0 &amp;0\\<br>
+0 &amp;\cos\alpha &amp;-\sin \alpha\\<br>
+0 &amp;\sin \alpha &amp;\cos \alpha
+\end{bmatrix}
+$$</p>
+<p>and</p>
+<p>$$
+R_{\textit{pitch}}= R_y(\beta) =
+\begin{bmatrix}
+\cos\beta &amp;0 &amp;\sin \beta\\<br>
+0 &amp;1 &amp;0\\<br>
+-\sin \beta &amp;0 &amp;\cos\beta
+\end{bmatrix}
+$$</p>
+<p>A basic assumption at that point, is that the own-ship is able to measure the angles $(\alpha,\beta)$ of the <em>own-ship body coordinate system.</em> w.r.t the <em>tracking coordinate system.</em>. These angles are usually available on a ship by using one or multiple <em><strong>gyroscope sensors</strong></em>.</p>
+
+          </div>
+
+          
+
+
+
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on May 5, 2019</p>
+
+          
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/js/academic.min.738eb6c268ee4959345a9f0efc01a6e9.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

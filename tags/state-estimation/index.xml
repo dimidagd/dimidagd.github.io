@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>State-estimation | /usr</title>
+    <link>https://dimidagd.github.io/tags/state-estimation/</link>
+      <atom:link href="https://dimidagd.github.io/tags/state-estimation/index.xml" rel="self" type="application/rss+xml" />
+    <description>State-estimation</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 15 Mar 2020 16:19:16 +0100</lastBuildDate>
+    <image>
+      <url>img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]</url>
+      <title>State-estimation</title>
+      <link>https://dimidagd.github.io/tags/state-estimation/</link>
+    </image>
+    
+    <item>
+      <title>Thesis report Week#7</title>
+      <link>https://dimidagd.github.io/project/thesis4/</link>
+      <pubDate>Sun, 15 Mar 2020 16:19:16 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/thesis4/</guid>
+      <description>&lt;h2 id=&#34;tracking-a-single-target-in-clutter&#34;&gt;Tracking a single target in clutter&lt;/h2&gt;
+
+&lt;h3 id=&#34;problem-formulation&#34;&gt;Problem formulation:&lt;/h3&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;Perform &lt;em&gt;state estimation&lt;/em&gt; of a &lt;strong&gt;&lt;em&gt;single target&lt;/em&gt;&lt;/strong&gt; using observations of &lt;strong&gt;&lt;em&gt;uncertain origin&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Target&#39;s tracked state at sample time $k$ is, $\mathbf{x}_k=(x,y,V,h,\omega)^T$ with respect to the self-vehicle sea-keeping frame.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Assume its track is &lt;em&gt;initialized tracks&lt;/em&gt; i.e the problem is that of &lt;strong&gt;track maintenance&lt;/strong&gt; .&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Observations $z_k = h(\mathbf{x}_k) + w_k$ from various sensors, defined my a corresponding measurement model and the target&#39;s state.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$w$ is gaussian white and its covariance matrix depends on the sensor properties.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Detection probability $P_D$ less than unity, i.e. there exists the possibility of the sensor &lt;strong&gt;&lt;em&gt;not returning&lt;/em&gt;&lt;/strong&gt; an observation that belongs to the target, due to various reasons.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Non zero $P_{FD}$, ie the sensor can provide  &lt;em&gt;false positive&lt;/em&gt; observations that do not originate from the tracked target, usually due to clutter.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Possibility for &lt;strong&gt;&lt;em&gt;multiple validated&lt;/em&gt;&lt;/strong&gt; observations for a single target.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;clutter-model&#34;&gt;Clutter model&lt;/h3&gt;
+
+&lt;p&gt;The target tracker estimates the target state such as position and orientation from the noisy measurement observations originating from various object&#39;s sources such as real targets, clouds, terrain reflections and thermal noise. The unwanted measurements are referred as &lt;strong&gt;&lt;em&gt;clutter measurements&lt;/em&gt;&lt;/strong&gt;.[&lt;a href=&#34;https://www.sciencedirect.com/science/article/abs/pii/S0957417419306876&#34;&gt;source&lt;/a&gt;]&lt;/p&gt;
+
+&lt;p&gt;Most of the sensors are finite in their perception resolution, that is they have $N$  &lt;em&gt;&lt;strong&gt;resolution cells&lt;/strong&gt;&lt;/em&gt;. A detection is declared in a cell if  the output of the signal for the specific cell exceeds a threshold. If the sensor points to a region which is not occupied by a target, then false detections can still occur  due to sensor noise or background noise. Usually filtering is performed with &lt;em&gt;observations&lt;/em&gt; instead of detections, that is with the output of the raw-data preprocessor.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In radar tracking for instance, the preprocessor might run clustering algorithms on the raw detections and provide the mean of each cluster as a different observation. The preprocessing of the raw data should remove what was defined as clutter, nevertheless preprocessors still produce false positive observations. &lt;strong&gt;&lt;em&gt;Observations&lt;/em&gt;&lt;/strong&gt;(post-processed information from raw data) can have a similar clutter model.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;assumptions&#34;&gt;Assumptions&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The probability of a &lt;em&gt;false positive&lt;/em&gt; observation inside the sensors grid cell is $P_{FA} = p$ in each cell&lt;/li&gt;
+&lt;li&gt;The events of observations in each cell are independent of each other.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Then the &lt;strong&gt;&lt;em&gt;probability mass function (pmf)&lt;/em&gt;&lt;/strong&gt; of the number of false alarms in these $N$ cells, follows a &lt;strong&gt;&lt;em&gt;binomial(Bernouli)&lt;/em&gt;&lt;/strong&gt; distribution&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+P\{n_{FA}=m\} = \mu_{FA}(m) = \begin{pmatrix}N \\m \end{pmatrix} p^m (1-p)^{N-m}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;If $V$ is the volume of the $N$ cells under consideration, then $\lambda$ is the &lt;strong&gt;&lt;em&gt;spatial density of the false alarms&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\lambda = \frac{E{n_{FA}}}{V} = \frac{Np}{V}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;If $Np &amp;gt;1$ then the &lt;em&gt;Poisson distribution&lt;/em&gt; can be approximated by&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\mu_{FA}(m) \approx e^{-Np}\frac{(Np)^m}{m!}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;thus the &lt;strong&gt;&lt;em&gt;number of false alarms(clutter observations)&lt;/em&gt;&lt;/strong&gt; in a volume $V$ given a spatial density of clutter observations $\lambda$ is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\mu_{FA}(m) \approx e^{-\lambda V}\frac{(\lambda V)^m}{m!}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The justification of using the above clutter model, is that the &lt;strong&gt;&lt;em&gt;pdf of a false observation&lt;/em&gt;&lt;/strong&gt;  is &lt;strong&gt;&lt;em&gt;uniform&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+p(z|{z = \text{false measurement}}) = \frac{1}{V}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $V$ corresponds to the subspace volume in which the observation is originated from.&lt;/p&gt;
+
+&lt;h3 id=&#34;approaches-to-filtering&#34;&gt;Approaches to filtering&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Non-Bayesian techniques
+
+&lt;ul&gt;
+&lt;li&gt;Nearest Neighbour association&lt;/li&gt;
+&lt;li&gt;Strongest Neighbour association (assuming intensity information)&lt;/li&gt;
+&lt;li&gt;Track-Split approach&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Bayesian techniques
+
+&lt;ul&gt;
+&lt;li&gt;Probabilistic Data Association filter&lt;/li&gt;
+&lt;li&gt;Optimal Bayesian approach, multiple hypothesis (&lt;em&gt;MH&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;probabilistic-data-association-filter-pdaf-overview&#34;&gt;Probabilistic Data Association Filter (PDAF) overview&lt;/h3&gt;
+
+&lt;p&gt;This filter is based on the KF/EKF algorithm, it keeps the update equations the same but is probabilistically fusing
+observations within the target&#39;s validating region into a single fused innovation update step.&lt;/p&gt;
+
+&lt;h4 id=&#34;modeling-assumptions-of-the-pdaf&#34;&gt;Modeling assumptions of the PDAF&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Single target of interested modeled by white-noise driven state motion modele as in KF/EFK&lt;/li&gt;
+&lt;li&gt;The target&#39;s track is already initialized&lt;/li&gt;
+&lt;li&gt;At each sensor sample time, a validation region(gate) to filter the highly unprobable observations is created.&lt;/li&gt;
+&lt;li&gt;The target exhibits a detection probability at eash sensor scan $P_D$&lt;/li&gt;
+&lt;li&gt;The remaining observations(not originating from the target) are assumed due to false detection or clutter, and are assumed to be of uniform spatial distribution.&lt;/li&gt;
+&lt;li&gt;All past information about the target is summarised by a single state estimate  $\hat{\mathbf{x}(k-1|k-1)}$ and its associated covariance $P(k-1|k-1)$&lt;/li&gt;
+&lt;li&gt;The observation pdf originating from the target  is Gaussian with mean $\hat{z}(k|k-1)$ and &lt;em&gt;innovation covariance&lt;/em&gt;  $S(k)$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;pdaf-algorithm&#34;&gt;PDAF algorithm&lt;/h3&gt;
+
+&lt;p&gt;Two versions exist&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;em&gt;Non parametric&lt;/em&gt;&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A &lt;em&gt;diffuse prior&lt;/em&gt; is used as knowledge for the number of false measurements&lt;/li&gt;
+&lt;li&gt;This requires no knowledge about the &lt;em&gt;spatial density&lt;/em&gt; of false measurements&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;em&gt;Parametric&lt;/em&gt;&lt;/strong&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A Poisson &lt;strong&gt;&lt;em&gt;pmf&lt;/em&gt;&lt;/strong&gt; is used for the number of false measurements.&lt;/li&gt;
+&lt;li&gt;Requires the spatial density parameter $\lambda$ (expected number per unit volume) of the false measurements.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;prediction&#34;&gt;Prediction&lt;/h4&gt;
+
+&lt;p&gt;Predict the state and the observation:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{align}
+\hat{\mathbf{x}}(x+1|k) &amp;=  F(k)\hat{\mathbf{x}}(k|k) \\
+\hat{z}(k+1|k) &amp;= H(k+1)\hat{\mathbf{x}}(x+1|k)
+\end{align}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Calculate the &lt;em&gt;predicted state covariance&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[P(k+1|k) = F(k)P(k|k)F(k)^T + Q(k)\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The innovation covariance is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[S(k+1) = H(k+1)P(k+1|k)H(k+1)^T + R(k+1)\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The above steps are the same as in the standard KF/EKF.&lt;/p&gt;
+
+&lt;h4 id=&#34;observations-validation&#34;&gt;Observations validation&lt;/h4&gt;
+
+&lt;p&gt;A validation region(gate) is defined by the ellipsoid:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\mathcal{V}(k+1, \gamma) = \{z: [z-\hat{z}(k+1|k)]^T S(k+1)^{-1} [z-\hat{z}(k+1|k)] \leq \gamma \}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $\gamma$ is the gate threshold and can be calculated by the chosen &lt;em&gt;gate probability&lt;/em&gt; $P_G$ and the chi-squared distribution lookup matrix.&lt;/p&gt;
+
+&lt;p&gt;This leads to a validated observations set&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\{z_i(k+1), i = 1, ..., m(k+1)\}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The innovation $\nu_i$ corresponding to the i-th validated observation is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\begin{align}
+\nu_i(k+1) = z_i(k+1) - \hat{z}(k+1|k)  &amp;&amp; i= 1, ...,m(k+1)
+\end{align}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The validation region volume $V$ is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[V(k+1) = c_{n_{z}}|\gamma S(k+1)|^\frac{1}{2}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $c_{n_z}$ is the volume of the $n_z$ &lt;em&gt;dimensional unit hypersphere&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[ c_i =
+\left\{\begin{array}{ll}
+2  &amp; i = 1 \\
+\pi &amp; i=2 \\
+\frac{4\pi}{3} &amp; i = 3
+\end{array}
+\right.
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;probabilistic-data-association--non-parametric-version&#34;&gt;Probabilistic Data Association ~ non parametric version&lt;/h4&gt;
+
+&lt;p&gt;The probability that the i-th measurement is the correct one can be calculated&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\beta_i(k+1)=
+\left\{\begin{array}{ll}
+\frac{e_i}{b+\sum_{j=1}^{m(k+1)}e_j}  &amp; i = 1,...,m(k+1) \\
+\frac{b}{b+\sum_{j=1}^{m(k+1)}e_j} &amp; i=0
+\end{array}
+\right.
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $\beta_0$ corresponds to the &lt;em&gt;probability that none of the measurements is correct&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The likelihood $e_i$ is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+e_i \overset{\Delta}{=}  e^{-\frac{1}{2} \nu_i(k+1)^T S(k+1)^-1 \nu_i(k+1)}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+b \overset{\Delta}{=} \left(\frac{2\pi}{\gamma}\right)^{\frac{n_z}{2}}m(k+1)c_{n_z}^-1\frac{1-P_D P_G}{P_D}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;update&#34;&gt;Update&lt;/h4&gt;
+
+&lt;p&gt;The &lt;strong&gt;&lt;em&gt;state update&lt;/em&gt;&lt;/strong&gt; can be carried by first calculating the weighted combined innovation&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\nu(k+1) \overset{\Delta}{=} \sum_{i=1}^{m(k+1)}\beta_i(k+1)\nu_i(k+1)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;Then the &lt;em&gt;state update&lt;/em&gt; follows&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\hat{x}(k+1|k+1) = \hat{x}(k+1|k) + K(k+1)\nu(k+1)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where the Kalman gain $K(k+1)$ follows the standard EKF/KF calculation.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;The &lt;strong&gt;updated covariance&lt;/strong&gt; is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+P(k+1|k+1) = P(k+1|k) -  [ (1-\beta_0(k+1)) ] K(k+1)S(k+1)W(k+1)^T + \tilde{P}(k+1)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where $\tilde{P}(k+1)$ is responsible for &lt;em&gt;spreading&lt;/em&gt; the updated estimate variance(increase uncertainty)&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\tilde{P}(k+1) \overset{\Delta}{=} K(k+1)\left[ \sum_{i=1}^{m(k+1)}\beta_i(k+1)\nu_i(k+1)\nu_i(k+1)^T - \nu_i(k+1)\nu_i(k+1)^T \right]K(k+1)^T
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;remarks-on-pdaf&#34;&gt;Remarks on PDAF&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;$\tilde{P}(k+1)$ is &lt;em&gt;positive definite&lt;/em&gt; and increases the covariance of the updated state, and is capturing the effect of origin uncertainty.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The estimation accuracy is &lt;em&gt;data dependend&lt;/em&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;In the parametric &lt;strong&gt;PDA&lt;/strong&gt; , $\beta$ is calculated by replacing $m(k+1)$ with $\lambda V(k+1)$ , where $\lambda$ is the spatial density of the false measurements of the clutter model.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The distinctive difference between the parametric and the non-parametric variants, is that the parametric asssumes an apriori known diffusion density $\lambda$ , where as the non-parametric one is calculating it based on the current number of validated observations $m(k+1)$ and the validation volume $V$.&lt;/p&gt;
+&lt;/blockquote&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;While the structure is the same as in a linear filter, &lt;strong&gt;&lt;em&gt;PDAF&lt;/em&gt;&lt;/strong&gt; is a non-linear filter due to the &lt;em&gt;weighted innovation&lt;/em&gt; calculation.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Thesis report Week#6</title>
+      <link>https://dimidagd.github.io/project/thesis3/</link>
+      <pubDate>Wed, 11 Mar 2020 16:24:31 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/thesis3/</guid>
+      <description>&lt;h2 id=&#34;multisensor-tracking---summary&#34;&gt;Multisensor tracking - summary&lt;/h2&gt;
+&lt;p&gt;When measurements are obtained from multiple sensors, there is a need to distinguish between different cases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Asynchronous measurements&lt;/strong&gt; - i.e the sampling times are different for each sensor and not necessarily fixed.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In this project&amp;rsquo;s context, both the camera and the radar sensors are asynchronous, even though they can process the data at a fixed time interval, an actual target measurement might arrive at arbitrary time samples due to missed detections. The camera can become blinded, and the radar data processing algorithm can miss in extracting an observation.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Synchronized measurements&lt;/strong&gt; - the sampling times of all sensors are the same (unrealistic)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;synchronized&#34;&gt;Synchronized&lt;/h3&gt;
+&lt;p&gt;In the case of syncrhonized measurements from different sensors, and the measurement noises among them are uncorrelated, which is a fair assumption, then the update process can be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;sequential&lt;/strong&gt; - with the data from one sensor at a time&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;parallel&lt;/strong&gt; - simultaneously by stacking the measurements vector&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The approaches are equivalent for &lt;em&gt;linear systems&lt;/em&gt;, but the second approach is computationaly more expensive because of the stacked covariance matrix inversion.&lt;/p&gt;
+&lt;p&gt;It is important to note that so far it has been assumed that there is no &lt;em&gt;origin uncertainty&lt;/em&gt; for the measurements.&lt;/p&gt;
+&lt;h2 id=&#34;measurements-validation&#34;&gt;Measurements validation&lt;/h2&gt;
+&lt;h3 id=&#34;the-association-problem&#34;&gt;The association problem&lt;/h3&gt;
+&lt;p&gt;When tracking multiple objects, one needs to associate sensor observations, which at the moment of capture are &lt;em&gt;&lt;strong&gt;origin agnostic&lt;/strong&gt;&lt;/em&gt; , to a tracked target, before actually performing the filtering step.&lt;/p&gt;
+&lt;p&gt;The first step towards identifying an observations&amp;rsquo;s origin &lt;em&gt;&lt;strong&gt;gating&lt;/strong&gt;&lt;/em&gt; , that is to filter out unrealistic observations which most likely constitute outliers. This can be done in a probabilistic way by defining a &lt;strong&gt;validation region&lt;/strong&gt;, or else a &lt;em&gt;probabilistic hypervolume&lt;/em&gt; around the tracked target estimates.&lt;/p&gt;
+&lt;p&gt;A measurement within the &lt;strong&gt;validation region&lt;/strong&gt;  does not necessarily originate from the target the gate pertains to, but it is a &lt;em&gt;valid association candidate&lt;/em&gt; . As soon as multiple observations belong to the same gate, then there is an &lt;em&gt;association uncertainty&lt;/em&gt; .&lt;/p&gt;
+&lt;h4 id=&#34;validation-region&#34;&gt;Validation region&lt;/h4&gt;
+&lt;p&gt;If one considers a tracked target, i.e the filter has already been initialized, then one should be able to calculate the &lt;em&gt;predicted observation&lt;/em&gt; mean $\hat{z}(k+1|k)$ and its associated covariance $S(k+1)$ through the sensor&amp;rsquo;s measurement model and the filter&amp;rsquo;s estimate of the state.&lt;/p&gt;
+&lt;p&gt;A fair assumption at this point, is that the &lt;em&gt;true measurement&lt;/em&gt; $$ z(k+1| Z^k)$$ conditioned on the past, is &lt;em&gt;normaly distributed&lt;/em&gt; with its probability distribution function given by the standard Gaussian&lt;/p&gt;
+&lt;p&gt;$$
+p[z(k+1)|Z^k] = \mathcal{N}[z(k+1); \hat{z}(k+1|k), S(k+1)]
+$$&lt;/p&gt;
+&lt;p&gt;Then the true measurement belongs to the &lt;em&gt;validation region&lt;/em&gt; with probability&lt;/p&gt;
+&lt;p&gt;$$
+\mathcal{V}(k+1, \gamma) = {z: [z-\hat{z}(k+1|k)]^T S(k+1)^{-1} [z-\hat{z}(k+1|k)] \leq \gamma }
+$$&lt;/p&gt;
+&lt;p&gt;The equation above describes a &lt;em&gt;validation region&lt;/em&gt; or else a &lt;em&gt;probabilistic hypervolume&lt;/em&gt; . In the simple case in which the measurement belongs to the three dimensional euclidean space $R^3$ then $\mathcal{V}$ defines an &lt;em&gt;ellipse of probability concentration&lt;/em&gt; , that is the region of &lt;em&gt;minimum volume&lt;/em&gt; that contains a given probability mass. The length of the ellipsoid semiaxes correspond to the square roots of the &lt;em&gt;eigenvalues(singular values)&lt;/em&gt; of $\gamma S$.&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-γ--139-uncertainty-ellipsoids-and-scattered-points&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/ellipsoid.png&#34; data-caption=&#34;γ = {1,3,9} Uncertainty ellipsoids and scattered points&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/ellipsoid.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    γ = {1,3,9} Uncertainty ellipsoids and scattered points
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;The quadratic form in $\mathcal{V}$ implies that the validation region is &lt;em&gt;chi-square distributed&lt;/em&gt;, with number of degree of freedom equal to the dimensionality $n_z$ of the observations.&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-probability-distribution-function-of-v&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/chi_squared_pdf.png&#34; data-caption=&#34;Probability distribution function of V&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/chi_squared_pdf.png&#34; alt=&#34;&#34; width=&#34;60%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Probability distribution function of V
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;In order to have a gating probability $P_g$, one must use the cumulative distribution function $F_{n_{z}}(\gamma)=P(X \leq \gamma)$ of $\mathcal{V}$ and since as already mentioned $\mathcal{V}$ is a chi-squared distributed function, the calculation of $\gamma$ is the solution to the following equation.&lt;/p&gt;
+&lt;p&gt;$$
+P(X \leq \gamma) = P_g
+$$&lt;/p&gt;
+&lt;p&gt;Unfortunately no closed-form solution exists for the above equation since the function is highly non-linear, nevertheless look-up tables are available after point-wise evaluation.&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-cumulative-distribution-function-fx-for-a-gated-k-dimensional-observation-v&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/chi_squared_cdf.png&#34; data-caption=&#34;Cumulative distribution function F(x) for a gated k-dimensional observation V&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/chi_squared_cdf.png&#34; alt=&#34;&#34; width=&#34;60%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Cumulative distribution function F(x) for a gated k-dimensional observation V
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-look-up-table-for-γ-right-tail-chi-squared-percentile-df-degrees-of-freedom-&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/chi_squared_table.png&#34; data-caption=&#34;Look up table for γ, right tail chi-squared percentile, df degrees of freedom&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/chi_squared_table.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Look up table for γ, right tail chi-squared percentile, df degrees of freedom
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;One can verify that for the radar case, $df = n_z =3 $ degrees of freedom and if the probability that the true observation will fall in the gate is&lt;/p&gt;
+&lt;p&gt;$$P_{g} = P\{ z(k+1)\in\mathcal{V}(k+1,\gamma)\}=0.99$$&lt;/p&gt;
+&lt;p&gt;That means that an outlier&amp;rsquo;s probability $P_{\text{outlier}}$ will be&lt;/p&gt;
+&lt;p&gt;$$P_{\text{outlier}} = 1 - P_g = 0.01$$&lt;/p&gt;
+&lt;p&gt;then a possible solution for the gating threshold is&lt;/p&gt;
+&lt;p&gt;$$\gamma \approx 9.21$$&lt;/p&gt;
+&lt;p&gt;The square root $g = \sqrt{\gamma}$ is also referred to as &lt;em&gt;&amp;ldquo;number of sigmas&amp;rdquo;&lt;/em&gt; or standard deviations of the gate.&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;validation region&lt;/em&gt; thus, consists of points whose  &lt;em&gt;statistical distance&lt;/em&gt; to the predicted measurement is below a threshold $\gamma$.  This is equivalent to the &lt;em&gt;statistical innovation&lt;/em&gt; $[z-\hat{z}(k+1|k)]^T S(k+1)^{-1} [z-\hat{z}(k+1|k)]$ being below this threshold.&lt;/p&gt;
+&lt;p&gt;Measurements &lt;em&gt;outside the validation region&lt;/em&gt; can be ignored, as they are too far and very unlikely(at least with probability $1-P_g$) to have originated from the target of interest. This argument holds, as long as the predicted observation is accurate enough.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Autonomous navigation: 31388</title>
+      <link>https://dimidagd.github.io/project/31388/</link>
+      <pubDate>Tue, 10 Mar 2020 13:14:15 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/31388/</guid>
+      <description>
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/NfoG2qjmwAU?autoplay=1&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&#34;project-outline&#34;&gt;Project outline&lt;/h1&gt;
+&lt;h2 id=&#34;software-architecture&#34;&gt;Software architecture&lt;/h2&gt;
+&lt;p&gt;When thinking about a  mobile robot, there are three key questions that need to be addressed.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Where am I?&lt;/li&gt;
+&lt;li&gt;Where do I want to go?&lt;/li&gt;
+&lt;li&gt;How do I get there?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/31388a.png&#34; alt=&#34;Small picture of a kitten&#34; /&gt;
+ &lt;figcaption&gt;
+ Autonomous robot software stack, graciously shared by &lt;a href=&#34;https://asl.ethz.ch/education/lectures/autonomous_mobile_robots/spring-2020.html&#34;&gt;ETHZ.&lt;/a&gt;
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;In order to answer to these questions, the systems has to be able to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Model the environment&lt;/li&gt;
+&lt;li&gt;Perceive the environment&lt;/li&gt;
+&lt;li&gt;Localise in the environment&lt;/li&gt;
+&lt;li&gt;Plan a trajectory and execute the movement&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The simple robot demonstrated in the video is addressing the previous topics by&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Perceiving the environment using a laser range sensor and a camera&lt;/li&gt;
+&lt;li&gt;Model the environment as straight line features on a map.&lt;/li&gt;
+&lt;li&gt;Localise using &lt;em&gt;exteroceptive(laser)&lt;/em&gt; &amp;amp; &lt;em&gt;proprioceptive(wheel encoders)&lt;/em&gt; measurements and Extended Kalman Filtering.&lt;/li&gt;
+&lt;li&gt;Plan a path using wavefront-planner.&lt;/li&gt;
+&lt;li&gt;Execute the path using a piecewise stable motion controller.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;environment-perception--modelling&#34;&gt;Environment perception &amp;amp; modelling&lt;/h3&gt;
+&lt;p&gt;The world is described by hand-crafter features, that we as humans perceive as lines. The robot is extracting line features from the raw laser-point data by running a &lt;strong&gt;RANSAC&lt;/strong&gt; algorithm.&lt;/p&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/line_extraction.png&#34; alt=&#34;Small picture of a kitten&#34;  width=&#34;60%&#34; /&gt;
+ &lt;figcaption&gt;
+ Line fitting using RANSAC.
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;h3 id=&#34;localisation&#34;&gt;Localisation&lt;/h3&gt;
+&lt;p&gt;The robot is constantly using its &lt;strong&gt;kinematic model&lt;/strong&gt; (differential drive) along with wheel encoder measurements to predict its traveled trajectory based on &lt;strong&gt;odometry&lt;/strong&gt;, it is widely known that odometry world estimates are drifting due to a lot of effects which are either on purpose not being considered on the motion model, or they are not known. Extended Kalman filtering can reduce the estimate error of the robot&amp;rsquo;s pose in the environment with respect to a a-priory known map of feature points.&lt;/p&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/odometry_error.png&#34; alt=&#34;Odometry error corrections using EKF localisation.&#34; width=&#34;60%&#34; /&gt;
+ &lt;figcaption&gt;
+Odometry error corrections using EKF localisation.
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;h3 id=&#34;obstacle-avoidance&#34;&gt;Obstacle avoidance&lt;/h3&gt;
+&lt;p&gt;For path planning a wavefront-planning algorithm is being used:&lt;/p&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/wavefront_planner.png&#34; alt=&#34;Planned path along an obstacle using a wavefront-planner.&#34;  width=&#34;60%&#34;/&gt;
+ &lt;figcaption&gt;
+Planned path along an obstacle using a wavefront-planner.
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;h3 id=&#34;motion-controller&#34;&gt;Motion controller&lt;/h3&gt;
+&lt;p&gt;The path planner is creating wheel velocity commands, based on a relative target pose. The controller is designed in polar coordinates as this provides a suitable framework to design an asympotically stable  feedback controller.&lt;/p&gt;
+&lt;center&gt;
+&lt;figure&gt;
+ &lt;img src=&#34;https://dimidagd.github.io/img/motion_controller.png&#34; alt=&#34;Controller smooth motion response to different target trajectory.&#34; width=&#34;60%&#34; /&gt;
+ &lt;figcaption&gt;
+Odometry error corrections using EKF localisation.
+ &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/center&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Thesis report Week#4-5</title>
+      <link>https://dimidagd.github.io/project/thesis2/</link>
+      <pubDate>Fri, 06 Mar 2020 09:56:46 +0100</pubDate>
+      <guid>https://dimidagd.github.io/project/thesis2/</guid>
+      <description>&lt;h1 id=&#34;updates&#34;&gt;Updates:&lt;/h1&gt;
+
+&lt;p&gt;This week I have been working on&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Work on filtering visualization&lt;/li&gt;
+&lt;li&gt;Implement multiple moving objects in the Simulation&lt;/li&gt;
+&lt;li&gt;Implement multiple tracked objects in the simulation&lt;/li&gt;
+&lt;li&gt;Implement Particle Filter Algorithm for single target&lt;/li&gt;
+&lt;li&gt;Implement EKF with Probabilistic data Assosiation (PDAF)&lt;/li&gt;
+&lt;li&gt;Implement PF with Probabilistic Data Assosiation (PDAF)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;[Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]&lt;/p&gt;
+
+&lt;h2 id=&#34;filtering-visualization&#34;&gt;Filtering visualization&lt;/h2&gt;
+
+&lt;p&gt;&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-filters-visualization-for-single-target&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/simulator.png&#34; data-caption=&#34;Filters visualization for single target.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/simulator.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Filters visualization for single target.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;A simple sailboat model is moving according to a deterministic Constant Turn rate and Velocity (CTRV) model. Given the known starting state of the target $x_0$ ,&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Initialize EKF at $x_0$&lt;/li&gt;
+&lt;li&gt;Initialize PF at $x_0$&lt;/li&gt;
+&lt;li&gt;Perform target deterministic motion update&lt;/li&gt;
+&lt;li&gt;Obtain noisy observations (if any) $z$ from different rate sensors.&lt;/li&gt;
+&lt;li&gt;Update the estimate of each filter with the given observations if any, using PDA.&lt;/li&gt;
+&lt;li&gt;Plot the weighted particles above the PF state estimate where the height of a particle depends on its likelihood.&lt;/li&gt;
+&lt;li&gt;Plot x-y uncertainty ellipsoids of the EKF around the state estimation.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;multiple-moving-objects&#34;&gt;Multiple moving objects&lt;/h2&gt;
+
+&lt;p&gt;So far, the data association problem was not considered, that is the filtering algorithms were certain about the origin on the measurements. Data association is a major component of a tracking algorithm both because of the existence of multiple measurement sources, but also because of the existence of outliers in the measurements.&lt;/p&gt;
+
+&lt;p&gt;The approach implemented so far is a &lt;em&gt;Probablistlic Data Association(PDA)&lt;/em&gt; algorithm.
+The goal again is in the update state, to associate measurements with different tracked targets based on a certain criterion described in the algorithm.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Mathematical explanation will be documented at a later stage, for now a visualization of the simulation is shown below.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Three different targets visualised&lt;/li&gt;
+&lt;li&gt;Both EKF &amp;amp; PF Filtering for each target&lt;/li&gt;
+&lt;li&gt;Triple crossing of targets, but the filters are able to associate correctly the measurements and correctly estimate the trajectories.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;3d-view&#34;&gt;3d view&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Continuous lines correspond to PF x-y state estimates for each target.&lt;/li&gt;
+&lt;li&gt;Magenta ellipsoids correspond to EKF state uncertainty&lt;/li&gt;
+&lt;li&gt;Point-clouds above the sailboats correspond to each target&#39;s particle distibutions where the height and size of a particle depends on its likelihood.(overall number of particles N=300 for each target).&lt;/li&gt;
+&lt;li&gt;Filters are associating the measurements to the correct targets at all times.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-3d-view---multiple-targets-crossing-pda-with-ekf-and-pf&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/3dViewPDA.gif&#34; data-caption=&#34;3d view - multiple targets crossing PDA with EKF and PF.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/3dViewPDA.gif&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    3d view - multiple targets crossing PDA with EKF and PF.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;2d-view&#34;&gt;2d view&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Continuous lines correspond to moving objects deterministic trajectories.&lt;/li&gt;
+&lt;li&gt;Blue scatter &#39;x&#39; points  correspond to the history of noisy radar measurements sensed from all the available targets.&lt;/li&gt;
+&lt;li&gt;Dashed lines correspond to the Particle Filtered x-y state estimate evolution over time. PDA is correctly associating the measurements to the measurement origin.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-2d-top-view-of-multiple-tracked-targets-crossing&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/2dViewPDA.gif&#34; data-caption=&#34;2d top-view of multiple tracked targets crossing&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/2dViewPDA.gif&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    2d top-view of multiple tracked targets crossing
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+
+&lt;h1 id=&#34;particle-filtering&#34;&gt;Particle filtering&lt;/h1&gt;
+
+&lt;p&gt;Particle filters (PFs) belong to the category of sub-optimal filters. They represent probability densities with point mass densities (&amp;quot;particles&amp;quot;), and perform &lt;strong&gt;&lt;em&gt;Sequential Monte Carlo&lt;/em&gt;&lt;/strong&gt; (SMC) estimations. &lt;strong&gt;&lt;em&gt;SMC&lt;/em&gt;&lt;/strong&gt; ideas were historically introduced in statistics from the 1950s but the limited computational power available at the time constrained their use and development. As soon as faster computers were made available, the related research activity in the field increased, resulting in their improvement and adoption in numerous applications, namely tracking, localisation of agents, pattern recognition, fault-detection, and ADAS.&lt;/p&gt;
+
+&lt;h3 id=&#34;monte-carlo-integration&#34;&gt;Monte carlo integration&lt;/h3&gt;
+
+&lt;p&gt;The basis of SMC methods is &lt;em&gt;Monte Carlo integration&lt;/em&gt;. If a multidimensional integral needs to be evaluated:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mathbf{I} = \int \mathbf{g(x)} d\mathbf{x}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[ \mathbf{x} \in \mathbf{R}^{n_{x}} \]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Then the Monte Carlo (MC) approach for numerical integration assumes a factorisation&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\mathbf{g(x)} = \mathbf{f(x)} \cdot \pi(\mathbf{x}) \]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;so  as that $\pi(\mathbf{x})$ is interpreted as a probability density which is satisfying&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{align}
+\pi(\mathbf{x}) \geq 0 \\
+\int \pi \mathbf{x} d \mathbf{x} = 1
+\end{align}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;If one can &amp;quot;draw&amp;quot; $N &amp;gt;&amp;gt; 1$ samples ${x^i; i = 1,...,N}$ distributed according to $\pi (\mathbf{x})$ , then the integral estimate can be approximated with the sample mean:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+I = \int \mathbf{f}(\mathbf{x})\pi(\mathbf{x}) d\mathbf{x} = I_N \approx \frac{1}{N}\sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Given that the samples $\mathbf{x}^i$ are independent, then $I_N$ is an unbiased estimator, and according to the law of large numbers it will almost surely converge to $I$.&lt;/p&gt;
+
+&lt;p&gt;Given that the variance of $\mathbf{f}(\mathbf{x})$, $\sigma^2$ is finite,&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\sigma^2 = \int (\mathbf{f}(\mathbf{x})- I)^2 \pi(\mathbf{x})
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;then the central theorem holds and the estimation error converges to the distribution:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\lim_{N\rightarrow \inf} \sqrt{N}(I_N - I) \sim \mathcal{N}(0,
+  \sigma^2)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;strong&gt;&lt;em&gt;Bayesian&lt;/em&gt;&lt;/strong&gt; context, $\pi(\mathbf{x})$ conveniently corresponds to the posterior belief density. What is not convenient though, is the fact that the posterior is usually multivariate, nonstandard and only known up to proportionality, thus distributed sampling is usually not available from it. A solution to this is the use of &lt;strong&gt;Importance Sampling&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;importance-sampling&#34;&gt;Importance sampling&lt;/h2&gt;
+
+&lt;p&gt;In order to generate samples directly from $\pi (\mathbf{x})$ and estimate $I$ using Monte Carlo integration, one can generate samples from a density $q(\mathbf{x})$, which is similar to $\pi(\mathbf{x})$. The pdf $q(\mathbf{x})$ is usually referred to as &lt;strong&gt;importance&lt;/strong&gt; or &lt;strong&gt;proposal&lt;/strong&gt; density.&lt;/p&gt;
+
+&lt;p&gt;Similarity between $\pi \text{ - } q $ is expressed as:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\pi(\mathbf{x}) &gt; 0 \rightarrow q(\mathbf{x})&gt;0 , \text{for all } \mathbf{x} \in R^{n_x}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;which means that $q(\mathbf{x})$ and $\pi(\mathbf{x})$ have the same support. The integral $I$ can be rewritten thus as:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+I = \int \mathbf{f}(\mathbf{x}) d\mathbf{x} = \int f(\mathbf{x}) \frac{\pi(\mathbf{x})}{q(\mathbf{x})}q(\mathbf{x}) d\mathbf{x}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Applying the &lt;strong&gt;&lt;em&gt;MC&lt;/em&gt;&lt;/strong&gt; sample mean:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+I_N = \frac{1}{N} \sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i) \tilde{w}(\mathbf{x}^i)
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;where the importance weights shape a probability mass function(PMF), and thus need to be normalised.&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x}^j)}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-1-d-belief-representation-with-weighted-particles&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/MC_importance.png&#34; data-caption=&#34;1-D Belief representation with weighted particles.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/MC_importance.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    1-D Belief representation with weighted particles.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;bayesian-estimation&#34;&gt;Bayesian estimation&lt;/h4&gt;
+
+&lt;p&gt;As already mentioned, in the Bayseian context, $\pi (\mathbf{x})$ is the posterior density. For selecting the proposal distribution $q(\mathbf{x})$ it makes sense to try to mantain a degree of similarity between the proposal and the posterior, so that the finite $N$ selected $\mathbf{x}^i$ samples fall into probable regions of the posterior, that is regions that contain information about the actual posterior distribution $p(\mathbf{x} | z_i)$.&lt;/p&gt;
+
+&lt;h4 id=&#34;sequential-importance-sampling-sis&#34;&gt;Sequential importance Sampling (SIS)&lt;/h4&gt;
+
+&lt;p&gt;[reference to 1.3 and conceptual filtering solution]&lt;/p&gt;
+
+&lt;p&gt;Intuitively, a recursive Bayesian nonlinear filter is a very suitable domain for applying &lt;strong&gt;&lt;em&gt;MC&lt;/em&gt;&lt;/strong&gt; integration. This &lt;strong&gt;sequential Monte Carlo&lt;/strong&gt; approach is known with various names such as,&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;boostrap Filtering&lt;/li&gt;
+&lt;li&gt;condensation algorithm&lt;/li&gt;
+&lt;li&gt;particle Filtering&lt;/li&gt;
+&lt;li&gt;survival of the fittest&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The key idea again, is to represent the posterior density function by a limited set of samples and their importance weights, based on which estimates can be calculated. As the number of samples increases, the sampled distribution becomes an equivalent representation to the functional description of the posterior pdf, and the &lt;strong&gt;&lt;em&gt;SIS&lt;/em&gt;&lt;/strong&gt; filter approaches the optimal Bayesian filtering estimator.&lt;/p&gt;
+
+&lt;p&gt;The recursive nature of &lt;em&gt;SIS&lt;/em&gt; implies that the new weights describing the posterior $p(\mathbf{x}_k | \mathbf{z}_k)$ are being updated based on their previous values, and the likelihood of a new measurement &lt;span  class=&#34;math&#34;&gt;\(p(\mathbf{z}_k | \mathbf{x}_k^i)\)&lt;/span&gt;, i.e&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+w_k^i \sim w_{k-1}^i \frac{p(\mathbf{z}_k | \mathbf{x}_k^i)p(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i)}{q(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i , \mathbf{z}_k)}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Then the posterior filtered density is described as a &lt;strong&gt;&lt;em&gt;pmf&lt;/em&gt;&lt;/strong&gt;  as:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[p(\mathbf{x}_k | \mathbf{z}_k) \approx \sum_{i=1}^N w_k^i \delta(\mathbf{x}_k - \mathbf{x}_k^i)\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The recursiveness of the algorithm is evident since the importance weights $w_k^i$ and support points $x_k^i$ are being propagated as each measurement is received sequentially. The SIS algorithm is the basis of most particle filtering algorithms, and the choice of the importance density function is crucial in the design.&lt;/p&gt;
+
+&lt;h4 id=&#34;importance-density-selection&#34;&gt;Importance density selection&lt;/h4&gt;
+
+&lt;p&gt;A popular and convenient selection of the importance density is the transitional prior, i.e. the motion model:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[q(\mathbf{x_k | x_{k-1}^i , \mathbf{z}_k}) = p(\mathbf{x}_k | \mathbf{x}_{k-1}^i)\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;substituting the above in the &lt;strong&gt;SIS&lt;/strong&gt; algorithm yields&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+ w_k^i \sim w_{k-1}^i p(\mathbf{z}_k | \mathbf{x}_k^i)
+ \]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;degeneracy-problem&#34;&gt;Degeneracy problem&lt;/h4&gt;
+
+&lt;p&gt;A general problem of a SIS particle filter is that the particle distribution becomes extremely peaked through the subsequent measurement updates. That is, the variance of the importance weights can only increase over time. This effect overtime leads to poor accuracy of the estimates and leads to a common problem of the SIS particle filter, that of &lt;strong&gt;&lt;em&gt;degeneracy&lt;/em&gt;&lt;/strong&gt;. An effective countermeasure is monitoring the level of degenracy of the filter and resample when appropriate. Such a measure is the effective sample size $N_{\text{eff}}$ as introduced by [&lt;a href=&#34;https://www.jstor.org/stable/2291224?seq=1&#34;&gt;ref&lt;/a&gt;]&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\hat{N}_{\text{eff}} = \frac{1}{\sum_{i=1}^{N}(w_k^i)^2}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;It verify that &lt;span  class=&#34;math&#34;&gt;\(1 &lt; N_{\text{eff}} &lt; N\)&lt;/span&gt; , thus a usual degeneracy criterion is&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+\begin{aligned}
+N_{\text{eff}} &amp;&lt; \alpha N  \\ \alpha \in \mathcal{R}: &amp;\alpha \in (0,1)
+\end{aligned}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;resampling-algorithms&#34;&gt;Resampling algorithms&lt;/h4&gt;
+
+&lt;p&gt;Whenever a degeneracy is detected(i.e $N_{\text{eff}}$ falling below a threshold value), resampling is performed. Resampling follows the strategy of &lt;strong&gt;&lt;em&gt;survival of the fittest&lt;/em&gt;&lt;/strong&gt;, by eliminating particles in the set with low weight values and replacing them with copies of the more probable ones.&lt;/p&gt;
+
+&lt;p&gt;The resampling algorithm is thus:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Normalize the particle set weights $w^j$&lt;/li&gt;
+&lt;li&gt;Calculate the cumulative mass function &lt;span  class=&#34;math&#34;&gt;\(F_k(i) = \sum_{j=1}^{i} w_k^j\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;Draw $N$ random samples $u_i \in \mathcal{R}$, $i=1,..,N$ uniformly distributed on the interval $[0,1]$.&lt;/li&gt;
+&lt;li&gt;For every uniform sample $u_i$, pick $\hat{x}_k^i = x_k^j$ out of the current samples pool, where the picking index $j$ depends on the weight&#39;s value as&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+j = \underset{i}{\arg\min} |F_k(i)-u_i|
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-resampling-process-based-on-csw-the-particle-x_k_j-has-a-good-chance-of-surviving&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/stratified_resampling.png&#34; data-caption=&#34;Resampling process based on CSW. The particle x_k_j has a good chance of surviving.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/stratified_resampling.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Resampling process based on CSW. The particle x_k_j has a good chance of surviving.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;The above strategy leads to a weight selection &lt;strong&gt;survival chance&lt;/strong&gt; equal to the &lt;strong&gt;weight&#39;s value&lt;/strong&gt;
+$P(\hat{x}_k^i = x_k^j) = w_k^j$ . This results in useful samples having a higher likelihood of being selected for the new set. The new weights of the samples are uniform i.e. the weights are set to&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[\{\hat{x}_k^i , 1/N\}\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The use of resampling technique might lead to other issues though. Diversity among particles is depleted as highly probable particles are through subsequent resampling steps &lt;strong&gt;&lt;em&gt;genetically dominating&lt;/em&gt;&lt;/strong&gt; the distribution. Moreover, if the process noise is too low then the distribution will not &lt;em&gt;diversify&lt;/em&gt; enough in between measurement updates and will eventually become a uniformly weighted replicate of a few particles. This phenomenon is also known as &lt;strong&gt;&lt;em&gt;sample impoverishment&lt;/em&gt;&lt;/strong&gt; or &lt;strong&gt;&lt;em&gt;particle depletion&lt;/em&gt;&lt;/strong&gt; . [&lt;a href=&#34;https://www.researchgate.net/publication/228646515_The_unscented_Kalman_Filter_and_particle_filter_methods_for_nonlinear_structural_system_identification_with_non-collocated_heterogeneous_sensing&#34;&gt;ref&lt;/a&gt;].&lt;/p&gt;
+
+&lt;h2 id=&#34;pf-algorithm-outline&#34;&gt;PF Algorithm outline&lt;/h2&gt;
+
+&lt;p&gt;The PF algorithm thus summarises to:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Initialise the filter by drawing particles according to an initial belief $p(\mathbf{x}_0)$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Usually  &lt;span  class=&#34;math&#34;&gt;\(p(\mathbf{x}_0)\)&lt;/span&gt; is Gaussian with known moments, or a uniform distribution around the initial estimate  $\mathbf{x}_{0}$.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Update the particle set weights according to a the likelihood of the new measurement.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This step requires pointwise evaluation of the likelihood-function $p(\mathbf{z}_k | \mathbf{x}_k)$ which depends on the stochastic properties, of the &lt;em&gt;measurement model&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Example&lt;/em&gt;:
+For the radar sensor, the likelihood function is the &lt;em&gt;multivariate gaussian&lt;/em&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;span  class=&#34;math&#34;&gt;\[
+p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}\mathbf{R}(z-h(x)\right)}
+\]&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Where $\mathbf{R}_{k\times k}$ is the measurement noise covariance matrix&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Normalise weights to represent a pmf.&lt;/li&gt;
+&lt;li&gt;Resample if required, based on $N_{\text{eff}} &amp;lt; \textit{threshold}$&lt;/li&gt;
+&lt;li&gt;Propagate every point according to the motion model.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;It is crucial to use non-zero process noise at that step, as that ensures that additional diversity is being introduced into the distribution.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;Repeat from step #2&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-general-particle-filtering-algorithm-genetics&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/particle_filter_genetics.png&#34; data-caption=&#34;General particle filtering algorithm genetics.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/particle_filter_genetics.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    General particle filtering algorithm genetics.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;[&lt;a href=&#34;https://www.researchgate.net/publication/228646515_The_unscented_Kalman_Filter_and_particle_filter_methods_for_nonlinear_structural_system_identification_with_non-collocated_heterogeneous_sensing&#34;&gt;ref&lt;/a&gt;]&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

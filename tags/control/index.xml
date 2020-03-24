@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Control | /usr</title>
+    <link>https://dimidagd.github.io/tags/control/</link>
+      <atom:link href="https://dimidagd.github.io/tags/control/index.xml" rel="self" type="application/rss+xml" />
+    <description>Control</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0300</lastBuildDate>
+    <image>
+      <url>img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]</url>
+      <title>Control</title>
+      <link>https://dimidagd.github.io/tags/control/</link>
+    </image>
+    
+    <item>
+      <title>Plasma Actuators</title>
+      <link>https://dimidagd.github.io/project/internal-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0300</pubDate>
+      <guid>https://dimidagd.github.io/project/internal-project/</guid>
+      <description>&lt;p&gt;The capabilities of flow control using DBD were studied with a vision of being implemented in UAVs to alter flight characteristics such as power efficiency, lift off velocity, and provide abilities such as direction control without the use of moving surfaces.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/NJbJIRJB4vs&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://hcuav.gr&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;HCUAV&lt;/a&gt; is a research project, whose aim was to design and build a Medium-Altitude-Long-Endurance Unmanned Aerial Vehicle (MALE UAV) in order to carry out civil operations in Greece. The consortium was made up of three Greek universities and three Greek industries, and the chief Engineer was prof. K. Yakinthos (AUTH).
+Starting from scratch, the HCUAV prototype (RX-1) made its first and successful flight, 36 months after the initiation of the project.
+The maiden flight took place at August 4, 2016, and lasted approximately 15 minutes. The attached video is an overview of the testing phase, which started right after the conclusion of the aerial vehicle construction and integration.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/HrSj4gomEAg&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+</description>
+    </item>
+    
+  </channel>
+</rss>
