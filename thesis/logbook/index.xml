@@ -74,821 +74,6 @@
     </item>
     
     <item>
-      <title>State-space</title>
-      <link>https://dimidagd.github.io/thesis/logbook/state_space/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>https://dimidagd.github.io/thesis/logbook/state_space/</guid>
-      <description>&lt;h2 id=&#34;state-vector&#34;&gt;State vector&lt;/h2&gt;
-&lt;p&gt;Assuming the target&amp;rsquo;s motion on the &lt;em&gt;&lt;strong&gt;two-dimensional&lt;/strong&gt;&lt;/em&gt; own-ship&amp;rsquo;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Cartesian velocity model
-$$\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} $$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Polar velocity model
-$$\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} $$&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;where&lt;/p&gt;
-&lt;p&gt;$$
-\begin{align*}
-\upsilon &amp;amp;= \sqrt{\dot{x}^2 + \dot{y}^2}  \\&lt;br&gt;
-\psi &amp;amp;= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\&lt;br&gt;
-\omega &amp;amp;= \dot{\psi}
-\end{align*}
-$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;$(x,y)$ is the displacement relative to the local self-body fixed coordinate system&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;$\upsilon$ is the target&amp;rsquo;s linear velocity&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;$\psi$ is the heading angle w.r.t the tracking system&amp;rsquo;s x-axis.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;$\omega$ is the turn-rate of the target&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;all expressed w.r.t the own-ship&amp;rsquo;s tracking coordinate system.&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-tracked-target-state-vector-top-view-in-the-tracking-coordinate-system&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; data-caption=&#34;Tracked target state vector top view, in the tracking coordinate system&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Tracked target state vector top view, in the tracking coordinate system
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Coordinate systems</title>
-      <link>https://dimidagd.github.io/thesis/logbook/coordinate_systems/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://dimidagd.github.io/thesis/logbook/coordinate_systems/</guid>
-      <description>&lt;!-- TOC --&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;a href=&#34;#earth-coordinate-systems&#34;&gt;Earth coordinate systems&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;a href=&#34;#geodetic-coordinates&#34;&gt;Geodetic coordinates&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#local-tangential---enu&#34;&gt;Local-tangential - ENU&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#earth-centered-earth-fixed-ecef&#34;&gt;Earth Centered Earth-fixed (ECEF)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#transformations&#34;&gt;Transformations&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;a href=&#34;#geodetic-to-ecef&#34;&gt;Geodetic to ECEF&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#ecef-to-enu&#34;&gt;ECEF to ENU&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#ship-coordinate-systems&#34;&gt;Ship coordinate systems&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;a href=&#34;#body-fixed-coordinate-system&#34;&gt;Body fixed coordinate system&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#seakeeping-coordinate-system&#34;&gt;Seakeeping coordinate system&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#tracking-coordinates-system&#34;&gt;Tracking coordinates system&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#purpose-of-using-different-coordinate-systems&#34;&gt;Purpose of using different coordinate systems&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#transformations-1&#34;&gt;Transformations&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;a href=&#34;#from-enu-to-tracking-coordinates&#34;&gt;From ENU to tracking coordinates&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;a href=&#34;#purpose-of-using-different-coordinate-systems-1&#34;&gt;Purpose of using different coordinate systems&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;!-- /TOC --&gt;
-&lt;h1 id=&#34;earth-coordinate-systems&#34;&gt;Earth coordinate systems&lt;/h1&gt;
-&lt;p&gt;When defining the configuration space, four coordinate systems are usually involved in &lt;em&gt;target tracking&lt;/em&gt; algorithms.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Geodetic&lt;/li&gt;
-&lt;li&gt;Local-tangential East-North-Up (ENU)&lt;/li&gt;
-&lt;li&gt;Earth-Centered Earth-fixed (ECEF)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The transformations between the systems exist and are non-linear.&lt;/p&gt;
-&lt;h4 id=&#34;geodetic-coordinates&#34;&gt;Geodetic coordinates&lt;/h4&gt;
-&lt;p&gt;The earth&amp;rsquo;s surface is approximated by an ellipsoid of revolution of known parameters. The parameters depend on the datum of choice. In the scope of this chapter, the selected datum is the &lt;em&gt;&lt;strong&gt;WGS 84&lt;/strong&gt;&lt;/em&gt;. Locations near the surface are described in terms of latitude, longitude, and height $(\phi, \lambda, h)^T$.&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-geodetic-coordinate-system&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/geodetic.png&#34; data-caption=&#34;Geodetic coordinate system&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/geodetic.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Geodetic coordinate system
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-
-&lt;h4 id=&#34;local-tangential---enu&#34;&gt;Local-tangential - ENU&lt;/h4&gt;
-&lt;p&gt;The local tangential plane coordinates, are based on the local &lt;em&gt;vertical direction&lt;/em&gt; and the earth&amp;rsquo;s axis of rotation.&lt;/p&gt;
-&lt;p&gt;Two variants exist, the selection of which is a matter of convention but leads to slightly different state vectors in tracking applications.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;East, North, Up (&lt;em&gt;&lt;strong&gt;ENU&lt;/strong&gt;&lt;/em&gt;)&lt;/li&gt;
-&lt;li&gt;North, East, Down (&lt;em&gt;&lt;strong&gt;NED&lt;/strong&gt;&lt;/em&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;The local-tangential &lt;em&gt;&lt;strong&gt;east-north-up&lt;/strong&gt;&lt;/em&gt;  plane is the rectangular coordinate system determined by &lt;em&gt;fitting a tangential plane&lt;/em&gt; to the surface of the earth at some reference point $[X_0,Y_0,Z_0]$. The reference point is the origin of the frame.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Such a system is convenient in the context of tracking nearby ships because the tracking problem can be reduced to tracking a target on a two-dimensional plane&lt;/em&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;earth-centered-earth-fixed-ecef&#34;&gt;Earth Centered Earth-fixed (ECEF)&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;ECEF&lt;/strong&gt; is a &lt;em&gt;cartesian coordinate system&lt;/em&gt; $[X,Y,Z]^T$ with its origin placed at the earth&amp;rsquo;s &lt;em&gt;center of mass&lt;/em&gt;, hence the naming convention. It is a rotating system as the &lt;em&gt;z-axis&lt;/em&gt; is pointing through &lt;em&gt;true north&lt;/em&gt; and the x-axis intersects the earth&amp;rsquo;s sphere at $[\phi,\lambda]^{T} =  [0,0]^{T}$.&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-ecef-and-enu-systems&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/ECEF_ENU.png&#34; data-caption=&#34;ECEF and ENU systems&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/ECEF_ENU.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    ECEF and ENU systems
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-
-&lt;h2 id=&#34;transformations&#34;&gt;Transformations&lt;/h2&gt;
-&lt;p&gt;There is a need to define transformations between different coordinate systems.&lt;/p&gt;
-&lt;h4 id=&#34;geodetic-to-ecef&#34;&gt;Geodetic to ECEF&lt;/h4&gt;
-&lt;p&gt;GPS measurements usually arrive in &lt;em&gt;&lt;strong&gt;geodetic&lt;/strong&gt;&lt;/em&gt; coordinates, where as tracking is usually performed in the &lt;em&gt;&lt;strong&gt;local tangential&lt;/strong&gt;&lt;/em&gt; plane of the own-ship.&lt;/p&gt;
-&lt;p&gt;The transformation between these two systems requires an intermediate transformation from &lt;em&gt;&lt;strong&gt;geodetic&lt;/strong&gt;&lt;/em&gt; $(\phi,\lambda,h)$ to &lt;em&gt;&lt;strong&gt;ECEF&lt;/strong&gt;&lt;/em&gt;   $(X,Y,Z)$ coordinates.&lt;/p&gt;
-&lt;p&gt;$$\begin{align*}
-X &amp;amp;=(N+h)cos\lambda cos\phi \&lt;br&gt;
-Y &amp;amp;= (N+h)cos\lambda sin\phi \&lt;br&gt;
-Z &amp;amp;= [N(1-e^2)+h] sin\lambda
-\end{align*}$$&lt;/p&gt;
-&lt;h4 id=&#34;ecef-to-enu&#34;&gt;ECEF to ENU&lt;/h4&gt;
-&lt;p&gt;Given a reference point in Geodetic $[\phi_0,\lambda_0]$ and the corresponding ECEF $[X_0,Y_0,Z_0]$ coordinates, then any other point&amp;rsquo;s ECEF coordinates $[X,Y,Z]$ can be converted to local tangential plane coordinates $[x,y,z]$ using the following transformation&lt;/p&gt;
-&lt;p&gt;$$
-\begin{bmatrix}
-x\&lt;br&gt;
-y\&lt;br&gt;
-z
-\end{bmatrix}= \mathcal{L}\left(\begin{bmatrix}
-X\&lt;br&gt;
-Y\&lt;br&gt;
-Z
-\end{bmatrix} - \begin{bmatrix}
-X_0\&lt;br&gt;
-Y_0\&lt;br&gt;
-Z_0
-\end{bmatrix}\right)
-$$&lt;/p&gt;
-&lt;p&gt;where $\mathcal{L}$ is a function of the reference point $[\phi_0,\lambda_0,h_0]$&lt;/p&gt;
-&lt;p&gt;$$
-\mathcal{L} = \begin{bmatrix}
--sin\phi_0  &amp;amp; cos\phi_0 &amp;amp; 0 \&lt;br&gt;
--sin\lambda_0cos\phi_0 &amp;amp; -sin\lambda_0sin\phi_0 &amp;amp; cos\lambda_0\&lt;br&gt;
-cos\lambda_0 cos\phi_0 &amp;amp; cos\lambda_0 sin\phi_0 &amp;amp; sin\lambda_0
-\end{bmatrix}
-$$&lt;/p&gt;
-&lt;h1 id=&#34;ship-coordinate-systems&#34;&gt;Ship coordinate systems&lt;/h1&gt;
-&lt;p&gt;To describe the position and orientation of a ship, one can use the following orthogonal coordinate systems:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;NED/ENU, $\{n\} , \{e\}$&lt;/li&gt;
-&lt;li&gt;Body-fixed, $\{b\}$&lt;/li&gt;
-&lt;li&gt;Seakeeping, $\{s\}$&lt;/li&gt;
-&lt;li&gt;Tracking coordinates, $\{t\}$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-body-fixed-sea-keeping-and-ned-systems&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/seakeeping_body.jpg&#34; data-caption=&#34;Body fixed sea-keeping and NED systems&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/seakeeping_body.jpg&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Body fixed sea-keeping and NED systems
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-
-src: [
-&lt;a href=&#34;https://www.researchgate.net/publication/41719906_Kinematic_Models_for_Manoeuvring_and_Seakeeping_of_Marine_Vessels&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kinematic Models for Manoeuvring and Seakeeping of Marine Vessels&lt;/a&gt;]&lt;/p&gt;
-&lt;h4 id=&#34;body-fixed-coordinate-system&#34;&gt;Body fixed coordinate system&lt;/h4&gt;
-&lt;p&gt;This system is fixed to the hull of a vessel. The x-axis pointing towards the bow, y-axis point starboard and z-axis pointing downwards completing the orthogonal system. The origin of the system is usually the origin of the principal axes of inertia, which simplifies the solution of the dynamical equations of motion for the body.&lt;/p&gt;
-&lt;h4 id=&#34;seakeeping-coordinate-system&#34;&gt;Seakeeping coordinate system&lt;/h4&gt;
-&lt;p&gt;The &lt;em&gt;&lt;strong&gt;seakeeping&lt;/strong&gt;&lt;/em&gt; frame follows the average speed of the vessel. As such, the system is fixed to the ship&amp;rsquo;s &lt;em&gt;equilibrium&lt;/em&gt; state, which is defined by the average speed and heading. The positive x-axis is pointing towards the forward velocity vector, the y-axis pointing starboard and the z-axis pointing down. The origin of the system is selected so that the z-axis is pointing through its mean center of mass, and the x-y plane coincides with the mean free water surface.&lt;/p&gt;
-&lt;h4 id=&#34;tracking-coordinates-system&#34;&gt;Tracking coordinates system&lt;/h4&gt;
-&lt;p&gt;For the shake of simplicity, one can define the tracking coordinates system $\{t\}$. The origin of the tracking system coincides with the origin of the seakeeping coordinate system of the own-ship. The x-axis is pointing in the heading direction of the own-ship, the y-axis is pointing port, and the z-axis up to complete a dextral orthogonal system. The x-y axes are always coplanar to the East North plane and since this is an &lt;em&gt;&lt;strong&gt;equilibrium coordinate system&lt;/strong&gt;&lt;/em&gt;, the coordinates of a tracked target in this system do not depend on the roll or pitch angles of the own-ship. Thus the configuration space for the tracking problem is reduced in tracking along two dimensions.&lt;/p&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-enu-and-own-ship-tracking-coordinates&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/coords.png&#34; data-caption=&#34;ENU and own-ship tracking coordinates&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/coords.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    ENU and own-ship tracking coordinates
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-
-&lt;h3 id=&#34;purpose-of-using-different-coordinate-systems&#34;&gt;Purpose of using different coordinate systems&lt;/h3&gt;
-&lt;p&gt;Both the motion and the measurement model equations depend on the coordinate system of choice. Sensor measurements from a radar usually arrive in the sensor&amp;rsquo;s local spherical system, where as the GPS measurements either for the own-ship or for other vessels arrive in the geodetic system. It is convenient to consider that all floating targets move on the same plane, thus to express a target&amp;rsquo;s motion model w.r.t the own-ship&amp;rsquo;s local tangential plane.&lt;/p&gt;
-&lt;p&gt;Since the local sensors like the radar and the cameras are rigidly attached to the body-frame, it is important to consider the transformations from the body coordinate system to the own-ship&amp;rsquo;s equilibrium coordinate system.&lt;/p&gt;
-&lt;!--
-
-This frame is the local-tangential frame rotated around the z-axis so that the x-axis is aligned with the own-ships heading direction from the true north $h_{self_{true}}$. This frame in case of a non rolling-pitching vessel coincides with the body-fixed frame. This is also called the sea-keeping frame because the vessel is assumed to move along the direction of its average velocity. Since this system is rotating along the vessel&#39;s heading direction and so do the local sensors, it is convenient to use for tracking purposes.
---&gt;
-&lt;h3 id=&#34;transformations-1&#34;&gt;Transformations&lt;/h3&gt;
-&lt;h4 id=&#34;from-enu-to-tracking-coordinates&#34;&gt;From ENU to tracking coordinates&lt;/h4&gt;
-&lt;p&gt;If the origin of the ENU system is selected to coincide with the origin of the own-ship&amp;rsquo;s tracking coordinates origin, and $\psi$ is the heading angle of the own-ship from the North direction, then the transformation from ENU, to the own-ship&amp;rsquo;s tracking coordinates is&lt;/p&gt;
-&lt;p&gt;$$\begin{bmatrix}
-x \&lt;br&gt;
-y \&lt;br&gt;
-z
-\end{bmatrix}&lt;em&gt;{\text{{t}}} = R&lt;/em&gt;{z}(\frac{\pi}{2}-\psi)
-\begin{bmatrix}
-E \&lt;br&gt;
-N \&lt;br&gt;
-U
-\end{bmatrix}_{\text{{e}}}
-$$&lt;/p&gt;
-&lt;p&gt;where&lt;/p&gt;
-&lt;p&gt;$$
-R_{z}(\theta)=\begin{bmatrix}
-cos\theta &amp;amp;-sin\theta &amp;amp;0\&lt;br&gt;
-sin\theta &amp;amp;cos\theta &amp;amp;0 \&lt;br&gt;
-0 &amp;amp;0 &amp;amp;1
-\end{bmatrix}
-$$&lt;/p&gt;
-&lt;h2 id=&#34;purpose-of-using-different-coordinate-systems-1&#34;&gt;Purpose of using different coordinate systems&lt;/h2&gt;
-&lt;p&gt;Both the &lt;em&gt;motion&lt;/em&gt; and the &lt;em&gt;measurement&lt;/em&gt; model equations depend on the coordinate system of choice.&lt;/p&gt;
-&lt;p&gt;Sensor measurements from a radar usually arrive in the local tangential system, where as the GPS measurements either for the own-ship or for other vessels arrive in the geodetic system.&lt;/p&gt;
-&lt;p&gt;It is convenient thus to express a &lt;em&gt;&lt;strong&gt;target&amp;rsquo;s motion model&lt;/strong&gt;&lt;/em&gt; w.r.t the &lt;em&gt;&lt;strong&gt;local tangential &amp;amp; body fixed frame&lt;/strong&gt;&lt;/em&gt;, since the local sensors like the radar and the cameras are rigidly attached to the body-frame.&lt;/p&gt;
-&lt;p&gt;This simplifies the measurement models for local sensors, nevertheless working in the local tangential plane induces errors when one has to use models that depend on the &lt;em&gt;&lt;strong&gt;earth&amp;rsquo;s curvature&lt;/strong&gt;&lt;/em&gt; like the &lt;strong&gt;AIS&lt;/strong&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Environment</title>
-      <link>https://dimidagd.github.io/thesis/logbook/categenv/</link>
-      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://dimidagd.github.io/thesis/logbook/categenv/</guid>
-      <description>&lt;p&gt;This sections is devoted to:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Different earth coordinate systems&lt;/li&gt;
-&lt;li&gt;Conversions between earth coordinate systems&lt;/li&gt;
-&lt;li&gt;Different ship coordinate systems&lt;/li&gt;
-&lt;li&gt;Transformations between ship coordinate systems&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Modeling</title>
-      <link>https://dimidagd.github.io/thesis/logbook/categmodel/</link>
-      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://dimidagd.github.io/thesis/logbook/categmodel/</guid>
-      <description>&lt;p&gt;This sections is devoted to:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Different state-space representations of a tracked target.&lt;/li&gt;
-&lt;li&gt;Different motion model(state update functions) for a tracked target.&lt;/li&gt;
-&lt;li&gt;Different sensors and their models&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Filtering</title>
-      <link>https://dimidagd.github.io/thesis/logbook/categfilt/</link>
-      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://dimidagd.github.io/thesis/logbook/categfilt/</guid>
-      <description>&lt;p&gt;This sections is devoted to:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Linear filtering methods&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;KF&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Non-linear filtering methods&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;EKF&lt;/li&gt;
-&lt;li&gt;PF&lt;/li&gt;
-&lt;li&gt;PDAF/EKF&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Performance analysis of different filters&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>KF/EKF</title>
-      <link>https://dimidagd.github.io/thesis/logbook/kf_ekf/</link>
-      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
-      <guid>https://dimidagd.github.io/thesis/logbook/kf_ekf/</guid>
-      <description>&lt;h1 id=&#34;kalman-filter&#34;&gt;Kalman filter&lt;/h1&gt;
-&lt;h2 id=&#34;modeling-assumptions&#34;&gt;Modeling Assumptions&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;System&amp;rsquo;s state evolution $\mathbf{x}_{k+1} = f(\mathbf{x}_k,u_k) + w_{\textit{x}}$ is linear and driven by
-&lt;ul&gt;
-&lt;li&gt;Known input $u_k$&lt;/li&gt;
-&lt;li&gt;Additive process noise $w_{\textit{x}}$ which is assumed to be a zero-mean, white and uncorrelated with known covariance matrix $Q(k)$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;The measurements $ z_k = h(x_k,u_k) + w_z $  are linear function of the state vector and the input vector with
-&lt;ul&gt;
-&lt;li&gt;Additive zero-mean white noise with known covariance $R(k)$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;The &lt;em&gt;&lt;strong&gt;initial state&lt;/strong&gt;&lt;/em&gt; vector is a random variable with known mean $\mathbf{x}_0$ and covariance $P_0$ (initial uncertainty)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;center&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-block-diagram-of-a-discrete-kalman-filtering-algorithm&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/KF2.png&#34; data-caption=&#34;Block diagram of a discrete Kalman filtering algorithm&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/KF2.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Block diagram of a discrete Kalman filtering algorithm
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-&lt;/center&gt;
-&lt;p&gt;Under the above assumptions the Kalman Filter is the &lt;em&gt;&lt;strong&gt;MMSE state estimator&lt;/strong&gt;&lt;/em&gt;. If the random variables are &lt;em&gt;not Gaussian&lt;/em&gt;, but one can still obtain their first two moments, then the KF is still the &lt;em&gt;&lt;strong&gt;best linear MMSE estimator&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;why-the-standard-kf-is-not-enough&#34;&gt;Why the standard KF is not enough&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Usually the motion models are nonlinear&lt;/li&gt;
-&lt;li&gt;The measurement models are usually nonlinear&lt;/li&gt;
-&lt;li&gt;Unable to capture  mode changes(target maneuveres)&lt;/li&gt;
-&lt;li&gt;Can&amp;rsquo;t handle cross-correlated noise&lt;/li&gt;
-&lt;li&gt;Single target &amp;amp; unimodal method&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;extended-kalman-filter&#34;&gt;Extended Kalman Filter&lt;/h1&gt;
-&lt;p&gt;The EKF is a suboptimal state estimation algorithm for nonlinear systems.&lt;/p&gt;
-&lt;h2 id=&#34;modeling-assumptions-1&#34;&gt;Modeling Assumptions&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Same as the KF except that the state transition function $f$ and/or the measurement function $h$ are nonlinear, note that the noises are still assumed to enter additively into the state update/measurement equations.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&lt;strong&gt;First order Taylor expansion&lt;/strong&gt;&lt;/em&gt; of the nonlinear functions around the current state is a reasonable approximation of the original nonlinear functions.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;taylor-approximation-of-the-ctrv-motion-models&#34;&gt;Taylor approximation of the CTRV motion models&lt;/h2&gt;
-&lt;p&gt;A nonlinear motion model $x_{k} = f({x}_{k-1})$ can be linearised around a known state $x_{k-1}$&lt;/p&gt;
-&lt;p&gt;$$
-f_{k-1} \approx F_{k-1} =
-\begin{bmatrix}
-\nabla_{x_{k-1}} f_{k-1}^{T}(x_{k-1})
-\end{bmatrix}_{x_{k-1} \rightarrow\text{latest estimate}}^{T}
-$$&lt;/p&gt;
-&lt;p&gt;and for the &lt;em&gt;&lt;strong&gt;CTRV&lt;/strong&gt;&lt;/em&gt; motion   model this leads to&lt;/p&gt;
-&lt;p&gt;$$
-F_{{CTRV}_{k-1}} =
-\begin{bmatrix}1 &amp;amp;0 &amp;amp;\frac{sin(h+T\omega) - \sinh}{\omega} &amp;amp; \upsilon \frac{cos(h+T\omega)-cosh}{\omega} &amp;amp; \upsilon\frac{sinh -sin(h+T\omega) + T\omega cos(h+T\omega)}{\omega^{2}}\\&lt;br&gt;
-0 &amp;amp;1 &amp;amp;-\frac{cos(h+T\omega) - cos(\omega)}{\omega} &amp;amp;\upsilon \frac{sin(h+T\omega)-sinh}{\omega} &amp;amp; \upsilon\frac{cos(h + T\omega) -cosh + T\omega sin(h+T\omega)}{\omega^{2}}\\&lt;br&gt;
-0 &amp;amp;0 &amp;amp;1 &amp;amp;0 &amp;amp;0 \\&lt;br&gt;
-0 &amp;amp;0 &amp;amp;0 &amp;amp;0 &amp;amp;1\end{bmatrix}
-$$&lt;/p&gt;
-&lt;h2 id=&#34;taylor-approximation-of-the-measurement-models&#34;&gt;Taylor approximation of the measurement models&lt;/h2&gt;
-&lt;p&gt;similarly, a measurement model $z_k=h(\mathbf{x_k})$ can be linearised around the latest motion propagated estimate $x_{k}$ as&lt;/p&gt;
-&lt;p&gt;$$
-h_{k} \approx H_{k} =
-\begin{bmatrix}
-\nabla_{x_{k}} h_{k}^{T}(x_{k})
-\end{bmatrix}_{x_{k} \rightarrow\text{motion updated estimate}}^{T}
-$$&lt;/p&gt;
-&lt;p&gt;For example, the &lt;em&gt;&lt;strong&gt;radar model&lt;/strong&gt;&lt;/em&gt; that measures distance and bearing  to a target with known state vector $\mathbf{x}_k = [x,y,\upsilon,h,\omega]^T$, can be linearised as:&lt;/p&gt;
-&lt;p&gt;$$
-H_k =
-\begin{bmatrix}
-\frac{x}{\sqrt{x^2+y^2}} &amp;amp;\frac{y}{\sqrt{x^2+y^2}} &amp;amp;0 &amp;amp;0 &amp;amp;0 \\&lt;br&gt;
--\frac{y}{x^2+y^2} &amp;amp;\frac{x}{x^2+y^2} &amp;amp;0 &amp;amp;0 &amp;amp;0
-\end{bmatrix}
-$$&lt;/p&gt;
-&lt;center&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-gaussian-pdf-propagation-through-a-nonlinear-model-and-taylor-approximation&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/EKF_lineariation_error.png&#34; data-caption=&#34;Gaussian PDF propagation through a nonlinear model and taylor-approximation.&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/EKF_lineariation_error.png&#34; alt=&#34;&#34; width=&#34;70%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Gaussian PDF propagation through a nonlinear model and taylor-approximation.
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-&lt;/center&gt;
-&lt;!---
-| ![space-1.jpg](/thesis/EKF_lineariation_error.png) |
-|:--:|
-| *Space*
---&gt;
-&lt;p&gt;
-&lt;a href=&#34;http://ais.informatik.uni-freiburg.de/teaching/ss17/robotics/slides/11-ekf.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sebastian Thrun, Wolfram Burgard, and Dieter Fox. 2005. Probabilistic Robotics (Intelligent Robotics and Autonomous Agents). The MIT Press.&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;simulated-ekf-performance&#34;&gt;Simulated EKF performance&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;Motion model CTRV, sample time T = 100ms&lt;/li&gt;
-&lt;li&gt;Measurement models, asynchronous measurements from:
-&lt;ul&gt;
-&lt;li&gt;Noisy Radar measurements: bearing and distance, Ts=5 s&lt;/li&gt;
-&lt;li&gt;Noisy Camera pixel measurements. The camera is measuring the targets horizontal target pixel location on the image plane every Ts=20s.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;center&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-overall-estimated-trajectory-of-target-using-ctrv-motion-model-for-83-minutes&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/fusionCTRV.png&#34; data-caption=&#34;Overall estimated trajectory of target using CTRV motion model for 8.3 minutes&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/fusionCTRV.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Overall estimated trajectory of target using CTRV motion model for 8.3 minutes
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-&lt;/center&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;/th&gt;
-&lt;th&gt;Sample time&lt;/th&gt;
-&lt;th&gt;function&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Radar&lt;/td&gt;
-&lt;td&gt;5s&lt;/td&gt;
-&lt;td&gt;n-linear&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Camera&lt;/td&gt;
-&lt;td&gt;20s&lt;/td&gt;
-&lt;td&gt;n-linear&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;CTRV Motion model&lt;/td&gt;
-&lt;td&gt;0.1s&lt;/td&gt;
-&lt;td&gt;n-linear&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Having a close look at a segment of the trajectory one can observe the effect of using a CTRV model.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Clearly the estimator is able to adapt to the step change in the turn rate but the convergence to the real track at the moment of the change is rather slow because the motion model that the filter is using assumes constant turn rate with low process noise.&lt;/li&gt;
-&lt;li&gt;The red ellipses correspond to the estimated &lt;em&gt;state uncertainty&lt;/em&gt; $P_k$ as propagated through the motion model.&lt;/li&gt;
-&lt;li&gt;The green ellipses correspond to the estimated &lt;em&gt;state uncertainty&lt;/em&gt; $P_k$ after incorporating a measurement $z_k$, whether that be a radar or a camera measurement.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;center&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-close-up-on-the-previous-trajectory&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/propagation.png&#34; data-caption=&#34;Close up on the previous trajectory&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/propagation.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Close up on the previous trajectory
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-&lt;/center&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Illustration&lt;/th&gt;
-&lt;th&gt;Representation&lt;/th&gt;
-&lt;th&gt;Variable&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Red ellipse&lt;/td&gt;
-&lt;td&gt;Predicted state-uncertainty $3\sigma$ area&lt;/td&gt;
-&lt;td&gt;$\hat{P}_k$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Green ellipse&lt;/td&gt;
-&lt;td&gt;Corrected predicted state-uncertainty $3\sigma$ area&lt;/td&gt;
-&lt;td&gt;$\hat{P}_k$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Blue trajectory&lt;/td&gt;
-&lt;td&gt;Target&amp;rsquo;s real trajectory&lt;/td&gt;
-&lt;td&gt;$\mathbf{x}_{0:k}$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Red trajectory&lt;/td&gt;
-&lt;td&gt;Estimated target&amp;rsquo;s state trajectory&lt;/td&gt;
-&lt;td&gt;$\hat{\mathbf{x}}_{0:k}$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Green cross&lt;/td&gt;
-&lt;td&gt;Noisy radar measurements&lt;/td&gt;
-&lt;td&gt;$z_{radar}$&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h1 id=&#34;filter-performance&#34;&gt;Filter performance&lt;/h1&gt;
-&lt;h2 id=&#34;performance-graphs&#34;&gt;Performance graphs&lt;/h2&gt;
-&lt;p&gt;The performance of the &lt;em&gt;EKF single target tracker&lt;/em&gt; previously shown in 2D, is outlined in the following figures&lt;/p&gt;
-&lt;center&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-performance-of-the-ekf-on-the-previous-simulation-right-click-image-open-in-new-tab-for-zoomable-image&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/EKF_performance.png&#34; data-caption=&#34;Performance of the EKF on the previous simulation (right click image open in new tab for zoomable image)&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/EKF_performance.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Performance of the EKF on the previous simulation (right click image open in new tab for zoomable image)
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-&lt;/center&gt;
-&lt;p&gt;From top to bottom:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Predicted target position $x_p$ and real target position $x$ w.r.t Seakeeping own-ship frame&lt;/li&gt;
-&lt;li&gt;Predicted target position $y_p$ and real target position $y$ w.r.t Seakeeping own-ship frame&lt;/li&gt;
-&lt;li&gt;Predicted target heading velocity $\upsilon_p$ and real target heading velocity $\upsilon$ w.r.t Seakeeping own-ship frame&lt;/li&gt;
-&lt;li&gt;Predicted target heading velocity $h_p$ and real target heading velocity $h$ w.r.t Seakeeping own-ship frame&lt;/li&gt;
-&lt;li&gt;Predicted target turn rate $\omega_{p}$ and real target turn rate $\omega$&lt;/li&gt;
-&lt;li&gt;Absolute distance prediction error norm $|e| = \sqrt{(x-x_p)^2+(y-y_p)^2}$&lt;/li&gt;
-&lt;li&gt;Innovation norm $|v|$, is a measure of how accurate the filter is tracking the real target, an unbound innovation norm implies that the observations do not match the predicted trajectory anymore i.e the tracker diverged.&lt;/li&gt;
-&lt;li&gt;Innovation of the range measurements&lt;/li&gt;
-&lt;li&gt;Innovation of the range rate Measurements&lt;/li&gt;
-&lt;li&gt;Innovation of the bearing measurement&lt;/li&gt;
-&lt;li&gt;Innovation of the camera localiser measurements&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;determinant-of-p_k&#34;&gt;Determinant of $P_k$&lt;/h2&gt;
-&lt;p&gt;Calculating the determinant $||P_k||$ of the &lt;strong&gt;first two columns and rows&lt;/strong&gt; of the &lt;strong&gt;predicted state covariance matrix&lt;/strong&gt; provides an indication of the magnitude of the &lt;em&gt;tracking uncertainty&lt;/em&gt; of the target on the  2D tracking plane. Or in other words a measure of the surface of the plotted uncertainty ellipses. As seen in the figure below, measurement updates from different sensors are able to keep the uncertainty low.&lt;/p&gt;
-&lt;center&gt;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;figure id=&#34;figure-predicted-state-covariance-matrix-determinant&#34;&gt;
-
-
-  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/detP.png&#34; data-caption=&#34;Predicted state covariance matrix determinant&#34;&gt;
-
-
-  &lt;img src=&#34;https://dimidagd.github.io/thesis/detP.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
-&lt;/a&gt;
-
-
-  
-  
-  &lt;figcaption&gt;
-    Predicted state covariance matrix determinant
-  &lt;/figcaption&gt;
-
-
-&lt;/figure&gt;
-&lt;/center&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Motion models</title>
       <link>https://dimidagd.github.io/thesis/logbook/motion_models/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
@@ -974,6 +159,83 @@ g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
 0
 \end{bmatrix} ,  \omega = 0
 $$&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>State-space</title>
+      <link>https://dimidagd.github.io/thesis/logbook/state_space/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/state_space/</guid>
+      <description>&lt;h2 id=&#34;state-vector&#34;&gt;State vector&lt;/h2&gt;
+&lt;p&gt;Assuming the target&amp;rsquo;s motion on the &lt;em&gt;&lt;strong&gt;two-dimensional&lt;/strong&gt;&lt;/em&gt; own-ship&amp;rsquo;s tracking plane, then two different state-space descriptions can be used depending on the expression of the velocity vector:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Cartesian velocity model
+$$\mathbf{x} = \left[x,y,\dot{x}, \dot{y},\omega\right]^{T} $$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Polar velocity model
+$$\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T} $$&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$
+\begin{align*}
+\upsilon &amp;amp;= \sqrt{\dot{x}^2 + \dot{y}^2}  \\&lt;br&gt;
+\psi &amp;amp;= \arctan\left(\frac{\dot{y}}{\dot{x}}\right) \\&lt;br&gt;
+\omega &amp;amp;= \dot{\psi}
+\end{align*}
+$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;$(x,y)$ is the displacement relative to the local self-body fixed coordinate system&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$\upsilon$ is the target&amp;rsquo;s linear velocity&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$\psi$ is the heading angle w.r.t the tracking system&amp;rsquo;s x-axis.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$\omega$ is the turn-rate of the target&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;all expressed w.r.t the own-ship&amp;rsquo;s tracking coordinate system.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-tracked-target-state-vector-top-view-in-the-tracking-coordinate-system&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; data-caption=&#34;Tracked target state vector top view, in the tracking coordinate system&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/2d_track.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Tracked target state vector top view, in the tracking coordinate system
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
 </description>
     </item>
     
@@ -1369,6 +631,302 @@ $$&lt;/p&gt;
     </item>
     
     <item>
+      <title>Coordinate systems</title>
+      <link>https://dimidagd.github.io/thesis/logbook/coordinate_systems/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/coordinate_systems/</guid>
+      <description>&lt;!-- TOC --&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;#earth-coordinate-systems&#34;&gt;Earth coordinate systems&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;#geodetic-coordinates&#34;&gt;Geodetic coordinates&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#local-tangential---enu&#34;&gt;Local-tangential - ENU&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#earth-centered-earth-fixed-ecef&#34;&gt;Earth Centered Earth-fixed (ECEF)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#transformations&#34;&gt;Transformations&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;#geodetic-to-ecef&#34;&gt;Geodetic to ECEF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#ecef-to-enu&#34;&gt;ECEF to ENU&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#ship-coordinate-systems&#34;&gt;Ship coordinate systems&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;#body-fixed-coordinate-system&#34;&gt;Body fixed coordinate system&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#seakeeping-coordinate-system&#34;&gt;Seakeeping coordinate system&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#tracking-coordinates-system&#34;&gt;Tracking coordinates system&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#purpose-of-using-different-coordinate-systems&#34;&gt;Purpose of using different coordinate systems&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#transformations-1&#34;&gt;Transformations&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;#from-enu-to-tracking-coordinates&#34;&gt;From ENU to tracking coordinates&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;#purpose-of-using-different-coordinate-systems-1&#34;&gt;Purpose of using different coordinate systems&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- /TOC --&gt;
+&lt;h1 id=&#34;earth-coordinate-systems&#34;&gt;Earth coordinate systems&lt;/h1&gt;
+&lt;p&gt;When defining the configuration space, four coordinate systems are usually involved in &lt;em&gt;target tracking&lt;/em&gt; algorithms.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Geodetic&lt;/li&gt;
+&lt;li&gt;Local-tangential East-North-Up (ENU)&lt;/li&gt;
+&lt;li&gt;Earth-Centered Earth-fixed (ECEF)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The transformations between the systems exist and are non-linear.&lt;/p&gt;
+&lt;h4 id=&#34;geodetic-coordinates&#34;&gt;Geodetic coordinates&lt;/h4&gt;
+&lt;p&gt;The earth&amp;rsquo;s surface is approximated by an ellipsoid of revolution of known parameters. The parameters depend on the datum of choice. In the scope of this chapter, the selected datum is the &lt;em&gt;&lt;strong&gt;WGS 84&lt;/strong&gt;&lt;/em&gt;. Locations near the surface are described in terms of latitude, longitude, and height $(\phi, \lambda, h)^T$.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-geodetic-coordinate-system&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/geodetic.png&#34; data-caption=&#34;Geodetic coordinate system&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/geodetic.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Geodetic coordinate system
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h4 id=&#34;local-tangential---enu&#34;&gt;Local-tangential - ENU&lt;/h4&gt;
+&lt;p&gt;The local tangential plane coordinates, are based on the local &lt;em&gt;vertical direction&lt;/em&gt; and the earth&amp;rsquo;s axis of rotation.&lt;/p&gt;
+&lt;p&gt;Two variants exist, the selection of which is a matter of convention but leads to slightly different state vectors in tracking applications.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;East, North, Up (&lt;em&gt;&lt;strong&gt;ENU&lt;/strong&gt;&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;North, East, Down (&lt;em&gt;&lt;strong&gt;NED&lt;/strong&gt;&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The local-tangential &lt;em&gt;&lt;strong&gt;east-north-up&lt;/strong&gt;&lt;/em&gt;  plane is the rectangular coordinate system determined by &lt;em&gt;fitting a tangential plane&lt;/em&gt; to the surface of the earth at some reference point $[X_0,Y_0,Z_0]$. The reference point is the origin of the frame.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Such a system is convenient in the context of tracking nearby ships because the tracking problem can be reduced to tracking a target on a two-dimensional plane&lt;/em&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;earth-centered-earth-fixed-ecef&#34;&gt;Earth Centered Earth-fixed (ECEF)&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;ECEF&lt;/strong&gt; is a &lt;em&gt;cartesian coordinate system&lt;/em&gt; $[X,Y,Z]^T$ with its origin placed at the earth&amp;rsquo;s &lt;em&gt;center of mass&lt;/em&gt;, hence the naming convention. It is a rotating system as the &lt;em&gt;z-axis&lt;/em&gt; is pointing through &lt;em&gt;true north&lt;/em&gt; and the x-axis intersects the earth&amp;rsquo;s sphere at $[\phi,\lambda]^{T} =  [0,0]^{T}$.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-ecef-and-enu-systems&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/ECEF_ENU.png&#34; data-caption=&#34;ECEF and ENU systems&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/ECEF_ENU.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    ECEF and ENU systems
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;transformations&#34;&gt;Transformations&lt;/h2&gt;
+&lt;p&gt;There is a need to define transformations between different coordinate systems.&lt;/p&gt;
+&lt;h4 id=&#34;geodetic-to-ecef&#34;&gt;Geodetic to ECEF&lt;/h4&gt;
+&lt;p&gt;GPS measurements usually arrive in &lt;em&gt;&lt;strong&gt;geodetic&lt;/strong&gt;&lt;/em&gt; coordinates, where as tracking is usually performed in the &lt;em&gt;&lt;strong&gt;local tangential&lt;/strong&gt;&lt;/em&gt; plane of the own-ship.&lt;/p&gt;
+&lt;p&gt;The transformation between these two systems requires an intermediate transformation from &lt;em&gt;&lt;strong&gt;geodetic&lt;/strong&gt;&lt;/em&gt; $(\phi,\lambda,h)$ to &lt;em&gt;&lt;strong&gt;ECEF&lt;/strong&gt;&lt;/em&gt;   $(X,Y,Z)$ coordinates.&lt;/p&gt;
+&lt;p&gt;$$\begin{align*}
+X &amp;amp;=(N+h)cos\lambda cos\phi \&lt;br&gt;
+Y &amp;amp;= (N+h)cos\lambda sin\phi \&lt;br&gt;
+Z &amp;amp;= [N(1-e^2)+h] sin\lambda
+\end{align*}$$&lt;/p&gt;
+&lt;h4 id=&#34;ecef-to-enu&#34;&gt;ECEF to ENU&lt;/h4&gt;
+&lt;p&gt;Given a reference point in Geodetic $[\phi_0,\lambda_0]$ and the corresponding ECEF $[X_0,Y_0,Z_0]$ coordinates, then any other point&amp;rsquo;s ECEF coordinates $[X,Y,Z]$ can be converted to local tangential plane coordinates $[x,y,z]$ using the following transformation&lt;/p&gt;
+&lt;p&gt;$$
+\begin{bmatrix}
+x\&lt;br&gt;
+y\&lt;br&gt;
+z
+\end{bmatrix}= \mathcal{L}\left(\begin{bmatrix}
+X\&lt;br&gt;
+Y\&lt;br&gt;
+Z
+\end{bmatrix} - \begin{bmatrix}
+X_0\&lt;br&gt;
+Y_0\&lt;br&gt;
+Z_0
+\end{bmatrix}\right)
+$$&lt;/p&gt;
+&lt;p&gt;where $\mathcal{L}$ is a function of the reference point $[\phi_0,\lambda_0,h_0]$&lt;/p&gt;
+&lt;p&gt;$$
+\mathcal{L} = \begin{bmatrix}
+-sin\phi_0  &amp;amp; cos\phi_0 &amp;amp; 0 \&lt;br&gt;
+-sin\lambda_0cos\phi_0 &amp;amp; -sin\lambda_0sin\phi_0 &amp;amp; cos\lambda_0\&lt;br&gt;
+cos\lambda_0 cos\phi_0 &amp;amp; cos\lambda_0 sin\phi_0 &amp;amp; sin\lambda_0
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;ship-coordinate-systems&#34;&gt;Ship coordinate systems&lt;/h1&gt;
+&lt;p&gt;To describe the position and orientation of a ship, one can use the following orthogonal coordinate systems:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NED/ENU, $\{n\} , \{e\}$&lt;/li&gt;
+&lt;li&gt;Body-fixed, $\{b\}$&lt;/li&gt;
+&lt;li&gt;Seakeeping, $\{s\}$&lt;/li&gt;
+&lt;li&gt;Tracking coordinates, $\{t\}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-body-fixed-sea-keeping-and-ned-systems&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/seakeeping_body.jpg&#34; data-caption=&#34;Body fixed sea-keeping and NED systems&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/seakeeping_body.jpg&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Body fixed sea-keeping and NED systems
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+src: [
+&lt;a href=&#34;https://www.researchgate.net/publication/41719906_Kinematic_Models_for_Manoeuvring_and_Seakeeping_of_Marine_Vessels&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kinematic Models for Manoeuvring and Seakeeping of Marine Vessels&lt;/a&gt;]&lt;/p&gt;
+&lt;h4 id=&#34;body-fixed-coordinate-system&#34;&gt;Body fixed coordinate system&lt;/h4&gt;
+&lt;p&gt;This system is fixed to the hull of a vessel. The x-axis pointing towards the bow, y-axis point starboard and z-axis pointing downwards completing the orthogonal system. The origin of the system is usually the origin of the principal axes of inertia, which simplifies the solution of the dynamical equations of motion for the body.&lt;/p&gt;
+&lt;h4 id=&#34;seakeeping-coordinate-system&#34;&gt;Seakeeping coordinate system&lt;/h4&gt;
+&lt;p&gt;The &lt;em&gt;&lt;strong&gt;seakeeping&lt;/strong&gt;&lt;/em&gt; frame follows the average speed of the vessel. As such, the system is fixed to the ship&amp;rsquo;s &lt;em&gt;equilibrium&lt;/em&gt; state, which is defined by the average speed and heading. The positive x-axis is pointing towards the forward velocity vector, the y-axis pointing starboard and the z-axis pointing down. The origin of the system is selected so that the z-axis is pointing through its mean center of mass, and the x-y plane coincides with the mean free water surface.&lt;/p&gt;
+&lt;h4 id=&#34;tracking-coordinates-system&#34;&gt;Tracking coordinates system&lt;/h4&gt;
+&lt;p&gt;For the shake of simplicity, one can define the tracking coordinates system $\{t\}$. The origin of the tracking system coincides with the origin of the seakeeping coordinate system of the own-ship. The x-axis is pointing in the heading direction of the own-ship, the y-axis is pointing port, and the z-axis up to complete a dextral orthogonal system. The x-y axes are always coplanar to the East North plane and since this is an &lt;em&gt;&lt;strong&gt;equilibrium coordinate system&lt;/strong&gt;&lt;/em&gt;, the coordinates of a tracked target in this system do not depend on the roll or pitch angles of the own-ship. Thus the configuration space for the tracking problem is reduced in tracking along two dimensions.&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-enu-and-own-ship-tracking-coordinates&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/coords.png&#34; data-caption=&#34;ENU and own-ship tracking coordinates&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/coords.png&#34; alt=&#34;&#34; width=&#34;50%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    ENU and own-ship tracking coordinates
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h3 id=&#34;purpose-of-using-different-coordinate-systems&#34;&gt;Purpose of using different coordinate systems&lt;/h3&gt;
+&lt;p&gt;Both the motion and the measurement model equations depend on the coordinate system of choice. Sensor measurements from a radar usually arrive in the sensor&amp;rsquo;s local spherical system, where as the GPS measurements either for the own-ship or for other vessels arrive in the geodetic system. It is convenient to consider that all floating targets move on the same plane, thus to express a target&amp;rsquo;s motion model w.r.t the own-ship&amp;rsquo;s local tangential plane.&lt;/p&gt;
+&lt;p&gt;Since the local sensors like the radar and the cameras are rigidly attached to the body-frame, it is important to consider the transformations from the body coordinate system to the own-ship&amp;rsquo;s equilibrium coordinate system.&lt;/p&gt;
+&lt;!--
+
+This frame is the local-tangential frame rotated around the z-axis so that the x-axis is aligned with the own-ships heading direction from the true north $h_{self_{true}}$. This frame in case of a non rolling-pitching vessel coincides with the body-fixed frame. This is also called the sea-keeping frame because the vessel is assumed to move along the direction of its average velocity. Since this system is rotating along the vessel&#39;s heading direction and so do the local sensors, it is convenient to use for tracking purposes.
+--&gt;
+&lt;h3 id=&#34;transformations-1&#34;&gt;Transformations&lt;/h3&gt;
+&lt;h4 id=&#34;from-enu-to-tracking-coordinates&#34;&gt;From ENU to tracking coordinates&lt;/h4&gt;
+&lt;p&gt;If the origin of the ENU system is selected to coincide with the origin of the own-ship&amp;rsquo;s tracking coordinates origin, and $\psi$ is the heading angle of the own-ship from the North direction, then the transformation from ENU, to the own-ship&amp;rsquo;s tracking coordinates is&lt;/p&gt;
+&lt;p&gt;$$\begin{bmatrix}
+x \&lt;br&gt;
+y \&lt;br&gt;
+z
+\end{bmatrix}&lt;em&gt;{\text{{t}}} = R&lt;/em&gt;{z}(\frac{\pi}{2}-\psi)
+\begin{bmatrix}
+E \&lt;br&gt;
+N \&lt;br&gt;
+U
+\end{bmatrix}_{\text{{e}}}
+$$&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$
+R_{z}(\theta)=\begin{bmatrix}
+cos\theta &amp;amp;-sin\theta &amp;amp;0\&lt;br&gt;
+sin\theta &amp;amp;cos\theta &amp;amp;0 \&lt;br&gt;
+0 &amp;amp;0 &amp;amp;1
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;h2 id=&#34;purpose-of-using-different-coordinate-systems-1&#34;&gt;Purpose of using different coordinate systems&lt;/h2&gt;
+&lt;p&gt;Both the &lt;em&gt;motion&lt;/em&gt; and the &lt;em&gt;measurement&lt;/em&gt; model equations depend on the coordinate system of choice.&lt;/p&gt;
+&lt;p&gt;Sensor measurements from a radar usually arrive in the local tangential system, where as the GPS measurements either for the own-ship or for other vessels arrive in the geodetic system.&lt;/p&gt;
+&lt;p&gt;It is convenient thus to express a &lt;em&gt;&lt;strong&gt;target&amp;rsquo;s motion model&lt;/strong&gt;&lt;/em&gt; w.r.t the &lt;em&gt;&lt;strong&gt;local tangential &amp;amp; body fixed frame&lt;/strong&gt;&lt;/em&gt;, since the local sensors like the radar and the cameras are rigidly attached to the body-frame.&lt;/p&gt;
+&lt;p&gt;This simplifies the measurement models for local sensors, nevertheless working in the local tangential plane induces errors when one has to use models that depend on the &lt;em&gt;&lt;strong&gt;earth&amp;rsquo;s curvature&lt;/strong&gt;&lt;/em&gt; like the &lt;strong&gt;AIS&lt;/strong&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title></title>
       <link>https://dimidagd.github.io/thesis/logbook/tracking/</link>
       <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
@@ -1416,6 +974,871 @@ $$&lt;/p&gt;
   
   &lt;figcaption&gt;
     Tracking system components.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Structure</title>
+      <link>https://dimidagd.github.io/thesis/logbook/simulation_structure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/simulation_structure/</guid>
+      <description>&lt;p&gt;[Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]&lt;/p&gt;
+&lt;h1 id=&#34;simulation-and-visualization&#34;&gt;Simulation and visualization&lt;/h1&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-filters-visualization-for-single-target&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/simulator.png&#34; data-caption=&#34;Filters visualization for single target.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/simulator.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Filters visualization for single target.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;A simple sailboat model is moving according to a deterministic Constant Turn rate and Velocity (CTRV) model. Given the known starting state of the target $x_0$ ,&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Initialize EKF at $x_0$&lt;/li&gt;
+&lt;li&gt;Initialize PF at $x_0$&lt;/li&gt;
+&lt;li&gt;Perform target deterministic motion update&lt;/li&gt;
+&lt;li&gt;Obtain noisy observations (if any) $z$ from different rate sensors.&lt;/li&gt;
+&lt;li&gt;Update the estimate of each filter with the given observations if any, using PDA.&lt;/li&gt;
+&lt;li&gt;Plot the weighted particles above the PF state estimate where the height of a particle depends on its likelihood.&lt;/li&gt;
+&lt;li&gt;Plot x-y uncertainty ellipsoids of the EKF around the state estimation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;multiple-moving-objects&#34;&gt;Multiple moving objects&lt;/h2&gt;
+&lt;p&gt;So far, the data association problem was not considered, that is the filtering algorithms were certain about the origin on the measurements. Data association is a major component of a tracking algorithm both because of the existence of multiple measurement sources, but also because of the existence of outliers in the measurements.&lt;/p&gt;
+&lt;p&gt;The approach implemented so far is a &lt;em&gt;Probablistlic Data Association(PDA)&lt;/em&gt; algorithm.
+The goal again is in the update state, to associate measurements with different tracked targets based on a certain criterion described in the algorithm.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mathematical explanation will be documented at a later stage, for now a visualization of the simulation is shown below.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Three different targets visualised&lt;/li&gt;
+&lt;li&gt;Both EKF &amp;amp; PF Filtering for each target&lt;/li&gt;
+&lt;li&gt;Triple crossing of targets, but the filters are able to associate correctly the measurements and correctly estimate the trajectories.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3d-view&#34;&gt;3d view&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Continuous lines correspond to PF x-y state estimates for each target.&lt;/li&gt;
+&lt;li&gt;Magenta ellipsoids correspond to EKF state uncertainty&lt;/li&gt;
+&lt;li&gt;Point-clouds above the sailboats correspond to each target&amp;rsquo;s particle distibutions where the height and size of a particle depends on its likelihood.(overall number of particles N=300 for each target).&lt;/li&gt;
+&lt;li&gt;Filters are associating the measurements to the correct targets at all times.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-3d-view---multiple-targets-crossing-pda-with-ekf-and-pf&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/3dViewPDA.gif&#34; data-caption=&#34;3d view - multiple targets crossing PDA with EKF and PF.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/3dViewPDA.gif&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    3d view - multiple targets crossing PDA with EKF and PF.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;2d-top-view&#34;&gt;2d top-view&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Continuous lines correspond to moving objects deterministic trajectories.&lt;/li&gt;
+&lt;li&gt;Blue scatter &amp;lsquo;x&amp;rsquo; points  correspond to the history of noisy radar measurements sensed from all the available targets.&lt;/li&gt;
+&lt;li&gt;Dashed lines correspond to the Particle Filtered x-y state estimate evolution over time. PDA is correctly associating the measurements to the measurement origin.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-2d-top-view-of-multiple-tracked-targets-crossing&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/2dViewPDA.gif&#34; data-caption=&#34;2d top-view of multiple tracked targets crossing&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/2dViewPDA.gif&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    2d top-view of multiple tracked targets crossing
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>Environment</title>
+      <link>https://dimidagd.github.io/thesis/logbook/categenv/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/categenv/</guid>
+      <description>&lt;p&gt;This sections is devoted to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Different earth coordinate systems&lt;/li&gt;
+&lt;li&gt;Conversions between earth coordinate systems&lt;/li&gt;
+&lt;li&gt;Different ship coordinate systems&lt;/li&gt;
+&lt;li&gt;Transformations between ship coordinate systems&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Modeling</title>
+      <link>https://dimidagd.github.io/thesis/logbook/categmodel/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/categmodel/</guid>
+      <description>&lt;p&gt;This sections is devoted to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Different state-space representations of a tracked target.&lt;/li&gt;
+&lt;li&gt;Different motion model(state update functions) for a tracked target.&lt;/li&gt;
+&lt;li&gt;Different sensors and their models&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Filtering</title>
+      <link>https://dimidagd.github.io/thesis/logbook/categfilt/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/categfilt/</guid>
+      <description>&lt;p&gt;This sections is devoted to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Linear filtering methods&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;KF&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Non-linear filtering methods&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;EKF&lt;/li&gt;
+&lt;li&gt;PF&lt;/li&gt;
+&lt;li&gt;PDAF/EKF&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Performance analysis of different filters&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Simulations</title>
+      <link>https://dimidagd.github.io/thesis/logbook/categsims/</link>
+      <pubDate>Mon, 09 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/categsims/</guid>
+      <description>&lt;h1 id=&#34;updates&#34;&gt;Updates:&lt;/h1&gt;
+&lt;p&gt;This week I have been working on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Work on filtering visualization&lt;/li&gt;
+&lt;li&gt;Implement multiple moving objects in the Simulation&lt;/li&gt;
+&lt;li&gt;Implement multiple tracked objects in the simulation&lt;/li&gt;
+&lt;li&gt;Implement Particle Filter Algorithm for single target&lt;/li&gt;
+&lt;li&gt;Implement EKF with Probabilistic data Assosiation (PDAF)&lt;/li&gt;
+&lt;li&gt;Implement PF with Probabilistic Data Assosiation (PDAF)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;List of references:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PF</title>
+      <link>https://dimidagd.github.io/thesis/logbook/pf/</link>
+      <pubDate>Tue, 03 Mar 2020 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/pf/</guid>
+      <description>&lt;h1 id=&#34;particle-filtering&#34;&gt;Particle filtering&lt;/h1&gt;
+&lt;p&gt;Particle filters (PFs) belong to the category of sub-optimal filters. They represent probability densities with point mass densities (&amp;ldquo;particles&amp;rdquo;), and perform &lt;em&gt;&lt;strong&gt;Sequential Monte Carlo&lt;/strong&gt;&lt;/em&gt; (SMC) estimations. &lt;em&gt;&lt;strong&gt;SMC&lt;/strong&gt;&lt;/em&gt; ideas were historically introduced in statistics from the 1950s but the limited computational power available at the time constrained their use and development. As soon as faster computers were made available, the related research activity in the field increased, resulting in their improvement and adoption in numerous applications, namely tracking, localisation of agents, pattern recognition, fault-detection, and ADAS.&lt;/p&gt;
+&lt;h3 id=&#34;monte-carlo-integration&#34;&gt;Monte carlo integration&lt;/h3&gt;
+&lt;p&gt;The basis of SMC methods is &lt;em&gt;Monte Carlo integration&lt;/em&gt;. If a multidimensional integral needs to be evaluated:&lt;/p&gt;
+&lt;p&gt;$$\mathbf{I} = \int \mathbf{g(x)} d\mathbf{x}$$&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;$$ \mathbf{x} \in \mathbf{R}^{n_{x}} $$&lt;/p&gt;
+&lt;p&gt;Then the Monte Carlo (MC) approach for numerical integration assumes a factorisation&lt;/p&gt;
+&lt;p&gt;$$\mathbf{g(x)} = \mathbf{f(x)} \cdot \pi(\mathbf{x}) $$&lt;/p&gt;
+&lt;p&gt;so  as that $\pi(\mathbf{x})$ is interpreted as a probability density which is satisfying&lt;/p&gt;
+&lt;p&gt;$$
+\begin{align}
+\pi(\mathbf{x}) \geq 0 \&lt;br&gt;
+\int \pi \mathbf{x} d \mathbf{x} = 1
+\end{align}
+$$&lt;/p&gt;
+&lt;p&gt;If one can &amp;ldquo;draw&amp;rdquo; $N &amp;raquo; 1$ samples ${x^i; i = 1,&amp;hellip;,N}$ distributed according to $\pi (\mathbf{x})$ , then the integral estimate can be approximated with the sample mean:&lt;/p&gt;
+&lt;p&gt;$$
+I = \int \mathbf{f}(\mathbf{x})\pi(\mathbf{x}) d\mathbf{x} = I_N \approx \frac{1}{N}\sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i)
+$$&lt;/p&gt;
+&lt;p&gt;Given that the samples $\mathbf{x}^i$ are independent, then $I_N$ is an unbiased estimator, and according to the law of large numbers it will almost surely converge to $I$.&lt;/p&gt;
+&lt;p&gt;Given that the variance of $\mathbf{f}(\mathbf{x})$, $\sigma^2$ is finite,&lt;/p&gt;
+&lt;p&gt;$$
+\sigma^2 = \int (\mathbf{f}(\mathbf{x})- I)^2 \pi(\mathbf{x})
+$$&lt;/p&gt;
+&lt;p&gt;then the central theorem holds and the estimation error converges to the distribution:&lt;/p&gt;
+&lt;p&gt;$$
+\lim_{N\rightarrow \inf} \sqrt{N}(I_N - I) \sim \mathcal{N}(0,
+\sigma^2)
+$$&lt;/p&gt;
+&lt;p&gt;In the &lt;em&gt;&lt;strong&gt;Bayesian&lt;/strong&gt;&lt;/em&gt; context, $\pi(\mathbf{x})$ conveniently corresponds to the posterior belief density. What is not convenient though, is the fact that the posterior is usually multivariate, nonstandard and only known up to proportionality, thus distributed sampling is usually not available from it. A solution to this is the use of &lt;strong&gt;Importance Sampling&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;importance-sampling&#34;&gt;Importance sampling&lt;/h2&gt;
+&lt;p&gt;In order to generate samples directly from $\pi (\mathbf{x})$ and estimate $I$ using Monte Carlo integration, one can generate samples from a density $q(\mathbf{x})$, which is similar to $\pi(\mathbf{x})$. The pdf $q(\mathbf{x})$ is usually referred to as &lt;strong&gt;importance&lt;/strong&gt; or &lt;strong&gt;proposal&lt;/strong&gt; density.&lt;/p&gt;
+&lt;p&gt;Similarity between $\pi \text{ - } q $ is expressed as:&lt;/p&gt;
+&lt;p&gt;$$
+\pi(\mathbf{x}) &amp;gt; 0 \rightarrow q(\mathbf{x})&amp;gt;0 , \text{for all } \mathbf{x} \in R^{n_x}
+$$&lt;/p&gt;
+&lt;p&gt;which means that $q(\mathbf{x})$ and $\pi(\mathbf{x})$ have the same support. The integral $I$ can be rewritten thus as:&lt;/p&gt;
+&lt;p&gt;$$
+I = \int \mathbf{f}(\mathbf{x}) d\mathbf{x} = \int f(\mathbf{x}) \frac{\pi(\mathbf{x})}{q(\mathbf{x})}q(\mathbf{x}) d\mathbf{x}
+$$&lt;/p&gt;
+&lt;p&gt;Applying the &lt;em&gt;&lt;strong&gt;MC&lt;/strong&gt;&lt;/em&gt; sample mean:&lt;/p&gt;
+&lt;p&gt;$$
+I_N = \frac{1}{N} \sum_{i=1}^{N} \mathbf{f}(\mathbf{x}^i) \tilde{w}(\mathbf{x}^i)
+$$&lt;/p&gt;
+&lt;p&gt;where the importance weights shape a probability mass function(PMF), and thus need to be normalised.&lt;/p&gt;
+&lt;p&gt;$$
+w(\mathbf{x}^i)  \frac{\tilde{w}(\mathbf{x}^i)}{\sum_{j=1}^N \tilde{w}(\mathbf{x}^j)}
+$$&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-1-d-belief-representation-with-weighted-particles&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/MC_importance.png&#34; data-caption=&#34;1-D Belief representation with weighted particles.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/MC_importance.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    1-D Belief representation with weighted particles.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;h4 id=&#34;bayesian-estimation&#34;&gt;Bayesian estimation&lt;/h4&gt;
+&lt;p&gt;As already mentioned, in the Bayseian context, $\pi (\mathbf{x})$ is the posterior density. For selecting the proposal distribution $q(\mathbf{x})$ it makes sense to try to mantain a degree of similarity between the proposal and the posterior, so that the finite $N$ selected $\mathbf{x}^i$ samples fall into probable regions of the posterior, that is regions that contain information about the actual posterior distribution $p(\mathbf{x} | z_i)$.&lt;/p&gt;
+&lt;h4 id=&#34;sequential-importance-sampling-sis&#34;&gt;Sequential importance Sampling (SIS)&lt;/h4&gt;
+&lt;p&gt;[reference to 1.3 and conceptual filtering solution]&lt;/p&gt;
+&lt;p&gt;Intuitively, a recursive Bayesian nonlinear filter is a very suitable domain for applying &lt;em&gt;&lt;strong&gt;MC&lt;/strong&gt;&lt;/em&gt; integration. This &lt;strong&gt;sequential Monte Carlo&lt;/strong&gt; approach is known with various names such as,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;boostrap Filtering&lt;/li&gt;
+&lt;li&gt;condensation algorithm&lt;/li&gt;
+&lt;li&gt;particle Filtering&lt;/li&gt;
+&lt;li&gt;survival of the fittest&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The key idea again, is to represent the posterior density function by a limited set of samples and their importance weights, based on which estimates can be calculated. As the number of samples increases, the sampled distribution becomes an equivalent representation to the functional description of the posterior pdf, and the &lt;em&gt;&lt;strong&gt;SIS&lt;/strong&gt;&lt;/em&gt; filter approaches the optimal Bayesian filtering estimator.&lt;/p&gt;
+&lt;p&gt;The recursive nature of &lt;em&gt;SIS&lt;/em&gt; implies that the new weights describing the posterior $p(\mathbf{x}_k | \mathbf{z}_k)$ are being updated based on their previous values, and the likelihood of a new measurement $$p(\mathbf{z}_k | \mathbf{x}_k^i)$$, i.e&lt;/p&gt;
+&lt;p&gt;$$
+w_k^i \sim w_{k-1}^i \frac{p(\mathbf{z}_k | \mathbf{x}_k^i)p(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i)}{q(\mathbf{x}_k^i | \mathbf{x}_{k-1}^i , \mathbf{z}_k)}
+$$&lt;/p&gt;
+&lt;p&gt;Then the posterior filtered density is described as a &lt;em&gt;&lt;strong&gt;pmf&lt;/strong&gt;&lt;/em&gt;  as:&lt;/p&gt;
+&lt;p&gt;$$p(\mathbf{x}_k | \mathbf{z}&lt;em&gt;k) \approx \sum&lt;/em&gt;{i=1}^N w_k^i \delta(\mathbf{x}_k - \mathbf{x}_k^i)$$&lt;/p&gt;
+&lt;p&gt;The recursiveness of the algorithm is evident since the importance weights $w_k^i$ and support points $x_k^i$ are being propagated as each measurement is received sequentially. The SIS algorithm is the basis of most particle filtering algorithms, and the choice of the importance density function is crucial in the design.&lt;/p&gt;
+&lt;h4 id=&#34;importance-density-selection&#34;&gt;Importance density selection&lt;/h4&gt;
+&lt;p&gt;A popular and convenient selection of the importance density is the transitional prior, i.e. the motion model:&lt;/p&gt;
+&lt;p&gt;$$q(\mathbf{x_k | x_{k-1}^i , \mathbf{z}_k}) = p(\mathbf{x}_k | \mathbf{x}_{k-1}^i)$$&lt;/p&gt;
+&lt;p&gt;substituting the above in the &lt;strong&gt;SIS&lt;/strong&gt; algorithm yields&lt;/p&gt;
+&lt;p&gt;$$
+w_k^i \sim w_{k-1}^i p(\mathbf{z}_k | \mathbf{x}_k^i)
+$$&lt;/p&gt;
+&lt;h4 id=&#34;degeneracy-problem&#34;&gt;Degeneracy problem&lt;/h4&gt;
+&lt;p&gt;A general problem of a SIS particle filter is that the particle distribution becomes extremely peaked through the subsequent measurement updates. That is, the variance of the importance weights can only increase over time. This effect overtime leads to poor accuracy of the estimates and leads to a common problem of the SIS particle filter, that of &lt;em&gt;&lt;strong&gt;degeneracy&lt;/strong&gt;&lt;/em&gt;. An effective countermeasure is monitoring the level of degenracy of the filter and resample when appropriate. Such a measure is the effective sample size $N_{\text{eff}}$ as introduced by 
+&lt;a href=&#34;https://www.jstor.org/stable/2291224?seq=1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ref&lt;/a&gt;]&lt;/p&gt;
+&lt;p&gt;$$
+\hat{N}_{\text{eff}} = \frac{1}{\sum_{i=1}^{N}(w_k^i)^2}
+$$&lt;/p&gt;
+&lt;p&gt;One can easily verify that $$1 &amp;lt; N_{\text{eff}} &amp;lt; N$$ , thus a usual degeneracy criterion is&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+N_{\text{eff}} &amp;amp;&amp;lt; \alpha N   ,&amp;amp; \alpha \in \mathcal{R}: &amp;amp;\alpha \in (0,1)
+\end{aligned}
+$$&lt;/p&gt;
+&lt;h4 id=&#34;resampling-algorithms&#34;&gt;Resampling algorithms&lt;/h4&gt;
+&lt;p&gt;Whenever a degeneracy is detected(i.e $N_{\text{eff}}$ falling below a threshold value), resampling is performed.&lt;/p&gt;
+&lt;p&gt;Resampling follows the strategy of &lt;em&gt;&lt;strong&gt;survival of the fittest&lt;/strong&gt;&lt;/em&gt;, by eliminating particles in the set with low weight values and replacing them with copies of the more probable ones.&lt;/p&gt;
+&lt;p&gt;The resampling algorithm is thus:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Normalize the particle set weights $w^j$&lt;/li&gt;
+&lt;li&gt;Calculate the &lt;em&gt;&lt;strong&gt;Cumulative Sum of Weights(CSW)&lt;/strong&gt;&lt;/em&gt; function $$F_k(i) = \sum_{j=1}^{i} w_k^j$$.&lt;/li&gt;
+&lt;li&gt;Draw $N$ random samples $u_i \in \mathcal{R}$, $i=1,..,N$ uniformly distributed on the interval $[0,1]$.&lt;/li&gt;
+&lt;li&gt;For every uniform sample $u_i$, pick $\hat{x}_k^i = x_k^j$ out of the current samples pool, where the picking index $j$ depends on the weight&amp;rsquo;s value as&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;$$
+j = \underset{i}{\arg\min} |F_k(i)-u_i|
+$$&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-resampling-process-based-on-csw-the-particle-x_k_j-has-a-good-chance-of-surviving&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/stratified_resampling.png&#34; data-caption=&#34;Resampling process based on CSW. The particle x_k_j has a good chance of surviving.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/stratified_resampling.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Resampling process based on CSW. The particle x_k_j has a good chance of surviving.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;The above strategy leads to a weight selection &lt;strong&gt;survival chance&lt;/strong&gt; equal to the &lt;strong&gt;weight&amp;rsquo;s value&lt;/strong&gt;
+$P(\hat{x}_k^i = x_k^j) = w_k^j$ . This results in useful samples having a higher likelihood of being selected for the new set. The new weights of the samples are uniform i.e. the weights are set to&lt;/p&gt;
+&lt;p&gt;$$\{\hat{x}_k^i , 1/N\}$$&lt;/p&gt;
+&lt;p&gt;The use of resampling technique might lead to other issues though. Diversity among particles is depleted as highly probable particles are through subsequent resampling steps &lt;em&gt;&lt;strong&gt;genetically dominating&lt;/strong&gt;&lt;/em&gt; the distribution. Moreover, if the process noise is too low then the distribution will not &lt;em&gt;diversify&lt;/em&gt; enough in between measurement updates and will eventually become a uniformly weighted replicate of a few particles. This phenomenon is also known as &lt;em&gt;&lt;strong&gt;sample impoverishment&lt;/strong&gt;&lt;/em&gt; or &lt;em&gt;&lt;strong&gt;particle depletion&lt;/strong&gt;&lt;/em&gt; . [
+&lt;a href=&#34;https://www.researchgate.net/publication/228646515_The_unscented_Kalman_Filter_and_particle_filter_methods_for_nonlinear_structural_system_identification_with_non-collocated_heterogeneous_sensing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ref&lt;/a&gt;].&lt;/p&gt;
+&lt;h2 id=&#34;pf-algorithm-outline&#34;&gt;PF Algorithm outline&lt;/h2&gt;
+&lt;p&gt;The PF algorithm thus summarises to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Initialise the filter by drawing particles according to an initial belief $p(\mathbf{x}_0)$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Usually  $p(\mathbf{x}_0)$ is Gaussian with known moments, or a uniform distribution around the initial estimate  $\mathbf{x}_{0}$.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Update the particle set weights according to a the likelihood of the new measurement.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This step requires pointwise evaluation of the likelihood-function $p(\mathbf{z}_k | \mathbf{x}_k)$ which depends on the stochastic properties, of the &lt;em&gt;measurement model&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Example:
+For the radar sensor, the likelihood function is the &lt;em&gt;multivariate gaussian&lt;/em&gt;:
+$$
+p(z|x) = (2\pi)^{-\frac{k}{2}}\det{}(\mathbf{R})e^{-\frac{1}{2}\left(z-h(x))^{T}\mathbf{R}(z-h(x)\right)}
+$$
+Where $\mathbf{R}_{k\times k}$ is the measurement noise covariance matrix&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Normalise weights to represent a pmf.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Resample if required, based on $N_{\text{eff}} &amp;lt; \textit{threshold}$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Propagate every point according to the motion model.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is crucial to use non-zero process noise at that step, as that ensures that additional diversity is being introduced into the distribution.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Repeat from step #2&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-general-particle-filtering-algorithm-genetics&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/particle_filter_genetics.png&#34; data-caption=&#34;General particle filtering algorithm genetics.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/particle_filter_genetics.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    General particle filtering algorithm genetics.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;[
+&lt;a href=&#34;https://www.researchgate.net/publication/228646515_The_unscented_Kalman_Filter_and_particle_filter_methods_for_nonlinear_structural_system_identification_with_non-collocated_heterogeneous_sensing&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ref&lt;/a&gt;]&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>KF/EKF</title>
+      <link>https://dimidagd.github.io/thesis/logbook/kf_ekf/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>https://dimidagd.github.io/thesis/logbook/kf_ekf/</guid>
+      <description>&lt;h1 id=&#34;kalman-filter&#34;&gt;Kalman filter&lt;/h1&gt;
+&lt;h2 id=&#34;modeling-assumptions&#34;&gt;Modeling Assumptions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;System&amp;rsquo;s state evolution $\mathbf{x}_{k+1} = f(\mathbf{x}_k,u_k) + w_{\textit{x}}$ is linear and driven by
+&lt;ul&gt;
+&lt;li&gt;Known input $u_k$&lt;/li&gt;
+&lt;li&gt;Additive process noise $w_{\textit{x}}$ which is assumed to be a zero-mean, white and uncorrelated with known covariance matrix $Q(k)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The measurements $ z_k = h(x_k,u_k) + w_z $  are linear function of the state vector and the input vector with
+&lt;ul&gt;
+&lt;li&gt;Additive zero-mean white noise with known covariance $R(k)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;&lt;strong&gt;initial state&lt;/strong&gt;&lt;/em&gt; vector is a random variable with known mean $\mathbf{x}_0$ and covariance $P_0$ (initial uncertainty)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-block-diagram-of-a-discrete-kalman-filtering-algorithm&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/KF2.png&#34; data-caption=&#34;Block diagram of a discrete Kalman filtering algorithm&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/KF2.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Block diagram of a discrete Kalman filtering algorithm
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;Under the above assumptions the Kalman Filter is the &lt;em&gt;&lt;strong&gt;MMSE state estimator&lt;/strong&gt;&lt;/em&gt;. If the random variables are &lt;em&gt;not Gaussian&lt;/em&gt;, but one can still obtain their first two moments, then the KF is still the &lt;em&gt;&lt;strong&gt;best linear MMSE estimator&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;why-the-standard-kf-is-not-enough&#34;&gt;Why the standard KF is not enough&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Usually the motion models are nonlinear&lt;/li&gt;
+&lt;li&gt;The measurement models are usually nonlinear&lt;/li&gt;
+&lt;li&gt;Unable to capture  mode changes(target maneuveres)&lt;/li&gt;
+&lt;li&gt;Can&amp;rsquo;t handle cross-correlated noise&lt;/li&gt;
+&lt;li&gt;Single target &amp;amp; unimodal method&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;extended-kalman-filter&#34;&gt;Extended Kalman Filter&lt;/h1&gt;
+&lt;p&gt;The EKF is a suboptimal state estimation algorithm for nonlinear systems.&lt;/p&gt;
+&lt;h2 id=&#34;modeling-assumptions-1&#34;&gt;Modeling Assumptions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Same as the KF except that the state transition function $f$ and/or the measurement function $h$ are nonlinear, note that the noises are still assumed to enter additively into the state update/measurement equations.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;First order Taylor expansion&lt;/strong&gt;&lt;/em&gt; of the nonlinear functions around the current state is a reasonable approximation of the original nonlinear functions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;taylor-approximation-of-the-ctrv-motion-models&#34;&gt;Taylor approximation of the CTRV motion models&lt;/h2&gt;
+&lt;p&gt;A nonlinear motion model $x_{k} = f({x}_{k-1})$ can be linearised around a known state $x_{k-1}$&lt;/p&gt;
+&lt;p&gt;$$
+f_{k-1} \approx F_{k-1} =
+\begin{bmatrix}
+\nabla_{x_{k-1}} f_{k-1}^{T}(x_{k-1})
+\end{bmatrix}_{x_{k-1} \rightarrow\text{latest estimate}}^{T}
+$$&lt;/p&gt;
+&lt;p&gt;and for the &lt;em&gt;&lt;strong&gt;CTRV&lt;/strong&gt;&lt;/em&gt; motion   model this leads to&lt;/p&gt;
+&lt;p&gt;$$
+F_{{CTRV}_{k-1}} =
+\begin{bmatrix}1 &amp;amp;0 &amp;amp;\frac{sin(h+T\omega) - \sinh}{\omega} &amp;amp; \upsilon \frac{cos(h+T\omega)-cosh}{\omega} &amp;amp; \upsilon\frac{sinh -sin(h+T\omega) + T\omega cos(h+T\omega)}{\omega^{2}}\\&lt;br&gt;
+0 &amp;amp;1 &amp;amp;-\frac{cos(h+T\omega) - cos(\omega)}{\omega} &amp;amp;\upsilon \frac{sin(h+T\omega)-sinh}{\omega} &amp;amp; \upsilon\frac{cos(h + T\omega) -cosh + T\omega sin(h+T\omega)}{\omega^{2}}\\&lt;br&gt;
+0 &amp;amp;0 &amp;amp;1 &amp;amp;0 &amp;amp;0 \\&lt;br&gt;
+0 &amp;amp;0 &amp;amp;0 &amp;amp;0 &amp;amp;1\end{bmatrix}
+$$&lt;/p&gt;
+&lt;h2 id=&#34;taylor-approximation-of-the-measurement-models&#34;&gt;Taylor approximation of the measurement models&lt;/h2&gt;
+&lt;p&gt;similarly, a measurement model $z_k=h(\mathbf{x_k})$ can be linearised around the latest motion propagated estimate $x_{k}$ as&lt;/p&gt;
+&lt;p&gt;$$
+h_{k} \approx H_{k} =
+\begin{bmatrix}
+\nabla_{x_{k}} h_{k}^{T}(x_{k})
+\end{bmatrix}_{x_{k} \rightarrow\text{motion updated estimate}}^{T}
+$$&lt;/p&gt;
+&lt;p&gt;For example, the &lt;em&gt;&lt;strong&gt;radar model&lt;/strong&gt;&lt;/em&gt; that measures distance and bearing  to a target with known state vector $\mathbf{x}_k = [x,y,\upsilon,h,\omega]^T$, can be linearised as:&lt;/p&gt;
+&lt;p&gt;$$
+H_k =
+\begin{bmatrix}
+\frac{x}{\sqrt{x^2+y^2}} &amp;amp;\frac{y}{\sqrt{x^2+y^2}} &amp;amp;0 &amp;amp;0 &amp;amp;0 \\&lt;br&gt;
+-\frac{y}{x^2+y^2} &amp;amp;\frac{x}{x^2+y^2} &amp;amp;0 &amp;amp;0 &amp;amp;0
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-gaussian-pdf-propagation-through-a-nonlinear-model-and-taylor-approximation&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/EKF_lineariation_error.png&#34; data-caption=&#34;Gaussian PDF propagation through a nonlinear model and taylor-approximation.&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/EKF_lineariation_error.png&#34; alt=&#34;&#34; width=&#34;70%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Gaussian PDF propagation through a nonlinear model and taylor-approximation.
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;!---
+| ![space-1.jpg](/thesis/EKF_lineariation_error.png) |
+|:--:|
+| *Space*
+--&gt;
+&lt;p&gt;
+&lt;a href=&#34;http://ais.informatik.uni-freiburg.de/teaching/ss17/robotics/slides/11-ekf.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Sebastian Thrun, Wolfram Burgard, and Dieter Fox. 2005. Probabilistic Robotics (Intelligent Robotics and Autonomous Agents). The MIT Press.&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;simulated-ekf-performance&#34;&gt;Simulated EKF performance&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Motion model CTRV, sample time T = 100ms&lt;/li&gt;
+&lt;li&gt;Measurement models, asynchronous measurements from:
+&lt;ul&gt;
+&lt;li&gt;Noisy Radar measurements: bearing and distance, Ts=5 s&lt;/li&gt;
+&lt;li&gt;Noisy Camera pixel measurements. The camera is measuring the targets horizontal target pixel location on the image plane every Ts=20s.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-overall-estimated-trajectory-of-target-using-ctrv-motion-model-for-83-minutes&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/fusionCTRV.png&#34; data-caption=&#34;Overall estimated trajectory of target using CTRV motion model for 8.3 minutes&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/fusionCTRV.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Overall estimated trajectory of target using CTRV motion model for 8.3 minutes
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Sample time&lt;/th&gt;
+&lt;th&gt;function&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Radar&lt;/td&gt;
+&lt;td&gt;5s&lt;/td&gt;
+&lt;td&gt;n-linear&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Camera&lt;/td&gt;
+&lt;td&gt;20s&lt;/td&gt;
+&lt;td&gt;n-linear&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CTRV Motion model&lt;/td&gt;
+&lt;td&gt;0.1s&lt;/td&gt;
+&lt;td&gt;n-linear&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Having a close look at a segment of the trajectory one can observe the effect of using a CTRV model.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Clearly the estimator is able to adapt to the step change in the turn rate but the convergence to the real track at the moment of the change is rather slow because the motion model that the filter is using assumes constant turn rate with low process noise.&lt;/li&gt;
+&lt;li&gt;The red ellipses correspond to the estimated &lt;em&gt;state uncertainty&lt;/em&gt; $P_k$ as propagated through the motion model.&lt;/li&gt;
+&lt;li&gt;The green ellipses correspond to the estimated &lt;em&gt;state uncertainty&lt;/em&gt; $P_k$ after incorporating a measurement $z_k$, whether that be a radar or a camera measurement.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-close-up-on-the-previous-trajectory&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/propagation.png&#34; data-caption=&#34;Close up on the previous trajectory&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/propagation.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Close up on the previous trajectory
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Illustration&lt;/th&gt;
+&lt;th&gt;Representation&lt;/th&gt;
+&lt;th&gt;Variable&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Red ellipse&lt;/td&gt;
+&lt;td&gt;Predicted state-uncertainty $3\sigma$ area&lt;/td&gt;
+&lt;td&gt;$\hat{P}_k$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Green ellipse&lt;/td&gt;
+&lt;td&gt;Corrected predicted state-uncertainty $3\sigma$ area&lt;/td&gt;
+&lt;td&gt;$\hat{P}_k$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Blue trajectory&lt;/td&gt;
+&lt;td&gt;Target&amp;rsquo;s real trajectory&lt;/td&gt;
+&lt;td&gt;$\mathbf{x}_{0:k}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Red trajectory&lt;/td&gt;
+&lt;td&gt;Estimated target&amp;rsquo;s state trajectory&lt;/td&gt;
+&lt;td&gt;$\hat{\mathbf{x}}_{0:k}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Green cross&lt;/td&gt;
+&lt;td&gt;Noisy radar measurements&lt;/td&gt;
+&lt;td&gt;$z_{radar}$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;filter-performance&#34;&gt;Filter performance&lt;/h1&gt;
+&lt;h2 id=&#34;performance-graphs&#34;&gt;Performance graphs&lt;/h2&gt;
+&lt;p&gt;The performance of the &lt;em&gt;EKF single target tracker&lt;/em&gt; previously shown in 2D, is outlined in the following figures&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-performance-of-the-ekf-on-the-previous-simulation-right-click-image-open-in-new-tab-for-zoomable-image&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/EKF_performance.png&#34; data-caption=&#34;Performance of the EKF on the previous simulation (right click image open in new tab for zoomable image)&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/EKF_performance.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Performance of the EKF on the previous simulation (right click image open in new tab for zoomable image)
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/center&gt;
+&lt;p&gt;From top to bottom:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Predicted target position $x_p$ and real target position $x$ w.r.t Seakeeping own-ship frame&lt;/li&gt;
+&lt;li&gt;Predicted target position $y_p$ and real target position $y$ w.r.t Seakeeping own-ship frame&lt;/li&gt;
+&lt;li&gt;Predicted target heading velocity $\upsilon_p$ and real target heading velocity $\upsilon$ w.r.t Seakeeping own-ship frame&lt;/li&gt;
+&lt;li&gt;Predicted target heading velocity $h_p$ and real target heading velocity $h$ w.r.t Seakeeping own-ship frame&lt;/li&gt;
+&lt;li&gt;Predicted target turn rate $\omega_{p}$ and real target turn rate $\omega$&lt;/li&gt;
+&lt;li&gt;Absolute distance prediction error norm $|e| = \sqrt{(x-x_p)^2+(y-y_p)^2}$&lt;/li&gt;
+&lt;li&gt;Innovation norm $|v|$, is a measure of how accurate the filter is tracking the real target, an unbound innovation norm implies that the observations do not match the predicted trajectory anymore i.e the tracker diverged.&lt;/li&gt;
+&lt;li&gt;Innovation of the range measurements&lt;/li&gt;
+&lt;li&gt;Innovation of the range rate Measurements&lt;/li&gt;
+&lt;li&gt;Innovation of the bearing measurement&lt;/li&gt;
+&lt;li&gt;Innovation of the camera localiser measurements&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;determinant-of-p_k&#34;&gt;Determinant of $P_k$&lt;/h2&gt;
+&lt;p&gt;Calculating the determinant $||P_k||$ of the &lt;strong&gt;first two columns and rows&lt;/strong&gt; of the &lt;strong&gt;predicted state covariance matrix&lt;/strong&gt; provides an indication of the magnitude of the &lt;em&gt;tracking uncertainty&lt;/em&gt; of the target on the  2D tracking plane. Or in other words a measure of the surface of the plotted uncertainty ellipses. As seen in the figure below, measurement updates from different sensors are able to keep the uncertainty low.&lt;/p&gt;
+&lt;center&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-predicted-state-covariance-matrix-determinant&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/detP.png&#34; data-caption=&#34;Predicted state covariance matrix determinant&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/detP.png&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    Predicted state covariance matrix determinant
   &lt;/figcaption&gt;
 
 

@@ -28,11 +28,10 @@
   
     
   
-  <meta name="description" content="When choosing a coordinate system for the target motion model, it is very convenient to assume the target&rsquo;s state on a the own-ship&rsquo;s two dimensional tracking plane.
-In order to improve the quality the stability and the accuracy of the estimations, the ships are assumed to comply with dynamic motion models. The tracking problem therefore is that of estimating the model&rsquo;s parameters for a target, taking into consideration all available observations from various sensors.">
+  <meta name="description" content="Simulation environment">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/thesis/logbook/motion_models/">
+  <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/thesis/logbook/categsims/">
 
   
 
@@ -44,9 +43,6 @@ In order to improve the quality the stability and the accuracy of the estimation
   
 
   
-  
-  
-  <script src="/js/mathjax-config.js"></script>
   
 
   
@@ -178,9 +174,9 @@ In order to improve the quality the stability and the accuracy of the estimation
 
       
       
-
+        
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+
       
     
       
@@ -257,7 +253,7 @@ In order to improve the quality the stability and the accuracy of the estimation
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="https://dimidagd.github.io/thesis/logbook/motion_models/">
+  <link rel="canonical" href="https://dimidagd.github.io/thesis/logbook/categsims/">
 
   
   
@@ -271,16 +267,15 @@ In order to improve the quality the stability and the accuracy of the estimation
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="/usr">
-  <meta property="og:url" content="https://dimidagd.github.io/thesis/logbook/motion_models/">
-  <meta property="og:title" content="Motion models | /usr">
-  <meta property="og:description" content="When choosing a coordinate system for the target motion model, it is very convenient to assume the target&rsquo;s state on a the own-ship&rsquo;s two dimensional tracking plane.
-In order to improve the quality the stability and the accuracy of the estimations, the ships are assumed to comply with dynamic motion models. The tracking problem therefore is that of estimating the model&rsquo;s parameters for a target, taking into consideration all available observations from various sensors."><meta property="og:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]">
+  <meta property="og:url" content="https://dimidagd.github.io/thesis/logbook/categsims/">
+  <meta property="og:title" content="Simulations | /usr">
+  <meta property="og:description" content="Simulation environment"><meta property="og:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]">
   <meta property="twitter:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+      <meta property="article:published_time" content="2020-03-09T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+    <meta property="article:modified_time" content="2020-03-09T00:00:00&#43;00:00">
   
 
   
@@ -299,7 +294,7 @@ In order to improve the quality the stability and the accuracy of the estimation
 
 
 
-  <title>Motion models | /usr</title>
+  <title>Simulations | /usr</title>
 
 </head>
 
@@ -544,7 +539,7 @@ In order to improve the quality the stability and the accuracy of the estimation
     <a class="docs-toc-link" href="/thesis/logbook/categmodel/">Modeling</a>
     <ul class="nav docs-sidenav">
       
-      <li class="active">
+      <li >
         <a href="/thesis/logbook/motion_models/">Motion models</a>
       </li>
       
@@ -578,7 +573,7 @@ In order to improve the quality the stability and the accuracy of the estimation
 
   </div>
   
-  <div class="docs-toc-item">
+  <div class="docs-toc-item active">
     <a class="docs-toc-link" href="/thesis/logbook/categsims/">Simulations</a>
     <ul class="nav docs-sidenav">
       
@@ -604,16 +599,7 @@ In order to improve the quality the stability and the accuracy of the estimation
 
       <nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li><a href="#tracking-coordinates">Tracking coordinates</a>
-          <ul>
-            <li><a href="#continuous-constant-turn-rate-and-velocity-ctrv-model">Continuous constant turn rate and velocity (CTRV) model</a></li>
-            <li><a href="#discretisation-of-the-ctrv-motion-model">Discretisation of the CTRV motion model</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
+    <li><a href="#updates">Updates:</a></li>
   </ul>
 </nav>
 
@@ -626,90 +612,23 @@ In order to improve the quality the stability and the accuracy of the estimation
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>Motion models</h1>
+          <h1>Simulations</h1>
 
           <div class="article-style">
-            <p>When choosing a coordinate system for the target motion model, it is very convenient to assume the target&rsquo;s state on a the own-ship&rsquo;s two dimensional tracking plane.</p>
-<p>In order to improve the quality the stability and the accuracy of the estimations, the ships are assumed to comply with dynamic <em><strong>motion models</strong></em>. The tracking problem therefore is that of estimating the model&rsquo;s parameters for a target, taking into consideration all available observations from various sensors.</p>
-<p>The motion models proposed in literature are numerous. Trying to keep the complexity low, <em>linear motion</em> models assume a constant velocity(CV) or constant acceleration (CA). These models have the advantage that the state transition equation is linear, and thus the state distribution can be optimally propagated. Unfortunately they are limited to straight motions and are thus unable to capture rotations. If one introduces the angular speed of the target around its z-axis as well, the resulting models are referred to as <em>curvilinear</em> models.</p>
-<h2 id="tracking-coordinates">Tracking coordinates</h2>
-<p>Tracking objects in the two dimensional equilibrium tracking frame is a fair assumption at sea since all  targets in the vicinity of the own-ship are floating, and thus assuming their motion on a plane is a fair approximation as long as the distance between the tracked target and the own-ship is not large enough for the earth&rsquo;s curvature to induce approximation errors. The model&rsquo;s fidelity using the tracking coordinates is a topic of debate. In the context of sensor fusion and local situational awareness, the on-board sensors used on a ship operate within a range limit that should &mdash; at least intuitively &mdash; ratify the tangential plane approximation.</p>
-<p>When it comes to situational awareness in a more global context, i.e. tracking targets across the Atlantic, one could argue that there is no sense in applying sensor fusion since the targets are observable solely through GPS measurements.</p>
-<h3 id="continuous-constant-turn-rate-and-velocity-ctrv-model">Continuous constant turn rate and velocity (CTRV) model</h3>
-<p>Starting with a time continuous model</p>
-<p>$$\begin{aligned}\dot{\mathbf{x}}(t) = f(\mathbf{x}(t)) + w(t) &amp;&amp;,\mathbf{x} = \left[x,y,\upsilon, \psi,\omega\right]^{T}  \end{aligned}$$</p>
-<p>then assuming that the linear velocity $\upsilon$ and the turn rate $\omega$ remain constant  &mdash; which is a fair assumption for a moving vessel &mdash; then the non-linear dynamics are</p>
-<p>$$f =\begin{bmatrix}\dot{x} \\ \dot{y} \\ \dot{\upsilon} \\ \dot{\psi} \\ \dot{\omega}  \end{bmatrix}=  \begin{bmatrix}\upsilon cos(\psi) \\ \upsilon sin(\psi) \\ 0 \\ \omega \\ 0  \end{bmatrix}$$</p>
-<p>which is describing  <em><strong>constant turn rate and velocity</strong></em>(CTRV)model since the derivatives of the <em>linear and angular velocities</em> are zero .</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<figure id="figure-tracked-target-state-vector-top-view-in-the-own-ships-tracking-coordinate-system">
-
-
-  <a data-fancybox="" href="/thesis/2d_track_state.png" data-caption="Tracked target state vector top view, in the own-ship&rsquo;s tracking coordinate system">
-
-
-  <img src="/thesis/2d_track_state.png" alt="" width="50%" >
-</a>
-
-
-  
-  
-  <figcaption>
-    Tracked target state vector top view, in the own-ship&rsquo;s tracking coordinate system
-  </figcaption>
-
-
-</figure>
-
-<p>
-<a href="http://fusion.isif.org/proceedings/fusion08CD/papers/1569107835.pdf" target="_blank" rel="noopener">[src: Comparison and Evaluation of Advanced
-Motion Models for Vehicle Tracking]</a></p>
-<h3 id="discretisation-of-the-ctrv-motion-model">Discretisation of the CTRV motion model</h3>
-<p>Since the system is simulated in discrete time, one can integrate the motion model within a sample time $T$ and obtain exactly:</p>
-<p>[
-<a href="https://liu.diva-portal.org/smash/get/diva2:734112/FULLTEXT01.pdf" target="_blank" rel="noopener">src:ODE integration</a>]</p>
-<p>$$\begin{aligned}
-\mathbf{x}(t+T) = \mathbf{x}(t) + \int_{t}^{t+T}(f(\mathbf{x}(\tau)+w(\tau) )d\tau &amp;&amp;\text{and}&amp;&amp; f(\mathbf{x(\tau)})=  \begin{bmatrix}\upsilon cos(\psi) \\ \upsilon sin(\psi) \\ 0 \\ \omega \\ 0  \end{bmatrix}\\<br>
-\mathbf{x(\tau)} = \left[x,y,\upsilon, \psi,\omega\right]^{T}
-\end{aligned}$$</p>
-<p>and hence , the discrete update model(ignoring the noise) is</p>
-<p>$$
-\mathbf{x}(t+T) = g\left(\mathbf{x}(t)\right)
-$$</p>
-<p>therefore, the <em><strong>non linear discrete state transition function</strong></em> $g(\mathbf{x}(t)$ by direct integration, for $\mathbf{x}(t) =\left[x,y,\upsilon, \psi,\omega\right]^{T} $,</p>
-<p>$$
-g(\mathbf{x}(t)) = \mathbf{x}(t) +  \begin{bmatrix}
-\frac{2\upsilon}{\omega}sin(\omega T)cos(\psi + \frac{\omega T}{2})\\<br>
--\frac{2\upsilon}{\omega}sin(\omega T)cos(\psi + \frac{\omega T}{2})\\<br>
-0 \\<br>
-\omega T \\<br>
-0
-\end{bmatrix} , \omega \neq 0
-$$</p>
-<p>or</p>
-<p>$$
-g(\mathbf{x}) = \mathbf{x} +  \begin{bmatrix}
-\upsilon T cos(\psi)\\<br>
-\upsilon T sin(\psi)\\<br>
-0 \\<br>
-0 \\<br>
-0
-\end{bmatrix} ,  \omega = 0
-$$</p>
+            <h1 id="updates">Updates:</h1>
+<p>This week I have been working on:</p>
+<ul>
+<li>Work on filtering visualization</li>
+<li>Implement multiple moving objects in the Simulation</li>
+<li>Implement multiple tracked objects in the simulation</li>
+<li>Implement Particle Filter Algorithm for single target</li>
+<li>Implement EKF with Probabilistic data Assosiation (PDAF)</li>
+<li>Implement PF with Probabilistic Data Assosiation (PDAF)</li>
+</ul>
+<p>List of references:</p>
+<ul>
+<li>[Multitarget-multisensor Tracking: Principles and Techniques : Yakkov Bar-Shalom Xiao-Rong Li]</li>
+</ul>
 
           </div>
 
@@ -721,7 +640,7 @@ $$</p>
         </div>
 
         <div class="body-footer">
-          <p>Last updated on May 5, 2019</p>
+          <p>Last updated on Mar 9, 2020</p>
 
           
 
