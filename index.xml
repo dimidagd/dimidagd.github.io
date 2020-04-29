@@ -776,8 +776,8 @@ $$&lt;/p&gt;
 &lt;p&gt;GPS measurements usually arrive in &lt;em&gt;&lt;strong&gt;geodetic&lt;/strong&gt;&lt;/em&gt; coordinates, where as tracking is usually performed in the &lt;em&gt;&lt;strong&gt;local tangential&lt;/strong&gt;&lt;/em&gt; plane of the own-ship.&lt;/p&gt;
 &lt;p&gt;The transformation between these two systems requires an intermediate transformation from &lt;em&gt;&lt;strong&gt;geodetic&lt;/strong&gt;&lt;/em&gt; $(\phi,\lambda,h)$ to &lt;em&gt;&lt;strong&gt;ECEF&lt;/strong&gt;&lt;/em&gt;   $(X,Y,Z)$ coordinates.&lt;/p&gt;
 &lt;p&gt;$$\begin{align*}
-X &amp;amp;=(N+h)cos\lambda cos\phi \&lt;br&gt;
-Y &amp;amp;= (N+h)cos\lambda sin\phi \&lt;br&gt;
+X &amp;amp;=(N+h)cos\lambda cos\phi \\&lt;br&gt;
+Y &amp;amp;= (N+h)cos\lambda sin\phi \\&lt;br&gt;
 Z &amp;amp;= [N(1-e^2)+h] sin\lambda
 \end{align*}$$&lt;/p&gt;
 &lt;h4 id=&#34;ecef-to-enu&#34;&gt;ECEF to ENU&lt;/h4&gt;
@@ -800,8 +800,8 @@ $$&lt;/p&gt;
 &lt;p&gt;where $\mathcal{L}$ is a function of the reference point $[\phi_0,\lambda_0,h_0]$&lt;/p&gt;
 &lt;p&gt;$$
 \mathcal{L} = \begin{bmatrix}
--sin\phi_0  &amp;amp; cos\phi_0 &amp;amp; 0 \&lt;br&gt;
--sin\lambda_0cos\phi_0 &amp;amp; -sin\lambda_0sin\phi_0 &amp;amp; cos\lambda_0\&lt;br&gt;
+-sin\phi_0  &amp;amp; cos\phi_0 &amp;amp; 0 \\&lt;br&gt;
+-sin\lambda_0cos\phi_0 &amp;amp; -sin\lambda_0sin\phi_0 &amp;amp; cos\lambda_0\\&lt;br&gt;
 cos\lambda_0 cos\phi_0 &amp;amp; cos\lambda_0 sin\phi_0 &amp;amp; sin\lambda_0
 \end{bmatrix}
 $$&lt;/p&gt;
@@ -900,21 +900,21 @@ This frame is the local-tangential frame rotated around the z-axis so that the x
 &lt;h4 id=&#34;from-enu-to-tracking-coordinates&#34;&gt;From ENU to tracking coordinates&lt;/h4&gt;
 &lt;p&gt;If the origin of the ENU system is selected to coincide with the origin of the own-ship&amp;rsquo;s tracking coordinates origin, and $\psi$ is the heading angle of the own-ship from the North direction, then the transformation from ENU, to the own-ship&amp;rsquo;s tracking coordinates is&lt;/p&gt;
 &lt;p&gt;$$\begin{bmatrix}
-x \&lt;br&gt;
-y \&lt;br&gt;
+x \\&lt;br&gt;
+y \\&lt;br&gt;
 z
-\end{bmatrix}&lt;em&gt;{\text{{t}}} = R&lt;/em&gt;{z}(\frac{\pi}{2}-\psi)
+\end{bmatrix}_{\text{{t}}} = R_{z}(\frac{\pi}{2}-\psi)
 \begin{bmatrix}
-E \&lt;br&gt;
-N \&lt;br&gt;
+E \\&lt;br&gt;
+N \\&lt;br&gt;
 U
 \end{bmatrix}_{\text{{e}}}
 $$&lt;/p&gt;
 &lt;p&gt;where&lt;/p&gt;
 &lt;p&gt;$$
 R_{z}(\theta)=\begin{bmatrix}
-cos\theta &amp;amp;-sin\theta &amp;amp;0\&lt;br&gt;
-sin\theta &amp;amp;cos\theta &amp;amp;0 \&lt;br&gt;
+cos\theta &amp;amp;-sin\theta &amp;amp;0\\&lt;br&gt;
+sin\theta &amp;amp;cos\theta &amp;amp;0 \\&lt;br&gt;
 0 &amp;amp;0 &amp;amp;1
 \end{bmatrix}
 $$&lt;/p&gt;

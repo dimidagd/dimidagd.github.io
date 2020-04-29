@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Earth coordinate systems  Geodetic coordinates Local-tangential - ENU Earth Centered Earth-fixed (ECEF) Transformations  Geodetic to ECEF ECEF to ENU     Ship coordinate systems  Body fixed coordinate system Seakeeping coordinate system Tracking coordinates system Purpose of using different coordinate systems Transformations  From ENU to tracking coordinates   Purpose of using different coordinate systems    Earth coordinate systems When defining the configuration space, four coordinate systems are usually involved in target tracking algorithms.">
+  <meta name="description" content="Earth coordinate systems   Geodetic coordinates  Local-tangential - ENU  Earth Centered Earth-fixed (ECEF)  Transformations   Geodetic to ECEF  ECEF to ENU      Ship coordinate systems   Body fixed coordinate system  Seakeeping coordinate system  Tracking coordinates system  Purpose of using different coordinate systems  Transformations   From ENU to tracking coordinates    Purpose of using different coordinate systems    Earth coordinate systems When defining the configuration space, four coordinate systems are usually involved in target tracking algorithms.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://dimidagd.github.io/thesis/logbook/coordinate_systems/">
@@ -272,7 +272,7 @@
   <meta property="og:site_name" content="/usr">
   <meta property="og:url" content="https://dimidagd.github.io/thesis/logbook/coordinate_systems/">
   <meta property="og:title" content="Coordinate systems | /usr">
-  <meta property="og:description" content="Earth coordinate systems  Geodetic coordinates Local-tangential - ENU Earth Centered Earth-fixed (ECEF) Transformations  Geodetic to ECEF ECEF to ENU     Ship coordinate systems  Body fixed coordinate system Seakeeping coordinate system Tracking coordinates system Purpose of using different coordinate systems Transformations  From ENU to tracking coordinates   Purpose of using different coordinate systems    Earth coordinate systems When defining the configuration space, four coordinate systems are usually involved in target tracking algorithms."><meta property="og:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]">
+  <meta property="og:description" content="Earth coordinate systems   Geodetic coordinates  Local-tangential - ENU  Earth Centered Earth-fixed (ECEF)  Transformations   Geodetic to ECEF  ECEF to ENU      Ship coordinate systems   Body fixed coordinate system  Seakeeping coordinate system  Tracking coordinates system  Purpose of using different coordinate systems  Transformations   From ENU to tracking coordinates    Purpose of using different coordinate systems    Earth coordinate systems When defining the configuration space, four coordinate systems are usually involved in target tracking algorithms."><meta property="og:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]">
   <meta property="twitter:image" content="img/map[comment_count:%!s(bool=true) gravatar:%!s(bool=false) main_menu:map[align:l show_logo:%!s(bool=true)] reading_time:%!s(bool=true) section_pager:%!s(bool=false) shape:circle sharing:%!s(bool=false)]"><meta property="og:locale" content="en-us">
   
     
@@ -782,8 +782,8 @@
 <p>GPS measurements usually arrive in <em><strong>geodetic</strong></em> coordinates, where as tracking is usually performed in the <em><strong>local tangential</strong></em> plane of the own-ship.</p>
 <p>The transformation between these two systems requires an intermediate transformation from <em><strong>geodetic</strong></em> $(\phi,\lambda,h)$ to <em><strong>ECEF</strong></em>   $(X,Y,Z)$ coordinates.</p>
 <p>$$\begin{align*}
-X &amp;=(N+h)cos\lambda cos\phi \<br>
-Y &amp;= (N+h)cos\lambda sin\phi \<br>
+X &amp;=(N+h)cos\lambda cos\phi \\<br>
+Y &amp;= (N+h)cos\lambda sin\phi \\<br>
 Z &amp;= [N(1-e^2)+h] sin\lambda
 \end{align*}$$</p>
 <h4 id="ecef-to-enu">ECEF to ENU</h4>
@@ -806,8 +806,8 @@ $$</p>
 <p>where $\mathcal{L}$ is a function of the reference point $[\phi_0,\lambda_0,h_0]$</p>
 <p>$$
 \mathcal{L} = \begin{bmatrix}
--sin\phi_0  &amp; cos\phi_0 &amp; 0 \<br>
--sin\lambda_0cos\phi_0 &amp; -sin\lambda_0sin\phi_0 &amp; cos\lambda_0\<br>
+-sin\phi_0  &amp; cos\phi_0 &amp; 0 \\<br>
+-sin\lambda_0cos\phi_0 &amp; -sin\lambda_0sin\phi_0 &amp; cos\lambda_0\\<br>
 cos\lambda_0 cos\phi_0 &amp; cos\lambda_0 sin\phi_0 &amp; sin\lambda_0
 \end{bmatrix}
 $$</p>
@@ -906,21 +906,21 @@ This frame is the local-tangential frame rotated around the z-axis so that the x
 <h4 id="from-enu-to-tracking-coordinates">From ENU to tracking coordinates</h4>
 <p>If the origin of the ENU system is selected to coincide with the origin of the own-ship&rsquo;s tracking coordinates origin, and $\psi$ is the heading angle of the own-ship from the North direction, then the transformation from ENU, to the own-ship&rsquo;s tracking coordinates is</p>
 <p>$$\begin{bmatrix}
-x \<br>
-y \<br>
+x \\<br>
+y \\<br>
 z
-\end{bmatrix}<em>{\text{{t}}} = R</em>{z}(\frac{\pi}{2}-\psi)
+\end{bmatrix}_{\text{{t}}} = R_{z}(\frac{\pi}{2}-\psi)
 \begin{bmatrix}
-E \<br>
-N \<br>
+E \\<br>
+N \\<br>
 U
 \end{bmatrix}_{\text{{e}}}
 $$</p>
 <p>where</p>
 <p>$$
 R_{z}(\theta)=\begin{bmatrix}
-cos\theta &amp;-sin\theta &amp;0\<br>
-sin\theta &amp;cos\theta &amp;0 \<br>
+cos\theta &amp;-sin\theta &amp;0\\<br>
+sin\theta &amp;cos\theta &amp;0 \\<br>
 0 &amp;0 &amp;1
 \end{bmatrix}
 $$</p>
