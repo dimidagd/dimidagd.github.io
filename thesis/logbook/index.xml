@@ -1090,7 +1090,7 @@ The goal again is in the update state, to associate measurements with different 
 &lt;li&gt;Blue scatter &amp;lsquo;x&amp;rsquo; points  correspond to the history of noisy radar measurements sensed from all the available targets.&lt;/li&gt;
 &lt;li&gt;Dashed lines correspond to the Particle Filtered x-y state estimate evolution over time. PDA is correctly associating the measurements to the measurement origin.&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;p&gt;
 
 
 
@@ -1124,6 +1124,40 @@ The goal again is in the update state, to associate measurements with different 
 
 &lt;/figure&gt;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure id=&#34;figure-2d-top-view-of-multiple-tracked-targets-crossing&#34;&gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;https://dimidagd.github.io/thesis/3dView_real_dataEKFandPF.gif&#34; data-caption=&#34;2d top-view of multiple tracked targets crossing&#34;&gt;
+
+
+  &lt;img src=&#34;https://dimidagd.github.io/thesis/3dView_real_dataEKFandPF.gif&#34; alt=&#34;&#34; width=&#34;100%&#34; &gt;
+&lt;/a&gt;
+
+
+  
+  
+  &lt;figcaption&gt;
+    2d top-view of multiple tracked targets crossing
+  &lt;/figcaption&gt;
+
+
+&lt;/figure&gt;
+&lt;/p&gt;
 </description>
     </item>
     
