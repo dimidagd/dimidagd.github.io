@@ -1,3 +1,5 @@
+
+---
 # Display name
 title: "Dimitrios Dagdilelis"
 
@@ -88,3 +90,4 @@ social:
 
 # Highlight the author in author lists? (true/false)
 highlight_name: true
+---
