@@ -1,14 +1,14 @@
 
 ---
 # Display name
-title: "Dimitrios Dagdilelis"
+title: "D.Dagdilelis"
 
 # Name pronunciation (optional)
-name_pronunciation: "Dimitrios Dagdilelis"
+name_pronunciation: "dimda@dtu.dk"
 
 # Full name (for SEO)
-first_name: "Dimitrios"
-last_name: "Dagdilelis"
+first_name: "Dim"
+last_name: "Dag"
 
 # Status emoji
 status:
@@ -18,7 +18,7 @@ status:
 superuser: true
 
 # Role/position/tagline
-role: "Msc student in Robotics and Autonomous Systems"
+role: "PhD Cand. Sensor Fusion & Cyber-resiliency"
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -26,20 +26,23 @@ organizations:
     url: ""
 
 # Short bio (displayed in user profile at end of posts)
-bio: "My research interests include dynamic controlled systems, mobile robotics and multiple DoF manipulators."
+bio: "My research interests include Sensor-Fusion, Large-scale Computer Vision, and Cyber-Resiliency"
 
 # Interests to show in About widget
 interests:
-  - "Guidance Navigation & Control"
-  - "Autonomous Robots"
-  - "Multiple DoF manipulators"
+  - "Sensor Fusion"
+  - "Autonomous Navigation"
+  - "Cyber-Resiliency"
 
 # Education to show in About widget
 education:
   courses:
+    - course: "PhD Cyber-resilient Sensor Fusion"
+      institution: "Technical University of Denmark"
+      year: 2024
     - course: "MSc EE Automation & Robot Technology"
       institution: "Technical University of Denmark"
-      year: 2018
+      year: 2020
     - course: "Diploma in Electrical & Computer Engineering"
       institution: "Aristotle University of Thessaloniki"
       year: 2016

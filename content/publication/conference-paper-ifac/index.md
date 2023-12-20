@@ -1,5 +1,7 @@
 ---
-title: 'Cyber-resilience for marine navigation by information fusion and change detection'
+title: 'GNSS Independent Position Fixing using
+Multiple Navigational Features
+Registration'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
@@ -7,7 +9,6 @@ title: 'Cyber-resilience for marine navigation by information fusion and change 
 authors:
   - admin
   - Mogens Blanke
-  - Rasmus Hjorth Andersen
   - Roberto Galeazzi
 
 # Author notes (optional)
@@ -16,7 +17,7 @@ authors:
 #   - 'Equal contribution'
 
 date: '2022-12-01T00:00:00Z'
-doi: '10.1016/j.oceaneng.2022.112605'
+doi: '10.1016/j.ifacol.2022.10.438'
 
 # Schedule page publish date (NOT publication's date).
 publishDate: '2017-01-01T00:00:00Z'
@@ -24,16 +25,16 @@ publishDate: '2017-01-01T00:00:00Z'
 # Publication type.
 # Accepts a single type but formatted as a YAML list (for Hugo requirements).
 # Enter a publication type from the CSL standard.
-publication_types: ['paper-journal']
+publication_types: ['paper-conference']
 
 # Publication name and optional abbreviated publication name.
-publication: Ocean Engineering
-publication_short: Ocean Engineering
+publication: IFAC 2022
+publication_short: IFAC 2022
 
-abstract: Cyber-resilience is an increasing concern for autonomous navigation of marine vessels. This paper scrutinizes cyber-resilience properties of marine navigation through a prism with three edges, multiple sensor information fusion, diagnosis of not-normal behaviours, and change detection. It proposes a two-stage estimator for diagnosis and mitigation of sensor signals used for coastal navigation. Developing a Likelihood Field approach, the first stage extracts shoreline features from radar and matches them to the electronic navigation chart. The second stage associates buoy and beacon features from the radar with chart information. Using real data logged at sea tests combined with simulated spoofing, the paper verifies the ability to timely diagnose and isolate an attempt to compromise position measurements. A new approach is suggested for high level processing of received data to evaluate their consistency, which is agnostic to the underlying technology of the individual sensory input. A combined generalized likelihood ratio test using both parametric Gaussian modelling and Kernel Density Estimation is suggested and compared with a detector using only either of two. The paper shows how the detection of deviations from nominal behaviour is possible when the navigation sensor is under attack or defects occur.
+abstract: Safe navigation at sea depends on reliable position information. The easy to use and readily available navigation satellite systems are providing round the clock position information for seafarers, but denial of these services by jamming or spoofing techniques have become frequent, and other means are needed to validate critical navigation information. This paper revisits traditional methods to estimate position and heading of a vessel and offers a framework for computerized calculation of these basic observables without the use of radio-borne external information. Using radar and sea chart information, the paper investigates the quality of navigation information based on observed location of beacons, landmarks, coastlines and buoys. The paper demonstrates convincing accuracy in both position and heading estimation.
 
 # Summary. An optional shortened abstract.
-summary: The study explores cyber-resilience in autonomous marine navigation by proposing a two-stage estimator for diagnosing and mitigating sensor signal anomalies, tested through real and simulated sea trials.
+summary: The paper discusses the increasing unreliability of navigation satellite systems due to jamming or spoofing techniques, and proposes a computerized framework for estimating a vessel's position and heading using traditional methods such as radar and sea chart information, including the observed location of beacons, landmarks, coastlines, and buoys, demonstrating convincing accuracy in both position and heading estimation.
 
 tags: []
 
@@ -43,15 +44,13 @@ featured: true
 # Custom links (uncomment lines below)
 links:
 - name: DTU orbit
-  url: https://orbit.dtu.dk/en/publications/cyber-resilience-for-marine-navigation-by-information-fusion-and-
-- name: arXiv
-  url: https://arxiv.org/abs/2202.03268
+  url: https://orbit.dtu.dk/en/publications/gnss-independent-position-fixing-using-multiple-navigational-feat
 
-url_pdf: 'https://orbit.dtu.dk/en/publications/cyber-resilience-for-marine-navigation-by-information-fusion-and-'
+url_pdf: 'https://doi.org/10.1016/j.ifacol.2022.10.438'
 # url_code: 'https://github.com/HugoBlox/hugo-blox-builder'
 # url_dataset: 'https://github.com/HugoBlox/hugo-blox-builder'
 # url_poster: ''
-url_project: 'https://www.safenavsystem.com/'
+url_project: 'https://www.shippinglab.dk/'
 # url_slides: ''
 # url_source: 'https://github.com/HugoBlox/hugo-blox-builder'
 # url_video: 'https://youtube.com'
@@ -60,7 +59,7 @@ url_project: 'https://www.safenavsystem.com/'
 # To use, add an image named `featured.jpg/png` to your page's folder.
 image:
   caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/pLCdAaMFLTE)'
-  focal_point: ''
+  focal_point: 'Left'
   preview_only: true
 
 # Associated Projects (optional).
