@@ -58,7 +58,7 @@ url_project: 'https://www.shippinglab.dk/'
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder.
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/pLCdAaMFLTE)'
+  caption: 'Image credit: [**author**]()'
   focal_point: 'Left'
   preview_only: true
 
