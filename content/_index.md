@@ -70,14 +70,23 @@ sections:
           date_start: '2020-06-06'
           date_end: '2024-01-01'
           description: "**3D Computer Vision** · **Deep Learning** · **Multi-modal data** · **Sensor-Fusion** " 
+        - title: AI Engineer
+          company: SeaAI
+          company_url: 'https://sea.ai/'
+          company_logo: sea-ai-square
+          location: Vienna
+          date_start: '2022-10-01'
+          date_end: '2022-11-30'
+          description: "**ML/DL** · **Computer Vision** · **R&D**"
         - title: AI Research Developer
           company: ShippingLab
           company_url: 'https://shippinglab.dk/'
-          company_logo: shippinglab-logo
+          company_logo: shippinglab-square
           location: Copenhagen
           date_start: '2022-06-06'
           date_end: '2022-12-30'
-          description: "**Data science** · **Data Engineering** · **AI R&D** · **MLops** · **DevOps**"
+          description: "**Data Science** · **Data Engineering** · **AI R&D** · **MLops** · **DevOps**"
+          
     design:
       columns: '2'
       # background:
