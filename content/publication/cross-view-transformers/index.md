@@ -1,14 +1,12 @@
 ---
-title: 'GNSS Independent Position Fixing using
-Multiple Navigational Features
-Registration'
+title: 'Maritime Multi-modal Multi-view Bird Eye View Scene Segmentation'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
   - admin
-  - Mogens Blanke
+  - Panagiotis Grigoriadis
   - Roberto Galeazzi
 
 # Author notes (optional)
@@ -16,51 +14,53 @@ authors:
 #   - 'Equal contribution'
 #   - 'Equal contribution'
 
-date: '2022-12-01T00:00:00Z'
-doi: '10.1016/j.ifacol.2022.10.438'
+date: '2023-12-01T00:00:00Z'
+doi: ''
 
 # Schedule page publish date (NOT publication's date).
-publishDate: '2017-01-01T00:00:00Z'
+publishDate: '2023-12-20T00:00:00Z'
 
 # Publication type.
 # Accepts a single type but formatted as a YAML list (for Hugo requirements).
 # Enter a publication type from the CSL standard.
-publication_types: ['paper-conference']
+publication_types: ['paper-journal']
 
 # Publication name and optional abbreviated publication name.
-publication: IFAC 2022
-publication_short: IFAC 2022
+publication: Under review
+publication_short: Under review
 
-abstract: Safe navigation at sea depends on reliable position information. The easy to use and readily available navigation satellite systems are providing round the clock position information for seafarers, but denial of these services by jamming or spoofing techniques have become frequent, and other means are needed to validate critical navigation information. This paper revisits traditional methods to estimate position and heading of a vessel and offers a framework for computerized calculation of these basic observables without the use of radio-borne external information. Using radar and sea chart information, the paper investigates the quality of navigation information based on observed location of beacons, landmarks, coastlines and buoys. The paper demonstrates convincing accuracy in both position and heading estimation.
+abstract: In this paper, we address the challenge of enabling accurate and robust perception in marine autonomous systems for unmanned maritime operations. Our approach integrates data from multiple sensors, including cameras and radars, to overcome the limitations of traditional sensor fusion methods. We propose a novel cross-attention transformer-based multi-modal sensor fusion technique, specifically tailored for marine navigation. This method not only leverages deep learning to fuse complex data modalities effectively but also reconstructs a comprehensive Bird-eye-view of the environment using multi-view RGB and LWIR images. Our experimental results demonstrate the method's effectiveness in various challenging scenarios, contributing significantly to the development of more advanced and reliable marine autonomous systems. This approach utilizes multi-modal data, integrates the temporal fusion domain, and remains robust against sensor-calibration errors, marking a notable advancement in autonomous maritime technology.
 
 # Summary. An optional shortened abstract.
-summary: The paper discusses the increasing unreliability of navigation satellite systems due to jamming or spoofing techniques, and proposes a computerized framework for estimating a vessel's position and heading using traditional methods such as radar and sea chart information, including the observed location of beacons, landmarks, coastlines, and buoys, demonstrating convincing accuracy in both position and heading estimation.
+summary: This paper introduces a novel cross-attention transformer-based multi-modal sensor fusion approach for marine autonomous navigation, effectively integrating data from various sensors including Lidar, RGB, and LWIR, to enhance perception accuracy and robustness in complex maritime environments.
 
 tags: []
 
 # Display this page in the Featured widget?
-featured: false
+featured: true
 
 # Custom links (uncomment lines below)
 links:
 - name: DTU orbit
-  url: https://orbit.dtu.dk/en/publications/gnss-independent-position-fixing-using-multiple-navigational-feat
+  url: https://orbit.dtu.dk/en/publications/cyber-resilience-for-marine-navigation-by-information-fusion-and-
+- name: arXiv
+  url: https://arxiv.org/abs/2202.03268
 
-url_pdf: 'https://doi.org/10.1016/j.ifacol.2022.10.438'
+url_pdf: 'https://www.sciencedirect.com/science/article/pii/S0029801822018881'
 # url_code: 'https://github.com/HugoBlox/hugo-blox-builder'
 # url_dataset: 'https://github.com/HugoBlox/hugo-blox-builder'
 # url_poster: ''
-url_project: 'https://www.shippinglab.dk/'
+url_project: 'https://www.safenavsystem.com/'
 # url_slides: ''
 # url_source: 'https://github.com/HugoBlox/hugo-blox-builder'
-# url_video: 'https://youtube.com'
+url_video: 'https://www.youtube.com/watch?v=0cO_tyMM1wo'
 
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder.
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/pLCdAaMFLTE)'
-  focal_point: 'Left'
-  preview_only: true
+  caption: 'Image credit: [**author**]()'
+  focal_point: ''
+  preview_only: false
 
 # Associated Projects (optional).
 #   Associate this publication with one or more of your projects.
@@ -87,3 +87,7 @@ Create your slides in Markdown - click the _Slides_ button to check out the exam
 {{% /callout %}}
 
 Add the publication's **full text** or **supplementary notes** here. You can use rich formatting such as including [code, math, and images](https://docs.hugoblox.com/content/writing-markdown-latex/). -->
+
+
+{{< vimeo 896729397 >}}
+<!-- {{< asciinema 573031 >}} -->

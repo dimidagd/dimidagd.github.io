@@ -1,15 +1,15 @@
 ---
-title: 'GNSS Independent Position Fixing using
-Multiple Navigational Features
-Registration'
+title: 'Analysing Cyber-resiliency of a Marine Navigation System using Behavioural Relations'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
 # and it will be replaced with their full name and linked to their profile.
 authors:
+  - Morten C. Nissov
   - admin
-  - Mogens Blanke
   - Roberto Galeazzi
+  - Mogens Blanke
+  
 
 # Author notes (optional)
 # author_notes:
@@ -17,7 +17,7 @@ authors:
 #   - 'Equal contribution'
 
 date: '2022-12-01T00:00:00Z'
-doi: '10.1016/j.ifacol.2022.10.438'
+doi: '10.23919/ECC54610.2021.9654972'
 
 # Schedule page publish date (NOT publication's date).
 publishDate: '2017-01-01T00:00:00Z'
@@ -28,13 +28,13 @@ publishDate: '2017-01-01T00:00:00Z'
 publication_types: ['paper-conference']
 
 # Publication name and optional abbreviated publication name.
-publication: IFAC 2022
-publication_short: IFAC 2022
+publication: ECC 2022
+publication_short: ECC 2022
 
-abstract: Safe navigation at sea depends on reliable position information. The easy to use and readily available navigation satellite systems are providing round the clock position information for seafarers, but denial of these services by jamming or spoofing techniques have become frequent, and other means are needed to validate critical navigation information. This paper revisits traditional methods to estimate position and heading of a vessel and offers a framework for computerized calculation of these basic observables without the use of radio-borne external information. Using radar and sea chart information, the paper investigates the quality of navigation information based on observed location of beacons, landmarks, coastlines and buoys. The paper demonstrates convincing accuracy in both position and heading estimation.
+abstract: Marine vessels need trustworthy navigation data for safe manoeuvring, but threats exist for external manipulation of signals and on-board systems. This paper employs analysis of behaviours to cross-validate that instruments provide correct information. Deviations from normal behaviour could be effects of malicious cyber-attack or instrument malfunction. Independent of the root cause, faulty information need be disregarded for navigation. This paper shows how instruments’ violation of correct behaviour can be detected and isolated during near-coast navigation. The approach is to analyse topology of information flow and information processing, also referred to as structural analysis. The paper addresses the diagnosis potential for isolation of erroneous information about state of own ship and of surrounding objects. The analysis includes position, ship speed, and heading, which could lead to errors in navigation, to collision or grounding. The paper addresses required sensors, according to the International Maritime Organizations (IMO) Safety of Life at Sea (SOLAS), and also presents potential gains by inclusion of computer vision. Showing that all single and several cases of simultaneous defects are discovered, for own ship and in surroundings, the results demonstrate that resilience of navigation information can be obtained for vessels sailing in coastal waters.
 
 # Summary. An optional shortened abstract.
-summary: The paper discusses the increasing unreliability of navigation satellite systems due to jamming or spoofing techniques, and proposes a computerized framework for estimating a vessel's position and heading using traditional methods such as radar and sea chart information, including the observed location of beacons, landmarks, coastlines, and buoys, demonstrating convincing accuracy in both position and heading estimation.
+summary: This paper presents a method for ensuring maritime navigation safety by using behavior analysis and structural analysis of information flow to detect and isolate incorrect navigation data, potentially caused by cyber-attacks or instrument malfunctions, in marine vessels, emphasizing the importance of adhering to International Maritime Organization standards and the potential integration of computer vision to enhance navigation resilience, especially in coastal waters.
 
 tags: []
 
@@ -44,9 +44,9 @@ featured: false
 # Custom links (uncomment lines below)
 links:
 - name: DTU orbit
-  url: https://orbit.dtu.dk/en/publications/gnss-independent-position-fixing-using-multiple-navigational-feat
+  url: https://doi.org/10.23919/ECC54610.2021.9654972
 
-url_pdf: 'https://doi.org/10.1016/j.ifacol.2022.10.438'
+url_pdf: 'https://doi.org/10.23919/ECC54610.2021.9654972'
 # url_code: 'https://github.com/HugoBlox/hugo-blox-builder'
 # url_dataset: 'https://github.com/HugoBlox/hugo-blox-builder'
 # url_poster: ''

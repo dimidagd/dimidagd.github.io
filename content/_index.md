@@ -69,10 +69,7 @@ sections:
           location: Copenhagen
           date_start: '2020-06-06'
           date_end: '2024-01-01'
-          description: |2-
-              * Maritime-autonomy
-              * Sensor-Fusion
-              * DL
+          description: "**3D Computer Vision** · **Deep Learning** · **Multi-modal data** · **Sensor-Fusion** " 
         - title: AI Research Developer
           company: ShippingLab
           company_url: 'https://shippinglab.dk/'
@@ -80,9 +77,11 @@ sections:
           location: Copenhagen
           date_start: '2022-06-06'
           date_end: '2022-12-30'
-          description: Developed SOTA algos enabling autonomy on Denmark's first autonomous passenger ferry. 
+          description: "**Data science** · **Data Engineering** · **AI R&D** · **MLops** · **DevOps**"
     design:
       columns: '2'
+      # background:
+      #   color: 'white'
   # - block: accomplishments
   #   content:
   #     # Note: `&shy;` is used to add a 'soft' hyphen in a long heading.
@@ -125,33 +124,34 @@ sections:
   #         url: ''
   #   design:
   #     columns: '2'
-  # - block: collection
-  #   id: posts
-  #   content:
-  #     title: Recent Posts
-  #     subtitle: ''
-  #     text: ''
-  #     # Choose how many pages you would like to display (0 = all pages)
-  #     count: 5
-  #     # Filter on criteria
-  #     filters:
-  #       folders:
-  #         - post
-  #       author: ""
-  #       category: ""
-  #       tag: ""
-  #       exclude_featured: false
-  #       exclude_future: false
-  #       exclude_past: false
-  #       publication_type: ""
-  #     # Choose how many pages you would like to offset by
-  #     offset: 0
-  #     # Page order: descending (desc) or ascending (asc) date.
-  #     order: desc
-  #   design:
-  #     # Choose a layout view
-  #     view: compact
-  #     columns: '2'
+  - block: collection
+    demo: true
+    id: posts
+    content:
+      title: Recent Posts
+      subtitle: ''
+      text: ''
+      # Choose how many pages you would like to display (0 = all pages)
+      count: 5
+      # Filter on criteria
+      filters:
+        folders:
+          - post
+        author: ""
+        category: ""
+        tag: ""
+        exclude_featured: false
+        exclude_future: false
+        exclude_past: false
+        publication_type: ""
+      # Choose how many pages you would like to offset by
+      offset: 0
+      # Page order: descending (desc) or ascending (asc) date.
+      order: desc
+    design:
+      # Choose a layout view
+      view: compact
+      columns: '2'
   # - block: portfolio
   #   hide: True
   #   id: projects
@@ -198,18 +198,14 @@ sections:
         featured_only: true
     design:
       columns: '2'
-      view: card
+      view: compact
   - block: collection
     content:
       title: Recent Publications
-      text: |-
-        {{% callout note %}}
-        Quickly discover relevant content by [filtering publications](./publication/).
-        {{% /callout %}}
       filters:
         folders:
           - publication
-        exclude_featured: true
+        exclude_featured: false
     design:
       columns: '2'
       view: citation

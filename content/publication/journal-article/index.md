@@ -47,7 +47,7 @@ links:
 - name: arXiv
   url: https://arxiv.org/abs/2202.03268
 
-url_pdf: 'https://orbit.dtu.dk/en/publications/cyber-resilience-for-marine-navigation-by-information-fusion-and-'
+url_pdf: 'https://www.sciencedirect.com/science/article/pii/S0029801822018881'
 # url_code: 'https://github.com/HugoBlox/hugo-blox-builder'
 # url_dataset: 'https://github.com/HugoBlox/hugo-blox-builder'
 # url_poster: ''

@@ -1,14 +1,14 @@
 
 ---
 # Display name
-title: "D.Dagdilelis"
+title: "Dimitrios Dagdilelis"
 
 # Name pronunciation (optional)
-name_pronunciation: "dimda@dtu.dk"
+name_pronunciation: "dimda(at)dtu(dot)dk"
 
 # Full name (for SEO)
-first_name: "Dim"
-last_name: "Dag"
+first_name: "Dimitrios"
+last_name: "Dagdilelis"
 
 # Status emoji
 status:
@@ -18,7 +18,7 @@ status:
 superuser: true
 
 # Role/position/tagline
-role: "PhD Cand. Sensor Fusion & Cyber-resiliency"
+role: "ML/AI Researcher"
 
 # Organizations/Affiliations to show in About widget
 organizations:
@@ -31,8 +31,9 @@ bio: "My research interests include Sensor-Fusion, Large-scale Computer Vision, 
 # Interests to show in About widget
 interests:
   - "Sensor Fusion"
+  - "Multi-modal Data"
   - "Autonomous Navigation"
-  - "Cyber-Resiliency"
+  - "Fault-Detection"
 
 # Education to show in About widget
 education:
@@ -85,7 +86,7 @@ skills:
 social:
   - icon: envelope
     icon_pack: fas
-    link: "mailto:dimidagd@gmail.com"
+    link: "mailto:dimidagd(at)gmail.com"
   - icon: linkedin
     icon_pack: fab
     link: "https://www.linkedin.com/in/dimidagd/"
@@ -94,3 +95,5 @@ social:
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
+
+Specialist in AI R&D with a focus on Computer Vision. Practised in managing the entire ML S/W lifecycle and turning SOTA research into products.
