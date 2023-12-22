@@ -69,24 +69,37 @@ sections:
           location: Copenhagen
           date_start: '2020-06-06'
           date_end: '2024-01-01'
-          description: "**3D Computer Vision** · **Deep Learning** · **Multi-modal data** · **Sensor-Fusion** " 
-        - title: AI Engineer
+          description: |2- #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
+            - **3D Computer Vision**: Developed and implemented SOTA algos for 3D object detection & tracking, and semantic scene segmentation
+            - **Deep Learning**: *Transformer Models* · *Self-supervised learning* · *Generative models* · *Predictive modeling* · *Anomaly-detection* · *CNNs* · *RNNs*.
+            - **Sensor-Fusion**: Worked on integrating data from *multiple and heterogeneous* sensor modalities. *Multi-camera view fusion* · *LiDAR-Camera-Radar-HDmaps Fusion*
+            - **Experiment Design**: Planned coordinated and executed multiple data collection experiments in different geolocations with a sizeable group of Engineers and Researchers.
+            - **Research project coordination**: Supervised multiple prospect engineers through ML projects, collaborated with external industrial stakeholders.
+
+        - title: Visiting AI Engineer
           company: SeaAI
           company_url: 'https://sea.ai/'
           company_logo: sea-ai-square
           location: Vienna
           date_start: '2022-10-01'
           date_end: '2022-11-30'
-          description: "**ML/DL** · **Computer Vision** · **R&D**"
+          description: |2- #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
+            - **AI**: Collaborated with the Vienna AI department, performed exploratory research, applying own developed SOTA 3D algos to the company's  Computer Vision S/W product.
+            - **Data Engineering**: *Large-scale vision data* · *SOTA 3D Detection models*
         - title: AI Research Developer
           company: ShippingLab
           company_url: 'https://shippinglab.dk/'
           company_logo: shippinglab-square
           location: Copenhagen
           date_start: '2022-06-06'
-          date_end: '2022-12-30'
-          description: "**Data Science** · **Data Engineering** · **AI R&D** · **MLops** · **DevOps**"
-          
+          date_end: '2024-12-30'
+          description: |2- #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
+            - **ML/DL**: Deployed ML/AI applications ingesting raw visual streams on a mixed hardware setup, embedded devices, distributed computation system.
+            - **S/W development**: Developed and deployed distributed sensing application architecture *Sensor integration* · *Hardware interfaces*
+            - **DevOps**: **SRE**, **CI/CD**, **Infra-provisioning**, **Containerization**
+            - **MLops**: Closed loop between new data and new model versions. *Automated Model Deployment* · *Model performance monitoring*
+            - **Software-Architecture**: *Distributed App Architectures* · *Middleware*, 
+            - **Data Engineering**: *Sensor integration* · *Hardware interfaces*          
     design:
       columns: '2'
       # background:
