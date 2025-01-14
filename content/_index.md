@@ -62,19 +62,29 @@ sections:
       #   Leave `date_end` empty if it's your current employer.
       #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
-        - title: Phd Candidate
-          company: DTU Photonics
-          company_url: ''
+        - title: Senior Consultant – AI & MLOps
+          company: Danish Defence
+          company_logo: ministry
+          location: Copenhagen, Denmark
+          date_start: '2024-01-01'
+          description: |2-
+            - Developing AI solutions and deploying machine learning pipelines.  
+            - Implementing MLOps practices, automating workflows, bringing advanced models to production.
+            - Collaborating with stakeholders to align AI technologies with operational needs.
+            
+        - title: PhD
+          company: Technical University of Denmark (DTU)
           company_logo: dtu-small
-          location: Copenhagen
+          location: Copenhagen, Denmark
           date_start: '2020-06-06'
           date_end: '2024-01-01'
-          description: |2- #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
-            - **3D Computer Vision**: Developed and implemented SOTA algos for 3D object detection & tracking, and semantic scene segmentation
-            - **Deep Learning**: *Transformer Models* · *Self-supervised learning* · *Generative models* · *Predictive modeling* · *Anomaly-detection* · *CNNs* · *RNNs*.
-            - **Sensor-Fusion**: Worked on integrating data from *multiple and heterogeneous* sensor modalities. *Multi-camera view fusion* · *LiDAR-Camera-Radar-HDmaps Fusion*
-            - **Experiment Design**: Planned coordinated and executed multiple data collection experiments in different geolocations with a sizeable group of Engineers and Researchers.
-            - **Research project coordination**: Supervised multiple prospect engineers through ML projects, collaborated with external industrial stakeholders.
+          description: |2-
+            - **3D Computer Vision**: Engineered advanced algorithms for 3D object detection, tracking, and semantic scene segmentation, enhancing maritime situational awareness and autonomous navigation systems.
+            - **Deep Learning**: Applied *Transformer Models*, *Self-supervised Learning*, and *Generative Models* to develop predictive models and anomaly detection systems for autonomous maritime operations.
+            - **Sensor Fusion**: Developed robust frameworks integrating data from diverse sensor modalities, including *LiDAR*, *Camera*, *Radar*, and *HD Maps*, to improve navigation accuracy in complex maritime environments.
+            - **Experimentation and Validation**: Led comprehensive field experiments and simulations to validate cyber-resilient navigation and situational awareness systems across various maritime scenarios.
+            - **Cyber-Resilient Navigation Systems**: Devised innovative solutions to detect and mitigate GNSS spoofing and jamming, ensuring navigation integrity under adverse conditions through multi-sensor fusion and statistical change detection techniques.
+            - **Research Leadership**: Supervised and mentored engineering teams on AI-driven projects, fostering collaboration with academic and industrial partners to advance autonomous ship technologies.
 
         - title: Visiting AI Engineer
           company: SeaAI
