@@ -28,7 +28,7 @@ publishDate: '2017-01-01T00:00:00Z'
 publication_types: ['paper-conference']
 
 # Publication name and optional abbreviated publication name.
-publication: ECC 2022
+publication:  European Control Conference 2022
 publication_short: ECC 2022
 
 abstract: Marine vessels need trustworthy navigation data for safe manoeuvring, but threats exist for external manipulation of signals and on-board systems. This paper employs analysis of behaviours to cross-validate that instruments provide correct information. Deviations from normal behaviour could be effects of malicious cyber-attack or instrument malfunction. Independent of the root cause, faulty information need be disregarded for navigation. This paper shows how instruments’ violation of correct behaviour can be detected and isolated during near-coast navigation. The approach is to analyse topology of information flow and information processing, also referred to as structural analysis. The paper addresses the diagnosis potential for isolation of erroneous information about state of own ship and of surrounding objects. The analysis includes position, ship speed, and heading, which could lead to errors in navigation, to collision or grounding. The paper addresses required sensors, according to the International Maritime Organizations (IMO) Safety of Life at Sea (SOLAS), and also presents potential gains by inclusion of computer vision. Showing that all single and several cases of simultaneous defects are discovered, for own ship and in surroundings, the results demonstrate that resilience of navigation information can be obtained for vessels sailing in coastal waters.
