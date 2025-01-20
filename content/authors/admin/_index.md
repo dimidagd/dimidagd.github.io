@@ -4,7 +4,7 @@
 title: "Dimitrios Dagdilelis"
 
 # Name pronunciation (optional)
-name_pronunciation: "dimda(at)dtu(dot)dk"
+# name_pronunciation: ""
 
 # Full name (for SEO)
 first_name: "Dimitrios"
@@ -22,26 +22,25 @@ role: "ML/AI Engineer"
 
 # Organizations/Affiliations to show in About widget
 organizations:
-  - name: "Technical University of Denmark"
+  - name: ""
     url: ""
 
 # Short bio (displayed in user profile at end of posts)
-bio: "My research interests include Sensor-Fusion, Large-scale Computer Vision, and Cyber-Resiliency"
+bio: "I’m an AI Engineer who loves building intelligent systems that solve real-world problems and push the boundaries of what’s possible. From optimizing processes to creating scalable machine learning models, I thrive at the intersection of data, innovation, and impact."
 
 # Interests to show in About widget
 interests:
-  - "Sensor Fusion"
-  - "Multi-modal Data"
-  - "Autonomous Navigation"
-  - "Fault-Detection"
+  - "Sensor Fusion & Multimodal modeling"
+  - "Computer Vision"
+  - "AI system diagnostics"
 
 # Education to show in About widget
 education:
   courses:
-    - course: "PhD Cyber-resilient Sensor Fusion"
+    - course: "PhD Cyber-Resilient Sensor Fusion"
       institution: "Technical University of Denmark"
       year: 2024
-    - course: "MSc EE Automation & Robot Technology"
+    - course: "MSc Automation & Robot Technology"
       institution: "Technical University of Denmark"
       year: 2020
     - course: "Diploma in Electrical & Computer Engineering"
@@ -90,10 +89,17 @@ social:
   - icon: linkedin
     icon_pack: fab
     link: "https://www.linkedin.com/in/dimidagd/"
+  - icon: github
+    icon_pack: fab
+    link: "https://github.com/dimidagd"
+  - icon: google-scholar
+    icon_pack: ai
+    link: "https://github.com/dimidagd"
+
   # Additional social links can be added here as needed
 
 # Highlight the author in author lists? (true/false)
 highlight_name: true
 ---
 
-Specialist in AI R&D with a focus on Computer Vision. Practised in managing the entire ML S/W lifecycle and turning SOTA research into products.
+**AI/ML Research Engineer** focused on building scalable systems that solve practical problems and improve efficiency. Committed to turning data into actionable insights and creating technology that makes a measurable impact. Research background in *multimodal 3D perception, cyber-resilient maritime navigation*, and *remote surveillance* applications.
