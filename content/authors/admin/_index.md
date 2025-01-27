@@ -102,4 +102,4 @@ social:
 highlight_name: true
 ---
 
-**AI/ML Research Engineer** focused on building scalable systems that solve practical problems and improve efficiency. Committed to turning data into actionable insights and creating technology that makes a measurable impact. Research background in *multimodal 3D perception, cyber-resilient maritime navigation*, and *remote surveillance* applications.
+**AI/ML Research Engineer**, building scalable systems that turn data into actionable insights and make a measurable impact. Research background in *multimodal 3D perception, cyber-resilient maritime navigation*, and *remote surveillance* applications.
