@@ -68,9 +68,12 @@ sections:
           location: Copenhagen, Denmark
           date_start: '2024-01-01'
           description: |2-
-            - Developing AI solutions and deploying machine learning pipelines.  
-            - Implementing MLOps practices, automating workflows, bringing advanced models to production.
-            - Collaborating with stakeholders to align AI technologies with operational needs.
+            - Developing AI solutions and deploying machine learning pipelines, enabling efficient and scalable model training and inference across diverse applications.
+            - Implementing MLOps practices to automate workflows, streamline model deployment, and bring advanced AI models into production environments with high reliability.
+            - Leveraging self-supervised learning techniques to minimize the dependency on labeled data, accelerating development cycles and enabling cost-effective solutions for large-scale datasets.
+            - Collaborating with stakeholders to align AI technologies with operational requirements, ensuring seamless integration and addressing real-world challenges.
+            - Conducting exploratory research on cutting-edge machine learning methodologies to enhance system performance and drive innovation.
+            - Optimizing end-to-end AI workflows, from data preprocessing and model training to validation and deployment, ensuring high performance and scalability.
             
         - title: PhD
           company: Technical University of Denmark (DTU)
@@ -79,12 +82,12 @@ sections:
           date_start: '2020-06-06'
           date_end: '2024-01-01'
           description: |2-
-            - **3D Computer Vision**: Engineered advanced algorithms for 3D object detection, tracking, and semantic scene segmentation, enhancing maritime situational awareness and autonomous navigation systems.
-            - **Deep Learning**: Applied *Transformer Models*, *Self-supervised Learning*, and *Generative Models* to develop predictive models and anomaly detection systems for autonomous maritime operations.
-            - **Sensor Fusion**: Developed robust frameworks integrating data from diverse sensor modalities, including *LiDAR*, *Camera*, *Radar*, and *HD Maps*, to improve navigation accuracy in complex maritime environments.
-            - **Experimentation and Validation**: Led comprehensive field experiments and simulations to validate cyber-resilient navigation and situational awareness systems across various maritime scenarios.
-            - **Cyber-Resilient Navigation Systems**: Devised innovative solutions to detect and mitigate GNSS spoofing and jamming, ensuring navigation integrity under adverse conditions through multi-sensor fusion and statistical change detection techniques.
-            - **Research Leadership**: Supervised and mentored engineering teams on AI-driven projects, fostering collaboration with academic and industrial partners to advance autonomous ship technologies.
+            - Spearheaded the development of advanced 3D computer vision algorithms, including object detection, tracking, and semantic scene segmentation, significantly enhancing maritime situational awareness and enabling autonomous navigation systems.
+            - Applied cutting-edge deep learning techniques such as Transformer models, self-supervised learning, and generative models to design predictive models and anomaly detection systems tailored for autonomous maritime operations.
+            - Engineered robust sensor fusion frameworks by integrating data from LiDAR, cameras, radar, and HD maps, improving navigation accuracy and reliability in complex maritime environments.
+            - Directed comprehensive field experiments and simulations, validating cyber-resilient navigation and situational awareness systems across diverse maritime scenarios.
+            - Designed innovative cyber-resilient navigation solutions to counter GNSS spoofing and jamming, leveraging multi-sensor fusion and statistical change detection methods to ensure navigation integrity under adverse conditions.
+            - Led research initiatives and mentored engineering teams, fostering collaboration with academic and industrial partners to advance the development of autonomous maritime technologies.
 
         - title: Visiting AI Engineer
           company: SeaAI
@@ -93,9 +96,10 @@ sections:
           location: Vienna
           date_start: '2022-10-01'
           date_end: '2022-11-30'
-          description: |2- #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
-            - **AI**: Collaborated with the Vienna AI department, performed exploratory research, applying own developed SOTA 3D algos to the company's  Computer Vision S/W product.
-            - **Data Engineering**: *Large-scale vision data* · *SOTA 3D Detection models*
+          description: |2-
+            - Collaborated with the Vienna AI department to conduct exploratory research, integrating state-of-the-art 3D algorithms into the company’s computer vision software, enhancing product performance and capabilities.
+            - Engineered scalable pipelines for processing large-scale vision datasets, leveraging cutting-edge 3D detection models to optimize data utilization and improve system efficiency.
+
         - title: AI Research Developer
           company: ShippingLab
           company_url: 'https://shippinglab.dk/'
@@ -103,13 +107,13 @@ sections:
           location: Copenhagen
           date_start: '2022-06-06'
           date_end: '2024-12-30'
-          description: |2- #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
-            - **ML/DL**: Deployed ML/AI applications ingesting raw visual streams on a mixed hardware setup, embedded devices, distributed computation system.
-            - **S/W development**: Developed and deployed distributed sensing application architecture *Sensor integration* · *Hardware interfaces*
-            - **DevOps**: **SRE**, **CI/CD**, **Infra-provisioning**, **Containerization**
-            - **MLops**: Closed loop between new data and new model versions. *Automated Model Deployment* · *Model performance monitoring*
-            - **Software-Architecture**: *Distributed App Architectures* · *Middleware*, 
-            - **Data Engineering**: *Sensor integration* · *Hardware interfaces*          
+          description: |2-
+            - Deployed machine learning and AI applications to process raw visual streams on mixed hardware setups, including embedded devices and distributed computation systems, enhancing operational efficiency and data processing capabilities.
+            - Designed and implemented a distributed sensing application architecture, integrating sensors and hardware interfaces to deliver seamless functionality across diverse platforms.
+            - Streamlined DevOps processes, incorporating site reliability engineering (SRE), CI/CD pipelines, infrastructure provisioning, and containerization to ensure robust and scalable system performance.
+            - Established an MLops framework, automating model deployment and performance monitoring, creating a closed-loop system for continuous improvement with new data and updated models.
+            - Developed and deployed distributed application architectures and middleware solutions, optimizing software performance for complex and scalable systems.
+            - Engineered advanced sensor integration frameworks and hardware interfaces, enabling efficient data collection and processing in real-world environments.
     design:
       columns: '2'
       # background:
