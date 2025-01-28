@@ -69,11 +69,10 @@ sections:
           date_start: '2024-01-01'
           description: |2-
             - Developing AI solutions and deploying machine learning pipelines, enabling efficient and scalable model training and inference across diverse applications.
-            - Implementing MLOps practices to automate workflows, streamline model deployment, and bring advanced AI models into production environments with high reliability.
+            - Implementing MLOps practices to automate workflows, streamline deployment of models, and reliably bring them to production.
             - Leveraging self-supervised learning techniques to minimize the dependency on labeled data, accelerating development cycles and enabling cost-effective solutions for large-scale datasets.
             - Collaborating with stakeholders to align AI technologies with operational requirements, ensuring seamless integration and addressing real-world challenges.
             - Conducting exploratory research on cutting-edge machine learning methodologies to enhance system performance and drive innovation.
-            - Optimizing end-to-end AI workflows, from data preprocessing and model training to validation and deployment, ensuring high performance and scalability.
             
         - title: PhD
           company: Technical University of Denmark (DTU)
@@ -82,12 +81,12 @@ sections:
           date_start: '2020-06-06'
           date_end: '2024-01-01'
           description: |2-
-            - Spearheaded the development of advanced 3D computer vision algorithms, including object detection, tracking, and semantic scene segmentation, significantly enhancing maritime situational awareness and enabling autonomous navigation systems.
-            - Applied cutting-edge deep learning techniques such as Transformer models, self-supervised learning, and generative models to design predictive models and anomaly detection systems tailored for autonomous maritime operations.
-            - Engineered robust sensor fusion frameworks by integrating data from LiDAR, cameras, radar, and HD maps, improving navigation accuracy and reliability in complex maritime environments.
-            - Directed comprehensive field experiments and simulations, validating cyber-resilient navigation and situational awareness systems across diverse maritime scenarios.
-            - Designed innovative cyber-resilient navigation solutions to counter GNSS spoofing and jamming, leveraging multi-sensor fusion and statistical change detection methods to ensure navigation integrity under adverse conditions.
-            - Led research initiatives and mentored engineering teams, fostering collaboration with academic and industrial partners to advance the development of autonomous maritime technologies.
+            - Spearheaded the development of advanced 3D multimodal perception algorithms, including object detection, tracking, and semantic scene segmentation.
+            - Researched Transformer models, self-supervised learning, and generative modeling for multimodal situational awareness. 
+            - Engineered robust sensor fusion frameworks by integrating data from LiDAR, cameras, radar, and HD maps, improving navigation safety and reliability.
+            - Directed comprehensive field experiments and simulations, validating cyber-resilient navigation, in presence of adversarial GNSS interference.
+            - Designed AI diagnostics to counter GNSS spoofing and jamming, leveraging multi-sensor fusion and statistical change detection methods.
+            - Led research initiatives and mentored engineering teams, fostering collaboration with academic and industrial partners, in order to advance the development of autonomous maritime technologies.
 
         - title: Visiting AI Engineer
           company: SeaAI
@@ -98,7 +97,7 @@ sections:
           date_end: '2022-11-30'
           description: |2-
             - Collaborated with the Vienna AI department to conduct exploratory research, integrating state-of-the-art 3D algorithms into the company’s computer vision software, enhancing product performance and capabilities.
-            - Engineered scalable pipelines for processing large-scale vision datasets, leveraging cutting-edge 3D detection models to optimize data utilization and improve system efficiency.
+            - Engineered scalable pipelines for processing large-scale vision datasets, leveraging cutting-edge 3D detection models and optimizing labeled data utilization.
 
         - title: AI Research Developer
           company: ShippingLab
