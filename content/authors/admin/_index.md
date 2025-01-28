@@ -94,7 +94,7 @@ social:
     link: "https://github.com/dimidagd"
   - icon: google-scholar
     icon_pack: ai
-    link: "https://github.com/dimidagd"
+    link: "https://scholar.google.com/citations?hl=en&user=29wM-aMAAAAJ"
 
   # Additional social links can be added here as needed
 
