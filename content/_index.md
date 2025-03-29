@@ -104,7 +104,7 @@ sections:
           company_url: 'https://shippinglab.dk/'
           company_logo: shippinglab-square
           location: Copenhagen
-          date_start: '2022-06-06'
+          date_start: '2020-06-06'
           date_end: '2024-12-30'
           description: |2-
             - Deployed machine learning and AI applications to process raw visual streams on mixed hardware setups, including embedded devices and distributed computation systems, enhancing operational efficiency and data processing capabilities.
