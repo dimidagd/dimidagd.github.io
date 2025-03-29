@@ -68,11 +68,11 @@ sections:
           location: Copenhagen, Denmark
           date_start: '2024-01-01'
           description: |2-
-            - Developing AI solutions and deploying machine learning pipelines, enabling efficient and scalable model training and inference across diverse applications.
-            - Implementing MLOps practices to automate workflows, streamline deployment of models, and reliably bring them to production.
+            - Developing AI solutions and deploying machine learning pipelines, enabling efficient and scalable model training and inference across diverse applications and modalities (text, images).
+            - Implementing MLOps practices to automate ML workflows, reliably bringing models to production.
             - Leveraging self-supervised learning techniques to minimize the dependency on labeled data, accelerating development cycles and enabling cost-effective solutions for large-scale datasets.
             - Collaborating with stakeholders to align AI technologies with operational requirements, ensuring seamless integration and addressing real-world challenges.
-            - Conducting exploratory research on cutting-edge machine learning methodologies to enhance system performance and drive innovation.
+            - Conducting exploratory research on cutting-edge machine learning methodologies to enhance NLP and CV model capabilities.
             
         - title: PhD
           company: Technical University of Denmark (DTU)
