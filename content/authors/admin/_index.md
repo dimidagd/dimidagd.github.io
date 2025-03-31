@@ -30,9 +30,10 @@ bio: "I’m an AI Engineer who loves building intelligent systems that solve rea
 
 # Interests to show in About widget
 interests:
-  - "Sensor Fusion & Multimodal modeling"
-  - "Computer Vision"
-  - "AI system diagnostics"
+  - "Multimodal AI"
+  - "Computer Vision & LLMs"
+  - "MLOps"
+  - "Scalable AI"
 
 # Education to show in About widget
 education:
