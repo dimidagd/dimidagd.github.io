@@ -34,6 +34,7 @@ interests:
   - "Computer Vision & LLMs"
   - "MLOps"
   - "Scalable AI"
+  - "Explainable AI"
 
 # Education to show in About widget
 education:
