@@ -68,11 +68,13 @@ sections:
           location: Copenhagen, Denmark
           date_start: '2024-01-01'
           description: |2-
-            - Developing AI solutions and deploying machine learning pipelines, enabling efficient and scalable model training and inference across diverse applications and modalities (text, images).
-            - Implementing MLOps practices to automate ML workflows, reliably bringing models to production.
-            - Leveraging self-supervised learning techniques to minimize the dependency on labeled data, accelerating development cycles and enabling cost-effective solutions for large-scale datasets.
-            - Collaborating with stakeholders to align AI technologies with operational requirements, ensuring seamless integration and addressing real-world challenges.
-            - Conducting exploratory research on cutting-edge machine learning methodologies to enhance NLP and CV model capabilities.
+            - Training and fine-tuning state-of-the-art computer vision and large language models using proprietary data to optimize performance for specific safety-critical applications.  
+            - Developing and deploying scalable machine learning pipelines, enabling efficient model training and inference across diverse modalities (text, images).  
+            - Implementing MLOps practices to automate end-to-end ML workflows, reliably bringing models to production according to FAIR principles.
+            - Leveraging self-supervised learning and advanced fine-tuning techniques to minimize dependency on labeled data, accelerating development cycles and enabling cost-effective solutions for large-scale datasets.  
+            - Collaborating with stakeholders to align AI technologies with operational requirements, ensuring seamless integration and addressing real-world challenges.  
+            - Prototyping research products based on SOTA ML methodologies, enhancing CV and NLP model capabilities.
+
             
         - title: PhD
           company: Technical University of Denmark (DTU)
