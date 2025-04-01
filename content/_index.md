@@ -90,7 +90,7 @@ sections:
             - Designed AI diagnostics to counter GNSS spoofing and jamming, leveraging multi-sensor fusion and statistical change detection methods.
             - Led research initiatives and mentored engineering teams, fostering collaboration with academic and industrial partners, in order to advance the development of autonomous maritime technologies.
 
-        - title: Visiting AI Engineer
+        - title: Visiting AI Research Engineer
           company: SeaAI
           company_url: 'https://sea.ai/'
           company_logo: sea-ai-square
@@ -101,7 +101,7 @@ sections:
             - Collaborated with the Vienna AI department to conduct exploratory research, integrating state-of-the-art 3D algorithms into the company’s computer vision software, enhancing product performance and capabilities.
             - Engineered scalable pipelines for processing large-scale vision datasets, leveraging cutting-edge 3D detection models and optimizing labeled data utilization.
 
-        - title: AI Research Developer
+        - title: AI Research Engineer
           company: ShippingLab
           company_url: 'https://shippinglab.dk/'
           company_logo: shippinglab-square
