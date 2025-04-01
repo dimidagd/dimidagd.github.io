@@ -62,7 +62,7 @@ sections:
       #   Leave `date_end` empty if it's your current employer.
       #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
-        - title: Senior Consultant – AI & MLOps
+        - title: Senior AI/MLOps Engineer
           company: Danish Defence
           company_logo: ministry
           location: Copenhagen, Denmark
