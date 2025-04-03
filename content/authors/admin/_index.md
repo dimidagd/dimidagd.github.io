@@ -104,4 +104,4 @@ social:
 highlight_name: true
 ---
 
-**AI/ML Research Engineer**, building scalable systems that turn data into actionable insights and make a measurable impact. Research background in *multimodal 3D perception, cyber-resilient maritime navigation*, and *remote surveillance* applications.
+**AI/ML Research Engineer**, building scalable systems that turn data into actionable insights and make a measurable impact. R&D in using deep learning for *multimodal 3D perception, cyber-resilient maritime navigation*, and *remote sensing* applications.
