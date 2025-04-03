@@ -39,20 +39,20 @@ tags: []
 # Display this page in the Featured widget?
 featured: true
 
-# Custom links (uncomment lines below)
-links:
-- name: DTU orbit
-  url: https://orbit.dtu.dk/en/publications/cyber-resilience-for-marine-navigation-by-information-fusion-and-
-- name: arXiv
-  url: https://arxiv.org/abs/2202.03268
+# # Custom links (uncomment lines below)
+# links:
+# - name: DTU orbit
+#   url: https://orbit.dtu.dk/en/publications/cyber-resilience-for-marine-navigation-by-information-fusion-and-
+# - name: arXiv
+#   url: https://arxiv.org/abs/2202.03268
 
-url_pdf: 'https://www.sciencedirect.com/science/article/pii/S0029801822018881'
-# url_code: 'https://github.com/HugoBlox/hugo-blox-builder'
-# url_dataset: 'https://github.com/HugoBlox/hugo-blox-builder'
-# url_poster: ''
-url_project: 'https://www.safenavsystem.com/'
-# url_slides: ''
-# url_source: 'https://github.com/HugoBlox/hugo-blox-builder'
+# url_pdf: 'https://www.sciencedirect.com/science/article/pii/S0029801822018881'
+# # url_code: 'https://github.com/HugoBlox/hugo-blox-builder'
+# # url_dataset: 'https://github.com/HugoBlox/hugo-blox-builder'
+# # url_poster: ''
+# url_project: 'https://www.safenavsystem.com/'
+# # url_slides: ''
+# # url_source: 'https://github.com/HugoBlox/hugo-blox-builder'
 url_video: 'https://www.youtube.com/watch?v=0cO_tyMM1wo'
 
 # Featured image
