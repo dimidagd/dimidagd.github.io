@@ -68,40 +68,16 @@ sections:
           location: Copenhagen, Denmark
           date_start: '2024-01-01'
           description: |2-
-            - Training and fine-tuning state-of-the-art computer vision and large language models using proprietary data to optimize performance for specific safety-critical applications.  
-            - Developing and deploying scalable machine learning pipelines, enabling efficient model training and inference across diverse modalities (text, images).  
-            - Implementing MLOps practices to automate end-to-end ML workflows, reliably bringing models to production according to FAIR principles.
+            - Designed and implemented a centralized AI platform supporting multilingual synopsis generation, content globalization through translation, and internal knowledge discovery using agentic RAGs. 
+            - Leading the design of the image processing platform, delivering AI-generated operational insights about millions of data points to stakeholders within the first 6 months.
+            - Building services within the AI platform for fine-tuning, hosting LLMs and multimodal models, ingesting and maintaining vector stores, incorporating human feedback, and serving inference for production-scale traffic.
+            - Using MLOps to enable distributed model training and deploying API endpoints for multiple data modalities.  
             - Minimizing dependency on labeled data by implementing auto-labeling, self-supervised learning, and accelerating model development with efficiency and cost-effectiveness.
-            - Collaborating with stakeholders to align AI technologies with operational requirements, ensuring seamless integration and addressing real-world challenges.  
-            - Prototyping research products based on SOTA ML methodologies, enhancing CV and NLP model capabilities.
+            - Align, integrate and scale AI technologies with operational requirements, addressing operations challenges.  
+            - Prototyping state-of-the-art ML solutions.
 
             
-        - title: PhD
-          company: Technical University of Denmark (DTU)
-          company_logo: dtu-small
-          location: Copenhagen, Denmark
-          date_start: '2020-06-06'
-          date_end: '2024-01-01'
-          description: |2-
-            - Spearheaded the development of advanced 3D multimodal perception algorithms, including object detection, tracking, and semantic scene segmentation.
-            - Researched Transformer models, self-supervised learning, and generative modeling for multimodal situational awareness. 
-            - Engineered robust sensor fusion frameworks by integrating data from LiDAR, cameras, radar, and HD maps, improving navigation safety and reliability.
-            - Directed comprehensive field experiments and simulations, validating cyber-resilient navigation, in presence of adversarial GNSS interference.
-            - Designed AI diagnostics to counter GNSS spoofing and jamming, leveraging multi-sensor fusion and statistical change detection methods.
-            - Led research initiatives and mentored engineering teams, fostering collaboration with academic and industrial partners, in order to advance the development of autonomous maritime technologies.
-
-        - title: Visiting AI Research Engineer
-          company: SeaAI
-          company_url: 'https://sea.ai/'
-          company_logo: sea-ai-square
-          location: Vienna
-          date_start: '2022-10-01'
-          date_end: '2022-11-30'
-          description: |2-
-            - Collaborated with the Vienna AI department to conduct exploratory research, integrating state-of-the-art 3D algorithms into the company’s computer vision software, enhancing product performance and capabilities.
-            - Engineered scalable pipelines for processing large-scale vision datasets, leveraging cutting-edge 3D detection models and optimizing labeled data utilization.
-
-        - title: AI Research Engineer
+        - title: AI R&D Engineer
           company: ShippingLab
           company_url: 'https://shippinglab.dk/'
           company_logo: shippinglab-square
@@ -109,12 +85,40 @@ sections:
           date_start: '2020-06-06'
           date_end: '2024-12-30'
           description: |2-
-            - Deployed machine learning and AI applications to process raw visual streams on mixed hardware setups, including embedded devices and distributed computation systems, enhancing operational efficiency and data processing capabilities.
-            - Designed and implemented a distributed sensing application architecture, integrating sensors and hardware interfaces to deliver seamless functionality across diverse platforms.
-            - Streamlined DevOps processes, incorporating site reliability engineering (SRE), CI/CD pipelines, infrastructure provisioning, and containerization to ensure robust and scalable system performance.
-            - Established an MLops framework, automating model deployment and performance monitoring, creating a closed-loop system for continuous improvement with new data and updated models.
-            - Developed and deployed distributed application architectures and middleware solutions, optimizing software performance for complex and scalable systems.
-            - Engineered advanced sensor integration frameworks and hardware interfaces, enabling efficient data collection and processing in real-world environments.
+            - Developing 3D multimodal perception algorithms, enabling downstream collision avoidance, trajectory planning and situational awareness.
+            - Using generative modeling for realtime 3D semantic representation of the environment.
+            - Engineered robust sensor fusion frameworks by integrating data from LiDAR, cameras, radar, and HD maps, improving navigation safety and reliability.
+            - Designed AI diagnostics to counter GNSS spoofing and jamming, leveraging multi-sensor fusion and statistical change detection methods.
+            - Led research initiatives and mentored engineering teams, fostering collaboration with academic and industrial partners, in order to advance the development of autonomous maritime technologies.
+
+        - title: Visiting AI Engineer
+          company: SeaAI
+          company_url: 'https://sea.ai/'
+          company_logo: sea-ai-square
+          location: Vienna
+          date_start: '2022-10-01'
+          date_end: '2022-11-30'
+          description: |2-
+            - 3D perception algorithm development.
+            - Using AI to build situational awareness at sea.
+            - Large-scale vision dataset curation.
+            - Optimizing labeled data utilization.
+
+        - title: PhD
+          company: Technical University of Denmark (DTU)
+          company_logo: dtu-small
+          location: Copenhagen, Denmark
+          date_start: '2020-06-06'
+          date_end: '2024-01-01'
+          description: |2-
+            - Autonomous navigation
+            - Autopilot perception
+            - Multimodal Data Fusion
+            - Cyber-resilient Navigation
+            - Computer Vision
+            - Deep Learning
+            - Fault-detection
+            
     design:
       columns: '2'
       # background:

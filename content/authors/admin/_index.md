@@ -39,7 +39,7 @@ interests:
 # Education to show in About widget
 education:
   courses:
-    - course: "PhD Cyber-Resilient Sensor Fusion"
+    - course: "PhD in Multi-Modal Data Fusion"
       institution: "Technical University of Denmark"
       year: 2024
     - course: "MSc Automation & Robot Technology"
@@ -104,4 +104,4 @@ social:
 highlight_name: true
 ---
 
-**AI/ML Research Engineer**, building scalable systems that turn data into actionable insights and make a measurable impact. R&D in using deep learning for *multimodal 3D perception, cyber-resilient maritime navigation*, and *remote sensing* applications.
+**AI/ML Engineer** with a PhD in multi-modal data fusion. I empower organizations and teams to navigate their AI transformation journeys. By delivering impactful, high-value data products, I ensure that business strategies are backed by real, scalable AI solutions while separating genuine advancements from overhyped, unreliable claims. My focus is on delivering robust, production-ready systems that solve real-world problems and drive sustainable growth.
