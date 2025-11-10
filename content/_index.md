@@ -6,7 +6,7 @@ type: landing
 
 sections:
   - block: hero
-    demo: true # Only display this section in the Hugo Blox Builder demo site
+    demo: true
     content:
       title: Hugo Academic Theme
       image:
@@ -26,41 +26,24 @@ sections:
         **Easily build anything with blocks - no-code required!**
 
         From landing pages, second brains, and courses to academic resumés, conferences, and tech blogs.
-
-        <!--Custom spacing-->
         <div class="mb-3"></div>
-        <!--GitHub Button JS-->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
     design:
       background:
         gradient_end: '#1976d2'
         gradient_start: '#004ba0'
         text_color_light: true
+
   - block: about.biography
     id: about
     content:
       title: Biography
-      # Choose a user profile to display (a folder name within `content/authors/`)
       username: admin
-  # - block: skills
-  #   content:
-  #     title: Skills
-  #     text: ''
-  #     # Choose a user to display skills from (a folder name within `content/authors/`)
-  #     username: admin
-  #   design:
-  #     columns: '1'
+
   - block: experience
     content:
       title: Experience
-      # Date format for experience
-      #   Refer to https://docs.hugoblox.com/customization/#date-format
       date_format: Jan 2006
-      # Experiences.
-      #   Add/remove as many `experience` items below as you like.
-      #   Required fields are `title`, `company`, and `date_start`.
-      #   Leave `date_end` empty if it's your current employer.
-      #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
       items:
         - title: Senior AI/MLOps Engineer
           company: Danish Defence
@@ -68,15 +51,14 @@ sections:
           location: Copenhagen, Denmark
           date_start: '2024-01-01'
           description: |2-
-            - Designed and implemented a centralized AI platform supporting multilingual synopsis generation, content globalization through translation, and internal knowledge discovery using agentic RAGs. 
-            - Leading the design of the image processing platform, delivering AI-generated operational insights about millions of data points to stakeholders within the first 6 months.
-            - Building services within the AI platform for fine-tuning, hosting LLMs and multimodal models, ingesting and maintaining vector stores, incorporating human feedback, and serving inference for production-scale traffic.
-            - Using MLOps to enable distributed model training and deploying API endpoints for multiple data modalities.  
-            - Minimizing dependency on labeled data by implementing auto-labeling, self-supervised learning, and accelerating model development with efficiency and cost-effectiveness.
-            - Align, integrate and scale AI technologies with operational requirements, addressing operations challenges.  
-            - Prototyping state-of-the-art ML solutions.
+            - Established baselines and evaluation frameworks for deep learning model development.  
+            - Designed and productionized a computer vision agent solving image recognition, object retrieval, and 3D space segmentation tasks at scale.  
+            - Developed interpretability methods to explain and validate model behavior.  
+            - Built a visual search system for large-scale image-based retrieval across indexed datasets.  
+            - Created auto-labeling and active-learning workflows to reduce annotation effort and improve model generalization.  
+            - Introduced evaluation and data quality tools to assess robustness, monitor drift, and ensure reliability of deployed systems.  
+            - Defined standards for model governance, documentation, and experimentation; organized regular ML reading sessions to align research with delivery.  
 
-            
         - title: AI R&D Engineer
           company: ShippingLab
           company_url: 'https://shippinglab.dk/'
@@ -85,11 +67,12 @@ sections:
           date_start: '2020-06-06'
           date_end: '2024-12-30'
           description: |2-
-            - Developing 3D multimodal perception algorithms, enabling downstream collision avoidance, trajectory planning and situational awareness.
-            - Using generative modeling for realtime 3D semantic representation of the environment.
-            - Engineered robust sensor fusion frameworks by integrating data from LiDAR, cameras, radar, and HD maps, improving navigation safety and reliability.
-            - Designed AI diagnostics to counter GNSS spoofing and jamming, leveraging multi-sensor fusion and statistical change detection methods.
-            - Led research initiatives and mentored engineering teams, fostering collaboration with academic and industrial partners, in order to advance the development of autonomous maritime technologies.
+            - Led the development of a perception stack for an autonomous maritime autopilot, delivering a production-grade situational awareness system despite pandemic constraints ([preview](https://youtu.be/-U8SjiTo37w)).  
+            - Designed a multimodal data fusion architecture for 3D scene understanding and target tracking, combining radar, LiDAR, and camera data ([preview](https://www.youtube.com/watch?v=8h_lvCD6gCU)).  
+            - Delivered the ML perception stack for Denmark’s first autonomous ferry operation ([preview](https://www.youtube.com/watch?v=3ldAIurDOso)).  
+            - Scaled data operations through automated and semi-automated annotation pipelines, dataset versioning, and visual data exploration tools ([preview](https://youtu.be/TZas_vM9sgI)).  
+            - Partnered with downstream product owners to triage failure modes, collect targeted data (including synthetic), and deploy iterative model improvements.  
+            - Worked extensively with 3D perception and geometric reasoning tasks including detection, tracking, and segmentation.  
 
         - title: Visiting AI Engineer
           company: SeaAI
@@ -99,10 +82,9 @@ sections:
           date_start: '2022-10-01'
           date_end: '2022-11-30'
           description: |2-
-            - 3D perception algorithm development.
-            - Using AI to build situational awareness at sea.
-            - Large-scale vision dataset curation.
-            - Optimizing labeled data utilization.
+            - Extended an existing 2D detection pipeline into a 3D object detection system for maritime navigation ([preview](https://www.youtube.com/watch?v=6uVaoD86Oic&t=1s)).  
+            - Curated large datasets and built visualization tools to accelerate model iteration and evaluation.  
+            - Collaborated effectively in hybrid remote/on-site settings, aligning research milestones with product delivery.  
 
         - title: PhD
           company: Technical University of Denmark (DTU)
@@ -111,209 +93,9 @@ sections:
           date_start: '2020-06-06'
           date_end: '2024-01-01'
           description: |2-
-            - Autonomous navigation
-            - Autopilot perception
-            - Multimodal Data Fusion
-            - Cyber-resilient Navigation
-            - Computer Vision
-            - Deep Learning
-            - Fault-detection
-            
+            - Research focused on multimodal data fusion, deep learning, and 3D computer vision.  
+            - Thesis available [here](https://orbit.dtu.dk/files/388731705/Thesis_2_.pdf).  
+
     design:
       columns: '2'
-      # background:
-      #   color: 'white'
-  # - block: accomplishments
-  #   content:
-  #     # Note: `&shy;` is used to add a 'soft' hyphen in a long heading.
-  #     title: 'Accomplish&shy;ments'
-  #     subtitle:
-  #     # Date format: https://docs.hugoblox.com/customization/#date-format
-  #     date_format: Jan 2006
-  #     # Accomplishments.
-  #     #   Add/remove as many `item` blocks below as you like.
-  #     #   `title`, `organization`, and `date_start` are the required parameters.
-  #     #   Leave other parameters empty if not required.
-  #     #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
-  #     items:
-  #       - certificate_url: https://www.coursera.org
-  #         date_end: ''
-  #         date_start: '2021-01-25'
-  #         description: ''
-  #         icon: coursera
-  #         organization: Coursera
-  #         organization_url: https://www.coursera.org
-  #         title: Neural Networks and Deep Learning
-  #         url: ''
-  #       - certificate_url: https://www.edx.org
-  #         date_end: ''
-  #         date_start: '2021-01-01'
-  #         description: Formulated informed blockchain models, hypotheses, and use cases.
-  #         icon: edx
-  #         organization: edX
-  #         organization_url: https://www.edx.org
-  #         title: Blockchain Fundamentals
-  #         url: https://www.edx.org/professional-certificate/uc-berkeleyx-blockchain-fundamentals
-  #       - certificate_url: https://www.datacamp.com
-  #         date_end: '2020-12-21'
-  #         date_start: '2020-07-01'
-  #         description: ''
-  #         icon: datacamp
-  #         organization: DataCamp
-  #         organization_url: https://www.datacamp.com
-  #         title: 'Object-Oriented Programming in R'
-  #         url: ''
-  #   design:
-  #     columns: '2'
-  - block: collection
-    demo: true
-    id: posts
-    content:
-      title: Recent Posts
-      subtitle: ''
-      text: ''
-      # Choose how many pages you would like to display (0 = all pages)
-      count: 5
-      # Filter on criteria
-      filters:
-        folders:
-          - post
-        author: ""
-        category: ""
-        tag: ""
-        exclude_featured: false
-        exclude_future: false
-        exclude_past: false
-        publication_type: ""
-      # Choose how many pages you would like to offset by
-      offset: 0
-      # Page order: descending (desc) or ascending (asc) date.
-      order: desc
-    design:
-      # Choose a layout view
-      view: compact
-      columns: '2'
-  # - block: portfolio
-  #   hide: True
-  #   id: projects
-  #   content:
-  #     title: Projects
-  #     filters:
-  #       folders:
-  #         - project
-  #     # Default filter index (e.g. 0 corresponds to the first `filter_button` instance below).
-  #     default_button_index: 0
-  #     # Filter toolbar (optional).
-  #     # Add or remove as many filters (`filter_button` instances) as you like.
-  #     # To show all items, set `tag` to "*".
-  #     # To filter by a specific tag, set `tag` to an existing tag name.
-  #     # To remove the toolbar, delete the entire `filter_button` block.
-  #     buttons:
-  #       - name: All
-  #         tag: '*'
-  #       - name: Deep Learning
-  #         tag: Deep Learning
-  #       - name: Other
-  #         tag: Demo
-  #   design:
-  #     # Choose how many columns the section has. Valid values: '1' or '2'.
-  #     columns: '1'
-  #     view: showcase
-  #     # For Showcase view, flip alternate rows?
-  #     flip_alt_rows: false
-  # - block: markdown
-  #   content:
-  #     title: Gallery
-  #     subtitle: ''
-  #     text: |-
-  #       {{< gallery album="demo" >}}
-  #   design:
-  #     columns: '1'
-  - block: collection
-    id: featured
-    content:
-      title: Featured Publications
-      filters:
-        folders:
-          - publication
-        featured_only: true
-    design:
-      columns: '2'
-      view: compact
-  - block: collection
-    content:
-      title: Recent Publications
-      filters:
-        folders:
-          - publication
-        exclude_featured: false
-    design:
-      columns: '2'
-      view: citation
-  # - block: collection
-  #   id: talks
-  #   content:
-  #     title: Recent & Upcoming Talks
-  #     filters:
-  #       folders:
-  #         - event
-  #   design:
-  #     columns: '2'
-  #     view: compact
-  # - block: tag_cloud
-  #   content:
-  #     title: Popular Topics
-  #   design:
-  #     columns: '2'
-  # - block: contact
-  #   id: contact
-  #   content:
-  #     title: Contact
-  #     subtitle:
-  #     text: |-
-  #       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mi diam, venenatis ut magna et, vehicula efficitur enim.
-  #     # Contact (add or remove contact options as necessary)
-  #     email: test@example.org
-  #     phone: 888 888 88 88
-  #     appointment_url: 'https://calendly.com'
-  #     address:
-  #       street: 450 Serra Mall
-  #       city: Stanford
-  #       region: CA
-  #       postcode: '94305'
-  #       country: United States
-  #       country_code: US
-  #     directions: Enter Building 1 and take the stairs to Office 200 on Floor 2
-  #     office_hours:
-  #       - 'Monday 10:00 to 13:00'
-  #       - 'Wednesday 09:00 to 10:00'
-  #     # Choose a map provider in `params.yaml` to show a map from these coordinates
-  #     coordinates:
-  #       latitude: '37.4275'
-  #       longitude: '-122.1697'  
-  #     contact_links:
-  #       - icon: twitter
-  #         icon_pack: fab
-  #         name: DM Me
-  #         link: 'https://twitter.com/Twitter'
-  #       - icon: skype
-  #         icon_pack: fab
-  #         name: Skype Me
-  #         link: 'skype:echo123?call'
-  #       - icon: video
-  #         icon_pack: fas
-  #         name: Zoom Me
-  #         link: 'https://zoom.com'
-  #     # Automatically link email and phone or display as text?
-  #     autolink: true
-  #     # Email form provider
-  #     form:
-  #       provider: netlify
-  #       formspree:
-  #         id:
-  #       netlify:
-  #         # Enable CAPTCHA challenge to reduce spam?
-  #         captcha: false
-  #   design:
-  #     columns: '2'
 ---
