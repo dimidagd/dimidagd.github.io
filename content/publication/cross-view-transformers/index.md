@@ -32,7 +32,7 @@ publication_short: Under review
 abstract: In this paper, we address the challenge of enabling accurate and robust perception in marine autonomous systems for unmanned maritime operations. Our approach integrates data from multiple sensors, including cameras and radars, to overcome the limitations of traditional sensor fusion methods. We propose a novel cross-attention transformer-based multi-modal sensor fusion technique, specifically tailored for marine navigation. This method not only leverages deep learning to fuse complex data modalities effectively but also reconstructs a comprehensive Bird-eye-view of the environment using multi-view RGB and LWIR images. Our experimental results demonstrate the method's effectiveness in various challenging scenarios, contributing significantly to the development of more advanced and reliable marine autonomous systems. This approach utilizes multi-modal data, integrates the temporal fusion domain, and remains robust against sensor-calibration errors, marking a notable advancement in autonomous maritime technology.
 
 # Summary. An optional shortened abstract.
-summary: This paper introduces a novel cross-attention transformer-based multi-modal sensor fusion approach for marine autonomous navigation, effectively integrating data from various sensors including Lidar, RGB, and LWIR, to enhance perception accuracy and robustness in complex maritime environments.
+summary: "Using transformers to deep fuse sparse LiDAR and dense multispectral camera modalities for 3D Perception. A demo while sailing in North Denmark."
 
 tags: []
 
