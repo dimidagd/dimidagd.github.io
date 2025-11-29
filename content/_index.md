@@ -51,13 +51,13 @@ sections:
           location: Copenhagen, Denmark
           date_start: '2024-01-01'
           description: |2-
-            - Established baselines and evaluation frameworks for deep learning model development.  
-            - Designed and productionized a computer vision agent solving image recognition, object retrieval, and 3D space segmentation tasks at scale.  
-            - Developed interpretability methods to explain and validate model behavior.  
-            - Built a visual search system for large-scale image-based retrieval across indexed datasets.  
-            - Created auto-labeling and active-learning workflows to reduce annotation effort and improve model generalization.  
-            - Introduced evaluation and data quality tools to assess robustness, monitor drift, and ensure reliability of deployed systems.  
-            - Defined standards for model governance, documentation, and experimentation; organized regular ML reading sessions to align research with delivery.  
+            - Built strong baselines and reproducible evaluation pipelines aligned with current SOTA practice for deep learning model development.
+            - Designed and deployed a high throughput computer vision stack covering image classification, instance level retrieval, and 3D scene parsing using modern transformer based and metric learning architectures. 
+            - Developed model introspection and attribution tools to verify behavior, detect failure modes, and validate predictions under real world conditions.  
+            - Implemented a production grade visual search system for large scale image retrieval over indexed multimodal datasets using dense and hybrid embeddings.
+            - Created automated labeling and active learning loops that reduced manual annotation load and increased data efficiency across training cycles.
+            - Built robustness and data quality diagnostics to measure distribution shift, detect data drift, and track reliability of deployed models in continuous operation.
+            - Established concrete governance standards for experiment tracking, reproducibility, and model documentation, and led technical sessions to ensure alignment with contemporary research practice.
 
         - title: AI R&D Engineer
           company: ShippingLab
@@ -67,12 +67,11 @@ sections:
           date_start: '2020-06-06'
           date_end: '2024-12-30'
           description: |2-
-            - Led the development of a perception stack for an autonomous maritime autopilot, delivering a production-grade situational awareness system despite pandemic constraints ([preview](https://youtu.be/-U8SjiTo37w)).  
-            - Designed a multimodal data fusion architecture for 3D scene understanding and target tracking, combining radar, LiDAR, and camera data ([preview](https://www.youtube.com/watch?v=8h_lvCD6gCU)).  
-            - Delivered the ML perception stack for Denmark’s first autonomous ferry operation ([preview](https://www.youtube.com/watch?v=3ldAIurDOso)).  
+            - Led the development of the perception stack of the first autonomous ferry in Denmark, delivering a production-grade situational awareness system ([a-look-inside](https://youtu.be/-U8SjiTo37w)) ([demo-video](https://www.youtube.com/watch?v=3ldAIurDOso)).  
+            - Designed a multimodal ML fusion engine, enabling 3D scene understanding and target tracking, combining radar, LiDAR, and multi-view camera data ([preview](https://www.youtube.com/watch?v=8h_lvCD6gCU)).  
             - Scaled data operations through automated and semi-automated annotation pipelines, dataset versioning, and visual data exploration tools ([preview](https://youtu.be/TZas_vM9sgI)).  
-            - Partnered with downstream product owners to triage failure modes, collect targeted data (including synthetic), and deploy iterative model improvements.  
-            - Worked extensively with 3D perception and geometric reasoning tasks including detection, tracking, and segmentation.  
+            - Partnered with downstream product owners to triage failure modes, collect targeted in-field & synthetic data, deploying iterative model improvements.  
+            - Worked extensively with 3D perception and geometric reasoning tasks, enabling 3D object detection, tracking, and surrounding environment segmentation.
 
         - title: Visiting AI Engineer
           company: SeaAI
