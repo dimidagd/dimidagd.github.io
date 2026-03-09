@@ -2,6 +2,7 @@ name: Deploy website to GitHub Pages
 
 env:
   WC_HUGO_VERSION: '0.119.0'
+  CV_STYLE: 'kjhealy'
 
 on:
   # Trigger the workflow every time you push to the `main` branch
@@ -45,6 +46,10 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Generate CV site
+        run: |
+          chmod +x tools/build_cv_site.sh
+          CV_STYLE="${{ env.CV_STYLE }}" ./tools/build_cv_site.sh
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
