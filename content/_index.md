@@ -109,4 +109,17 @@ sections:
     design:
       columns: '2'
       view: compact
+
+  - block: collection
+    id: posts
+    content:
+      title: Posts
+      text: Latest writing from this site.
+      filters:
+        folders:
+          - post
+      count: 5
+    design:
+      columns: '2'
+      view: compact
 ---
