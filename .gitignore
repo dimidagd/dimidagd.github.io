@@ -11,3 +11,5 @@ go.sam
 # MACos
 
 *.DS_Store
+
+static/cv/
