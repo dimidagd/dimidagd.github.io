@@ -10,18 +10,13 @@ copyright:
 gallery_item:
   - album: photography
     image: image-2.jpeg
-    caption: Newly uploaded gallery image 2
+    caption: Wild horse, Chile, February 2026.
   - album: photography
     image: image-3.jpeg
-    caption: Newly uploaded gallery image 3
+    caption: Dog meets horse, Chile, February 2026.
   - album: photography
     image: image-1.png
-    caption: Newly uploaded gallery image
-  - album: photography
-    image: DJI_0247-cortada-e1713354517437.jpg
-    caption: Your uploaded aerial photo
+    caption: Wild dog, canyon, Chile, February 2026.
 ---
-
-This page now uses the built-in Hugo Blox gallery shortcode with captions.
 
 {{< gallery album="photography" >}}
