@@ -26,7 +26,7 @@ organizations:
     url: ""
 
 # Short bio (displayed in user profile at end of posts)
-bio: "I’m an AI Engineer who loves building intelligent systems that solve real-world problems and push the boundaries of what’s possible. From optimizing processes to creating scalable machine learning models, I thrive at the intersection of data, innovation, and impact."
+bio: "Hey there, I enjoy making machines observe the world. If you have something interesting to share, there is no better time that now, connect with me and lets discuss."
 
 # Interests to show in About widget
 interests:
@@ -34,7 +34,6 @@ interests:
   - "Computer Vision & LLMs"
   - "MLOps"
   - "Scalable AI"
-  - "Explainable AI"
 
 # Education to show in About widget
 education:
