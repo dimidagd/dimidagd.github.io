@@ -1,0 +1,83 @@
+{
+  "data": [
+    {
+      "type": "scatter",
+      "mode": "lines+markers",
+      "name": "Marine casualties and incidents",
+      "x": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+      "y": [1696, 1772, 1780, 1923, 1906, 2090, 1858, 2021, 1915],
+      "line": {
+        "color": "#0f5c7a",
+        "width": 3,
+        "shape": "spline",
+        "smoothing": 0.7
+      },
+      "marker": {
+        "color": "#0f5c7a",
+        "size": 8
+      },
+      "hovertemplate": "Year %{x}<br>Incidents %{y}<extra></extra>"
+    }
+  ],
+  "layout": {
+    "title": {
+      "text": "Marine casualties and incidents involving at least one EU flagged ship",
+      "x": 0.02,
+      "xanchor": "left",
+      "font": {
+        "color": "#0f172a",
+        "size": 20
+      }
+    },
+    "paper_bgcolor": "#ffffff",
+    "plot_bgcolor": "#f8fafc",
+    "margin": {
+      "l": 60,
+      "r": 20,
+      "t": 70,
+      "b": 60
+    },
+    "font": {
+      "family": "Helvetica, Arial, sans-serif",
+      "size": 14,
+      "color": "#1f2933"
+    },
+    "xaxis": {
+      "title": {
+        "text": "Year",
+        "font": {
+          "color": "#0f172a"
+        }
+      },
+      "tickmode": "array",
+      "tickvals": [2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+      "tickfont": {
+        "color": "#334155"
+      },
+      "linecolor": "#94a3b8",
+      "showgrid": false,
+      "zeroline": false
+    },
+    "yaxis": {
+      "title": {
+        "text": "Number of incidents",
+        "font": {
+          "color": "#0f172a"
+        }
+      },
+      "tickfont": {
+        "color": "#334155"
+      },
+      "linecolor": "#94a3b8",
+      "range": [0, 2700],
+      "dtick": 500,
+      "gridcolor": "#d9e2ec",
+      "zeroline": false
+    },
+    "showlegend": false
+  },
+  "config": {
+    "displayModeBar": false,
+    "responsive": true
+  }
+}
