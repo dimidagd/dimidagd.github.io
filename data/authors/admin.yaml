@@ -1,0 +1,87 @@
+schema: hugoblox/author/v1
+slug: admin
+is_owner: true
+name:
+  display: Dimitrios Dagdilelis
+  given: Dimitrios
+  family: Dagdilelis
+  alternate: ''
+  pronunciation: ''
+  pronouns: ''
+role: ML/AI Engineer
+bio: |
+  AI/ML Engineer with a PhD in multi-modal data fusion. I build production-focused systems in multimodal AI, computer vision, sensor fusion, and MLOps.
+
+affiliations: []
+
+links:
+  - icon: at-symbol
+    url: mailto:dimidagd@gmail.com
+    label: E-mail Me
+  - icon: brands/linkedin
+    url: https://www.linkedin.com/in/dimidagd/
+  - icon: brands/github
+    url: https://github.com/dimidagd
+  - icon: academicons/google-scholar
+    url: https://scholar.google.com/citations?hl=en&user=29wM-aMAAAAJ
+
+interests:
+  - Multimodal AI
+  - Computer Vision
+  - Sensor Fusion
+  - Multi-Object Tracking
+  - Autonomous Navigation
+  - ML in Production
+
+education:
+  - degree: PhD in Multi-Modal Data Fusion
+    institution: Technical University of Denmark
+    end: 2024-01-01
+  - degree: MSc Automation & Robot Technology
+    institution: Technical University of Denmark
+    end: 2020-01-01
+
+experience:
+  - role: Senior AI/MLOps Engineer
+    org: Danish Defence
+    start: 2024-01-01
+    summary: |
+      Built evaluation pipelines, production computer vision systems, model diagnostics, large-scale retrieval tools, and active learning loops for real-world AI delivery.
+  - role: AI R&D Engineer
+    org: ShippingLab
+    url: https://shippinglab.dk/
+    start: 2020-06-06
+    end: 2024-12-30
+    summary: |
+      Led perception and situational-awareness work for Denmark's first autonomous ferry, including multimodal fusion, 3D scene understanding, tracking, and data tooling.
+  - role: Visiting AI Engineer
+    org: SeaAI
+    url: https://sea.ai/
+    start: 2022-10-01
+    end: 2022-11-30
+    summary: |
+      Extended detection pipelines toward 3D maritime perception and built supporting dataset and visualization workflows.
+  - role: PhD Researcher
+    org: Technical University of Denmark
+    start: 2020-06-06
+    end: 2024-01-01
+    summary: |
+      Research on multimodal data fusion, deep learning, and 3D computer vision for maritime autonomy.
+
+skills:
+  - name: Technical
+    items:
+      - label: Robotics
+        level: 5
+      - label: Control Systems
+        level: 4
+      - label: Programming
+        level: 4
+  - name: Research
+    items:
+      - label: Multimodal AI
+        level: 5
+      - label: Sensor Fusion
+        level: 5
+      - label: Production ML
+        level: 4
