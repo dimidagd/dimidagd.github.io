@@ -1,5 +1,5 @@
 ---
-title: How to read multi object tracking diagnostics
+title: Multi Object Tracking framework diagnostics
 subtitle: A structured read of NIS, NEES, covariance, and motion-state plots from a vessel estimator.
 summary: The useful question in multi-object tracking is not whether the tracker draws a smooth path. It is whether the estimator stays consistent as measurements become partial, noisy, or uneven. This article reads one default run through the diagnostics exported by the filter.
 authors:
@@ -17,6 +17,7 @@ date: '2026-03-15T00:00:00Z'
 lastmod: '2026-03-15T00:00:00Z'
 draft: false
 featured: false
+math: true
 projects: []
 ---
 
@@ -53,6 +54,27 @@ That state is not supported equally by every measurement. The measurement models
 
 This shapes the whole problem. Position is updated often. Motion is not. `turn_rate` is never directly observed in this setup, and `cog` and `sog` depend on the mix of measurements arriving over time.
 
+The implementation makes that split explicit:
+
+```python
+def AISMeasurementModel() -> LinearMeasurementModel:
+    return LinearMeasurementModel(
+        state_indices=[0, 1, 2, 3],
+    )
+
+
+def TruncatedAISMeasurementModel() -> LinearMeasurementModel:
+    return LinearMeasurementModel(
+        state_indices=[0, 1],
+    )
+
+
+def PositionMeasurementModel() -> LinearMeasurementModel:
+    return LinearMeasurementModel(
+        state_indices=[0, 1],
+    )
+```
+
 The tentative-track logic already reflects that. Before a track is fully alive, the estimator derives velocity and heading from positional history. Once the track becomes active, the constant-turn-rate model carries the motion states forward until a richer update arrives.
 
 ## How to read NIS and NEES
@@ -63,6 +85,70 @@ The first two plots answer the same question from different angles.
 - NEES asks whether the full estimated state fits the ground truth, given the covariance the filter carries.
 
 Rising NIS means the update step is under strain. Rising NEES means the estimator has become too optimistic, too wrong, or both.
+
+For one update, the estimator computes the normalized innovation squared as
+
+$$
+\mathrm{NIS}_k = \mathbf{y}_k^\top \mathbf{S}_k^{-1} \mathbf{y}_k
+$$
+
+where $\mathbf{y}_k = \mathbf{z}_k - \hat{\mathbf{z}}_k$ is the innovation and $\mathbf{S}_k$ is the innovation covariance.
+
+NIS has a practical advantage over NEES: it does not require ground truth. That makes it a standalone consistency metric for live filtering. If NIS starts drifting, the problem can sit in the measurement model, the motion model, the assumed process noise, or assumptions about the types of their noise distributions.
+
+The update step in the filter computes NIS directly from the innovation:
+
+```python
+z = measurement.to_vector()
+z_pred = model.h(pred_track_state)
+H = model.H(pred_track_state)
+R = measurement.R()
+
+y = z - z_pred
+for idx in angular_measurement_indeces:
+    y[idx] = angle_residual_deg(z[idx], z_pred[idx])
+
+S = H @ pred_track_state.P @ H.T + R
+S_inv = np.linalg.inv(S)
+nis = y.T @ S_inv @ y
+```
+
+In repo terms, the symbols in the equation map cleanly onto the update code:
+
+- $\mathbf{z}_k$ is `measurement.to_vector()`
+- $\hat{\mathbf{z}}_k$ is `model.h(pred_track_state)`
+- $\mathbf{S}_k$ is `H @ pred_track_state.P @ H.T + R`
+- $\mathbf{y}_k$ is the residual `y`
+
+For one state estimate, the normalized estimation error squared is
+
+$$
+\mathrm{NEES}_k = \mathbf{e}_k^\top \mathbf{P}_k^{-1} \mathbf{e}_k
+$$
+
+where $\mathbf{e}_k = \hat{\mathbf{x}}_k - \mathbf{x}_k$ is the state error and $\mathbf{P}_k$ is the predicted state covariance.
+
+Unlike NIS, NEES needs ground truth for the full state. That makes it useful in simulation and offline evaluation, but not as a standalone live diagnostic.
+
+The state side of that equation is also explicit in the repo:
+
+```python
+class LatLonSogCogTRState(TrackState):
+    STATE_ORDER = {0: "lat", 1: "lon", 2: "sog", 3: "cog", 4: "turn_rate"}
+
+    def to_vector(self) -> np.ndarray:
+        vec = np.array(
+            [getattr(self, self.state_order()[i]) for i in sorted(self.STATE_ORDER)],
+            dtype=float,
+        )
+        return vec.reshape(-1, 1)
+
+    @property
+    def P(self) -> np.ndarray:
+        return np.array(self.covariance, dtype=float)
+```
+
+That means $\hat{\mathbf{x}}_k$ is the state vector returned by `pred_track_state.to_vector()`, and $\mathbf{P}_k$ is the covariance matrix exposed as `pred_track_state.P`. The ground-truth term $\mathbf{x}_k$ only exists in the simulated runs used to generate the evaluation plots.
 
 <figure>
   <iframe

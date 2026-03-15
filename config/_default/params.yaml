@@ -45,7 +45,7 @@ header:
 
 footer:
   copyright:
-    notice: '© {year} Licensed under: {license}'
+    notice: '© {year}'
     license:
       enable: false
       allow_derivatives: false
