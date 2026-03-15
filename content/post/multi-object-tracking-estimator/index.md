@@ -1,7 +1,7 @@
 ---
-title: What estimator plots say about multi object tracking
-subtitle: Reading NIS, NEES, covariance, and course traces from a vessel tracker.
-summary: A tracking plot is only useful if it tells you where the estimator is holding together and where it is not. This article reads a default multi-object run through the diagnostics exported by the estimator.
+title: How to read multi object tracking diagnostics
+subtitle: A structured read of NIS, NEES, covariance, and motion-state plots from a vessel estimator.
+summary: The useful question in multi-object tracking is not whether the tracker draws a smooth path. It is whether the estimator stays consistent as measurements become partial, noisy, or uneven. This article reads one default run through the diagnostics exported by the filter.
 authors:
   - admin
 tags:
@@ -20,13 +20,20 @@ featured: false
 projects: []
 ---
 
-A tracker can draw a clean line on a chart and still be wrong. The harder question is whether the estimator behind that line is still believable.
+A tracker can keep a clean trajectory on screen and still drift into a bad estimate. The plots exported by the estimator are useful because they show when that drift starts, which state is weakening, and whether the filter is still honest about its own uncertainty.
 
-In this run, the diagnostic plots are more informative than the map view. They show which tracks settle, which states stay weakly observed, and where the filter starts to lose statistical consistency.
+This post reads one default multi-object run from the `sensor-fusion` estimator. The goal is simple: move from “the plots look fine” to “the estimator is holding together for reasons we can explain.”
 
-## The estimator behind the plots
+**At a glance**
 
-The current implementation carries a five-state vessel model:
+- The estimator tracks five states: latitude, longitude, speed over ground, course over ground, and turn rate.
+- Only full AIS updates observe speed and course directly.
+- Two tracks settle after a noisy start.
+- One track develops a late consistency problem, first visible in motion-state uncertainty and then in NEES.
+
+## What the filter is estimating
+
+The current estimator uses a five-state vessel model:
 
 | State index | Variable | Meaning |
 | --- | --- | --- |
@@ -36,23 +43,26 @@ The current implementation carries a five-state vessel model:
 | 3 | `cog` | Course over ground |
 | 4 | `turn_rate` | Turn rate |
 
-For active tracks, the estimator predicts forward with a constant-turn-rate motion model and then updates against the measurement that arrives. The important detail is that not every measurement observes the full state. AIS updates carry position, speed, and course. Truncated AIS and positional measurements carry position only.
+That state is not supported equally by every measurement. The measurement models in the implementation observe different slices of the state vector:
 
-That split matters because it means the tracker is solving two problems at once:
+| Measurement type | `lat` | `lon` | `sog` | `cog` | `turn_rate` |
+| --- | --- | --- | --- | --- | --- |
+| AIS | yes | yes | yes | yes | no |
+| Truncated AIS | yes | yes | no | no | no |
+| Position measurement | yes | yes | no | no | no |
 
-- keep position stable under uneven updates
-- infer hidden motion states when speed and course are not directly observed
+This shapes the whole problem. Position is updated often. Motion is not. `turn_rate` is never directly observed in this setup, and `cog` and `sog` depend on the mix of measurements arriving over time.
 
-Tentative tracks make that even clearer. Before a track is fully alive, the implementation estimates velocity and heading from the positional history alone. The filter is already reasoning about missing information before it ever looks confident on screen.
+The tentative-track logic already reflects that. Before a track is fully alive, the estimator derives velocity and heading from positional history. Once the track becomes active, the constant-turn-rate model carries the motion states forward until a richer update arrives.
 
-## NIS and NEES are the first check
+## How to read NIS and NEES
 
-Two plots carry most of the argument.
+The first two plots answer the same question from different angles.
 
-- NIS checks whether each update is plausible under the current measurement model.
-- NEES checks whether the full state error is plausible under the covariance the filter claims to have.
+- NIS asks whether the latest measurement fits the predicted track state.
+- NEES asks whether the full estimated state fits the ground truth, given the covariance the filter carries.
 
-If both stay in a sensible range, the estimator is broadly honest about what it knows. If NIS rises, the incoming measurements are no longer fitting the predicted track well. If NEES rises, the full state estimate is no longer matching reality as well as the covariance says it should.
+Rising NIS means the update step is under strain. Rising NEES means the estimator has become too optimistic, too wrong, or both.
 
 <figure>
   <iframe
@@ -71,24 +81,28 @@ If both stay in a sensible range, the estimator is broadly honest about what it 
     loading="lazy"
     style="width:100%;height:560px;border:1px solid rgba(0,0,0,0.12);border-radius:8px;background:#fff;"
   ></iframe>
-  <figcaption>NEES from the same run. This is the stronger check because it compares the full estimated state against ground truth.</figcaption>
+  <figcaption>NEES from the same run. This compares the full state estimate against ground truth.</figcaption>
 </figure>
 
-The pattern is clear. `MV Iron Falcon2` starts rough, with very large early NIS and NEES values, then settles after the filter gets enough support. `SS Iron Aurora1` behaves better after initialization and stays in a narrower band. `SS Northern Star0` is the one to watch. Its NIS rises late, and its NEES blows up near the end of the run. That is the signature of a track that has stopped being internally consistent.
+In this run, `MV Iron Falcon2` starts with large NIS and NEES values, then settles once the filter gets enough support. `SS Iron Aurora1` stays in a tighter band after initialization. `SS Northern Star0` behaves differently. Its NIS rises late, and its NEES jumps sharply near the end of the run. That is the clearest sign in the article: the track is no longer consistent at the state level.
 
-## This run converges for two tracks and breaks for one
+## What this run shows track by track
 
-The three named tracks in the log do not fail in the same way.
+The three tracks do not fail in the same way:
 
-| Track | What improves | What stays weak |
+| Track | Main pattern | Reading |
 | --- | --- | --- |
-| `MV Iron Falcon2` | Update fit and state consistency both settle after a poor start | Initialization is noisy |
-| `SS Iron Aurora1` | Broadly stable after the first updates | Course remains less certain than position |
-| `SS Northern Star0` | Holds together for part of the run | Late NIS rise and a large NEES spike show a state-level mismatch |
+| `MV Iron Falcon2` | Large early NIS and NEES, then settles | Noisy startup, then convergence |
+| `SS Iron Aurora1` | Moderate errors and narrower spread | Broadly stable after initialization |
+| `SS Northern Star0` | Late NIS rise and a large NEES spike | State estimate breaks down late in the run |
 
-The late `SS Northern Star0` jump matters more than the early startup noise on the other two tracks. Large early errors are common while a filter is still finding the track. A late divergence means the estimator had already formed a story about the target and then could not keep that story coherent as new data arrived.
+The timing matters. Startup noise is common while a filter is still locking onto a target. Late divergence is harder to excuse, because it means the estimator had already built a coherent track and then lost that coherence as new data came in.
 
-The covariance export shows where that weakness sits.
+That is why NEES is so useful here. A smooth plotted trajectory can still hide a state estimate that no longer matches the covariance the filter claims to have.
+
+## Why course breaks before position
+
+The covariance and motion-state plots make the weak point visible.
 
 <figure>
   <iframe
@@ -97,14 +111,12 @@ The covariance export shows where that weakness sits.
     loading="lazy"
     style="width:100%;height:760px;border:1px solid rgba(0,0,0,0.12);border-radius:8px;background:#fff;"
   ></iframe>
-  <figcaption>Square-root covariance terms for the five-state estimator. Because the state order is fixed, `std[3]` is course over ground and `std[4]` is turn rate.</figcaption>
+  <figcaption>Square-root covariance terms for the five-state estimator. `std[3]` is course over ground and `std[4]` is turn rate.</figcaption>
 </figure>
 
-The strongest growth is in `state[3]`, the course state. `SS Northern Star0` shows the largest spike there, which matches the late consistency failure in the NEES plot. Position stays comparatively tame. Heading uncertainty is what expands first.
+The largest growth appears in `state[3]`, the course state. `SS Northern Star0` shows the most severe spike there, which lines up with the late consistency failure in the NEES plot. Position remains much better behaved because every measurement updates `lat` and `lon`.
 
-## Partial measurements make course fragile
-
-The course plot explains why.
+The course plot shows the same weakness from the state trajectory itself:
 
 <figure>
   <iframe
@@ -113,12 +125,12 @@ The course plot explains why.
     loading="lazy"
     style="width:100%;height:760px;border:1px solid rgba(0,0,0,0.12);border-radius:8px;background:#fff;"
   ></iframe>
-  <figcaption>Course over ground with mixed measurement support. The continuous line is the predicted track state. Marker shapes show which measurement type arrived at each update.</figcaption>
+  <figcaption>Course over ground with mixed measurement support. The continuous line is the predicted state. Marker shapes indicate the measurement type used at each update.</figcaption>
 </figure>
 
-In this implementation, only full AIS updates directly observe course. Position-only measurements and truncated AIS updates do not. That leaves the estimator to carry `cog` forward through the motion model until a richer update arrives. When that gap lasts too long, the tracker can keep looking smooth while becoming less trustworthy.
+Only full AIS updates observe course directly. Position-only and truncated AIS updates do not. When the estimator goes several updates without direct support for `cog`, it has to rely on the motion model to carry that state. The plotted path can remain smooth while the motion estimate becomes weaker.
 
-The same effect shows up in speed.
+The speed plot follows the same pattern:
 
 <figure>
   <iframe
@@ -127,7 +139,18 @@ The same effect shows up in speed.
     loading="lazy"
     style="width:100%;height:760px;border:1px solid rgba(0,0,0,0.12);border-radius:8px;background:#fff;"
   ></iframe>
-  <figcaption>Speed over ground from the same run. Hidden motion states are inferred between direct observations, not continuously measured.</figcaption>
+  <figcaption>Speed over ground from the same run. Motion states are inferred between direct observations; they are not continuously measured.</figcaption>
 </figure>
 
-That is the practical lesson from these plots. Track IDs and smooth trajectories are not enough. The estimator also has to stay honest about partially observed motion. Position can look fine while course, speed, and turn behavior drift into a weaker estimate. NIS, NEES, and covariance growth show that drift before a map display makes it obvious.
+This is the main structural asymmetry in the estimator. Position is heavily supported. Motion is partly inferred. That makes course and speed the first places to look when a track starts to weaken.
+
+## What to watch in practice
+
+These plots point to a short checklist for reading multi-object tracking output:
+
+- Do not treat a smooth map track as evidence that the full state estimate is sound.
+- Read NIS and NEES together. A late rise in both is more serious than a noisy start.
+- Watch covariance growth in motion states, especially course, before assuming the filter is stable.
+- Remember which states are directly observed and which states are being carried by the model.
+
+That is why estimator diagnostics belong in the article at all. They turn a tracking demo into an engineering argument. Instead of asking whether the tracker produced a plausible line, you can ask where it was well supported, where it was extrapolating, and where it stopped being trustworthy.
