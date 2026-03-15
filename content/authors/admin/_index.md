@@ -10,10 +10,6 @@ title: "Dimitrios Dagdilelis"
 first_name: "Dimitrios"
 last_name: "Dagdilelis"
 
-# Status emoji
-status:
-  icon: "🤖"
-
 # Is this the primary user of the site?
 superuser: true
 
@@ -44,9 +40,6 @@ education:
     - course: "MSc Automation & Robot Technology"
       institution: "Technical University of Denmark"
       year: 2020
-    - course: "Diploma in Electrical & Computer Engineering"
-      institution: "Aristotle University of Thessaloniki"
-      year: 2016
 
 # Skills
 skills:
