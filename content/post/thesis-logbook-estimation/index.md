@@ -1,6 +1,6 @@
 ---
-title: Estimation
-summary: "Archived note on state estimation, the limits of raw measurements, and the role of the estimator."
+title: Tracking as an estimation problem
+summary: "Notes on state estimation, the limits of raw measurements, and the role of the estimator."
 authors:
   - admin
 tags:
@@ -10,8 +10,8 @@ tags:
 categories:
   - Engineering
   - Archive
-date: '2019-05-05T00:00:00+01:00'
-lastmod: '2019-05-05T00:00:00+01:00'
+date: '2026-02-10T00:00:00+01:00'
+lastmod: '2026-02-10T00:00:00+01:00'
 draft: false
 featured: false
 aliases:

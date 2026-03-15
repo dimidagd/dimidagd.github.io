@@ -1,6 +1,6 @@
 ---
 title: Particle filtering
-summary: "Archived note on sequential Monte Carlo, importance sampling, degeneracy, and resampling."
+summary: "Sequential Monte Carlo, importance sampling, degeneracy, and resampling."
 authors:
   - admin
 tags:
@@ -11,8 +11,8 @@ tags:
 categories:
   - Engineering
   - Archive
-date: '2020-03-03T00:00:00+01:00'
-lastmod: '2020-03-03T00:00:00+01:00'
+date: '2026-03-03T00:00:00+01:00'
+lastmod: '2026-03-03T00:00:00+01:00'
 draft: false
 featured: false
 math: true

@@ -1,6 +1,6 @@
 ---
 title: Motion models
-summary: "Archived note on CTRV dynamics and the discrete vessel motion model used for tracking."
+summary: "Note on Constant Turn Rate and Velocity (CTRV) dynamics and the discrete vessel motion model used for tracking."
 authors:
   - admin
 tags:
@@ -11,8 +11,8 @@ tags:
 categories:
   - Engineering
   - Archive
-date: '2019-05-05T00:00:00+01:00'
-lastmod: '2019-05-05T00:00:00+01:00'
+date: '2026-01-27T00:00:00+01:00'
+lastmod: '2026-01-27T00:00:00+01:00'
 draft: false
 featured: false
 math: true

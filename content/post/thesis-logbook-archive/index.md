@@ -1,17 +1,15 @@
 ---
 title: Thesis logbook archive
-summary: "Archived thesis logbook notes migrated from an older Hugo site."
+summary: "Archived thesis logbook."
 authors:
   - admin
 tags:
-  - Archive
-  - Thesis logbook
   - Tracking
 categories:
   - Engineering
   - Archive
-date: '2020-03-09T00:00:00Z'
-lastmod: '2020-03-09T00:00:00Z'
+date: '2026-01-06T00:00:00Z'
+lastmod: '2026-01-06T00:00:00Z'
 draft: false
 featured: false
 aliases:

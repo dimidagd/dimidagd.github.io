@@ -1,6 +1,6 @@
 ---
 title: State space
-summary: "Archived note on planar vessel state vectors in Cartesian and polar form."
+summary: "Planar vessel state vectors in Cartesian and polar form."
 authors:
   - admin
 tags:
@@ -11,8 +11,8 @@ tags:
 categories:
   - Engineering
   - Archive
-date: '2019-05-05T00:00:00+01:00'
-lastmod: '2019-05-05T00:00:00+01:00'
+date: '2026-01-20T00:00:00+01:00'
+lastmod: '2026-01-20T00:00:00+01:00'
 draft: false
 featured: false
 math: true

@@ -1,5 +1,5 @@
 ---
-title: Structured Logging in the AIS Stack
+title: Using strucuted logging in an application stack
 summary: How the sensor-fusion services emit consistent JSON logs across the API, producer, and worker, and why that matters operationally.
 authors:
   - admin

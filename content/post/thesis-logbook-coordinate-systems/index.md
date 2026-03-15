@@ -1,6 +1,6 @@
 ---
 title: Coordinate systems
-summary: "Archived note on geodetic, ENU, ECEF, body, seakeeping, and tracking coordinate systems."
+summary: "Notes on geodetic, ENU, ECEF, body, seakeeping, and tracking coordinate systems."
 authors:
   - admin
 tags:
@@ -11,8 +11,8 @@ tags:
 categories:
   - Engineering
   - Archive
-date: '2020-02-19T16:16:09+01:00'
-lastmod: '2020-02-19T16:16:09+01:00'
+date: '2026-01-13T16:16:09+01:00'
+lastmod: '2026-01-13T16:16:09+01:00'
 draft: false
 featured: false
 math: true
