@@ -1,17 +1,15 @@
 {
   "name": "HugoBlox Codespace",
   "image": "ghcr.io/HugoBlox/hugo-blox-dev:hugo0.156.0",
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "22",
-      "pnpmVersion": "10.14.0"
-    }
-  },
   "updateContentCommand": "pnpm install --frozen-lockfile --prefer-offline",
-  "postCreateCommand": "node --version && pnpm --version && hugo version",
+  "postCreateCommand": "pnpm --version && hugo version",
+  "features": {
+    "ghcr.io/jsburckhardt/devcontainer-features/codex:1": {}
+  },
   "customizations": {
     "vscode": {
       "extensions": [
+        "ownable.ownable",
         "openai.chatgpt"
       ]
     }
