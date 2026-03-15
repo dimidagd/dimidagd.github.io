@@ -17,6 +17,7 @@ date: '2026-03-15T00:00:00Z'
 lastmod: '2026-03-15T00:00:00Z'
 draft: false
 featured: false
+math: true
 projects: []
 ---
 
@@ -63,6 +64,22 @@ The first two plots answer the same question from different angles.
 - NEES asks whether the full estimated state fits the ground truth, given the covariance the filter carries.
 
 Rising NIS means the update step is under strain. Rising NEES means the estimator has become too optimistic, too wrong, or both.
+
+For one update, the estimator computes the normalized innovation squared as
+
+$$
+\mathrm{NIS}_k = \mathbf{y}_k^\top \mathbf{S}_k^{-1} \mathbf{y}_k
+$$
+
+where $\mathbf{y}_k = \mathbf{z}_k - \hat{\mathbf{z}}_k$ is the innovation and $\mathbf{S}_k$ is the innovation covariance.
+
+For one state estimate, the normalized estimation error squared is
+
+$$
+\mathrm{NEES}_k = \mathbf{e}_k^\top \mathbf{P}_k^{-1} \mathbf{e}_k
+$$
+
+where $\mathbf{e}_k = \hat{\mathbf{x}}_k - \mathbf{x}_k$ is the state error and $\mathbf{P}_k$ is the predicted state covariance.
 
 <figure>
   <iframe
